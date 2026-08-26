@@ -1,0 +1,71 @@
+# HU-007 — Explorar, buscar y filtrar cursos
+
+## Información general
+
+| Campo | Valor |
+|---|---|
+| Actor principal | Visitante |
+| Incremento | Mes 1 |
+| Personas recomendadas | 2 |
+| Responsable / participante | Por asignar / Por asignar |
+
+## Historia
+
+> Como **visitante**, quiero **explorar, buscar y filtrar la oferta**, para **encontrar un curso
+> jurídico adecuado sin registrarme primero**.
+
+## Alcance incluido
+
+- Catálogo público con tarjetas que muestran imagen, tipo de curso, título, avatares de docentes,
+  fecha de inicio o estado y el botón “Ver detalles”.
+- Búsqueda sobre título y descripción.
+- Filtros independientes por tipo de curso y categoría temática.
+- Curso destacado antes que no destacado.
+- Dentro de cada grupo: VIRTUAL con inicio inmediato, fechas futuras más próximas y luego cursos en
+  progreso.
+- Badge “En vivo” para `EN_VIVO` e `HIBRIDO`.
+- Estados comerciales visibles derivados de los datos reales: “Inicio inmediato” para VIRTUAL sin
+  fecha de inicio; “Inicia el [fecha]” antes de una fecha futura; “En progreso” después de iniciar;
+  “Matrícula cerrada” al alcanzar el cierre comercial; y “Sin cupos” cuando las matrículas ACTIVA
+  alcanzan la capacidad configurada.
+- Resultado vacío comprensible.
+
+## Flujo principal
+
+1. El visitante abre el catálogo sin iniciar sesión.
+2. Visualiza la oferta en el orden acordado.
+3. Escribe una búsqueda o selecciona filtros.
+4. ESEJUR muestra solo coincidencias y permite retirar filtros.
+5. Selecciona un curso para HU-008.
+
+## Criterios de aceptación
+
+- **Dado** cursos destacados y no destacados, **cuando** abre el catálogo, **entonces** los
+  destacados aparecen primero y cada grupo respeta el orden temporal definido.
+- **Dado** una palabra en título o descripción, **cuando** busca, **entonces** obtiene coincidencias.
+- **Dado** tipo y categoría, **cuando** combina filtros, **entonces** se aplican ambos ejes.
+- **Dado** un curso EN_VIVO o HIBRIDO, **cuando** aparece, **entonces** muestra el badge “En vivo”.
+- **Dado** cualquier tarjeta visible, **cuando** se presenta, **entonces** contiene imagen, tipo,
+  título, docentes, fecha o estado y una acción para consultar los detalles.
+- **Dado** ningún resultado, **cuando** filtra, **entonces** recibe un estado vacío y puede limpiar.
+
+## Datos y permisos
+
+El catálogo nunca expone matrículas, alumnos, materiales protegidos ni certificados. No requiere
+sesión.
+
+## Dependencia interna
+
+- Ninguna. Puede comenzar con cursos controlados.
+- HU-008 se integra mediante la selección de una tarjeta.
+
+## Orientación de trabajo
+
+- **Frontend:** tarjetas, búsqueda, filtros, orden y estados vacíos.
+- **Backend:** selección pública de cursos, búsqueda y orden coherente.
+- **Integración:** combinación de búsqueda, filtros y navegación a ficha.
+
+## Demostración esperada
+
+Buscar por descripción, combinar tipo/categoría y comprobar el orden con cursos virtuales, futuros,
+en progreso y destacados.
