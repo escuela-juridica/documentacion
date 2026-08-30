@@ -106,5 +106,6 @@ Cada historia fue revisada para confirmar:
 
 Con el alcance actualmente acordado no queda una inconsistencia funcional conocida ni una regla
 aplicable que obligue a consultar el documento de negocio para comprender una historia. Las
-decisiones de base de datos, API, infraestructura y despliegue permanecen fuera de las historias;
-el documento técnico solo traduce los resultados funcionales sin alterarlos.
+decisiones de base de datos, API, infraestructura y despliegue quedan expresamente fuera de esta
+auditoría y se definirán en una etapa posterior. La consistencia actual se limita a negocio,
+historias funcionales y UX/UI.

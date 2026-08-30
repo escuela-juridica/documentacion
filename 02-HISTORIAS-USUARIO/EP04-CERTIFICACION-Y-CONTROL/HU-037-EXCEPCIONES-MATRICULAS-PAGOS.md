@@ -63,7 +63,8 @@
 - **Frontend:** alertas, detalle, registro de atención y estados separados.
 - **Backend:** detección idempotente, conservación y prohibición de acceso/devolución propia.
 - **Integración:** la atención debe mostrar pago, matrícula, acceso y cupo por separado; cualquier
-  ajuste autorizado conserva el resultado bancario y registra motivo, responsable, fechas y cierre.
+  ajuste autorizado opera solo sobre la atención, matrícula, acceso o capacidad; nunca modifica el
+  resultado bancario de Culqi y registra motivo, responsable, fechas y cierre.
 
 ## Demostración esperada
 

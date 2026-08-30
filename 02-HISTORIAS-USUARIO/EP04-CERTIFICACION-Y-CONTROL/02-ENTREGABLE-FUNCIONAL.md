@@ -119,7 +119,8 @@ anteriores ni permitir que dos certificados vigentes representen el mismo logro.
 
 1. Consultar una confirmación tardía, duplicada o contradictoria.
 2. Mostrar los datos que permiten decidir sin volver a cobrar ni crear otra matrícula.
-3. Aplicar el resultado autorizado y conservar la justificación.
+3. Registrar la atención y aplicar únicamente el efecto funcional definido sobre matrícula,
+   acceso o cupo, sin modificar el resultado informado por Culqi; conservar la justificación.
 4. Comprobar el acceso final del alumno y la capacidad del curso.
 
 **Resultado esperado:** la excepción se resuelve de forma controlada e idempotente, preservando

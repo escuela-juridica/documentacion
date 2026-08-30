@@ -1,12 +1,12 @@
 # esejur — Definición del negocio
 
 > **Fuente de verdad del negocio de esejur.** Todo lo que define qué hace el sistema y por qué
-> está aquí. Lo técnico vive en `03-TECNICO.md`.
+> está aquí. Las decisiones técnicas quedan fuera de la etapa documental actual.
 >
 > Fuentes: `PROYECTO 2026 AV.docx` (brief del cliente), investigación del sitio real de Escuela
 > Jurídica y de udeapolis, y las decisiones acordadas en el análisis.
 >
-> Última actualización: 2026-08-24 · Estado: 🟢 **cerrado** — listo para mapear historias de usuario
+> Última actualización: 2026-08-30 · Estado: 🟢 **cerrado** — negocio e historias funcionales validados
 
 ---
 
@@ -1773,12 +1773,13 @@ documento. No hace falta describir el diseño, pero sí **dónde vive cada cosa*
 |---|---|
 | **Temario lateral** | Los módulos con sus lecciones, en el orden que armó el administrador. Cada lección muestra si está completada, disponible o bloqueada. Los exámenes aparecen en la posición que les tocó, y al final el certificado |
 | **Contenido** | La lección abierta: su video o material en el visor, y sus recursos descargables solo si el administrador lo habilitó *(§7)* |
-| **Avance de la lección** | El botón **"Completar y continuar"**, o el check manual si la fuente no permite detección. Si hay detección, se le muestra cuánto le falta del video *(§11)* |
+| **Avance de la lección** | El botón **"Siguiente"** —o **"Completar lección"** en la última— y el check manual cuando la fuente no permite detección. Si hay detección, el check es automático y de solo lectura, y se muestra cuánto falta del video *(§11)* |
 | **Encabezado** | El porcentaje de avance del curso completo |
 | **Tu avance hacia el certificado** | *(ver abajo)* |
 
-Las lecciones en vivo se ven en este mismo temario: con su fecha, con el enlace que **se habilita
-el día de la sesión**, y después con su grabación o el aviso de "grabación pendiente" *(§9, §11)*.
+Las lecciones en vivo se ven en este mismo temario: la tarjeta conserva fecha y horario, pero el
+enlace real solo se expone y el botón se habilita **entre la hora de inicio y la hora de fin** en
+`America/Lima`; después muestra su grabación o el aviso de "grabación pendiente" *(§9, §11)*.
 
 ### Tu avance hacia el certificado
 
@@ -2262,7 +2263,8 @@ examen es calificado, bloquea la finalización y el certificado hasta obtener un
 (§12)
 
 **19.6 — Separación de la documentación** ✅ *Resuelto: este documento solo define el negocio.
-Las decisiones de construcción y despliegue se documentan exclusivamente en `03-TECNICO.md`.*
+Las decisiones de construcción, base de datos y despliegue se abordarán en una etapa posterior y
+no condicionan la definición funcional actual.*
 
 **19.7 — Repetición de un curso** ✅ *Resuelto: cada curso es una convocatoria
 concreta. Para volver a dictarlo se duplica su configuración y estructura académica en un nuevo
@@ -2488,9 +2490,8 @@ Registro de lo que se consultó y cómo quedó.
 | Documento | Contenido | Estado |
 |---|---|---|
 | `01-NEGOCIO.md` | Este documento: el negocio, las reglas y el alcance | 🟢 vigente |
-| `03-TECNICO.md` | Stack, decisiones técnicas y despliegue | 🟢 vigente |
-| `02-MODELO-DATOS.md` | Esquema de base de datos derivado de este documento | ⚪ por escribir |
-| `04-ROADMAP.md` | Orden de construcción | ⚪ por escribir |
+| `02-HISTORIAS-USUARIO/` | Historias, dependencias, entregables y pantallas funcionales | 🟢 vigente |
+| `04-DISENO-UX-UI/` | Guía visual, componentes y wireframes de las 40 pantallas | 🟢 vigente |
 
 ---
 
