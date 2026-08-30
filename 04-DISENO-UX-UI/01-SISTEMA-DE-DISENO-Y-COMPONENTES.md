@@ -58,6 +58,8 @@ estados normales, alternativos, vacíos, de carga, error, bloqueo y confirmació
 | `Color/Acento/500` | `#00D8D8` | Progreso, selección y detalles de marca |
 | `Color/Acento/100` | `#D9FAFA` | Fondo de selección |
 | `Color/Acento/050` | `#F0FFFF` | Superficie informativa suave |
+| `Color/RojoMarca/600` | `#C83E4D` | Acento institucional, focos editoriales y destacados comerciales |
+| `Color/RojoMarca/050` | `#FFF1F3` | Superficie cálida suave y etiquetas destacadas |
 
 ### 3.2 Colores complementarios
 
@@ -75,9 +77,13 @@ No reemplazan los estados semánticos.
 | `Color/Dorado/500` | `#F4B740` | Certificación y logro |
 | `Color/Dorado/050` | `#FFF8E1` | Fondo de certificación |
 
-Distribución recomendada: 60 % neutrales, 25 % marca, 10 % acentos de contexto y hasta 5 % colores
-semánticos vinculados a estados reales. En administración se reduce el acento decorativo, pero se
-mantiene el mismo 60/25/10/5 como límite visual.
+Distribución recomendada: 60 % neutrales, 25 % azul y turquesa de marca, 10 % rojo institucional y
+acentos de contexto, y hasta 5 % colores semánticos vinculados a estados reales. En administración
+se reduce el acento decorativo, pero se mantiene el mismo 60/25/10/5 como límite visual.
+
+`Color/RojoMarca/600` y `Error` no son intercambiables. El primero da energía y jerarquía visual; el
+segundo comunica fallos, rechazos, anulaciones o peligro. Nunca utilizar rojo institucional para
+disfrazar una acción destructiva ni rojo de error como decoración.
 
 ### 3.3 Colores neutrales
 
@@ -1289,13 +1295,16 @@ El estado vacío distingue “no hay información” de “los filtros no encont
 Secuencia recomendada:
 
 ```text
-#103860, #00AEB5, #6941C6, #026AA2, #F4B740, #FF8A7A
+#103860, #00AEB5, #C83E4D, #6941C6, #026AA2, #F4B740, #FF8A7A
 ```
 
 - Mostrar leyenda y valores mediante tooltip.
 - No depender solo del color.
 - Evitar gráficos 3D.
-- No utilizar rojo o verde salvo que representen un estado semántico real.
+- El rojo institucional `#C83E4D` puede representar una serie ordinaria; el rojo de error `#B42318`
+  y el verde semántico solo representan estados reales.
+- No colocar en un mismo gráfico el rojo institucional y el rojo de error como dos series
+  ordinarias, porque resultarían difíciles de distinguir.
 - Cuando existan más series, reutilizar tonos neutrales antes de inventar nuevos colores.
 
 ## 34. Responsive por componente
@@ -1436,6 +1445,8 @@ Un componente está listo cuando:
 ## 39. Lista de validación antes de entregar a frontend
 
 - [ ] Colores vinculados a variables.
+- [ ] Rojo institucional y rojo de error utilizan variables diferentes y funciones inequívocas.
+- [ ] Cada pantalla tiene como máximo un acento dominante y uno auxiliar.
 - [ ] Tipografía vinculada a estilos.
 - [ ] Espaciado basado en la escala definida.
 - [ ] Inputs con todos sus estados.

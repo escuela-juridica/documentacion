@@ -21,7 +21,8 @@ La propuesta parte de tres referencias:
 1. **Identidad real de Escuela Jurídica:** el logotipo y el certificado proporcionado utilizan
    azul jurídico profundo, turquesa y blanco.
 2. **Udeapolis:** se aprovecha como referencia para jerarquía de tarjetas, ficha comercial y
-   presentación del temario, pero no se copia su identidad ni su color rojo principal.
+   presentación del temario. ESEJUR incorpora un rojo institucional propio como acento cálido, sin
+   copiar el tono, la proporción ni el predominio rojo de Udeapolis.
 3. **Udemy:** se toma como referencia de facilidad para continuar una clase, reconocer el progreso
    y navegar una ruta de aprendizaje.
 
@@ -29,6 +30,10 @@ Los colores principales extraídos visualmente del certificado proporcionado son
 
 - azul aproximado `#103860`;
 - turquesa aproximado `#00D8D8`.
+
+Para ampliar la identidad digital sin alterar esos colores de origen, se incorpora el rojo
+institucional `#C83E4D` como acento cálido complementario. Este color no reemplaza al azul ni al
+turquesa y tampoco representa errores.
 
 Estos valores son suficientemente consistentes para wireframes de alta fidelidad y prototipos.
 Antes de cerrar el diseño final se debe solicitar el logotipo original, preferentemente en SVG, y
@@ -128,10 +133,11 @@ se combina con una paleta educativa más expresiva:
 
 - **60 % superficies claras y neutrales:** fondos, formularios, lectura y tablas;
 - **25 % azul institucional y turquesa de marca:** navegación, hero, acciones y progreso;
-- **10 % acentos de contexto:** violeta, celeste, coral y dorado para distinguir evaluación,
-  sesiones, oferta y certificación;
-- **5 % colores semánticos:** verde, ámbar, rojo e información, únicamente cuando exista un estado
-  real. Este cinco por ciento no es decoración y puede ser menor si la pantalla no tiene estados.
+- **10 % acentos visuales y de contexto:** rojo institucional, violeta, celeste, coral y dorado para
+  aportar energía y distinguir oferta, evaluación, sesiones y certificación;
+- **5 % colores semánticos:** verde, ámbar, rojo de error e información, únicamente cuando exista un
+  estado real. Este cinco por ciento no es decoración y puede ser menor si la pantalla no tiene
+  estados.
 
 Los acentos ayudan a reconocer contextos; no se aplican al azar ni convierten cada tarjeta en un
 color diferente. El resultado debe sentirse moderno y vivo, pero todavía jurídico y profesional.
@@ -149,6 +155,8 @@ color diferente. El resultado debe sentirse moderno y vivo, pero todavía juríd
 | `acento-500` | `#00D8D8` | Progreso, selección, líneas y detalles de marca |
 | `acento-100` | `#D9FAFA` | Fondos suaves de selección e información |
 | `acento-050` | `#F0FFFF` | Superficie turquesa muy ligera |
+| `rojo-marca-600` | `#C83E4D` | Acento institucional, focos editoriales y destacados comerciales |
+| `rojo-marca-050` | `#FFF1F3` | Fondo cálido suave para secciones o etiquetas destacadas |
 | `blanco` | `#FFFFFF` | Superficies, tarjetas y texto sobre azul |
 
 ### 4.2 Colores complementarios
@@ -166,6 +174,7 @@ color diferente. El resultado debe sentirse moderno y vivo, pero todavía juríd
 
 Reglas de uso:
 
+- el rojo institucional no comunica error, rechazo, cancelación ni acción destructiva;
 - el violeta no sustituye al rojo de error;
 - el coral no comunica rechazo ni cancelación;
 - el dorado no comunica advertencia;
@@ -201,14 +210,17 @@ Reglas de uso:
 - **No utilizar texto blanco sobre `#00D8D8`**, porque su contraste aproximado de `1.78:1` no es
   suficiente.
 - Si se requiere un botón turquesa con texto blanco, utilizar `#006F73`.
+- Sobre rojo institucional `#C83E4D` puede utilizarse texto blanco; su contraste es aproximadamente
+  `4.94:1`. Sobre el fondo rojo suave `#FFF1F3` se utiliza texto azul `#103860` o neutral oscuro.
 - Sobre violeta `#6941C6` y celeste `#026AA2` puede utilizarse texto blanco.
 - Sobre coral `#FF8A7A` y dorado `#F4B740` se utiliza texto azul `#103860`, no blanco.
-- Rojo, verde y ámbar son semánticos; no se usan como decoración.
+- El rojo institucional `#C83E4D` es visual; el rojo de error `#B42318`, el verde y el ámbar son
+  semánticos. No intercambiar sus funciones aunque ambos rojos sean cercanos.
 - Los gráficos no deben comunicar diferencias solamente mediante rojo y verde.
 - El fondo principal debe ser claro. El azul oscuro se reserva para navegación, llamados
   importantes, hero y secciones institucionales.
-- Violeta, celeste, coral y dorado se utilizan como acentos de contexto, no como fondos extensos de
-  lectura.
+- Rojo institucional, violeta, celeste, coral y dorado se utilizan como acentos de contexto, no como
+  fondos extensos de lectura.
 - Las tablas administrativas permanecen mayoritariamente neutrales; el color aparece en badges,
   iconos, selección y resúmenes.
 - En una misma tarjeta se utiliza un acento principal; no mezclar varios colores complementarios
@@ -221,20 +233,24 @@ azul y turquesa de la marca; cada contexto suma un acento análogo o complementa
 
 | Contexto | Base 60/25 | Acento 10 | Semántico hasta 5 | Sensación buscada |
 |---|---|---|---|---|
-| Portal y catálogo | blanco, neutral-050, marca-900 | coral-400 y turquesa | solo disponibilidad real | Cercano, comercial y confiable |
+| Portal y catálogo | blanco, neutral-050, marca-900 | rojo-marca-600; coral solo para En vivo | solo disponibilidad real | Cercano, enérgico y confiable |
 | Aula y progreso | blanco, marca-900, acento-500 | celeste-700 | éxito solo al completar | Continuidad y concentración |
 | Exámenes | blanco, neutral-050, marca-900 | violeta-700/050 | éxito/error por resultado | Enfoque sin ansiedad visual |
 | Sesiones | blanco, marca-900, celeste-050 | celeste-700 y coral-400 | aviso por cambio/cancelación | Tiempo y presencia |
 | Certificación | blanco, marca-900, dorado-050 | dorado-500 y turquesa | vigente/anulado reales | Prestigio y logro |
-| Administración | neutral-050, blanco, marca-900 | turquesa, violeta o celeste por módulo | estados operativos | Precisión y lectura rápida |
+| Administración | neutral-050, blanco, marca-900 | rojo institucional solo como detalle de marca; color contextual por módulo | estados operativos | Precisión y lectura rápida |
 
 Reglas de armonía:
 
 - azul–turquesa–celeste forman la familia análoga estable;
+- rojo institucional aporta el contraste cálido complementario y da energía a la identidad sin
+  competir con el azul;
 - coral aporta contraste cálido frente al azul y se limita a focos comerciales o modalidad;
 - violeta se reserva a evaluación para que el usuario aprenda su significado;
 - dorado se reserva a certificación y logro, nunca a advertencias;
 - una pantalla elige un acento contextual dominante y como máximo uno auxiliar;
+- cuando el rojo institucional sea el acento dominante, coral, violeta y dorado quedan como
+  indicadores pequeños ligados a su contexto, no como superficies competidoras;
 - superficies saturadas no deben colocarse una junto a otra; se separan mediante blanco o neutral;
 - cada gráfico mantiene orden de color estable para que una categoría no cambie de color entre
   dashboard, reporte y review.
@@ -367,7 +383,7 @@ convertirse en un recurso distintivo de ESEJUR:
 - líneas finas y polígonos en esquinas del hero;
 - bloques geométricos pequeños detrás de títulos editoriales;
 - formas suaves en estados vacíos y portada del prototipo;
-- combinación ocasional con coral o dorado en baja proporción.
+- combinación ocasional con rojo institucional, coral o dorado en baja proporción.
 
 No utilizar estos elementos detrás de formularios, tablas, preguntas de examen o textos largos.
 Su función es dar identidad, no decorar cada pantalla.
@@ -397,8 +413,8 @@ No se duplican las páginas institucionales que permanecen en la web principal d
 - cursos destacados primero;
 - tarjetas limpias con información comparable y un solo acento por modalidad;
 - secciones con mucho espacio blanco;
-- fondos alternos muy suaves en turquesa, violeta, celeste o dorado para separar secciones sin
-  llenar toda la página de azul;
+- fondos alternos muy suaves en rojo institucional, turquesa, violeta, celeste o dorado para
+  separar secciones sin llenar toda la página de azul;
 - pie de página en cuatro grupos: identidad breve, navegación de cursos, contacto/WhatsApp y legal;
   el grupo legal contiene Términos, Privacidad, Libro de Reclamaciones y Verificar certificado,
   además del enlace a la web institucional. En móvil los grupos usan acordeones, pero los enlaces
@@ -534,8 +550,10 @@ Los badges deben contener texto, no solo color.
 
 ### PF-001 — Inicio y catálogo
 
-- Hero con gradiente `#103860 → #164A73 → #006F73`, de altura moderada y no a pantalla completa.
-- Formas geométricas turquesa, coral o dorado con baja presencia y sin competir con el texto.
+- Hero con gradiente `#103860 → #164A73 → #006F73`, de altura moderada y no a pantalla completa;
+  una forma o línea roja institucional aporta el contraste cálido sin ocupar el fondo completo.
+- Formas geométricas turquesa, rojo institucional, coral o dorado con baja presencia y sin competir
+  con el texto.
 - Título breve, buscador central y acceso a categorías.
 - En escritorio, buscador seguido por dos selectores visibles: **Tipo de curso** y **Categoría**,
   ambos con “Todos” como valor inicial. En móvil, un botón “Filtros” abre un panel deslizable con
@@ -669,8 +687,8 @@ Los badges deben contener texto, no solo color.
 - Mostrar etiquetas y valores al interactuar.
 - No incluir pendientes, tareas ni alertas operativas.
 - Aplicar las mismas fechas, deduplicación y conceptos de los reportes correspondientes.
-- Distribuir azul, turquesa, violeta, celeste, coral y dorado con leyenda; no repetir variaciones de
-  azul que resulten difíciles de diferenciar.
+- Distribuir azul, turquesa, rojo institucional, violeta, celeste, coral y dorado con leyenda; no
+  repetir variaciones de azul que resulten difíciles de diferenciar.
 
 ### Matriz visual de las 40 pantallas
 
@@ -977,6 +995,8 @@ Una pantalla se considera lista para desarrollo cuando:
 
 - [ ] El logotipo conserva su proporción y colores.
 - [ ] Azul y turquesa se utilizan según su función.
+- [ ] El rojo institucional aparece como acento visual controlado y no se confunde con errores.
+- [ ] Ninguna pantalla mezcla más de un acento dominante y uno auxiliar.
 - [ ] No existe texto blanco sobre turquesa brillante.
 - [ ] Hay una sola acción primaria por bloque.
 - [ ] La pantalla presenta primero estado, información necesaria y siguiente acción.
@@ -998,8 +1018,10 @@ Una pantalla se considera lista para desarrollo cuando:
 ## 21. Resultado visual esperado
 
 El producto final debe reconocerse como una plataforma propia de Escuela Jurídica incluso sin leer
-su nombre: azul profundo institucional, acentos turquesa, superficies claras, tipografía sobria,
-tarjetas académicas limpias y una experiencia centrada en continuar, comprender y completar.
+su nombre: azul profundo institucional, acentos turquesa y rojo institucional, superficies claras,
+tipografía sobria, tarjetas académicas limpias y una experiencia centrada en continuar, comprender
+y completar. El rojo aporta energía; el azul mantiene la autoridad y las superficies claras
+conservan el equilibrio.
 
 La referencia Udeapolis orienta la composición comercial; Udemy orienta la experiencia de
 aprendizaje; ESEJUR conserva una identidad visual propia y coherente con su certificado.
