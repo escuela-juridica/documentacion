@@ -16,7 +16,9 @@
 
 ## Alcance incluido
 
-- “Mis cursos” separa en progreso y completados.
+- “Mis cursos” utiliza dos pestañas de navegación: **En progreso** y **Completados**. No son chips,
+  etiquetas ni filtros del catálogo. La pestaña activa se distingue visualmente y al seleccionarla
+  cambia la lista mostrada.
 - Tarjeta con curso, modalidad, avance disponible y acción “Continuar” cuando procede.
 - Cada tarjeta muestra una versión compacta del avance hacia la certificación: condiciones activas,
   valor real, meta y siguiente acción cuando exista.
@@ -35,9 +37,10 @@
 ## Flujo principal
 
 1. El alumno inicia sesión y abre “Mis cursos”.
-2. ESEJUR reúne sus matrículas y calcula acceso actual.
-3. Muestra estado y acción aplicable.
-4. “Continuar” conduce a HU-022 cuando el contenido está habilitado.
+2. ESEJUR abre inicialmente la pestaña “En progreso”, reúne sus matrículas y calcula el acceso actual.
+3. El alumno puede cambiar a “Completados” sin usar los filtros del catálogo.
+4. Cada pestaña muestra el estado y la acción aplicable de sus cursos.
+5. “Continuar” conduce a HU-022 cuando el contenido está habilitado.
 
 ## Criterios de aceptación
 
@@ -53,6 +56,8 @@
   el contenido que ya estuvo disponible en modo lectura, pero no registra nuevos checks, progreso,
   intentos, asistencia ni finalización. Si finalizó antes, su certificación sí continúa.
 - **Dado** otro alumno, **cuando** inicia sesión, **entonces** nunca ve estas matrículas.
+- **Dado** la pantalla “Mis cursos”, **cuando** cambia entre “En progreso” y “Completados”,
+  **entonces** solo una pestaña queda activa y la lista corresponde a esa selección.
 
 ## Dependencia interna
 

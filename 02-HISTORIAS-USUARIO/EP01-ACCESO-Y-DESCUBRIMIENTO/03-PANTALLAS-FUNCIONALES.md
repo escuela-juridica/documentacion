@@ -11,8 +11,9 @@ no depende visualmente de pantallas construidas en otra épica.
 
 - **Historias:** HU-007.
 - **Actor:** visitante y alumno.
-- **Debe mostrar:** oferta de cursos, búsqueda, filtros, tarjetas con nombre, imagen, modalidad,
-  precio o gratuidad y disponibilidad.
+- **Debe mostrar:** oferta de cursos, búsqueda, selector de tipo, selector de categoría y tarjetas
+  con nombre, imagen, modalidad, precio o gratuidad y disponibilidad. Los selectores comienzan en
+  “Todos”; modalidad es información de la tarjeta y no un filtro.
 - **Estados importantes:** inmediato, próximo, en curso, matrícula cerrada, sin cupos y sin
   resultados de búsqueda.
 - **Acción para la review:** buscar, filtrar y abrir un curso.
@@ -23,6 +24,8 @@ no depende visualmente de pantallas construidas en otra épica.
 - **Actor:** visitante y alumno.
 - **Debe mostrar:** información comercial, modalidad, precio y promoción vigente, fechas cuando
   correspondan, docente, beneficios, temario, duración disponible y lecciones de vista previa.
+- **Jerarquía:** primero título, modalidad, disponibilidad, precio y una sola acción comercial;
+  después beneficios, temario, docente y muestra. No incluye cursos relacionados.
 - **Estados importantes:** curso virtual, en vivo, híbrido, gratuito, sin cupos, contenido
   protegido y promoción vencida.
 - **Acción para la review:** abrir una vista previa e intentar acceder a una lección protegida.
@@ -43,6 +46,8 @@ no depende visualmente de pantallas construidas en otra épica.
 - **Actor:** visitante.
 - **Debe mostrar:** nombres, apellidos, correo, teléfono opcional, DNI opcional, contraseña, aceptación de
   documentos, alternativa de Google y contacto por WhatsApp para creación administrativa.
+- **Jerarquía:** formulario centrado de una columna, sin ilustración lateral; “Crear cuenta” es la
+  única acción principal y WhatsApp aparece como ayuda secundaria.
 - **Estados importantes:** correo existente, contraseña inválida, consentimientos faltantes y
   registro enviado.
 - **Acción para la review:** crear una cuenta dejando vacío el DNI y mostrar que también puede
@@ -79,6 +84,8 @@ no depende visualmente de pantallas construidas en otra épica.
 - **Debe mostrar:** identidad de la sesión, navegación permitida y aviso persistente si utiliza la
   contraseña temporal. En administrador, la barra lateral muestra Dashboard, Cursos, Usuarios,
   Matrículas y pagos, Operación académica, Certificados, Reclamaciones, Reportes y Configuración.
+- **Jerarquía:** alumno prioriza “Mis cursos”; administrador ve navegación sin gráficos ni tarjetas
+  que dupliquen el dashboard. Una cuenta restringida prioriza “Completar habilitación”.
 - **Estados importantes:** alumno no habilitado, cambio pendiente y sesión normal.
 - **Acción para la review:** ingresar con `Escuela1415@` y mostrar la advertencia.
 
@@ -88,6 +95,8 @@ no depende visualmente de pantallas construidas en otra épica.
 - **Actor:** alumno y administrador.
 - **Debe mostrar:** datos personales editables, correo de acceso de solo lectura y sección para
   definir o cambiar contraseña.
+- **Jerarquía:** dos pestañas, Datos y Seguridad, con una sola visible; el aviso de datos congelados
+  solo aparece si existe un certificado emitido afectado.
 - **Estados importantes:** cuenta creada por formulario, Google o administración; datos
   incompletos y guardado correcto.
 - **Acción para la review:** actualizar datos y reemplazar la contraseña temporal.
@@ -98,6 +107,8 @@ no depende visualmente de pantallas construidas en otra épica.
 - **Actor:** administrador.
 - **Debe mostrar:** búsqueda o selección de usuarios, datos principales, estado de cuenta y acción
   de creación administrativa con rol Alumno o Administrador y quién concedió el perfil.
+- **Jerarquía:** el listado aparece primero y la creación o el detalle se abre en panel; reenviar y
+  deshabilitar no compiten con “Crear usuario” en cada fila.
 - **Estados importantes:** correo duplicado, teléfono omitido, cuenta creada, correo fallido,
   habilitación incompleta, auto-desactivación bloqueada y último administrador protegido.
 - **Acción para la review:** crear una cuenta con teléfono opcional y contraseña temporal; mostrar
@@ -109,6 +120,7 @@ no depende visualmente de pantallas construidas en otra épica.
 - **Actor:** visitante y usuario.
 - **Debe mostrar:** política de privacidad y términos vigentes en secciones o pestañas accesibles
   desde el registro y el pie de página.
+- **Jerarquía:** un documento visible a la vez, con selector superior e índice desplegable.
 - **Acción para la review:** abrir ambos documentos sin abandonar definitivamente el registro.
 
 ## Elementos que no cuentan como pantallas adicionales

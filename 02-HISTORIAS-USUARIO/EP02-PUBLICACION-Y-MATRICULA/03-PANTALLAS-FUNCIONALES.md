@@ -13,8 +13,9 @@ esta épica.
 
 - **Historias:** HU-009.
 - **Actor:** administrador.
-- **Debe mostrar:** pestañas para tipos de curso, categorías, docentes públicos, entidades,
-  firmantes y tipos de material, con acciones de consulta, creación, edición y activación.
+- **Debe mostrar:** selector de sección para tipos de curso, categorías, docentes públicos,
+  entidades, firmantes y tipos de material; solo un listado visible, con creación o edición en
+  panel. En escritorio puede representarse como pestañas cuando quepan sin comprimirse.
 - **Estados importantes:** valor activo, inactivo, repetido o usado por cursos existentes.
 - **Acción para la review:** crear o actualizar un valor y seleccionarlo después en un curso.
 
@@ -24,6 +25,8 @@ esta épica.
 - **Actor:** administrador.
 - **Debe mostrar:** listado, búsqueda, estado, modalidad, acciones para crear, editar, duplicar,
   cerrar matrícula y administrar el ciclo de vida.
+- **Jerarquía:** “Crear curso” es primaria; editar abre el curso y las demás acciones se muestran en
+  un menú únicamente cuando el estado las permite.
 - **Estados importantes:** borrador, publicado, iniciado o disponible, cerrado y cancelado cuando
   corresponda.
 - **Acción para la review:** crear un curso, abrirlo, duplicarlo y mostrar sus cambios permitidos.
@@ -35,6 +38,9 @@ esta épica.
 - **Debe mostrar mediante secciones:** datos generales, modalidad y fechas, precio y promoción,
   módulos y lecciones, materiales, sesiones, exámenes, requisitos de certificación y validación de
   publicación.
+- **Jerarquía:** pestañas Información, Contenido, Sesiones, Exámenes, Certificación y Publicación,
+  con una sola visible. Cada una permite “Guardar y continuar”; las validaciones completas y
+  “Publicar” se concentran en Publicación.
 - **Editor de exámenes:** tipo CALIFICADO/PRACTICA, cuatro tipos de pregunta, opciones y respuestas,
   puntajes, tiempo, barajado, publicación de respuestas, intentos —solo CALIFICADO—,
   `dias_revision` y bloqueo de secuencia. PRACTICA siempre se muestra ilimitado.
@@ -49,6 +55,8 @@ esta épica.
 - **Actor:** administrador.
 - **Debe mostrar:** filtros, alumno, curso, origen de matrícula, estado de acceso, condición de pago
   y detalle relacionado cuando exista.
+- **Jerarquía:** listado y búsqueda primero; al seleccionar se muestra un resumen de Alumno,
+  Matrícula y Pago, con Pagos e Historial desplegables. Las excepciones no aparecen en todas las filas.
 - **Estados importantes:** gratuita, pagada, administrativa, exonerada, pendiente, rechazada,
   aprobada, cancelada y casos que exceden capacidad.
 - **Acción para la review:** comparar los tres orígenes y realizar una matrícula administrativa.
@@ -87,6 +95,8 @@ esta épica.
 - **Actor:** alumno.
 - **Debe mostrar:** cursos con acceso, modalidad, situación, progreso disponible, condición de
   certificación resumida y acción para ingresar.
+- **Jerarquía:** pestañas En progreso y Completados; cada tarjeta muestra solo la acción que
+  corresponde a su estado, sin reutilizar filtros del catálogo.
 - **Estados importantes:** acceso vigente, cerrado con acceso conservado, matrícula individual
   cancelada o vencida y cancelación total con contenido previo conservado.
 - **Acción para la review:** comprobar que cada matrícula aparece con el acceso correspondiente.

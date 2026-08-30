@@ -1691,7 +1691,9 @@ Basado en udeapolis, que es la referencia que el cliente adjuntó en su document
   aparecen primero los VIRTUAL con **"Inicio inmediato"**, después los cursos con la fecha de
   inicio futura más próxima y finalmente los que ya están en progreso.
 - **Buscador:** busca en **título y descripción** del curso.
-- **Filtros:** por tipo de curso y por categoría temática *(ver abajo)*.
+- **Filtros:** dos selectores independientes, **Tipo de curso** y **Categoría temática**, cada uno
+  con la opción inicial **“Todos”**. Se puede elegir un valor en cada selector y combinar ambos
+  con el buscador. La modalidad se muestra en la tarjeta, pero no es un filtro del catálogo.
 
 ### La ficha del curso
 
@@ -1765,7 +1767,7 @@ Es la pantalla que más usa el alumno:
 
 | Sección | Contenido |
 |---|---|
-| **Mis cursos** | En progreso y completados, con su porcentaje de avance y un botón para **continuar** donde se quedó |
+| **Mis cursos** | Dos pestañas de navegación, **En progreso** y **Completados**, con su porcentaje de avance y un botón para **continuar** donde se quedó. No utiliza los filtros del catálogo. |
 | **Próximas sesiones** | Las sesiones en vivo de todos sus cursos, ordenadas por fecha, con acceso directo al enlace cuando se habilite |
 | **Mis certificados** | Los suyos, y solo los suyos. Con descarga y enlace de verificación |
 | **Mi perfil** | Datos personales, incluido el DNI opcional, y confirmación de nombres y apellidos para el certificado *(§13.8)* |

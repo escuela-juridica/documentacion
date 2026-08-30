@@ -71,6 +71,56 @@ contemporánea y confiable.
    todas las áreas.
 7. **Responsive desde el inicio:** ninguna pantalla se diseña únicamente para escritorio.
 
+### Principios de simplicidad y comprensión
+
+1. **Primero lo necesario para decidir:** título, estado actual, explicación breve y siguiente
+   acción aparecen antes que historial, datos secundarios o excepciones.
+2. **Revelado progresivo:** una pantalla no muestra simultáneamente todos los formularios, detalles
+   y acciones posibles. Las opciones aparecen al elegir una tarea, abrir un registro o desplegar
+   una sección.
+3. **Una acción principal por pantalla:** puede haber acciones secundarias, pero solo una recibe el
+   mayor énfasis según el estado actual. Acciones incompatibles nunca compiten visualmente.
+4. **Valores iniciales útiles:** pestañas, selectores y vistas abren en la opción que resuelve el
+   caso más frecuente. El usuario no debe configurar la interfaz antes de comprenderla.
+5. **No repetir información:** un dato se presenta completo una vez. En otros lugares se resume o
+   se enlaza, evitando tarjetas y paneles que digan lo mismo.
+6. **Lenguaje antes que códigos:** estados internos se traducen a frases breves que explican qué
+   ocurrió y qué puede hacerse después.
+7. **Detalles bajo demanda:** historial, trazabilidad, reglas avanzadas y acciones excepcionales se
+   mantienen disponibles, pero no ocupan el primer nivel de lectura.
+8. **La simplicidad no elimina negocio:** ocultar visualmente un dato hasta que corresponda no
+   significa omitirlo del flujo ni de sus validaciones.
+
+### Principios de Interacción Humano–Computadora aplicados
+
+La experiencia se evalúa mediante principios clásicos de usabilidad y no solamente por su
+apariencia. Cada principio produce una regla comprobable dentro de ESEJUR:
+
+| Principio | Aplicación obligatoria | Ejemplo en ESEJUR |
+|---|---|---|
+| **Visibilidad del estado** | Toda acción informa si está procesando, terminó, falló o quedó pendiente. | El pago diferencia claramente Procesando, Pendiente, Aprobado y No aprobado. |
+| **Correspondencia con el mundo real** | Utilizar palabras, secuencias y unidades conocidas por la persona. | “En progreso”, “Completados”, soles, nota sobre 20 y hora de Lima. |
+| **Control y libertad** | Permitir volver o cancelar sin perder datos; confirmar únicamente acciones irreversibles. | Volver entre pasos de una reclamación conserva lo escrito; anular exige confirmación. |
+| **Consistencia y estándares** | La misma acción conserva nombre, posición, jerarquía y resultado en toda la plataforma. | “Continuar” abre el siguiente punto disponible; “Guardar” nunca publica. |
+| **Prevención de errores** | Restringir combinaciones inválidas antes de enviarlas y explicar requisitos antes de bloquear. | VIRTUAL no muestra asistencia ni fecha de fin; un envío duplicado no genera dos pagos. |
+| **Reconocimiento antes que memoria** | Mantener visibles opciones, contexto, valores actuales y consecuencias; no exigir recordar otra pantalla. | El examen muestra intento, tiempo y preguntas pendientes; el certificado muestra metas reales. |
+| **Eficiencia para uso frecuente** | Priorizar búsquedas, valores iniciales útiles y continuidad, sin crear atajos incomprensibles. | “Mis cursos” abre En progreso y “Continuar” lleva a la última posición. |
+| **Diseño claro y suficiente** | Mostrar solo información pertinente a la tarea actual, conservando el detalle bajo demanda. | El listado abre el detalle y el detalle abre la acción excepcional; no aparecen todos juntos. |
+| **Comprensión y recuperación de errores** | El mensaje identifica qué ocurrió, qué se conservó y cómo continuar. | Si falla un correo, el registro no se pierde y se ofrece reenviar. |
+| **Ayuda contextual** | Explicar términos o decisiones en el lugar donde aparecen, sin depender de un manual externo. | QUEJA y RECLAMO se explican antes de elegir; el check manual explica cuándo corresponde. |
+| **Accesibilidad e inclusión** | Permitir teclado, foco visible, contraste, texto además de color y controles táctiles suficientes. | Estados de examen y pago contienen texto e icono; todas las acciones reciben foco. |
+| **Carga cognitiva controlada** | Dividir tareas largas, agrupar datos relacionados y evitar decisiones simultáneas incompatibles. | El curso usa pestañas; la reclamación cuatro pasos; Mes y Lista nunca aparecen completos juntos. |
+
+#### Prueba rápida de comprensión por pantalla
+
+Una pantalla no se aprueba si una persona no puede responder, únicamente al observarla:
+
+1. **¿Dónde estoy?** — título, contexto y navegación activa.
+2. **¿Cuál es mi situación?** — estado expresado en lenguaje natural.
+3. **¿Qué puedo hacer ahora?** — una acción principal reconocible.
+4. **¿Qué ocurrirá si la ejecuto?** — resultado o consecuencia previsible.
+5. **¿Cómo regreso o me recupero?** — salida segura y tratamiento del error.
+
 ### Equilibrio cromático
 
 La interfaz no debe ser predominantemente azul. El azul conserva la autoridad institucional, pero
@@ -369,7 +419,7 @@ Debe sentirse clara, motivadora y orientada a continuar.
 
 ### 8.3 Administración
 
-Debe sentirse eficiente y densa, pero legible.
+Debe sentirse eficiente y completa, sin presentar toda la complejidad al mismo tiempo.
 
 - barra lateral estable y agrupada por función;
 - encabezado con título, contexto y acción principal;
@@ -377,6 +427,8 @@ Debe sentirse eficiente y densa, pero legible.
 - tablas con encabezado fijo cuando sean extensas;
 - acciones destructivas alejadas de acciones habituales;
 - edición compleja mediante pestañas o pasos, no una página interminable;
+- detalles e historial se abren bajo demanda desde el listado;
+- cada estado muestra únicamente las acciones que realmente puede ejecutar;
 - confirmaciones claras para publicar, cancelar, anular o emitir.
 - superficies y tablas neutrales, con acentos de color limitados a estados, indicadores y contexto;
   no convertir el panel administrativo en un mosaico multicolor.
@@ -485,7 +537,10 @@ Los badges deben contener texto, no solo color.
 - Hero con gradiente `#103860 → #164A73 → #006F73`, de altura moderada y no a pantalla completa.
 - Formas geométricas turquesa, coral o dorado con baja presencia y sin competir con el texto.
 - Título breve, buscador central y acceso a categorías.
-- Filtros en barra lateral de escritorio y panel deslizable en móvil.
+- En escritorio, buscador seguido por dos selectores visibles: **Tipo de curso** y **Categoría**,
+  ambos con “Todos” como valor inicial. En móvil, un botón “Filtros” abre un panel deslizable con
+  esos mismos dos selectores, las acciones “Aplicar” y “Limpiar”, y el número de filtros activos.
+- La modalidad no se filtra: se comunica mediante el badge de cada tarjeta.
 - Cuadrícula de tres tarjetas en 1440 px, dos en tableta y una en móvil.
 - Cursos destacados antes del resto, con etiqueta discreta.
 - Badge de modalidad con color contextual: Virtual turquesa, En vivo coral e Híbrido violeta.
@@ -494,7 +549,8 @@ Los badges deben contener texto, no solo color.
 ### PF-002 — Ficha y vista previa
 
 - Encabezado azul con título, descripción corta, modalidad, docente y datos esenciales.
-- Columna principal para beneficios, temario y docente.
+- Columna principal ordenada como: resumen, beneficios, temario y docente; no agregar cursos
+  relacionados ni bloques comerciales ajenos a la decisión principal.
 - Tarjeta comercial derecha fija al desplazarse, sin cubrir el pie de página.
 - Precio, promoción, disponibilidad y acción principal juntos.
 - Temario en acordeones por módulo.
@@ -505,17 +561,21 @@ Los badges deben contener texto, no solo color.
 - Formularios centrados de máximo 480 px.
 - Fondo claro con bloque institucional azul discreto en escritorio.
 - El registro no debe parecer un formulario legal extenso; consentimientos al final con enlaces.
+- El formulario de registro usa una sola columna y separadores suaves; no necesita ilustración
+  lateral que compita con los campos.
 - Google se presenta como alternativa equivalente, no como botón dominante sobre el registro.
 - Verificación y recuperación usan estados simples con icono, título, explicación y siguiente paso.
 - Perfil dividido en Datos personales y Seguridad.
+- El aviso sobre datos congelados solo aparece cuando ya existe un certificado afectado.
 - Gestión administrativa de usuarios utiliza tabla más panel lateral de creación.
 
 ### PF-012 a PF-015 — Configuración administrativa
 
 - Listados con filtros y acción principal en el encabezado.
-- Editor de curso dividido en pestañas: General, Contenido, Sesiones, Exámenes, Certificación y
-  Publicación.
-- Guardado visible por pestaña y resumen de pendientes antes de publicar.
+- Editor de curso dividido en pestañas: Información, Contenido, Sesiones, Exámenes, Certificación y
+  Publicación. Solo se muestra el contenido de la pestaña activa.
+- Cada pestaña ofrece “Guardar y continuar”; la lista completa de pendientes aparece en Publicación
+  o cuando el usuario solicita revisar, no como un panel permanente que reduzca el espacio.
 - Contenido organizado como árbol reordenable mediante asa de arrastre; también ofrecer controles
   accesibles para subir o bajar.
 - Matrículas y pagos se consultan juntos en la pantalla, pero sus estados se presentan por
@@ -532,14 +592,15 @@ Los badges deben contener texto, no solo color.
 
 ### PF-020 a PF-022 — Aula, lecciones y sesiones
 
-- Aula en tres zonas posibles: navegación del curso, contenido y panel contextual; reducir a una
-  columna en móvil.
+- Aula en dos zonas principales: navegación del curso y contenido. “Tu avance hacia el certificado”
+  aparece como resumen desplegable, no como una tercera columna permanente.
 - Reproductor de video como elemento principal.
 - Materiales debajo del contenido, con tipo, nombre, tamaño cuando aplique y permiso de descarga.
 - Acción “Siguiente” siempre en posición predecible.
 - Check de lección visible en la ruta, diferenciando automático y manual mediante explicación, no
   mediante un icono diferente sin texto.
-- Calendario y lista como vistas alternas de las mismas sesiones.
+- Calendario y lista son vistas alternas: se muestra una a la vez. El detalle se abre al seleccionar
+  una sesión.
 - Progreso turquesa y sesiones celestes; los fondos amplios continúan blancos o neutrales.
 
 ### PF-023 y PF-024 — Exámenes
@@ -551,15 +612,16 @@ Los badges deben contener texto, no solo color.
 - Respuestas grandes y fáciles de seleccionar.
 - En móvil, temporizador fijo y navegador de preguntas desplegable.
 - Confirmación antes de entregar; al agotarse el tiempo se explica el envío automático.
-- Resultado con nota, aprobación, mejor intento, intentos disponibles y respuestas visibles según
-  configuración.
+- Resultado muestra primero nota, aprobación y siguiente acción; mejor intento, intentos disponibles
+  y respuestas aparecen debajo o al solicitar el detalle permitido.
 - Respuesta abierta pendiente presenta fecha máxima de calificación.
 - Violeta como acento académico en navegador, selección y encabezado; éxito o error conservan sus
   colores semánticos.
 
 ### PF-025 a PF-028 — Operación académica
 
-- Sesiones y asistencia mediante tabla con resumen de elegibles y porcentaje.
+- Sesiones y asistencia mediante tabla; resumen y acciones de una sesión aparecen al abrirla, no en
+  todas las filas.
 - Reprogramación muestra claramente valor anterior y nuevo.
 - Cola de respuestas abiertas ordenada por vencimiento con badges de urgencia.
 - Calificación presenta respuesta completa y puntaje en un panel fijo.
@@ -580,9 +642,11 @@ Los badges deben contener texto, no solo color.
 
 ### PF-035 a PF-038 — Excepciones y reclamaciones
 
-- La excepción de matrícula o pago muestra tres bloques: pago, matrícula y acceso final.
+- La excepción de matrícula o pago muestra primero el resultado final explicado. Pago, matrícula,
+  cupo e historial se consultan después en bloques desplegables, no en tres columnas simultáneas.
 - Los casos contradictorios requieren explicación antes de habilitar una resolución.
-- Libro de reclamaciones público como formulario por secciones, con resumen antes de enviar.
+- Libro de reclamaciones público en cuatro pasos breves: persona, servicio, detalle/evidencias y
+  revisión/declaraciones. Volver a un paso conserva lo ingresado.
 - Explicar `QUEJA` y `RECLAMO` cerca de la selección.
 - Bandeja administrativa ordenada por plazo, con próximos a vencer y vencidos visibles.
 - Respuesta institucional muestra el historial del correo y bloquea edición después del envío
@@ -591,7 +655,8 @@ Los badges deben contener texto, no solo color.
 ### PF-039 — Centro de reportes
 
 - Cinco pestañas: Matrículas, Pagos, Académico, Certificados y Asistencia.
-- Filtros consistentes en la parte superior.
+- Solo una pestaña y su reporte se muestran a la vez. Los filtros frecuentes permanecen visibles y
+  los adicionales se agrupan en “Más filtros”.
 - Resumen breve antes de la tabla.
 - Exportación como acción secundaria.
 - Estado vacío explica si no hay datos o si los filtros no producen resultados.
@@ -902,6 +967,9 @@ Una pantalla se considera lista para desarrollo cuando:
 - utiliza los datos que requiere la historia;
 - no introduce una regla de negocio nueva;
 - conserva contraste, foco y tamaños táctiles adecuados;
+- supera la prueba rápida de comprensión: ubicación, situación, acción, consecuencia y recuperación;
+- proporciona retroalimentación visible después de cada acción;
+- no obliga a memorizar datos de otra pantalla para completar la tarea actual;
 - se conecta correctamente con el prototipo de su épica;
 - puede demostrarse siguiendo el entregable funcional de la review.
 
@@ -911,6 +979,10 @@ Una pantalla se considera lista para desarrollo cuando:
 - [ ] Azul y turquesa se utilizan según su función.
 - [ ] No existe texto blanco sobre turquesa brillante.
 - [ ] Hay una sola acción primaria por bloque.
+- [ ] La pantalla presenta primero estado, información necesaria y siguiente acción.
+- [ ] Historial, excepciones y opciones avanzadas aparecen solo cuando se solicitan.
+- [ ] No existen dos controles diferentes que produzcan la misma acción.
+- [ ] Badges informan, pestañas navegan y selectores filtran; no se intercambian sus funciones.
 - [ ] Formularios conservan etiquetas visibles.
 - [ ] Todos los estados contienen texto comprensible.
 - [ ] Botones y campos tienen estados de foco, carga y deshabilitado.

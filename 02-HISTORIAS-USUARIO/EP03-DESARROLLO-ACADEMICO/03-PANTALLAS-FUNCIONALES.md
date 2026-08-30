@@ -14,6 +14,8 @@ principales**.
 - **Actor:** alumno.
 - **Debe mostrar:** módulos, lecciones, porcentajes, última posición, requisitos aplicables,
   bloqueos y acciones para continuar.
+- **Jerarquía:** dos zonas, temario y contenido; el avance hacia el certificado se presenta como
+  resumen desplegable, no como una tercera columna permanente.
 - **Estados importantes:** sin avance, en progreso, completo, evaluación bloqueante y curso
   cerrado con acceso conservado.
 - **Acción para la review:** entrar, avanzar, salir y retomar la última posición.
@@ -34,6 +36,8 @@ principales**.
 - **Actor:** alumno.
 - **Debe mostrar:** sesiones próximas y pasadas, fecha, horario, enlace habilitado, asistencia,
   porcentaje y grabación disponible o pendiente.
+- **Jerarquía:** Mes y Lista son pestañas alternativas; se muestra una a la vez y el detalle se abre
+  al seleccionar la sesión.
 - **Estados importantes:** programada, reprogramada, cancelada, finalizada con grabación pendiente
   y no elegible para asistencia.
 - **Acción para la review:** consultar una sesión, su cambio y el nuevo cálculo de asistencia.
@@ -54,6 +58,8 @@ principales**.
 - **Actor:** alumno.
 - **Debe mostrar:** nota, mejor intento, aprobación, intentos consumidos y respuestas correctas solo
   cuando la política lo permita.
+- **Jerarquía:** estado, nota y siguiente acción primero; intentos, mejor nota y respuestas se
+  despliegan después cuando correspondan.
 - **Estados importantes:** aprobado, desaprobado con reintento, intentos agotados, pendiente de
   revisión humana y resultado actualizado.
 - **Acción para la review:** comparar resultado automático y respuesta pendiente de calificar.
@@ -64,6 +70,8 @@ principales**.
 - **Actor:** administrador.
 - **Debe mostrar:** sesiones, alumnos elegibles, asistencia, datos anteriores y nuevos, motivo de
   reprogramación o cancelación y situación de la grabación.
+- **Jerarquía:** listado primero y detalle por sesión; cada estado presenta únicamente las acciones
+  aplicables, sin una fila de botones incompatibles.
 - **Estados importantes:** cambio notificado, correo fallido, cancelación y sesión fuera de la
   fecha final del curso.
 - **Acción para la review:** corregir asistencia y reprogramar o cancelar una sesión.
@@ -90,6 +98,8 @@ principales**.
 - **Historias:** HU-031.
 - **Actor:** administrador.
 - **Debe mostrar:** alumno, curso, situación académica, tipo de excepción, justificación e historial.
+- **Jerarquía:** buscar, revisar situación y luego elegir una excepción; el formulario y el motivo
+  aparecen únicamente después de seleccionar la acción.
 - **Estados importantes:** corrección de asistencia, intento adicional, certificado ya emitido y
   operación no permitida.
 - **Acción para la review:** conceder una excepción válida y demostrar sus límites.

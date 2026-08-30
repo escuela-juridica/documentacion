@@ -14,6 +14,8 @@ y aula. En total pueden mostrarse aproximadamente **16 pantallas principales**.
 - **Actor:** alumno.
 - **Debe mostrar:** progreso frente a requisitos, datos personales que serán certificados, estado
   y fecha prevista cuando exista espera.
+- **Jerarquía:** estado y siguiente paso primero; datos, promedio y fecha aparecen solo cuando
+  aplican. Existe una sola acción principal para cada estado.
 - **Estados importantes:** requisitos pendientes, datos pendientes, programado, listo para emitir
   y advertencia previa a la generación.
 - **Acción para la review:** completar datos, revisar condiciones y emitir cuando corresponda.
@@ -47,6 +49,7 @@ y aula. En total pueden mostrarse aproximadamente **16 pantallas principales**.
 - **Historias:** HU-035, HU-036 y HU-044.
 - **Actor:** administrador.
 - **Debe mostrar:** listado, filtros, alumno, curso, nivel, fecha, estado y acceso al detalle.
+- **Jerarquía:** búsqueda/listado primero; trazabilidad y operaciones aparecen al abrir el registro.
 - **Estados importantes:** pendiente, programado, vigente, anulado y sin resultados.
 - **Acción para la review:** localizar un certificado y abrir su operación administrativa.
 
@@ -56,6 +59,8 @@ y aula. En total pueden mostrarse aproximadamente **16 pantallas principales**.
 - **Actor:** administrador.
 - **Debe mostrar:** requisitos, datos congelados, nivel calculado, historial, motivos y acciones
   permitidas.
+- **Jerarquía:** resumen y estado, luego pestañas Detalle, Versiones e Historial. Solo se muestran
+  las acciones válidas; emitir, corregir y anular nunca compiten simultáneamente.
 - **Estados importantes:** emisión manual, corrección con conservación histórica, anulación y
   acción bloqueada.
 - **Acción para la review:** emitir uno, corregir otro y anular un tercero.
@@ -66,6 +71,8 @@ y aula. En total pueden mostrarse aproximadamente **16 pantallas principales**.
 - **Actor:** administrador.
 - **Debe mostrar:** casos contradictorios o tardíos, pago, matrícula, cupo, acceso, historial y
   justificación de resolución.
+- **Jerarquía:** resultado final explicado primero; Pago, Matrícula, Acceso/cupo e Historial se
+  abren como detalles, evitando tres columnas simultáneas.
 - **Estados importantes:** confirmación repetida, aprobación tardía, curso cancelado, exceso de
   capacidad y caso resuelto.
 - **Acción para la review:** resolver sin duplicar pago, matrícula o cupo.
@@ -76,6 +83,8 @@ y aula. En total pueden mostrarse aproximadamente **16 pantallas principales**.
 - **Actor:** visitante.
 - **Debe mostrar:** tipo y número de documento, nombres, apellidos, correo, celular, dirección,
   importe, producto o servicio, hecho, solución solicitada, imágenes, declaración y autorización.
+- **Jerarquía:** cuatro pasos: Persona, Servicio, Detalle/evidencias y Revisión/declaraciones. Volver
+  conserva datos y “Presentar” aparece únicamente al final.
 - **Estados importantes:** queja, reclamo, archivos inválidos, datos faltantes y constancia enviada.
 - **Acción para la review:** registrar el caso y obtener correlativo y fecha máxima de respuesta.
 
@@ -94,6 +103,8 @@ y aula. En total pueden mostrarse aproximadamente **16 pantallas principales**.
 - **Actor:** administrador.
 - **Debe mostrar:** información presentada, imágenes, plazo, respuesta institucional y resultado
   del correo.
+- **Jerarquía:** editor de respuesta como contenido principal; expediente, evidencias e historial
+  se consultan bajo demanda.
 - **Estados importantes:** pendiente, envío fallido, respondido e intento de modificar una
   respuesta ya entregada.
 - **Acción para la review:** responder, simular un fallo y completar el envío correcto.
@@ -102,8 +113,9 @@ y aula. En total pueden mostrarse aproximadamente **16 pantallas principales**.
 
 - **Historias:** HU-041 a HU-045.
 - **Actor:** administrador.
-- **Debe mostrar en cinco pestañas:** matrículas, pagos, seguimiento académico, certificados y
-  asistencia, con sus filtros, resultados y exportación aplicable.
+- **Debe mostrar:** matrículas, pagos, seguimiento académico, certificados y asistencia como cinco
+  secciones, pero solo una visible a la vez; filtros frecuentes arriba, adicionales en “Más
+  filtros”, resultados y exportación secundaria.
 - **Estados importantes:** con datos, sin datos, filtros aplicados y cálculo de asistencia sobre
   sesiones elegibles.
 - **Acción para la review:** recorrer las cinco pestañas y comparar información relacionada.

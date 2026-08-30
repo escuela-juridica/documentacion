@@ -106,23 +106,30 @@ mostrar el cumplimiento académico y PF-013 para ejecutar la cancelación comple
 
 ## Decisiones de agrupación para mantener el sistema simple
 
-- PF-002 integra ficha y vista previa; la reproducción puede abrirse en la misma vista.
+- Toda pantalla muestra primero el estado actual, la información necesaria para decidir y una sola
+  acción principal. Historial, trazabilidad, filtros adicionales y acciones excepcionales se abren
+  bajo demanda.
+- PF-002 integra ficha y vista previa, sin cursos relacionados; la reproducción puede abrirse en la
+  misma vista y solo existe una acción comercial principal según el estado.
 - PF-009 integra datos personales, definición o cambio de contraseña y seguridad de la cuenta.
 - PF-010 integra listado, creación y habilitación de usuarios; crear puede ser un formulario
   emergente.
 - PF-011 reúne privacidad y términos en secciones o pestañas públicas.
-- PF-012 reúne tipos, categorías, docentes, entidades, firmantes y materiales mediante pestañas.
-- PF-014 usa secciones para datos generales, contenido, sesiones, exámenes, certificación y
-  validación de publicación.
+- PF-012 reúne tipos, categorías, docentes, entidades, firmantes y materiales mediante un selector
+  de sección o pestañas cuando exista espacio, mostrando solo un listado a la vez.
+- PF-014 usa pestañas para Información, Contenido, Sesiones, Exámenes, Certificación y Publicación;
+  solo la activa es visible y la validación completa se concentra en Publicación.
 - PF-015 incluye la matrícula administrativa y el detalle de matrícula o pago mediante formularios
   o paneles internos.
 - PF-023 utiliza estados para instrucciones, desarrollo, temporizador y confirmación de entrega.
-- PF-024 reúne resultado, mejor nota, intentos y respuestas visibles según la política definida.
+- PF-024 prioriza estado, nota y siguiente acción; mejor nota, intentos y respuestas se despliegan
+  después según la política definida.
 - PF-025 integra reprogramación, cancelación y asistencia por sesión.
-- PF-034 concentra emisión manual, corrección y anulación porque operan sobre el mismo certificado.
+- PF-034 concentra emisión manual, corrección y anulación porque operan sobre el mismo certificado,
+  pero solo muestra las acciones válidas para el estado y separa Detalle, Versiones e Historial.
 - La cancelación completa se ejecuta desde PF-013; no requiere una pantalla independiente.
-- PF-039 presenta cinco pestañas: matrículas, pagos, seguimiento académico, certificados y
-  asistencia.
+- PF-036 organiza todos los datos legales en cuatro pasos sin omitir campos.
+- PF-039 presenta un solo reporte a la vez; en escritorio usa cinco pestañas y en móvil un selector.
 - PF-040 contiene exactamente cuatro gráficos —evolución de matrículas, matrículas por curso,
   forma de ingreso y pagos confirmados—, sin tarjetas de indicadores, tareas, alertas ni pendientes.
 

@@ -19,7 +19,10 @@
 - Catálogo público con tarjetas que muestran imagen, tipo de curso, título, avatares de docentes,
   fecha de inicio o estado y el botón “Ver detalles”.
 - Búsqueda sobre título y descripción.
-- Filtros independientes por tipo de curso y categoría temática.
+- Dos selectores independientes: **Tipo de curso** y **Categoría temática**. Cada selector permite
+  un valor a la vez y comienza en “Todos”. El visitante puede combinar ambos entre sí y con el
+  buscador.
+- La modalidad aparece como información de la tarjeta, pero no forma parte de los filtros.
 - Curso destacado antes que no destacado.
 - Dentro de cada grupo: VIRTUAL con inicio inmediato, fechas futuras más próximas y luego cursos en
   progreso.
@@ -35,8 +38,8 @@
 
 1. El visitante abre el catálogo sin iniciar sesión.
 2. Visualiza la oferta en el orden acordado.
-3. Escribe una búsqueda o selecciona filtros.
-4. ESEJUR muestra solo coincidencias y permite retirar filtros.
+3. Escribe una búsqueda o elige un tipo y una categoría en sus selectores.
+4. ESEJUR muestra solo coincidencias y permite volver individualmente a “Todos” o limpiar todo.
 5. Selecciona un curso para HU-008.
 
 ## Criterios de aceptación
@@ -45,6 +48,10 @@
   destacados aparecen primero y cada grupo respeta el orden temporal definido.
 - **Dado** una palabra en título o descripción, **cuando** busca, **entonces** obtiene coincidencias.
 - **Dado** tipo y categoría, **cuando** combina filtros, **entonces** se aplican ambos ejes.
+- **Dado** un selector sin elección específica, **cuando** conserva “Todos”, **entonces** ese eje
+  no excluye cursos.
+- **Dado** la modalidad de un curso, **cuando** consulta los filtros, **entonces** la modalidad no
+  aparece como tercer selector; se comunica en la tarjeta mediante su etiqueta informativa.
 - **Dado** un curso EN_VIVO o HIBRIDO, **cuando** aparece, **entonces** muestra el badge “En vivo”.
 - **Dado** cualquier tarjeta visible, **cuando** se presenta, **entonces** contiene imagen, tipo,
   título, docentes, fecha o estado y una acción para consultar los detalles.
@@ -64,11 +71,11 @@ sesión.
 
 ## Orientación de trabajo
 
-- **Frontend:** tarjetas, búsqueda, filtros, orden y estados vacíos.
+- **Frontend:** tarjetas, búsqueda, selectores de tipo y categoría, orden y estados vacíos.
 - **Backend:** selección pública de cursos, búsqueda y orden coherente.
 - **Integración:** combinación de búsqueda, filtros y navegación a ficha.
 
 ## Demostración esperada
 
-Buscar por descripción, combinar tipo/categoría y comprobar el orden con cursos virtuales, futuros,
-en progreso y destacados.
+Buscar por descripción, elegir tipo y categoría, volver a “Todos”, limpiar la búsqueda y comprobar
+el orden con cursos virtuales, futuros, en progreso y destacados.

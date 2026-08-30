@@ -28,6 +28,23 @@ estados normales, alternativos, vacíos, de carga, error, bloqueo y confirmació
 9. No utilizar texto blanco sobre el turquesa `#00D8D8`.
 10. Los nombres internos de componentes se escriben en español sin tildes ni `ñ`.
 
+### 2.1 Jerarquía y carga visual
+
+- Cada pantalla identifica una tarea principal y la expresa con un solo botón de máxima jerarquía.
+- Estado, explicación y siguiente paso ocupan el primer nivel; historial y detalle técnico se
+  muestran después o bajo demanda.
+- No colocar a la vez tabla, formulario completo, historial completo y confirmación. El listado
+  abre el detalle; el detalle abre la acción; la acción solicita confirmación solo si corresponde.
+- Los campos condicionales permanecen ocultos hasta que una selección los vuelve necesarios.
+- Una acción no disponible se oculta cuando nunca aplica al estado; se deshabilita con explicación
+  cuando verla ayuda a entender qué requisito falta.
+- No repetir el mismo estado en badge, alerta y tarjeta dentro del mismo bloque. Elegir una forma
+  principal y usar las demás solo si aportan información distinta.
+- En móvil, priorizar una tarea por vista y utilizar paneles temporales para navegación, filtros o
+  detalle. Nunca apilar varias barras fijas que reduzcan el área útil.
+- Un badge informa, una pestaña cambia de sección, un selector filtra y un botón ejecuta. La forma
+  visual no puede sustituir el comportamiento correspondiente.
+
 ## 3. Variables fundamentales
 
 ### 3.1 Colores de marca
@@ -458,6 +475,9 @@ Mostrar:
 - Formulario extenso: máximo 960 px y dividido por secciones.
 - Dos columnas solo cuando los datos son cortos y relacionados.
 - En móvil todos los campos pasan a una columna.
+- Mostrar primero los campos frecuentes. Los campos que dependen de modalidad, estado o respuesta
+  previa aparecen únicamente cuando aplican.
+- Las secciones avanzadas comienzan cerradas si el usuario puede completar la tarea común sin ellas.
 
 ### 11.2 Acciones
 
@@ -530,6 +550,10 @@ Mostrar:
 - Inactiva: `#475467`.
 - Focus independiente.
 - Si no caben en móvil, desplazamiento horizontal con indicación visual; no reducir texto.
+- Solo el contenido de la pestaña activa permanece visible.
+- Una pestaña no ejecuta acciones ni actúa como filtro múltiple; únicamente cambia de sección.
+- Cuando haya muchas pestañas en móvil, mostrar el nombre de la sección actual y un selector de
+  secciones, evitando una fila interminable.
 
 Usos principales:
 
@@ -587,6 +611,11 @@ Utilizar solo cuando exista una secuencia real, por ejemplo publicación de curs
 
 Estados: normal, destacado, inmediato, próximo, en progreso, cerrado y sin cupos.
 
+- Mostrar como máximo dos badges simultáneos: modalidad y el estado comercial más importante. El
+  tipo o categoría permanece como texto secundario para no convertir la tarjeta en una colección
+  de etiquetas.
+- No repetir modalidad, estado o fecha en dos zonas de la misma tarjeta.
+
 Color contextual por modalidad:
 
 - `Virtual`: badge y detalle turquesa;
@@ -601,7 +630,7 @@ Color contextual por modalidad:
 - Estado de acceso.
 - Barra de progreso con porcentaje.
 - Resumen de certificación solo cuando exista información.
-- Acción dominante “Continuar”.
+- Una sola acción dominante según estado: “Continuar”, “Ver certificado” o “Ver temario”.
 - Si no existe acceso, explicar el motivo y no mostrar una acción falsa.
 
 ### 14.4 Tarjeta de certificado
@@ -637,9 +666,15 @@ Color contextual por modalidad:
 
 - Alto: 32 px.
 - Padding horizontal: 12 px.
-- Puede incluir acción para retirar.
+- Se utiliza únicamente para **resumir un filtro ya aplicado**, por ejemplo “Categoría: Derecho
+  registral ×”; no reemplaza al selector donde se elige el valor.
+- Incluye una acción clara para retirar ese filtro.
 - Seleccionado: fondo `#D9FAFA`, texto `#103860`.
 - No utilizar más de una línea.
+- Nunca representar una selección mediante una etiqueta visual sin comportamiento interactivo.
+  Todo elemento accionable debe tener estados normal, foco, activo y deshabilitado reconocibles.
+- En el catálogo, los controles principales son los selectores de Tipo y Categoría. En “Mis
+  cursos” se utilizan pestañas En progreso/Completados, no chips de filtro.
 
 ## 16. Alertas y notificaciones visuales
 
@@ -782,6 +817,8 @@ Un panel lateral se utiliza para creación breve o consulta sin perder el listad
 - Sombra: `Sombra/LG`.
 - Encabezado y acciones fijas.
 - Permite consultar el elemento anterior al cerrar.
+- No abrir un segundo panel encima del primero. Una acción compleja conduce a una vista dedicada o
+  reemplaza el contenido del panel conservando una acción clara para volver.
 
 Usos recomendados:
 
@@ -1014,6 +1051,9 @@ Fila de 56–64 px con:
 - Sesión marcada con punto y texto disponible al seleccionar.
 - Día actual con borde; día seleccionado con fondo turquesa suave.
 - Alternativa en lista obligatoria para móvil y accesibilidad.
+- Mes y Lista son vistas alternas; nunca se muestran completas al mismo tiempo.
+- Seleccionar una sesión abre su detalle sin insertar toda la información dentro de la celda del
+  calendario.
 
 ### Tarjeta o detalle de sesión
 
@@ -1156,6 +1196,11 @@ Utilizar los textos naturales:
 
 No exponer códigos internos.
 
+- Presentar primero el estado actual y una sola acción principal. Los requisitos se muestran como
+  lista breve y el historial queda fuera del primer nivel.
+- Los campos para confirmar nombres solo aparecen cuando faltan o cuando el alumno decide revisarlos
+  antes de emitir.
+
 ### 30.2 Visor
 
 - Fondo neutro.
@@ -1177,17 +1222,16 @@ No exponer códigos internos.
 
 ### Formulario público
 
-Dividir en:
+Dividir visualmente en cuatro pasos, sin eliminar ningún dato:
 
-1. identificación;
-2. contacto y dirección;
-3. producto o servicio e importe;
-4. qué ocurrió;
-5. qué puede hacer la Escuela;
-6. imágenes;
-7. declaración y autorización.
+1. **Persona:** identificación, contacto y dirección;
+2. **Servicio:** producto o servicio e importe;
+3. **Detalle y evidencias:** elección Queja/Reclamo, qué ocurrió, qué solicita e imágenes;
+4. **Revisión:** resumen, declaración jurada y autorización de respuesta.
 
 - Mostrar la diferencia entre Queja y Reclamo junto a la selección.
+- Mostrar “Paso X de 4”; permitir volver sin perder información.
+- Validar cada paso antes de continuar y reservar “Presentar” para el resumen final.
 - Conservar datos ante un fallo recuperable.
 - Antes de enviar, mostrar resumen.
 - Después de enviar, mostrar correlativo y fecha máxima de respuesta de quince días hábiles.
@@ -1204,13 +1248,16 @@ Dividir en:
 ## 32. Reportes
 
 - Contenedor de ancho completo dentro de administración.
-- Filtros en una línea adaptable.
+- Mostrar en primera línea únicamente rango, curso y el filtro más frecuente del reporte. Los demás
+  se abren desde “Más filtros”.
 - Botón aplicar cuando la consulta sea pesada; actualización inmediata controlada para filtros
   simples.
 - Resumen de resultados.
 - Tabla principal.
 - Exportación secundaria cuando corresponda.
 - Fecha y hora de la última consulta si aporta claridad.
+- Solo una pestaña y una tabla se muestran a la vez. En móvil las cinco pestañas se convierten en
+  selector de reporte.
 
 Pestañas:
 
@@ -1361,8 +1408,8 @@ No utilizar nombres como `Frame 132`, `Botón copia 4` o `Nuevo componente`.
 | PF-023–PF-024 | Temporizador, navegador, preguntas, entrega y resultado |
 | PF-025–PF-028 | Tablas académicas, panel de calificación y modal de excepción |
 | PF-029–PF-034 | Requisitos, modal de emisión, tarjetas, visor, verificación e historial |
-| PF-035 | Comparación de pago, matrícula y acceso |
-| PF-036–PF-038 | Formulario extenso, carga de imágenes, bandeja y respuesta |
+| PF-035 | Resultado explicado, acordeones de pago/matrícula/acceso e historial plegado |
+| PF-036–PF-038 | Formulario en cuatro pasos, carga de imágenes, bandeja y respuesta progresiva |
 | PF-039 | Filtros, pestañas, tablas, paginación y exportación |
 | PF-040 | Filtros y exactamente cuatro gráficos, sin indicadores |
 
@@ -1378,6 +1425,10 @@ Un componente está listo cuando:
 - funciona con textos cortos y largos;
 - tiene nombre y propiedades consistentes en Figma;
 - cumple contraste y teclado;
+- comunica su función sin depender únicamente de forma, posición o color;
+- proporciona retroalimentación para normal, procesando, éxito, error y deshabilitado cuando aplican;
+- conserva la información válida y ofrece recuperación después de un error;
+- no exige recordar un valor que podría mostrar dentro del contexto actual;
 - muestra contenido realista de ESEJUR;
 - fue probado dentro de al menos una pantalla real;
 - puede implementarse sin que frontend tenga que inventar una medida o comportamiento.
@@ -1389,6 +1440,11 @@ Un componente está listo cuando:
 - [ ] Espaciado basado en la escala definida.
 - [ ] Inputs con todos sus estados.
 - [ ] Botones con carga y deshabilitado.
+- [ ] Cada control comunica si informa, navega, selecciona o ejecuta.
+- [ ] Toda acción produce retroalimentación y una salida comprensible.
+- [ ] Errores explican qué ocurrió, qué se conservó y cómo continuar.
+- [ ] La tarea frecuente puede completarse sin abrir opciones avanzadas.
+- [ ] El usuario puede volver o cancelar sin perder información válida cuando la acción aún no se confirmó.
 - [ ] Modales con tamaños y foco.
 - [ ] Tablas con carga, vacío y sin resultados.
 - [ ] Tarjetas con estados reales.
