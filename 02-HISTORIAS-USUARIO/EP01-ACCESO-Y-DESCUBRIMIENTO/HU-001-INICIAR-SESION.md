@@ -38,6 +38,9 @@ No incluye registro, Google ni recuperación de contraseña, que tienen historia
 3. Registra quién intentó acceder, fecha y hora, origen disponible y resultado exitoso o fallido.
 4. Redirige al panel de alumno o de administración.
 
+Todas las fechas y horas visibles o registradas en este flujo se interpretan y muestran en la zona
+horaria `America/Lima`.
+
 ## Alternativas y excepciones
 
 - Credenciales incorrectas: no se inicia sesión y se informa sin confirmar si el correo existe.
@@ -66,6 +69,12 @@ No incluye registro, Google ni recuperación de contraseña, que tienen historia
 - **Dado** datos incorrectos,
 - **cuando** intenta ingresar,
 - **entonces** no obtiene sesión ni información sobre la existencia del correo.
+
+### Hora de los accesos
+
+- **Dado** cualquier intento de inicio de sesión,
+- **cuando** ESEJUR registra o muestra su fecha y hora,
+- **entonces** utiliza la zona horaria `America/Lima` y no la zona del servidor o del dispositivo.
 
 ## Estados, permisos y conservación
 

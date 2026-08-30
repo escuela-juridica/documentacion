@@ -29,6 +29,7 @@
   pasar a PENDIENTE_REVISION si contiene alguna respuesta abierta.
 - El intento pasa a PENDIENTE_REVISION si contiene abiertas.
 - Se calcula `fecha_limite_revision` desde envío y `dias_revision`, tres calendario por defecto.
+- `dias_revision` ya no puede modificarse después del inicio del curso.
 - No puede iniciar otro intento mientras uno está pendiente.
 - Si el examen es calificado, bloquea finalización/certificado hasta CALIFICADO.
 - La fecha límite informa el compromiso administrativo, no califica automáticamente.
@@ -49,6 +50,8 @@
 - **Dado** examen calificado pendiente, **cuando** cumple otros requisitos, **entonces** no se fija
   finalización ni se emite certificado.
 - **Dado** examen de práctica abierto, **cuando** está pendiente, **entonces** no afecta la nota final.
+- **Dado** un examen CALIFICADO pendiente, **cuando** se intenta finalizar o emitir incluso de forma
+  manual, **entonces** se bloquea hasta que la revisión produzca una nota definitiva.
 - **Dado** tiempo agotado con preguntas pendientes, **cuando** ESEJUR envía el intento, **entonces**
   asigna cero a las no respondidas, consume la oportunidad y conserva las abiertas para revisión.
 

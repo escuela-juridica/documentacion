@@ -23,6 +23,8 @@
 - `EXONERADO` si no hubo dinero: importe cero y motivo obligatorio.
 - Responsable y fecha siempre registrados.
 - Ambas opciones activan matrícula y ocupan cupo.
+- La vigencia, si existe, usa la fecha posterior entre activación administrativa e inicio del curso
+  como día 1 y vence a las 23:59:59 de `America/Lima` del día N.
 - Puede realizarse después del cierre de matrícula. Si asistencia es obligatoria y ya no quedan
   sesiones futuras, ESEJUR muestra antes de confirmar que el alumno no podrá alcanzar por sí solo
   la certificación automática basada en asistencia; la advertencia no impide la excepción manual.

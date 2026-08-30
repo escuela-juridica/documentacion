@@ -40,7 +40,8 @@ requiere un segundo pago.
 - Si el curso tiene `fecha_fin`, nunca se emite antes. VIRTUAL nunca tiene fecha de fin.
 - `fecha_base_emision` es la fecha posterior entre finalización académica y fecha de fin existente.
 - `fecha_emision_programada = fecha_base_emision + dias_espera`.
-- `dias_espera` vale cero por defecto.
+- `dias_espera` vale cero por defecto y se cuenta en días calendario. La emisión programada ocurre
+  a las 00:00 de `America/Lima` del día calculado.
 - Con espera mayor que cero, el certificado se genera automáticamente en la fecha programada; hasta
   ese momento puede mejorar usando intentos disponibles.
 - Con espera cero queda LISTO_PARA_EMITIR: el alumno elige generar ahora o seguir mejorando.
@@ -54,7 +55,7 @@ requiere un segundo pago.
 Antes de emitir debe confirmar nombres, apellido paterno, apellido materno y DNI. La pantalla viene
 prellenada, los cuatro son obligatorios y se registra fecha/hora de confirmación. Si faltan datos,
 queda PENDIENTE_DATOS, muestra el acceso al formulario y envía un correo solicitando la
-confirmación. Si la fecha programada
+confirmación únicamente cuando ya cumple las condiciones académicas y temporales. Si la fecha programada
 ya pasó, la emisión continúa al confirmar.
 
 El sistema completa lo que ya conoce según el origen de la cuenta: el registro por formulario ya
@@ -65,7 +66,9 @@ alumno puede corregir y volver a confirmar estos datos mientras el certificado n
 
 ### Nota y nivel
 
-- Nota final: promedio simple de los exámenes calificados, utilizando el mejor intento de cada uno.
+- Nota de intento, mejor intento y nota final se redondean convencionalmente a dos decimales antes
+  de compararse. La nota final es el promedio simple de los exámenes calificados, utilizando el
+  mejor intento de cada uno.
 - Normal: desde la nota mínima del curso, 12 por defecto.
 - Refrendado: desde un umbral estrictamente mayor, 14 por defecto, y utiliza la entidad definida
   por el curso. Una nota aprobatoria menor al umbral Refrendado produce nivel Normal emitido por la
@@ -78,7 +81,8 @@ alumno puede corregir y volver a confirmar estos datos mientras el certificado n
 
 Un solo certificado por alumno/curso, con código único y QR. El PDF incluye nombre completo, tipo y
 título del curso, rango de fechas, horas académicas, lugar/fecha de emisión, entidad cuando aplica,
-logos y firmas configuradas. Para VIRTUAL sin fin, el rango usa matrícula y finalización.
+logos y firmas configuradas. El lugar proviene de la configuración institucional y comienza con
+“Lima, Perú”. Para VIRTUAL sin fin, el rango usa matrícula y finalización.
 
 En EN_VIVO/HIBRIDO el rango utiliza las fechas de inicio y fin del curso. En VIRTUAL sin fecha de
 fin utiliza la fecha de matrícula del alumno y su fecha de finalización académica.
@@ -113,6 +117,8 @@ fin utiliza la fecha de matrícula del alumno y su fecha de finalización acadé
   y nuevos intentos calificados se rechazan con explicación.
 - **Dado** datos faltantes, **cuando** llega la fecha, **entonces** no crea PDF; al confirmarlos
   continúa según flujo inmediato o programado.
+- **Dado** finalización ya registrada, **cuando** la matrícula vence o se cancela después,
+  **entonces** conserva la confirmación y la emisión inmediata o programada sin reabrir el aula.
 
 ## Notificaciones
 

@@ -71,6 +71,21 @@ contemporánea y confiable.
    todas las áreas.
 7. **Responsive desde el inicio:** ninguna pantalla se diseña únicamente para escritorio.
 
+### Equilibrio cromático
+
+La interfaz no debe ser predominantemente azul. El azul conserva la autoridad institucional, pero
+se combina con una paleta educativa más expresiva:
+
+- **60 % superficies claras y neutrales:** fondos, formularios, lectura y tablas;
+- **25 % azul institucional y turquesa de marca:** navegación, hero, acciones y progreso;
+- **10 % acentos de contexto:** violeta, celeste, coral y dorado para distinguir evaluación,
+  sesiones, oferta y certificación;
+- **5 % colores semánticos:** verde, ámbar, rojo e información, únicamente cuando exista un estado
+  real. Este cinco por ciento no es decoración y puede ser menor si la pantalla no tiene estados.
+
+Los acentos ayudan a reconocer contextos; no se aplican al azar ni convierten cada tarjeta en un
+color diferente. El resultado debe sentirse moderno y vivo, pero todavía jurídico y profesional.
+
 ## 4. Paleta cromática
 
 ### 4.1 Colores de marca
@@ -86,7 +101,28 @@ contemporánea y confiable.
 | `acento-050` | `#F0FFFF` | Superficie turquesa muy ligera |
 | `blanco` | `#FFFFFF` | Superficies, tarjetas y texto sobre azul |
 
-### 4.2 Colores neutrales
+### 4.2 Colores complementarios
+
+| Token | Color | Uso principal |
+|---|---|---|
+| `violeta-700` | `#6941C6` | Exámenes, preguntas y actividad académica evaluable |
+| `violeta-050` | `#F4F3FF` | Fondo suave de evaluaciones |
+| `celeste-700` | `#026AA2` | Sesiones, calendario y comunicación académica |
+| `celeste-050` | `#F0F9FF` | Fondo suave de sesiones |
+| `coral-400` | `#FF8A7A` | Modalidad En vivo y llamadas comerciales seleccionadas |
+| `coral-050` | `#FFF1EF` | Fondo suave de modalidad En vivo |
+| `dorado-500` | `#F4B740` | Certificación, logro y elementos de prestigio |
+| `dorado-050` | `#FFF8E1` | Fondo suave de certificación |
+
+Reglas de uso:
+
+- el violeta no sustituye al rojo de error;
+- el coral no comunica rechazo ni cancelación;
+- el dorado no comunica advertencia;
+- el celeste no reemplaza al turquesa de progreso;
+- los acentos siempre incluyen icono o texto que explique su significado.
+
+### 4.3 Colores neutrales
 
 | Token | Color | Uso principal |
 |---|---|---|
@@ -99,7 +135,7 @@ contemporánea y confiable.
 | `neutral-100` | `#F2F4F7` | Fondos alternos |
 | `neutral-050` | `#F8FAFC` | Fondo general de la aplicación |
 
-### 4.3 Colores semánticos
+### 4.4 Colores semánticos
 
 | Estado | Texto o fondo fuerte | Fondo suave | Ejemplos |
 |---|---|---|---|
@@ -108,17 +144,50 @@ contemporánea y confiable.
 | Error | `#B42318` | `#FEF3F2` | Pago rechazado, dato inválido, certificado anulado |
 | Información | `#175CD3` | `#EFF8FF` | Fecha futura, aviso general, ayuda contextual |
 
-### 4.4 Reglas obligatorias de color
+### 4.5 Reglas obligatorias de color
 
 - Sobre `#103860` se utiliza texto blanco. Su contraste es aproximadamente `11.95:1`.
 - Sobre `#00D8D8` se utiliza texto `#103860`. Su contraste es aproximadamente `6.73:1`.
 - **No utilizar texto blanco sobre `#00D8D8`**, porque su contraste aproximado de `1.78:1` no es
   suficiente.
 - Si se requiere un botón turquesa con texto blanco, utilizar `#006F73`.
+- Sobre violeta `#6941C6` y celeste `#026AA2` puede utilizarse texto blanco.
+- Sobre coral `#FF8A7A` y dorado `#F4B740` se utiliza texto azul `#103860`, no blanco.
 - Rojo, verde y ámbar son semánticos; no se usan como decoración.
 - Los gráficos no deben comunicar diferencias solamente mediante rojo y verde.
 - El fondo principal debe ser claro. El azul oscuro se reserva para navegación, llamados
   importantes, hero y secciones institucionales.
+- Violeta, celeste, coral y dorado se utilizan como acentos de contexto, no como fondos extensos de
+  lectura.
+- Las tablas administrativas permanecen mayoritariamente neutrales; el color aparece en badges,
+  iconos, selección y resúmenes.
+- En una misma tarjeta se utiliza un acento principal; no mezclar varios colores complementarios
+  dentro del mismo componente.
+
+### 4.6 Paletas por contexto
+
+Estas combinaciones hacen la interfaz más vistosa sin perder la teoría del color. Todas parten del
+azul y turquesa de la marca; cada contexto suma un acento análogo o complementario controlado.
+
+| Contexto | Base 60/25 | Acento 10 | Semántico hasta 5 | Sensación buscada |
+|---|---|---|---|---|
+| Portal y catálogo | blanco, neutral-050, marca-900 | coral-400 y turquesa | solo disponibilidad real | Cercano, comercial y confiable |
+| Aula y progreso | blanco, marca-900, acento-500 | celeste-700 | éxito solo al completar | Continuidad y concentración |
+| Exámenes | blanco, neutral-050, marca-900 | violeta-700/050 | éxito/error por resultado | Enfoque sin ansiedad visual |
+| Sesiones | blanco, marca-900, celeste-050 | celeste-700 y coral-400 | aviso por cambio/cancelación | Tiempo y presencia |
+| Certificación | blanco, marca-900, dorado-050 | dorado-500 y turquesa | vigente/anulado reales | Prestigio y logro |
+| Administración | neutral-050, blanco, marca-900 | turquesa, violeta o celeste por módulo | estados operativos | Precisión y lectura rápida |
+
+Reglas de armonía:
+
+- azul–turquesa–celeste forman la familia análoga estable;
+- coral aporta contraste cálido frente al azul y se limita a focos comerciales o modalidad;
+- violeta se reserva a evaluación para que el usuario aprenda su significado;
+- dorado se reserva a certificación y logro, nunca a advertencias;
+- una pantalla elige un acento contextual dominante y como máximo uno auxiliar;
+- superficies saturadas no deben colocarse una junto a otra; se separan mediante blanco o neutral;
+- cada gráfico mantiene orden de color estable para que una categoría no cambie de color entre
+  dashboard, reporte y review.
 
 ## 5. Tipografía
 
@@ -240,6 +309,19 @@ necesario.
 - Definir una versión compacta del símbolo para avatar, favicon y navegación colapsada.
 - No reconstruir el logo desde una captura para producción; solicitar el archivo original.
 
+### 7.4 Recurso gráfico propio
+
+El certificado utiliza formas geométricas angulares en azul y turquesa. Ese lenguaje puede
+convertirse en un recurso distintivo de ESEJUR:
+
+- líneas finas y polígonos en esquinas del hero;
+- bloques geométricos pequeños detrás de títulos editoriales;
+- formas suaves en estados vacíos y portada del prototipo;
+- combinación ocasional con coral o dorado en baja proporción.
+
+No utilizar estos elementos detrás de formularios, tablas, preguntas de examen o textos largos.
+Su función es dar identidad, no decorar cada pantalla.
+
 ## 8. Arquitectura visual por contexto
 
 ### 8.1 Portal público
@@ -259,12 +341,18 @@ No se duplican las páginas institucionales que permanecen en la web principal d
 
 **Contenido:**
 
-- hero azul con acentos turquesa y propuesta de valor breve;
+- hero con gradiente controlado de azul a turquesa oscuro, formas geométricas de marca y propuesta
+  de valor breve;
 - buscador visible;
 - cursos destacados primero;
-- tarjetas limpias con información comparable;
+- tarjetas limpias con información comparable y un solo acento por modalidad;
 - secciones con mucho espacio blanco;
-- pie de página con contacto, documentos legales y enlace a la web institucional.
+- fondos alternos muy suaves en turquesa, violeta, celeste o dorado para separar secciones sin
+  llenar toda la página de azul;
+- pie de página en cuatro grupos: identidad breve, navegación de cursos, contacto/WhatsApp y legal;
+  el grupo legal contiene Términos, Privacidad, Libro de Reclamaciones y Verificar certificado,
+  además del enlace a la web institucional. En móvil los grupos usan acordeones, pero los enlaces
+  legales permanecen accesibles sin iniciar sesión.
 
 ### 8.2 Área del alumno
 
@@ -276,6 +364,8 @@ Debe sentirse clara, motivadora y orientada a continuar.
 - estados explicados en lenguaje natural;
 - alertas importantes persistentes pero no invasivas;
 - contenido académico con máximo espacio para el video o material.
+- color contextual: turquesa para progreso, celeste para sesiones, violeta para exámenes y dorado
+  para certificación.
 
 ### 8.3 Administración
 
@@ -288,6 +378,8 @@ Debe sentirse eficiente y densa, pero legible.
 - acciones destructivas alejadas de acciones habituales;
 - edición compleja mediante pestañas o pasos, no una página interminable;
 - confirmaciones claras para publicar, cancelar, anular o emitir.
+- superficies y tablas neutrales, con acentos de color limitados a estados, indicadores y contexto;
+  no convertir el panel administrativo en un mosaico multicolor.
 
 ## 9. Componentes principales
 
@@ -342,11 +434,11 @@ Los badges deben contener texto, no solo color.
 
 | Estado | Tratamiento sugerido |
 |---|---|
-| Virtual | Azul suave |
-| En vivo | Rojo semántico suave con texto “En vivo” |
-| Híbrido | Turquesa suave |
+| Virtual | Turquesa suave, texto azul oscuro |
+| En vivo | Coral suave, texto azul oscuro e icono de transmisión |
+| Híbrido | Violeta suave, texto violeta oscuro |
 | Inicio inmediato | Turquesa suave con texto azul oscuro |
-| Próximamente | Azul informativo suave |
+| Próximamente | Celeste suave |
 | En progreso | Turquesa suave |
 | Matrícula cerrada | Gris neutro |
 | Sin cupos | Gris oscuro o advertencia según contexto |
@@ -390,11 +482,13 @@ Los badges deben contener texto, no solo color.
 
 ### PF-001 — Inicio y catálogo
 
-- Hero azul de altura moderada, no pantalla completa.
+- Hero con gradiente `#103860 → #164A73 → #006F73`, de altura moderada y no a pantalla completa.
+- Formas geométricas turquesa, coral o dorado con baja presencia y sin competir con el texto.
 - Título breve, buscador central y acceso a categorías.
 - Filtros en barra lateral de escritorio y panel deslizable en móvil.
 - Cuadrícula de tres tarjetas en 1440 px, dos en tableta y una en móvil.
 - Cursos destacados antes del resto, con etiqueta discreta.
+- Badge de modalidad con color contextual: Virtual turquesa, En vivo coral e Híbrido violeta.
 - Estado sin resultados con acción para limpiar filtros.
 
 ### PF-002 — Ficha y vista previa
@@ -446,6 +540,7 @@ Los badges deben contener texto, no solo color.
 - Check de lección visible en la ruta, diferenciando automático y manual mediante explicación, no
   mediante un icono diferente sin texto.
 - Calendario y lista como vistas alternas de las mismas sesiones.
+- Progreso turquesa y sesiones celestes; los fondos amplios continúan blancos o neutrales.
 
 ### PF-023 y PF-024 — Exámenes
 
@@ -459,6 +554,8 @@ Los badges deben contener texto, no solo color.
 - Resultado con nota, aprobación, mejor intento, intentos disponibles y respuestas visibles según
   configuración.
 - Respuesta abierta pendiente presenta fecha máxima de calificación.
+- Violeta como acento académico en navegador, selección y encabezado; éxito o error conservan sus
+  colores semánticos.
 
 ### PF-025 a PF-028 — Operación académica
 
@@ -478,6 +575,8 @@ Los badges deben contener texto, no solo color.
 - Visor privado centra el documento y mantiene descargar como acción principal.
 - Verificación pública es simple: código, resultado y datos mínimos.
 - Administración separa listado de certificados y operación detallada con historial.
+- Dorado como acento de logro en iconos, bordes y fondos suaves, nunca como texto claro sobre fondo
+  claro.
 
 ### PF-035 a PF-038 — Excepciones y reclamaciones
 
@@ -499,12 +598,14 @@ Los badges deben contener texto, no solo color.
 
 ### PF-040 — Dashboard
 
-- Máximo cuatro indicadores breves en la primera fila.
-- Dos o tres gráficos simples relacionados con matrículas.
-- Recomendados: matrículas por periodo, distribución por modalidad y cursos con más matrículas.
+- No muestra tarjetas de indicadores ni métricas adicionales.
+- Muestra exactamente cuatro gráficos: evolución de matrículas, matrículas por curso, forma de
+  ingreso y pagos confirmados por periodo.
 - Mostrar etiquetas y valores al interactuar.
-- No incluir pendientes, tareas, alertas operativas ni exceso de indicadores.
-- Aplicar los mismos filtros y conceptos del reporte de matrículas.
+- No incluir pendientes, tareas ni alertas operativas.
+- Aplicar las mismas fechas, deduplicación y conceptos de los reportes correspondientes.
+- Distribuir azul, turquesa, violeta, celeste, coral y dorado con leyenda; no repetir variaciones de
+  azul que resulten difíciles de diferenciar.
 
 ### Matriz visual de las 40 pantallas
 
@@ -533,7 +634,7 @@ Los estados completos permanecen definidos en las historias y en el mapa de pant
 | PF-018 | Resultado del pago | Estado y comprobante | Ir a Mis cursos o reintentar |
 | PF-019 | Mis cursos | Cuadrícula de tarjetas de aprendizaje | Continuar curso |
 | PF-020 | Aula y ruta | Temario, resumen y avance | Continuar última lección |
-| PF-021 | Lección | Reproductor, materiales y navegación | Siguiente |
+| PF-021 | Lección | Reproductor, materiales y navegación | Siguiente o Completar lección |
 | PF-022 | Calendario y sesiones | Calendario/lista y detalle | Ingresar a sesión o ver grabación |
 | PF-023 | Resolución del examen | Pregunta, navegador y temporizador | Entregar examen |
 | PF-024 | Resultado del examen | Nota, intentos y retroalimentación | Reintentar o continuar |
@@ -552,7 +653,7 @@ Los estados completos permanecen definidos en las historias y en el mapa de pant
 | PF-037 | Bandeja de reclamaciones | Tabla ordenada por vencimiento | Abrir caso urgente |
 | PF-038 | Respuesta de reclamación | Detalle, evidencia y editor | Enviar respuesta |
 | PF-039 | Centro de reportes | Filtros, resumen, tabla y cinco pestañas | Consultar o exportar |
-| PF-040 | Dashboard | Indicadores y gráficos simples | Comprender las matrículas |
+| PF-040 | Dashboard | Filtros y cuatro gráficos simples | Comprender matrículas y pagos confirmados |
 
 ## 11. Navegación
 
@@ -619,6 +720,16 @@ Dashboard
 - Temario del aula como panel deslizable.
 - Tablas convertidas a tarjetas con datos prioritarios.
 - Controles táctiles de al menos `44 × 44 px`.
+
+### Puntos de quiebre obligatorios
+
+- `>= 1280 px`: escritorio amplio, doce columnas y barra administrativa de 264 px.
+- `1024–1279 px`: escritorio compacto; se reducen márgenes, no controles.
+- `768–1023 px`: tableta, ocho columnas; paneles laterales pasan a cajón cuando falte espacio.
+- `< 768 px`: móvil, cuatro columnas y flujo vertical.
+- `< 480 px`: móvil estrecho; acciones dobles se apilan y las tablas usan tarjetas.
+- No diseñar solo los anchos de referencia: probar al menos 1440, 1024, 768, 390 y 320 px sin
+  desplazamiento horizontal, salvo tablas dentro de su contenedor accesible.
 - No ocultar requisitos, precios, plazos o estados necesarios para decidir.
 
 ## 13. Accesibilidad

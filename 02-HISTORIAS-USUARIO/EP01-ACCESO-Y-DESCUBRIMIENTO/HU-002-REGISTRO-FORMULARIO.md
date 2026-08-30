@@ -23,6 +23,8 @@
 - El teléfono se muestra al visitante con la etiqueta “WhatsApp”, pero las notificaciones
   automáticas del sistema se envían por correo; no se envían avisos automáticos por WhatsApp.
 - Contraseña elegida por la persona y un segundo ingreso que debe coincidir antes de guardar.
+- La contraseña propia debe tener como mínimo ocho caracteres e incluir al menos una letra
+  mayúscula, una letra minúscula, un número y un carácter especial.
 - Aceptación obligatoria de términos y política, conservando versión y fecha.
 - Política de privacidad y términos y condiciones existen como páginas públicas enlazadas desde el
   pie de la plataforma. El visitante puede leerlas antes de aceptarlas.
@@ -42,6 +44,11 @@
 5. La persona abre el enlace y el correo queda verificado.
 6. La cuenta queda habilitada cuando todas las condiciones están completas.
 
+El enlace de verificación es válido durante 24 horas desde su emisión. Solicitar un nuevo envío
+invalida inmediatamente cualquier enlace de verificación anterior que todavía no se haya usado.
+Las fechas y horas de registro, consentimiento, emisión y vencimiento se muestran en
+`America/Lima`.
+
 ## Alternativas y excepciones
 
 - Sin aceptación o protección anti-robot válida no se crea la cuenta.
@@ -49,6 +56,8 @@
 - Un correo ya registrado no produce una segunda cuenta; se orienta al ingreso o recuperación.
 - Si existe por Google, se vincula el acceso por formulario a la misma cuenta.
 - Un fallo al enviar la verificación no convierte el correo en verificado.
+- Un enlace de verificación vencido, utilizado o invalidado por un reenvío no verifica la cuenta;
+  la persona puede solicitar uno nuevo sin crear otra cuenta.
 - Solicitar ayuda por WhatsApp no evita la verificación del correo, la aceptación de documentos ni
   el cambio de contraseña que correspondan a una cuenta creada por administración.
 
@@ -74,6 +83,22 @@
 - **Dado** un correo ya vinculado,
 - **cuando** se intenta registrar nuevamente,
 - **entonces** no se duplica la persona ni la cuenta.
+
+### Contraseña propia
+
+- **Dado** el registro por formulario,
+- **cuando** las dos contraseñas coinciden pero no tienen ocho caracteres, mayúscula, minúscula,
+  número y carácter especial,
+- **entonces** la cuenta no se crea y se indican las condiciones faltantes.
+
+### Vigencia de verificación
+
+- **Dado** un enlace de verificación emitido,
+- **cuando** se usa dentro de las 24 horas y no fue reemplazado,
+- **entonces** puede verificar el correo una sola vez.
+- **Dado** que se solicita un reenvío,
+- **cuando** se intenta usar un enlace anterior,
+- **entonces** se rechaza y solo el enlace más reciente permanece vigente.
 
 ### Solicitud de cuenta asistida
 

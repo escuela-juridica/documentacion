@@ -112,10 +112,11 @@ y aula. En total pueden mostrarse aproximadamente **16 pantallas principales**.
 
 - **Historias:** HU-046.
 - **Actor:** administrador.
-- **Debe mostrar:** indicadores y gráficos simples sobre matrículas, con filtros comprensibles.
+- **Debe mostrar:** exactamente cuatro gráficos con filtros comunes: evolución de matrículas,
+  matrículas por curso, forma de ingreso y pagos confirmados por periodo.
 - **Estados importantes:** con información, sin datos y filtro sin resultados.
 - **Acción para la review:** comparar un gráfico con el reporte de matrículas.
-- **Límite visible:** no muestra pendientes, tareas ni alertas operativas.
+- **Límite visible:** no muestra tarjetas de indicadores, pendientes, tareas ni alertas operativas.
 
 ## Pantallas reutilizadas
 

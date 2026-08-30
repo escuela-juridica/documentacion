@@ -3,7 +3,7 @@
 > Documento técnico del proyecto. Las reglas de negocio viven en `01-NEGOCIO.md`;
 > aquí solo va **cómo** se construye.
 >
-> Última actualización: 2026-08-22
+> Última actualización: 2026-08-30
 
 ---
 
@@ -39,6 +39,9 @@ Sin refresco, la sesión se cierra a media clase — inaceptable en una platafor
 puede estar 40 minutos viendo un video.
 
 - Contraseñas con hash **BCrypt**, y **confirmación de contraseña** en el registro.
+- La validación compartida exige al menos ocho caracteres, mayúscula, minúscula, número y símbolo.
+- Los tokens de verificación duran 24 horas y los de recuperación 60 minutos; son de un solo uso y
+  una nueva emisión invalida los anteriores del mismo propósito.
 - **Verificación de correo** obligatoria al registrarse por formulario: es el canal por el que
   llega el certificado.
 - **Recuperación de contraseña** por correo — imprescindible: si el alumno se registra solo a
@@ -123,7 +126,7 @@ servidor complica el despliegue, así que queda fuera de V1 — pero se deja pre
 
 ---
 
-## 5. Decisiones abiertas
+## 5. Decisiones técnicas y servicios externos
 
 ### 5.1 Migraciones de base de datos
 **Alternativas:** Flyway · Liquibase · dejar que Hibernate cree las tablas (`ddl-auto`).
@@ -142,13 +145,16 @@ al vuelo apuntando a la página pública de verificación.
 ### 5.3 Servicio de correo
 **Alternativas:** Brevo · SendGrid · SMTP propio.
 
-Se necesitan seis correos: bienvenida/verificación, matrícula confirmada, pago expirado,
-recordatorio de sesión en vivo, certificado listo y recuperación de contraseña.
+Se necesitan once plantillas funcionales: bienvenida/verificación, recuperación de contraseña,
+matrícula gratuita, matrícula pagada aprobada, matrícula administrativa, recordatorio de sesión,
+cambio o cancelación de sesión, examen abierto calificado, solicitud de datos del certificado,
+certificado listo y constancia/respuesta del Libro de Reclamaciones. Una misma infraestructura de
+correo sirve a todas; no se rastrea apertura o entrega, solo aceptación o fallo del envío.
 
 El recordatorio de sesión en vivo es el único que necesita **envío programado** — el día antes
 de cada sesión — no una reacción a un evento del usuario.
 
-### 5.4 Pasarela de pago
+### 5.4 Pasarela de pago — Culqi
 
 **Requisito que manda sobre todo lo demás:** debe cobrar con **tarjeta, Yape y Plin** y
 **confirmar el pago automáticamente** al sistema, por webhook. Son los tres medios de esta
@@ -159,17 +165,10 @@ versión (`01-NEGOCIO.md` §9); el pago en efectivo quedó fuera.
 > a eliminar. Si el proveedor elegido no avisa solo cuando el pago se aprueba, **la matrícula 24/7
 > deja de existir**. Es el criterio con el que hay que descartar opciones.
 
-| Opción | Nota |
-|---|---|
-| **Culqi** | Peruana, la que usaría el cliente de verdad |
-| **Izipay / Niubiz** | Respaldo bancario, integración más pesada |
-| **Mercado Pago** | Entorno de pruebas y documentación más cómodos |
-
-**Verificar antes de cerrar:** que el proveedor ofrezca tarjeta, Yape y Plin como medios de cobro en línea,
-que notifique por webhook, y sus condiciones y comisiones vigentes. No dar por hecho que los tres
-soportan billeteras móviles con confirmación automática — la tarjeta la tienen todos, Yape y Plin no.
-
-Todas tienen modo de pruebas, suficiente para demostrar el flujo completo sin mover dinero real.
+La pasarela funcional elegida es **Culqi**. Antes de integrar se verifican en la cuenta comercial
+contratada la disponibilidad real de tarjeta, Yape y Plin, sus credenciales de prueba/producción,
+webhooks y comisiones. ESEJUR nunca determina si un pago fue aprobado: valida autenticidad del
+aviso y aplica exactamente el resultado informado por Culqi.
 
 > ⚠️ **Es el elemento de plazo más largo del proyecto.** Abrir la cuenta necesita RUC, cuenta
 > bancaria, representante legal y un tiempo de aprobación que no depende de nosotros. Conviene
@@ -191,19 +190,22 @@ Lista de control derivada de `01-NEGOCIO.md`:
 | Requisito del negocio | Implicancia técnica |
 |---|---|
 | Matrícula automática al pagar | **Webhook** de la pasarela, procesado de forma **idempotente**: el mismo aviso puede llegar dos veces y la matrícula debe activarse una sola vez |
-| Avance del curso | **Calculado**, no almacenado: si el administrador agrega lecciones, el porcentaje se recalcula solo |
-| Certificado instantáneo | Emisión disparada al cumplirse la regla, sin intervención humana. Exige que todas las preguntas se califiquen automáticamente |
+| Avance del curso | Se conserva la finalización de cada lección y se calcula sobre el conjunto estable de lecciones obligatorias fijado al iniciar. Los materiales complementarios posteriores no cambian el denominador ni reducen avances existentes |
+| Certificado instantáneo | Emisión disparada al cumplirse la regla y confirmarse los datos. Puede haber preguntas abiertas, pero ninguna de examen CALIFICADO puede permanecer PENDIENTE_REVISION |
 | Certificado privado + QR público | Dos caminos distintos: PDF tras verificación de identidad; página de verificación pública con datos mínimos |
 | Persona ≠ usuario | Los datos personales y las credenciales viven en entidades separadas; un docente es persona sin usuario |
 | Duplicar módulo | Copia profunda: módulo, lecciones, materiales, exámenes, preguntas y opciones |
-| Reglas de certificación configurables | Cuatro interruptores por curso evaluados en conjunto |
-| Nota final | Promedio de exámenes obligatorios, tomando el mejor intento de cada uno |
+| Reglas de certificación configurables | Tres condiciones independientes: exámenes, progreso y asistencia; VIRTUAL no expone asistencia |
+| Nota final | Promedio de exámenes CALIFICADO, tomando el mejor intento de cada uno y redondeando convencionalmente a dos decimales antes de comparar umbrales |
 | Sesiones en vivo | Sin API de Zoom: el enlace y la grabación los carga el administrador. La asistencia se infiere de quién abre el enlace desde la plataforma, con corrección manual |
 | Asistencia de matriculados tardíos | Se calcula solo sobre sesiones posteriores a la fecha de matrícula, no sobre todas las del curso |
 | Examen interrumpido | Las respuestas se guardan parcialmente; el intento se retoma mientras no venza el tiempo. El cronómetro corre en el servidor, no en el navegador |
 | Recordatorio de sesión | Tarea programada diaria, el único envío no reactivo |
 | Nada se borra con gente dentro | Baja lógica en cursos, módulos y lecciones con matrículas o progreso |
 | Consentimiento de datos | Se guarda fecha y versión del texto aceptado por cada usuario |
+| Zona horaria | Fechas de negocio, vencimientos y tareas programadas usan `America/Lima`, no la zona del servidor |
+| Webhook tardío | La idempotencia identifica la operación de Culqi. Un APROBADO iniciado válidamente se respeta tras cierre, plazo o cupo; si curso o matrícula están CANCELADOS, registra pago sin acceso y crea atención externa |
+| Emisión programada | `dias_espera` usa días calendario y un proceso ejecuta la emisión a las 00:00 de Lima; una finalización ya obtenida sobrevive a vencimiento o cancelación posteriores |
 
 ---
 

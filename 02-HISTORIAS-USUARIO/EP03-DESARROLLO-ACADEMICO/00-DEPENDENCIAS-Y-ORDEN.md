@@ -35,6 +35,10 @@ excepciones.
 
 - El progreso y la secuencia deben utilizar el mismo resultado de lección completada.
 - Una sesión CANCELADA desaparece del denominador de asistencia y no bloquea la secuencia.
+- La lección EN_VIVO depende del cierre de sesión y su asistencia; para un ausente depende de que
+  exista grabación. GRABACION_PENDIENTE no completa ni libera esa lección.
+- El check de lección completada es un resultado compartido e irreversible: automático de solo
+  lectura o manual únicamente mientras está pendiente.
 - El temporizador del examen no se pausa y su vencimiento envía el intento.
 - Un intento con respuesta abierta permanece PENDIENTE_REVISION y bloquea la finalización cuando
   el examen es calificado.
@@ -57,4 +61,3 @@ excepciones.
 3. Rendir un examen automático con tiempo y reintento.
 4. Enviar una respuesta abierta y calificarla desde administración.
 5. Consultar el desempeño y resolver una excepción con motivo.
-

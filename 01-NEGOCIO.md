@@ -73,6 +73,10 @@ Consecuencias:
 | **Precios** | **Netos.** No se desglosa IGV ni comisión de plataforma. Si más adelante se decide desglosarlos, se agrega sin cambiar lo ya construido. |
 | **Escala de notas** | 0 a 20 (escala peruana). |
 
+La zona `America/Lima` rige promociones, matrículas, sesiones, exámenes, recordatorios,
+certificados, reclamaciones, reportes y cualquier fecha límite. Una fecha sin zona nunca se
+interpreta con la configuración local del navegador del alumno.
+
 **Nomenclatura interna de modalidad:** `VIRTUAL`, `EN_VIVO` y `HIBRIDO`, siempre en español y sin
 tildes. En las pantallas se muestran las etiquetas naturales **Virtual**, **En vivo** e
 **Híbrido**.
@@ -248,6 +252,8 @@ CURSO
   exámenes, preguntas, opciones, reglas de certificación, docentes y beneficios. El nuevo curso
   queda en **BORRADOR**, sin matrículas ni actividad académica, para que el administrador revise
   sus nuevas fechas, precio, cupo y sesiones antes de publicarlo.
+- La URL amigable no se copia. ESEJUR propone una nueva dirección única y el administrador debe
+  confirmarla antes de guardar el BORRADOR; nunca dos convocatorias comparten la misma URL.
 - La duplicación **nunca copia** matrículas, pagos, progreso, intentos, asistencia ni certificados.
   Tampoco duplica los archivos físicos: los nuevos materiales apuntan al mismo archivo almacenado
   o a la misma URL externa. Internamente se conserva la referencia al curso de origen.
@@ -430,6 +436,9 @@ muestra una lista completa de lo que falta cuando no se cumple alguna de estas r
   debe ser mayor que la nota mínima.
 - Si `requiere_examenes` está activo, debe existir al menos un examen calificado con preguntas y
   puntaje total mayor que cero.
+- Si `requiere_examenes` está desactivado, no puede quedar ningún examen `CALIFICADO`: antes de
+  guardar, el administrador debe convertirlo a `PRACTICA` o retirarlo. Esta validación también
+  bloquea la publicación. Un examen `PRACTICA` siempre tiene intentos ilimitados.
 - Si `requiere_progreso` está activo, debe existir al menos una lección obligatoria que pueda
   completarse mediante detección de video o confirmación manual.
 - Si `requiere_asistencia` está activo, el curso debe tener modalidad `EN_VIVO` o `HIBRIDO` y debe tener al menos
@@ -494,6 +503,12 @@ Cerrar y cancelar no significan lo mismo. **CERRADO** es el final normal o el re
   con la emisión normal de su certificado.
 - Quienes todavía no habían cumplido no reciben un certificado automático por el solo hecho de la
   cancelación. La Escuela puede emitirlo manualmente cuando corresponda, con motivo registrado.
+- Para quien no había finalizado, el contenido conservado queda **solo en lectura**: puede revisar
+  lo que ya estuvo habilitado, pero no completar checks, aumentar progreso, registrar asistencia,
+  iniciar o reintentar exámenes ni obtener una nueva `fecha_finalizacion`.
+- Si `fecha_finalizacion` ya existía antes de cancelar, una emisión PROGRAMADA continúa, y el
+  alumno puede confirmar los datos que falten. Cancelar o vencer después la matrícula tampoco
+  retira ese derecho ya obtenido.
 - El sistema no ejecuta devoluciones. La Escuela resuelve cada pago por su canal y registra en la
   matrícula afectada la fecha, observación y resultado de esa atención.
 - Un certificado ya emitido no cambia ni se anula automáticamente por la cancelación del curso.
@@ -566,7 +581,7 @@ matrícula:
 | Estado | Cuándo |
 |---|---|
 | **PENDIENTE** | Culqi todavía no comunica un resultado final. No habilita acceso ni ocupa cupo. |
-| **APROBADO** | Culqi confirmó el pago. Activa automáticamente la matrícula y ocupa el cupo cuando existe, salvo que el curso haya sido CANCELADO mientras se realizaba la operación. |
+| **APROBADO** | Culqi confirmó el pago. Activa automáticamente la matrícula y ocupa el cupo cuando existe, salvo que el curso o esa matrícula hayan sido CANCELADOS mientras se realizaba la operación. |
 | **RECHAZADO** | Culqi informó que el pago fue rechazado. No habilita acceso ni ocupa cupo. |
 | **ERROR** | Culqi informó que la operación no pudo completarse. No habilita acceso ni ocupa cupo. |
 | **EXPIRADO** | Culqi informó que la operación perdió vigencia sin ser aprobada. No habilita acceso ni ocupa cupo. |
@@ -574,7 +589,8 @@ matrícula:
 | **EXONERADO** | La matrícula es una cortesía, beca u otro caso sin cobro. Importe cero y activa la matrícula. |
 
 - Una matrícula puede acumular varios intentos no aprobados; **el primer pago aprobado** es el que
-  activa su acceso, salvo la cancelación total del curso explicada en §8.
+  activa su acceso, salvo la cancelación total del curso o la cancelación individual de esa
+  matrícula explicadas en §8 y §9.
 - Todos los intentos se conservan para que el alumno y la Escuela puedan comprobar qué ocurrió.
 - Si Culqi repite la confirmación de una misma operación, no se genera otro pago ni se
   activa nuevamente la matrícula.
@@ -583,6 +599,20 @@ matrícula:
   dinero o EXONERADO cuando no lo hubo.
 - REGISTRADO_MANUAL exige importe, medio, referencia y motivo. EXONERADO exige importe cero y
   motivo. En ambos casos se registra quién realizó la matrícula y cuándo.
+
+**Resultado tardío de una operación iniciada válidamente:**
+
+| Situación al llegar `APROBADO` | Consecuencia automática |
+|---|---|
+| El cierre de matrícula ya pasó | Se honra el pago iniciado antes del cierre y se activa la matrícula. |
+| El curso pasó a `CERRADO` | Se activa la matrícula y conserva el acceso conforme a su vigencia, porque `CERRADO` es un cierre normal, no una cancelación. |
+| Otro alumno ocupó el último cupo | Se activa también y se genera una alerta de sobrecupo; una persona cobrada no queda sin curso. |
+| La matrícula fue `CANCELADA` | Se registra el pago una sola vez, la matrícula permanece `CANCELADA`, no concede acceso y queda para atención externa. |
+| El curso fue `CANCELADO` | Se registra el pago una sola vez, la matrícula permanece `CANCELADA`, no concede acceso y queda para atención externa. |
+
+El cierre, la fecha comercial o el cupo se vuelven a validar para **iniciar** una operación nueva,
+pero no invalidan un cobro que Culqi aprobó después de haberse iniciado correctamente. ESEJUR no
+cambia ni revierte el resultado bancario.
 
 ### Estados de la matrícula
 
@@ -655,10 +685,11 @@ En cursos **VIRTUALES**, `fecha_inicio` es opcional y la opción `fecha_fin` **n
 En cursos de modalidad `EN_VIVO` e `HIBRIDO`, `fecha_inicio`, `fecha_fin` y las fechas de las sesiones son
 obligatorias.
 
-Las **lecciones en vivo** son la excepción: aparecen en el temario desde el primer día, pero
-**su enlace se habilita desde la hora de inicio hasta la hora de fin de la sesión**. Fuera de esa
-ventana ya no registra asistencia automática. La grabación aparece cuando el administrador la
-sube.
+Las **lecciones en vivo** son la excepción: su tarjeta aparece en el temario desde el primer día,
+pero el botón **"Ingresar a la sesión"** solo se habilita desde la hora de inicio hasta la hora de
+fin. Antes se muestra la hora y una cuenta regresiva con el botón deshabilitado; después se
+reemplaza por **"Grabación pendiente"** o por la grabación disponible. No se entrega el enlace de
+reunión fuera de la ventana, por lo que tampoco puede registrar asistencia fuera de ella.
 
 ### Cierre de matrícula en cursos con sesiones en vivo
 
@@ -692,10 +723,10 @@ En los cursos con límite, **el cupo se ocupa únicamente cuando la matrícula q
   el cupo.
 - RECHAZADO, ERROR o EXPIRADO no ocupan cupo.
 - Una matrícula gratuita o manual ocupa el cupo en el momento de activarse.
-- Si dos pagos distintos son aprobados prácticamente al mismo tiempo para el último lugar, ambos
-  alumnos reciben acceso porque ambos pagaron. La administración recibe una alerta de sobrecupo
-  para ajustar la capacidad operativa. Es la única excepción a la capacidad de venta y evita dejar
-  a una persona cobrada sin curso.
+- Si una operación que se inició con cupo llega APROBADA después de que otra matrícula ocupó el
+  último lugar, ambos alumnos reciben acceso porque ambos pagaron. La administración recibe una
+  alerta de sobrecupo para ajustar la capacidad operativa. Esta excepción incluye aprobaciones
+  simultáneas y confirmaciones tardías de operaciones iniciadas válidamente.
 - Los cursos sin límite simplemente activan la matrícula cuando corresponde.
 
 **Cuando el cupo se llena**, el curso sigue visible en el catálogo pero se muestra como
@@ -704,7 +735,16 @@ En los cursos con límite, **el cupo se ocupa únicamente cuando la matrícula q
 ### Vigencia del acceso
 
 Campo opcional de días. Vacío = **acceso permanente**, que es la decisión por defecto.
-Queda preparado por si más adelante la Escuela decide limitarlo.
+
+Cuando existe un número `N`:
+
+1. La fecha base es la posterior entre la activación de la matrícula y `fecha_inicio` del curso,
+   cuando exista.
+2. La fecha base cuenta como día 1.
+3. El último día de acceso es `fecha_base + (N - 1) días calendario`.
+4. El acceso vence a las 23:59:59 de ese último día en hora de Lima y pasa a `VENCIDA`.
+
+Así una compra anticipada no consume vigencia antes de que el contenido pueda utilizarse.
 
 > El "acceso ilimitado" que aparece en las imágenes del documento del cliente es de udeapolis,
 > no un compromiso de la Escuela (§5). El permanente por defecto es decisión propia.
@@ -716,6 +756,9 @@ página pública de verificación: se ganó cuando el acceso era válido y no se
 ### Cancelación
 
 - Solo el **administrador** puede cancelar una matrícula, y debe registrar el **motivo**.
+- Si cancela una matrícula con un intento PENDIENTE, ESEJUR no cancela ni altera la operación de
+  Culqi. Si posteriormente llega APROBADO, registra el pago, mantiene la matrícula CANCELADA y
+  crea el caso de atención externa sin entregar contenido.
 - **El sistema no devuelve dinero.** No hay política de reembolso en la plataforma: la Escuela
   resuelve caso por caso por su canal. En el sistema solo queda el registro de la cancelación
   con su motivo.
@@ -747,6 +790,10 @@ Sigue la forma del formulario de udeapolis, con tres diferencias: **apellido mat
 **La contraseña se escribe dos veces.** Es un campo más, pero evita el problema que no tiene
 arreglo cómodo: alguien se equivoca al tipear, queda registrado con una clave que no conoce, y
 tiene que pasar por recuperar contraseña antes siquiera de haber entrado la primera vez.
+
+Toda contraseña propia debe tener al menos ocho caracteres e incluir mayúscula, minúscula, número
+y símbolo. La interfaz muestra estas cuatro condiciones mientras se escribe y no permite guardar
+si falta alguna.
 
 Los apellidos van **separados desde el inicio**: es la convención peruana y es como deben salir
 en el certificado. **El DNI no se pide aquí** — va al final, en la pantalla del certificado
@@ -797,6 +844,12 @@ Al crear una cuenta nueva, el sistema envía un correo de bienvenida con el enla
 la contraseña temporal y el orden de los pasos que debe completar. La administración también
 puede comunicar esas instrucciones por el canal mediante el cual el alumno solicitó ayuda.
 
+Una cuenta con rol Administrador solo puede ser creada por otro administrador habilitado. Se
+registra quién concedió el rol. Un administrador no puede desactivarse a sí mismo y el sistema no
+permite dejar a la plataforma sin al menos un administrador habilitado. El nuevo administrador
+entra restringido a su propia habilitación; no ejecuta operaciones administrativas hasta verificar
+el correo, aceptar los documentos y cambiar la contraseña temporal.
+
 En el primer ingreso, el alumno debe completar, en este orden, la verificación de su correo, la
 aceptación de los términos y la política de privacidad, y la definición de una contraseña propia.
 Puede entrar al panel principal, donde ve en todo momento un aviso que no puede ocultar:
@@ -814,6 +867,12 @@ Correo y contraseña, o el botón de Google. Más **"¿Olvidaste tu contraseña?
 
 Una cuenta administrativa con CAMBIO_PENDIENTE puede iniciar sesión con `Escuela1415@`, pero solo
 accede al panel y al cambio de contraseña hasta completar la verificación y seguridad inicial.
+
+El enlace de verificación dura **24 horas**. Solicitar un reenvío invalida cualquier enlace de
+verificación anterior que todavía no se hubiera utilizado. El enlace para recuperar contraseña
+dura **60 minutos**; usarlo o solicitar uno nuevo invalida el anterior. En ambos casos, un enlace
+vencido o consumido explica el problema y ofrece una acción segura para volver a solicitarlo sin
+revelar públicamente si el correo existe.
 
 > **Por qué con contraseña y no sin ella.** Existe la opción de entrar solo con el correo, sin
 > contraseña, recibiendo un código en cada login — es lo que hace udeapolis. Se descartó por una
@@ -930,6 +989,9 @@ crear un portal adicional de seguimiento.
   **PENDIENTE_RESPUESTA**.
 - Calcula `fecha_limite_respuesta` a **15 días hábiles**, plazo máximo e improrrogable para
   reclamos y quejas conforme a la [regla vigente de Indecopi](https://www.gob.pe/institucion/indecopi/noticias/1296574-los-emprendedores-ya-pueden-generar-su-libro-de-reclamaciones-de-manera-rapida-y-sencilla-sin-costo-alguno).
+- El día hábil siguiente a la presentación es el día 1. No se cuentan sábados, domingos ni
+  feriados oficiales peruanos. Si se presenta en un día no hábil, el conteo comienza el siguiente
+  día hábil. Todo se calcula con fecha de Lima y con el calendario oficial peruano vigente.
 - Muestra una confirmación con número, fecha de presentación, estado y fecha máxima de respuesta.
 - Envía al consumidor una constancia con la copia de los datos presentados y su número. Ese
   correo es su prueba y su medio de seguimiento.
@@ -981,9 +1043,8 @@ video** — por ejemplo, solo un PDF — **se marca siempre a mano**: no hay nad
 
 **Lecciones con detección (video propio o YouTube):**
 - Se marcan **solas** al alcanzar un **porcentaje configurable del video**.
-- El alumno **puede desmarcarlas**, pero **no puede volver a marcarlas a mano**: para recuperar
-  la marca tiene que **ver el video otra vez**. Si el check fuera manual, desmarcar y volver a
-  marcar sería trivial y la regla no serviría de nada.
+- El check es **solo de lectura**: el alumno no puede marcarlo ni desmarcarlo. Refleja la evidencia
+  de reproducción registrada por ESEJUR.
 
 #### Cuánto hay que ver para que cuente
 
@@ -1000,6 +1061,9 @@ deja adivinando por qué no se marca.
 - No hay marcado automático posible: **solo existe la casilla manual**.
 - El **administrador** ve un aviso técnico al elegir esa fuente, explicando el motivo.
 - El **alumno** no ve ningún mensaje técnico: solo su casilla.
+- La casilla manual puede accionarse únicamente mientras la lección está pendiente. Una vez
+  completada queda fija, igual que un check automático, para que el avance no retroceda por una
+  pulsación accidental.
 
 Un curso puede **mezclar** lecciones de ambos tipos sin problema. En cualquier caso, el
 **porcentaje de avance del curso es calculado** a partir de las lecciones completadas, no un
@@ -1027,6 +1091,7 @@ recorre**.
 |---|---|
 | Uno o más videos con detección | El alumno alcanza el **umbral configurado** en cada video detectable (50% por defecto). El check refleja automáticamente el resultado |
 | Video sin detección, contenido escrito o solo otros materiales | El alumno marca el **check** de la lección o pulsa **"Siguiente"**; ambas acciones la completan |
+| Sesión `EN_VIVO` | Al terminar su horario, queda completada para quien tiene asistencia automática o corregida. Quien no asistió la completa posteriormente con la grabación: por umbral si es detectable o mediante check/"Siguiente" si no lo es |
 
 No existe un material principal. Los materiales se presentan en el orden definido por el
 administrador. En las lecciones de completado manual, el alumno elige entre marcar el check desde
@@ -1035,6 +1100,11 @@ umbral de reproducción.
 
 Las lecciones ya completadas quedan **siempre accesibles**: puede volver atrás cuantas veces
 quiera. Lo que no puede es adelantarse a lo que todavía no vio.
+
+Una sesión todavía futura o en estado **"Grabación pendiente"** no completa la lección para quien
+no asistió y puede mantener la secuencia bloqueada. Subir posteriormente una grabación no elimina
+el completado de quienes asistieron. Una sesión CANCELADA se excluye del progreso obligatorio y se
+considera liberada para la secuencia.
 
 Los **exámenes siguen la misma lógica**: el de un módulo se habilita al completar sus lecciones, y
 el final al completar todos los módulos (§12). Cada examen calificado de módulo tiene la opción
@@ -1075,6 +1145,11 @@ Lo que sí se puede hacer, y es lo que se hace:
 La hora de fin es obligatoria y debe ser posterior a la hora de inicio. Esta ventana evita que un
 alumno marque asistencia entrando cuando la clase ya terminó. Sigue siendo una señal aproximada:
 demuestra que abrió la reunión durante su horario, no cuánto tiempo permaneció conectado.
+
+Si un alumno no tiene ninguna sesión elegible, la asistencia se muestra como **"No aplicable — sin
+sesiones elegibles"**, no como 0%. Cuando la asistencia es requisito, esa condición permanece
+incumplida y bloquea la certificación automática; la matrícula manual advierte esta consecuencia y
+la salida disponible es una excepción administrativa documentada.
 
 **Quien se matricula tarde no queda castigado.** Si alguien entra en la semana 5, su asistencia
 se calcula **solo sobre las sesiones posteriores a su matrícula**. Las anteriores las ve
@@ -1122,8 +1197,9 @@ cambiar requisitos, duplica el curso y aplica los cambios a la nueva convocatori
 ## 12. Exámenes
 
 - Un curso puede tener **varios exámenes**; cuelgan del curso o de un módulo.
-- **Reintentos configurables** por examen: ilimitados o con tope de N intentos. Por defecto,
-  ilimitados — es lo que la Escuela permite hoy.
+- En un examen `CALIFICADO`, los reintentos son configurables: ilimitados o con tope de N. El
+  valor inicial es ilimitado. Un examen `PRACTICA` es siempre ilimitado y no muestra un campo de
+  máximo de intentos.
 - **Escala peruana 0-20.** Nota mínima de aprobación **12** por defecto, editable por curso.
 - El comportamiento principal es **automático**: cuando todas las preguntas son para marcar, la
   nota se calcula y se muestra al enviar el intento.
@@ -1152,7 +1228,8 @@ Cada examen es de uno de dos tipos, y el alumno **lo ve antes de entrar**:
 
 El badge importa: sin él, el alumno no distingue el examen que decide su certificado del que es
 para practicar, y se entera tarde. Los no calificados se pueden rendir las veces que quiera sin
-consecuencia — son para estudiar, no para medir.
+consecuencia — son para estudiar, no para medir. Esta regla no puede ser reducida por la
+configuración de intentos de un examen calificado.
 
 ### Cuándo se habilita un examen
 
@@ -1222,14 +1299,18 @@ Cuando un intento contiene al menos una RESPUESTA_ABIERTA:
 
 1. Las preguntas para marcar se califican automáticamente.
 2. El intento queda **PENDIENTE_REVISION** y el alumno ve que aún no tiene nota definitiva.
-3. El administrador revisa cada respuesta abierta, asigna entre cero y el puntaje máximo de la
-   pregunta y puede escribir una observación.
+3. El administrador revisa cada respuesta abierta, asigna un valor inclusivo entre cero y el
+   puntaje máximo de la pregunta y puede escribir una observación opcional. Si la escribe, el
+   alumno la consulta junto al resultado publicado.
 4. Al terminar todas las revisiones, el intento queda **CALIFICADO** y la nota se publica
    automáticamente.
 
 Cada examen con respuesta abierta tiene `dias_revision`: **3 días calendario por defecto**,
 editable antes de iniciar el curso. Al enviar el intento se calcula `fecha_limite_revision` y el
 alumno ve un mensaje como *"Tu examen será calificado como máximo el 15 de septiembre"*.
+
+Una vez iniciado el curso, `dias_revision` queda bloqueado para no cambiar el compromiso ya
+comunicado a los alumnos.
 
 - La administración ve los intentos pendientes, próximos a vencer y vencidos.
 - Al superarse el plazo, el intento no se aprueba solo: continúa PENDIENTE_REVISION y se generan
@@ -1274,6 +1355,12 @@ manual de certificados (§13.4).
   intento. Los no calificados no afectan la nota final.
 - Todos los exámenes calificados tienen el mismo peso.
 - Esa nota final es la que decide el **nivel del certificado** (§13.2).
+
+**Redondeo único y visible:** la nota de cada intento se redondea a dos decimales con redondeo
+decimal convencional antes de compararla con `nota_minima`. El mejor intento se elige entre esas
+notas visibles. La nota final promedia las mejores notas ya redondeadas, vuelve a redondearse a dos
+decimales y ese mismo valor visible decide Normal o Refrendado. Nunca se muestra `12.00` y se trata
+internamente como desaprobado.
 
 ---
 
@@ -1394,7 +1481,8 @@ valor legal certificando un periodo que todavía no ocurrió. Un curso VIRTUAL s
 se ve afectado: puede continuar con la emisión al cumplir la regla. En ese caso, el periodo del
 certificado se determina con `fecha_matricula` y `fecha_finalizacion` del alumno.
 
-**Por qué la condición 3.** `dias_espera` es configurable por curso y vale cero por defecto. Le da
+**Por qué la condición 3.** `dias_espera` es configurable por curso, se cuenta en **días
+calendario** y vale cero por defecto. Le da
 a la Escuela margen para cerrar notas, imprimir certificados físicos o revisar casos antes de que
 salgan. Es lo que hace udeapolis con su *"dentro de 3 días al finalizar el curso"*, pero aquí es
 decisión de cada curso.
@@ -1404,6 +1492,7 @@ La fecha se calcula sin que el administrador tenga que escribirla para cada alum
 1. `fecha_base_emision` es la fecha en que el alumno cumple todos los requisitos académicos o la
    `fecha_fin` del curso si esta es posterior.
 2. `fecha_emision_programada` es `fecha_base_emision + dias_espera`.
+3. La emisión programada se ejecuta desde las 00:00 de esa fecha en `America/Lima`.
 
 En VIRTUAL no existe `fecha_fin`, por lo que se usa la fecha en que el alumno cumple sus
 requisitos. `EN_VIVO` e `HIBRIDO` nunca pueden programar una emisión anterior a su `fecha_fin`.
@@ -1447,6 +1536,8 @@ confirmar se muestra el aviso final antes de generarlo.
 - **Contenido del PDF** (según la plantilla real de la Escuela): nombre completo del alumno,
   tipo y título del curso, rango de fechas cursadas, total de horas académicas, lugar y fecha
   de emisión, **QR de verificación**, logo y las firmas configuradas.
+- El lugar de emisión se obtiene de la configuración institucional de la Escuela y su valor
+  inicial es **"Lima, Perú"**; no se escribe nuevamente en cada curso.
 - **Emisión manual:** igual que existe la matrícula manual (§9), el administrador puede emitir un
   certificado a mano, registrando el motivo. Sirve para lo que la automatización no cubre: un
   alumno que cumplió pero quedó trabado por un error, un acuerdo especial, una corrección tardía.
@@ -1454,6 +1545,19 @@ confirmar se muestra el aviso final antes de generarlo.
   de la acción. No puede ser anterior a la matrícula ni futura. Puede resolver una excepción
   académica o temporal, pero no omite los datos obligatorios del alumno, la regla de un certificado
   por curso, la conservación del historial ni la privacidad.
+
+La emisión manual tampoco permite dejar una calificación abierta sin resolver. Si existe un
+intento `PENDIENTE_REVISION` de un examen calificado, primero debe calificarse. Después:
+
+- si existe una nota final definitiva igual o superior al umbral Refrendado, el nivel es
+  **Refrendado**;
+- en cualquier otra excepción manual, el nivel es **Normal**;
+- si existe una nota definitiva se congela y conserva aunque sea menor que la mínima; si no existe
+  nota, el certificado Normal se emite sin nota;
+- el administrador nunca elige libremente el nivel.
+
+La excepción y su motivo quedan en el historial privado. La verificación pública conserva los
+mismos datos mínimos y no expone que existió una excepción.
 
 ### 13.5 El certificado congela sus datos
 
@@ -1757,6 +1861,19 @@ Como filtros comunes ofrecen rango de fechas, curso, modalidad, estado y alumno.
 solo muestra los filtros que corresponden a sus datos y puede agregar los propios, como estado del
 pago, estado del certificado o cumplimiento académico.
 
+El rango de fechas tiene un único significado por reporte, tanto en pantalla como en Excel:
+
+| Reporte | Fecha filtrada |
+|---|---|
+| Matrículas | `fecha_matricula` |
+| Pagos registrados | fecha del resultado de Culqi o fecha del registro administrativo |
+| Seguimiento académico | `fecha_matricula`, para trabajar por cohorte de ingreso |
+| Certificados | `fecha_emision` |
+| Asistencia | fecha de la sesión |
+
+Todas se interpretan en hora de Lima. La tabla, los totales y el archivo exportado utilizan
+exactamente el mismo rango inclusivo.
+
 #### 1. Reporte de matrículas
 
 Permite consultar alumno, curso, modalidad, fecha de matrícula, fecha de activación, estado de la
@@ -1904,7 +2021,7 @@ puede reenviar a cualquiera.
 
 | # | Regla |
 |---|---|
-| RN-10 | Las transiciones PUBLICADO → EN CURSO → CERRADO son automáticas según las fechas cuando existen; el administrador puede forzarlas. Un VIRTUAL puede iniciar al publicarse o en su fecha de inicio, nunca tiene fecha de fin y se cierra manualmente. PUBLICADO o EN CURSO también puede pasar a CANCELADO por decisión administrativa con motivo. |
+| RN-10 | Las transiciones PUBLICADO → EN CURSO → CERRADO son automáticas según las fechas cuando existen; el administrador puede forzarlas. Un VIRTUAL sin fecha de inicio queda EN CURSO en la misma publicación; con inicio futuro permanece PUBLICADO hasta esa fecha, nunca tiene fecha de fin y se cierra manualmente. PUBLICADO o EN CURSO también puede pasar a CANCELADO con motivo. |
 | RN-11 | Un curso con matrículas no puede volver a BORRADOR; se retira de venta pasándolo a CERRADO. |
 | RN-12 | No se borra ningún curso, módulo ni lección con matrículas o progreso asociado; se oculta o se cierra. |
 
@@ -1921,49 +2038,49 @@ puede reenviar a cualquiera.
 | RN-19 | ESEJUR no cobra, autoriza ni rechaza operaciones bancarias. Registra el resultado comunicado por Culqi y aplica automáticamente su consecuencia. |
 | RN-20 | Cada pago aprobado genera una constancia imprimible con número de pedido, importe, método, fecha y curso. No reemplaza el comprobante tributario SUNAT emitido por la Escuela. |
 | RN-21 | El precio promocional puede tener fechas de vigencia; sin fechas, es permanente. |
-| RN-22 | La matrícula se activa automáticamente solo cuando Culqi informa APROBADO, sin intervención humana, salvo que el curso haya sido CANCELADO mientras se realizaba la operación. |
-| RN-23 | El primer resultado APROBADO activa la matrícula. Si Culqi repite el mismo resultado, no se genera otro pago ni se vuelve a activar el acceso. ESEJUR no convierte por su cuenta un resultado fallido en APROBADO. Si la aprobación llega después de cancelar el curso, registra el pago y mantiene la matrícula CANCELADA para su atención externa. |
-| RN-24 | Solo puede existir un intento PENDIENTE por matrícula. ESEJUR no le asigna un plazo propio: Culqi comunica si fue APROBADO o si terminó sin aprobarse. Cuando el resultado permite reintentar, se utiliza la misma matrícula y se conserva el historial. |
+| RN-22 | La matrícula se activa automáticamente solo cuando Culqi informa APROBADO, sin intervención humana. Una operación iniciada válidamente se honra aunque después cierre la matrícula, el curso pase a CERRADO o se llene el cupo. Si el curso o la matrícula quedaron CANCELADOS, se registra el pago pero no se activa acceso. |
+| RN-23 | El primer resultado APROBADO se registra una vez. Una repetición no genera otro pago ni matrícula y ESEJUR no convierte fallos en APROBADO. Una aprobación posterior a CANCELADO mantiene la matrícula CANCELADA y abre atención externa; una aprobación que encuentra el cupo lleno activa y genera alerta de sobrecupo. |
+| RN-24 | Solo puede existir un intento PENDIENTE por matrícula. ESEJUR no le asigna un plazo propio y no permite reintentarlo mientras siga PENDIENTE. Solo RECHAZADO, ERROR o EXPIRADO permiten un nuevo intento sobre la misma matrícula, conservando historial. |
 | RN-25 | Toda matrícula manual genera REGISTRADO_MANUAL con importe, medio, referencia y motivo, o EXONERADO con importe cero y motivo; ambas registran responsable y fecha y activan la matrícula. |
 | RN-26 | En autoservicio no se matricula sin correo verificado y documentos aceptados. Administración puede crear cuenta y matrícula, pero el contenido queda bloqueado hasta verificar el correo, aceptar los documentos y cambiar la contraseña temporal. ACTIVA representa el derecho concedido; utilizarlo también exige una cuenta habilitada y que haya llegado la fecha de inicio cuando exista. |
 | RN-27 | Un alumno no puede matricularse dos veces en el mismo curso. |
 | RN-28 | Los cursos PUBLICADO y EN CURSO admiten matrícula mientras tengan cupo y no se haya alcanzado su cierre de matrícula o cierre administrativo. VIRTUAL no usa fecha de cierre de matrícula. |
 | RN-29 | Un curso puede definir una capacidad de venta; vacío significa sin límite. Un pago PENDIENTE no reserva cupo. El cupo se ocupa cuando Culqi informa APROBADO y la matrícula pasa a ACTIVA, o cuando se activa una matrícula gratuita o administrativa. |
-| RN-30 | La disponibilidad considera matrículas ACTIVA. Antes de iniciar un pago se comprueba el cupo y, al llenarse, se muestra "Sin cupos". Si dos aprobaciones simultáneas producen sobrecupo, ambos alumnos reciben acceso y se genera una alerta; es la única excepción a la capacidad definida. No hay lista de espera. |
-| RN-31 | El acceso puede tener vigencia en días; vacío significa acceso permanente. |
-| RN-32 | Al agotarse la vigencia la matrícula pasa a VENCIDA y se pierde el acceso al contenido, pero el certificado ya emitido y su verificación se conservan para siempre. |
+| RN-30 | La disponibilidad considera matrículas ACTIVA. Antes de iniciar un pago se comprueba el cupo y, al llenarse, se muestra "Sin cupos". Si una operación iniciada con cupo llega APROBADA cuando el límite ya se llenó, activa el acceso y genera alerta de sobrecupo. No hay lista de espera. |
+| RN-31 | El acceso puede tener vigencia en días; vacío significa permanente. Su día 1 es la fecha posterior entre activación e inicio del curso; vence a las 23:59:59 de Lima del día N. |
+| RN-32 | Al agotarse la vigencia la matrícula pasa a VENCIDA y pierde contenido, pero conserva finalización y certificados. Si ya había finalizado, la emisión pendiente continúa aunque después venza o se cancele la matrícula. |
 | RN-33 | En `VIRTUAL`, `fecha_inicio` es opcional y `fecha_fin` no se ofrece: sin inicio, el contenido se abre al activarse la matrícula y el curso continúa hasta su cierre manual. `EN_VIVO` e `HIBRIDO` requieren ambas fechas y las de sus sesiones. |
 | RN-34 | El estado ACTIVA representa el derecho de acceso concedido. Para utilizarlo, la cuenta debe estar habilitada y debe haber llegado la fecha de inicio cuando exista. Al cumplir los requisitos académicos se registra `fecha_finalizacion`; cancelar o vencer el acceso no borra la finalización ni los certificados obtenidos. |
-| RN-35 | Solo el administrador cancela una matrícula, con motivo registrado. El sistema no devuelve dinero. |
+| RN-35 | Solo el administrador cancela una matrícula, con motivo. El sistema no devuelve dinero ni altera Culqi; una aprobación posterior se registra, mantiene CANCELADA y queda para atención externa. |
 
 ### Progreso y asistencia
 
 | # | Regla |
 |---|---|
-| RN-36 | La lección sin video detectable puede completarse desde el check de la lista o con "Siguiente" dentro de ella; ambas acciones producen el mismo resultado. |
-| RN-37 | Si existen videos detectables, la lección se completa al alcanzar en cada uno el porcentaje configurable, 50% por defecto; el check refleja el resultado y no permite omitir el umbral. |
-| RN-38 | Una lección completada conserva su check y permanece accesible; volver a abrirla no elimina el avance. |
+| RN-36 | La lección sin video detectable puede completarse desde el check o con "Siguiente"; en la última se usa "Completar lección". El control manual solo es accionable mientras está pendiente. |
+| RN-37 | Si existen videos detectables, la lección se completa al alcanzar en cada uno el porcentaje configurable, 50% por defecto; el check es de solo lectura y no permite omitir el umbral. |
+| RN-38 | Una lección completada conserva un check fijo que el alumno no puede desmarcar y permanece accesible; volver a abrirla no elimina el avance. |
 | RN-39 | El avance del curso se calcula a partir de las lecciones completadas. |
 | RN-40 | El avance se calcula sobre las lecciones obligatorias definidas al iniciar el curso. El contenido complementario agregado después no reduce el avance y un certificado emitido nunca se revoca por cambios de contenido. |
 | RN-41 | El alumno avanza en el orden que definió el administrador: para abrir una lección debe haber completado la anterior. Un examen calificado de módulo puede bloquear el siguiente hasta ser aprobado. |
 | RN-42 | Lo ya completado queda siempre accesible; lo que no se puede es adelantarse. |
 | RN-43 | Después de iniciado el curso no se agregan lecciones obligatorias ni se aumentan requisitos. Se permiten correcciones y materiales complementarios que no alteren el avance ni la certificación. |
 | RN-44 | La secuencia obligatoria es una opción por curso, activa por defecto. Cada examen calificado de módulo permite decidir si bloquea el siguiente; si la secuencia se desactiva, ningún examen bloquea la navegación. |
-| RN-45 | La asistencia se registra una sola vez al abrir el enlace desde la plataforma entre la hora de inicio y la hora de fin. Abrirlo fuera de esa ventana no cuenta. Una sesión CANCELADA se excluye del total para todos los alumnos. |
+| RN-45 | La tarjeta de sesión siempre es visible, pero el enlace solo se habilita entre inicio y fin. Abrirlo registra una asistencia. Después se muestra grabación o pendiente. Una sesión CANCELADA se excluye del total. |
 | RN-46 | El administrador puede corregir manualmente la asistencia de cualquier sesión. |
-| RN-47 | `EN_VIVO` e `HIBRIDO` pueden definir `fecha_cierre_matricula`, inicialmente igual a `fecha_inicio` si exigen asistencia. La asistencia tardía se calcula solo sobre sesiones posteriores a la matrícula; las grabaciones no cuentan. Sin sesiones futuras no hay matrícula automática si la asistencia es obligatoria. |
+| RN-47 | `EN_VIVO` e `HIBRIDO` pueden definir cierre. La asistencia tardía usa sesiones posteriores a matrícula. Al terminar una sesión, asistir completa su lección; quien no asistió la completa con la grabación. Cero sesiones elegibles muestra N/A y no cumple una asistencia requerida. |
 
 ### Exámenes y notas
 
 | # | Regla |
 |---|---|
-| RN-48 | Un examen es calificado o de práctica; solo los calificados cuentan para la nota final y para certificar, y hay que aprobarlos todos. |
+| RN-48 | Un examen es CALIFICADO o PRACTICA; solo los calificados cuentan y deben aprobarse. PRACTICA siempre tiene intentos ilimitados. Si `requiere_examenes` está apagado no puede quedar CALIFICADO. |
 | RN-49 | El alumno ve un badge que distingue el examen que debe aprobar del que es de práctica. |
 | RN-50 | En `VIRTUAL`, el examen se habilita automáticamente por avance o al activar la matrícula si no hay secuencia. `EN_VIVO` e `HIBRIDO` pueden agregar `fecha_habilitacion`; cuando existe también debe cumplirse. Habilitarlo no implica que deba bloquear el siguiente módulo. |
 | RN-51 | Si el alumno agota los intentos sin aprobar, el aula se lo indica y el administrador puede otorgarle un intento adicional con motivo registrado. |
-| RN-52 | Cada pregunta tiene puntaje, 1 por defecto. La nota es `puntaje_obtenido / puntaje_total × 20`, se muestra con hasta dos decimales y se aprueba desde `nota_minima`, 12 por defecto. No hay penalización por error. |
+| RN-52 | Cada pregunta tiene puntaje, 1 por defecto. La nota es `puntaje_obtenido / puntaje_total × 20`, se redondea convencionalmente a dos decimales y ese valor visible se compara con `nota_minima`, 12 por defecto. No hay penalización. |
 | RN-53 | De un examen con varios intentos, cuenta el intento de nota más alta. Al emitirse el certificado se cierran los nuevos intentos calificados y la nota queda definitiva. |
-| RN-54 | La nota final del curso es el promedio de los exámenes calificados, usando el mejor intento de cada uno y el mismo peso para todos. |
+| RN-54 | La nota final es el promedio de los exámenes calificados usando la mejor nota visible de cada uno y el mismo peso; se redondea a dos decimales antes de decidir el nivel. |
 | RN-55 | Un examen puede tener tiempo límite en minutos; vacío significa sin límite. El tiempo corre desde que inicia el intento y no se pausa al cerrar la página ni al perder conexión. |
 | RN-56 | Un examen puede barajar sus preguntas y opciones en cada intento. |
 | RN-57 | Las respuestas correctas se muestran al aprobar, al agotar los intentos o nunca; con intentos ilimitados no se ofrece "al agotar". |
@@ -1973,22 +2090,22 @@ puede reenviar a cualquiera.
 
 | # | Regla |
 |---|---|
-| RN-59 | La certificación se configura con tres condiciones independientes: exámenes, progreso y asistencia. Sus valores iniciales dependen de la modalidad y pueden modificarse antes de iniciar. En VIRTUAL la opción de asistencia no se muestra. Si las tres se desactivan, el certificado solo puede emitirse manualmente con motivo. |
+| RN-59 | La certificación se configura con tres condiciones independientes: exámenes, progreso y asistencia. Sus valores iniciales dependen de la modalidad y pueden modificarse antes de iniciar. En VIRTUAL la opción de asistencia no se muestra. Si `requiere_examenes` está desactivado, no puede permanecer ningún examen CALIFICADO: antes de iniciar se debe convertir a PRACTICA o retirar. Si las tres condiciones se desactivan, el certificado solo puede emitirse manualmente con motivo. |
 | RN-60 | El umbral del certificado normal es la nota mínima del curso y el del refrendado debe ser mayor; por defecto 12 y 14. |
 | RN-61 | Si el curso no exige exámenes, el certificado es siempre Normal. |
-| RN-62 | El certificado se emite sin intervención administrativa cuando se cumple la regla de certificación, no existe ningún examen calificado PENDIENTE_REVISION, llegó la fecha de fin si existe y el alumno confirmó sus datos. Con espera se emite en la fecha programada; con cero días, después de la confirmación final del alumno. |
+| RN-62 | El certificado se emite sin intervención administrativa cuando se cumple la regla de certificación, no existe ningún examen calificado PENDIENTE_REVISION, llegó la fecha de fin si existe y el alumno confirmó sus datos. Con espera se emite a las 00:00 de `America/Lima` de la fecha programada; con cero días, después de la confirmación final del alumno. Una finalización obtenida válidamente no se pierde si después la matrícula vence o se cancela. |
 | RN-63 | Si el curso tiene fecha de fin, el certificado nunca se emite antes de ella. En un VIRTUAL sin fecha de fin, su periodo se determina con `fecha_matricula` y `fecha_finalizacion`. |
-| RN-64 | Cada curso tiene `dias_espera`, cero por defecto. La fecha programada se calcula desde la fecha posterior entre el cumplimiento académico y `fecha_fin` cuando existe. Durante la espera se puede mejorar la nota. |
+| RN-64 | Cada curso tiene `dias_espera`, cero por defecto, contado en días calendario. La fecha programada se calcula desde la fecha posterior entre el cumplimiento académico y `fecha_fin` cuando existe. Durante la espera se puede mejorar la nota. |
 | RN-65 | Con espera, el alumno ve promedio, nivel proyectado, fecha límite para mejorar y fecha exacta de emisión. Sin espera, ve una confirmación antes de generar y puede emitir ahora o seguir mejorando. |
 | RN-66 | Un alumno recibe un solo certificado por curso. |
 | RN-67 | El certificado congela sus datos, nota y nivel al emitirse y nunca se recalcula. Desde entonces los exámenes calificados no admiten nuevos intentos; los de práctica sí. |
 | RN-68 | Solo el administrador corrige o anula un certificado. Corregir mantiene código y estado VIGENTE, reemplaza la descarga y conserva el historial; no cambia libremente nota ni nivel. Anular retira la descarga, mantiene el QR informativo y es irreversible. Ninguna acción elimina la finalización académica. |
-| RN-69 | El administrador puede emitir un certificado manualmente, con motivo registrado. Si todavía no existe `fecha_finalizacion`, se registra la fecha de la acción; no puede ser anterior a la matrícula ni futura. La excepción no omite datos obligatorios, unicidad, historial ni privacidad. |
+| RN-69 | El administrador puede emitir un certificado manualmente, con motivo registrado, siempre que no exista una respuesta abierta de examen CALIFICADO en PENDIENTE_REVISION. Si la nota definitiva alcanza el umbral refrendado, el nivel es Refrendado; cualquier otra excepción manual emite nivel Normal. El administrador no elige el nivel. Si ya existe nota se congela; si no existe, el certificado se emite sin nota. Si todavía no existe `fecha_finalizacion`, se registra la fecha de la acción; no puede ser anterior a la matrícula ni futura. La excepción no omite datos obligatorios, unicidad, historial ni privacidad. |
 | RN-70 | El alumno solo ve sus propios certificados. |
-| RN-71 | Si faltan datos se envía un correo para confirmarlos; una vez emitido, el correo del certificado lleva un enlace de descarga, nunca el PDF adjunto. |
+| RN-71 | El correo para confirmar datos del certificado se envía únicamente cuando el alumno ya cumple las condiciones académicas y temporales de emisión y solo faltan sus datos. Una vez emitido, el correo del certificado lleva un enlace de descarga, nunca el PDF adjunto. |
 | RN-72 | El QR o el código manual llevan a una verificación pública con código, nombre, curso, horas, nivel, entidad, fecha y estado. Nunca muestra DNI, contacto, nota, firmas ni PDF. Un ANULADO muestra su fecha y que no es válido; una corrección muestra los datos vigentes y un código inexistente responde "Certificado no encontrado". |
 | RN-73 | Sin nombres, apellidos y DNI confirmados no se genera el certificado. La confirmación puede realizarse antes o después de completar el curso y queda registrada. |
-| RN-74 | Cada curso indica qué entidad lo refrenda; entidades, firmantes, tipos de curso y categorías temáticas son tablas maestras. |
+| RN-74 | Cada curso indica qué entidad lo refrenda; entidades, firmantes, tipos de curso y categorías temáticas son tablas maestras. El lugar de emisión proviene de la configuración institucional y su valor inicial es "Lima, Perú". |
 
 ### Contenido protegido
 
@@ -2004,16 +2121,16 @@ puede reenviar a cualquiera.
 |---|---|
 | RN-78 | El docente tiene un perfil público sin acceso al sistema; el alumno y el administrador sí utilizan una cuenta. |
 | RN-79 | Se registra cada acceso al sistema. |
-| RN-80 | El registro por formulario o Google exige aceptar la política de privacidad y los términos, guardando cuándo y qué versión se aceptó. Una cuenta creada por administración puede existir antes, pero no queda habilitada hasta que el alumno los acepte. |
+| RN-80 | El registro por formulario o Google exige aceptar la política de privacidad y los términos, guardando cuándo y qué versión se aceptó. Una cuenta creada por administración puede existir antes, pero no queda habilitada hasta que el alumno los acepte. La contraseña debe tener al menos 8 caracteres e incluir mayúscula, minúscula, número y símbolo. El enlace de verificación dura 24 horas y reenviarlo invalida el anterior; el de recuperación dura 60 minutos y usarlo o solicitar uno nuevo invalida el anterior. |
 | RN-81 | La plataforma ofrece Libro de Reclamaciones como página pública enlazada en el pie y accesible con o sin cuenta; con sesión, completa los datos conocidos. |
 | RN-82 | La reclamación distingue QUEJA de RECLAMO, admite varias imágenes opcionales de hasta 5 MB cada una y exige declaración jurada y autorización de respuesta por correo. |
-| RN-83 | Cada QUEJA o RECLAMO debe ser respondido. Recibe número, fecha, PENDIENTE_RESPUESTA y una fecha límite de 15 días hábiles improrrogables. Se envía constancia; la administración responde por correo y solo entonces pasa a RESPONDIDO. Si el envío falla, permanece pendiente. |
+| RN-83 | Cada QUEJA o RECLAMO debe ser respondido. Recibe número, fecha, PENDIENTE_RESPUESTA y una fecha límite de 15 días hábiles improrrogables. El primer día hábil posterior a la presentación es el día 1; si se presenta en día no hábil, el conteo comienza el siguiente día hábil. Se excluyen sábados, domingos y feriados oficiales del Perú. Se envía constancia; la administración responde por correo y solo entonces pasa a RESPONDIDO. Si el envío falla, permanece pendiente. |
 | RN-84 | Existen tres caminos de registro: formulario, Google y creación administrativa. Formulario y creación administrativa usan correo, nombres y apellidos separados y `telefono` opcional; Google entrega el correo verificado y sus datos disponibles. |
 | RN-85 | El correo que llega por Google ya está verificado: ese usuario no recibe el correo de verificación. |
 | RN-86 | Un mismo correo es una sola cuenta: los accesos por formulario y por Google se vinculan entre sí. |
 | RN-87 | El login no bloquea el catálogo ni las lecciones de vista previa; la sesión se pide solo al matricularse. |
 | RN-88 | El registro guarda el WhatsApp del alumno como dato de contacto opcional; las notificaciones automáticas van por correo. |
-| RN-89 | La pantalla de registro ofrece WhatsApp para solicitar una cuenta manual. El administrador usa correo, nombres, apellidos y `telefono` opcional; una cuenta nueva recibe por correo las instrucciones, el enlace de verificación y `Escuela1415@`, y queda con CAMBIO_PENDIENTE. No permite abrir cursos, exámenes ni certificados hasta verificar el correo, aceptar los documentos y cambiar la contraseña. Una cuenta existente nunca cambia su clave. |
+| RN-89 | La pantalla de registro ofrece WhatsApp para solicitar una cuenta manual. Cualquier administrador HABILITADO puede crear otro administrador o un alumno usando correo, nombres, apellidos y `telefono` opcional; se registra quién concedió el perfil. No puede deshabilitarse a sí mismo ni dejar al sistema sin al menos un administrador habilitado. Una cuenta nueva recibe por correo las instrucciones, el enlace de verificación y `Escuela1415@`, y queda con CAMBIO_PENDIENTE. Puede entrar al panel, pero no abrir cursos, exámenes ni certificados hasta verificar el correo, aceptar los documentos y cambiar la contraseña. Una cuenta existente nunca cambia su clave. |
 | RN-90 | El formulario de registro lleva protección anti-robot. |
 
 ### Catálogo y administración
@@ -2029,16 +2146,16 @@ puede reenviar a cualquiera.
 | RN-97 | El administrador puede consultar el avance, los intentos y las notas de cualquier alumno. |
 | RN-98 | El alumno ve en todo momento su avance hacia el certificado: cada condición activa del curso, con su valor real y su meta. |
 | RN-99 | El alumno tiene un calendario mensual con las sesiones en vivo de todos sus cursos; solo se muestra si tiene cursos `EN_VIVO` o `HIBRIDO`. |
-| RN-100 | Cada curso representa una convocatoria concreta. Al duplicarlo se copia su configuración y estructura académica en un nuevo BORRADOR, reutilizando los archivos físicos; nunca se copian matrículas, pagos, progreso, intentos, asistencia ni certificados. |
-| RN-101 | SELECCION_UNICA, SELECCION_MULTIPLE y VERDADERO_FALSO se califican al instante. Un intento con RESPUESTA_ABIERTA queda PENDIENTE_REVISION hasta que el administrador lo califique; tiene `dias_revision`, 3 días calendario por defecto, muestra `fecha_limite_revision`, impide otro intento pendiente y bloquea la finalización y el certificado si el examen es calificado. |
+| RN-100 | Cada curso representa una convocatoria concreta. Al duplicarlo se copia su configuración y estructura académica en un nuevo BORRADOR, reutilizando los archivos físicos; se genera una nueva dirección amigable única y nunca se copian matrículas, pagos, progreso, intentos, asistencia ni certificados. |
+| RN-101 | SELECCION_UNICA, SELECCION_MULTIPLE y VERDADERO_FALSO se califican al instante. Un intento con RESPUESTA_ABIERTA queda PENDIENTE_REVISION hasta que el administrador lo califique; tiene `dias_revision`, 3 días calendario por defecto y no modificable después del inicio del curso, muestra `fecha_limite_revision`, impide otro intento pendiente y bloquea la finalización y el certificado si el examen es CALIFICADO. Cada respuesta recibe un puntaje inclusivo entre 0 y su puntaje máximo y una observación opcional visible para el alumno. |
 | RN-102 | Antes de publicar se valida que el curso tenga estructura cursable, reglas coherentes, fechas válidas y todos los elementos requeridos por sus condiciones de examen, progreso, asistencia y certificación. Si falta algo, la publicación se bloquea mostrando la lista completa de pendientes. |
-| RN-103 | Cancelar un curso completo exige motivo, detiene matrículas y pagos nuevos, cancela sus sesiones futuras y envía un solo aviso consolidado por curso, sin correos separados por cada sesión. Conserva todo el historial. Una aprobación de Culqi recibida después de cancelar registra el pago, pero mantiene la matrícula CANCELADA para atención externa. No entrega certificados automáticos a quienes no cumplieron ni ejecuta devoluciones. |
-| RN-104 | Administración dispone de cinco reportes: matrículas, pagos registrados, seguimiento académico, certificados y asistencia. Pueden filtrarse según los datos que contengan y descargarse en Excel. |
+| RN-103 | Cancelar un curso completo exige motivo, detiene matrículas y pagos nuevos, cancela sus sesiones futuras y envía un solo aviso consolidado por curso, sin correos separados por cada sesión. Conserva todo el historial. Quien no había finalizado conserva como consulta solo el contenido ya liberado, pero no puede registrar nuevos checks, progreso, intentos, asistencia ni finalización. Quien finalizó antes conserva la confirmación de datos y la emisión programada aunque después la matrícula venza o se cancele. Una aprobación de Culqi recibida después de cancelar registra el pago, pero mantiene la matrícula CANCELADA para atención externa. No ejecuta devoluciones. |
+| RN-104 | Administración dispone de cinco reportes: matrículas, pagos registrados, seguimiento académico, certificados y asistencia. Pueden filtrarse según los datos que contengan y descargarse en Excel. El rango de fechas usa `fecha_matricula` en matrículas y seguimiento, fecha del resultado o registro administrativo en pagos, `fecha_emision` en certificados y fecha de sesión en asistencia. |
 | RN-105 | El reporte de matrículas distingue estado de matrícula, forma de ingreso, situación académica y estado del certificado. Una matrícula o confirmación repetida se contabiliza una sola vez. |
 | RN-106 | El reporte de pagos conserva todos los resultados. Sus totales confirmados incluyen APROBADO y REGISTRADO_MANUAL con monto mayor que cero; excluyen PENDIENTE, RECHAZADO, ERROR, EXPIRADO y EXONERADO. Es un control de pagos registrados, no un reporte contable ni tributario. |
 | RN-107 | El seguimiento académico muestra únicamente las condiciones aplicables al curso. Incluye progreso, exámenes, nota, revisión de respuestas abiertas, asistencia cuando corresponda, finalización y certificado. |
 | RN-108 | El reporte de certificados distingue su estado y forma de emisión. El reporte de asistencia solo existe para `EN_VIVO` e `HIBRIDO` y respeta las exclusiones de sesiones canceladas y la matrícula tardía. |
-| RN-109 | El dashboard muestra gráficos simples de evolución de matrículas, matrículas por curso, forma de ingreso y pagos confirmados. No muestra pendientes, alertas ni tareas y se implementa después de los procesos principales y los reportes. |
+| RN-109 | El dashboard muestra exactamente cuatro gráficos simples: evolución de matrículas, matrículas por curso, forma de ingreso y pagos confirmados. No muestra tarjetas de indicadores, pendientes, alertas ni tareas y se implementa después de los procesos principales y los reportes. |
 ---
 
 ## 18. Alcance del proyecto
@@ -2191,7 +2308,10 @@ y `fecha_finalizacion`.* (§8, §9, §13 y §14)
 PENDIENTE, APROBADO, RECHAZADO, ERROR o EXPIRADO, separado del estado de acceso de la matrícula.
 Culqi procesa el pago y determina el resultado; ESEJUR no cobra, autoriza ni rechaza. Solo el
 resultado APROBADO activa el acceso y una confirmación repetida no duplica el pago ni la
-matrícula. ESEJUR no impone un plazo propio a PENDIENTE. Una matrícula administrativa genera
+matrícula. Un APROBADO tardío iniciado válidamente se respeta aunque después cierre la matrícula,
+venza el cierre o se complete el cupo; si el curso o esa matrícula fueron CANCELADOS, el pago se
+registra una sola vez, no concede acceso y pasa a atención externa. ESEJUR no impone un plazo
+propio a PENDIENTE. Una matrícula administrativa genera
 REGISTRADO_MANUAL cuando hubo dinero o EXONERADO cuando no lo hubo; ambas activan la matrícula.*
 (§9)
 
@@ -2205,13 +2325,16 @@ no duplica el acceso.* (§9)
 cupo. Antes de iniciar el pago se comprueba disponibilidad y el cupo se ocupa únicamente cuando
 Culqi informa APROBADO y la matrícula queda ACTIVA. RECHAZADO, ERROR y EXPIRADO no ocupan nada.
 Las matrículas gratuitas y administrativas ocupan al activarse. Si dos aprobaciones simultáneas
-generan sobrecupo, ambas reciben acceso y se avisa a la administración, porque ninguna persona
+o una aprobación tardía iniciada válidamente generan sobrecupo, reciben acceso y se avisa a la administración, porque ninguna persona
 cobrada queda sin curso; es la única excepción a la capacidad de venta.* (§9)
 
 **19.17 — Finalización flexible de lecciones** ✅ *Resuelto: no existe un material principal;
 los materiales se ordenan arrastrando y soltando. Si hay videos detectables, todos deben alcanzar
-el umbral configurado y el check refleja el resultado. Sin video detectable, el alumno puede
-completar la lección desde el check de la lista o pulsando "Siguiente" dentro de ella.* (§7 y §11)
+el umbral configurado y el check automático es de solo lectura. Sin video detectable, el alumno
+puede completar la lección desde el check pendiente de la lista o pulsando "Siguiente" —y
+"Completar lección" en la última— dentro de ella. Una lección completada no puede desmarcarse. En
+una lección EN_VIVO, la asistencia válida completa al terminar la sesión; el ausente espera la
+grabación y la completa mediante progreso detectable o acción manual según su fuente.* (§7 y §11)
 
 **19.18 — Exámenes interactivos y calificación** ✅ *Resuelto: selección única, selección
 múltiple y verdadero/falso se califican automáticamente al enviar; respuesta abierta requiere
@@ -2219,7 +2342,9 @@ revisión del administrador. El alumno navega entre preguntas, conserva sus resp
 pendientes antes de enviar. La nota se calcula por puntaje en escala de 0 a 20. En VIRTUAL la
 habilitación es automática por avance; `EN_VIVO` e `HIBRIDO` pueden usar `fecha_habilitacion`. Una
 respuesta abierta tiene 3 días calendario de revisión por defecto, muestra su fecha máxima y
-bloquea la finalización y el certificado hasta quedar CALIFICADO.* (§12 y §13)
+bloquea la finalización y el certificado hasta quedar CALIFICADO. Las notas se redondean de forma
+convencional a dos decimales antes de comparar umbrales. Los exámenes PRACTICA siempre tienen
+intentos ilimitados; solo los CALIFICADO configuran límite.* (§12 y §13)
 
 **19.19 — Exámenes que controlan el avance** ✅ *Resuelto: cada examen calificado de módulo
 permite decidir si bloquea el siguiente hasta ser aprobado. La opción se activa inicialmente con
@@ -2234,8 +2359,13 @@ posteriores a su matrícula y las grabaciones anteriores solo aportan progreso. 
 futuras no hay matrícula automática cuando la asistencia es obligatoria. VIRTUAL no usa fecha de
 cierre de matrícula ni fecha de fin.* (§9, §11 y §14)
 
+Si no existe ninguna sesión elegible, la asistencia se presenta como "No aplica": no se divide
+entre cero y, cuando la asistencia es requisito, no se considera cumplida ni permite la emisión
+automática; queda disponible la excepción manual motivada.
+
 **19.21 — Nota definitiva y fecha del certificado** ✅ *Resuelto: con `dias_espera` mayor que
-cero se calcula y muestra `fecha_emision_programada`; hasta ese momento el alumno puede mejorar su
+cero se calcula y muestra `fecha_emision_programada`; `dias_espera` se cuenta en días calendario
+y la emisión se ejecuta a las 00:00 de `America/Lima`; hasta ese momento el alumno puede mejorar su
 nota y el certificado se genera automáticamente al llegar la fecha. Con cero días, se muestra una
 confirmación con promedio y nivel antes de generar; el alumno puede emitir o seguir mejorando. Al
 emitirse, la nota y el nivel quedan congelados y se cierran los nuevos intentos de exámenes
@@ -2261,6 +2391,12 @@ y cambiar la contraseña. Recibe por correo las instrucciones y el enlace de ver
 cuenta existente conserva su clave. Toda matrícula administrativa
 genera REGISTRADO_MANUAL o EXONERADO según exista cobro.* (§9 y §10)
 
+La verificación dura 24 horas y su reenvío invalida el enlace anterior; la recuperación dura 60
+minutos y usarla o solicitar otra invalida la anterior. La contraseña exige al menos ocho
+caracteres, mayúscula, minúscula, número y símbolo. Un administrador habilitado puede crear a otro,
+queda registrado como otorgante, no puede deshabilitarse a sí mismo ni dejar al sistema sin un
+administrador habilitado.
+
 **19.25 — Libro de Reclamaciones** ✅ *Resuelto: se replica el formulario público de Udeapolis,
 con datos prellenados cuando existe sesión, QUEJA o RECLAMO, imágenes y declaración jurada. Al
 enviar se genera número, constancia, PENDIENTE_RESPUESTA y fecha límite de 15 días hábiles. La
@@ -2283,7 +2419,9 @@ bloquea.* (§5 y §8)
 
 **19.28 — Ventana de asistencia automática** ✅ *Resuelto: cada sesión exige hora de inicio y
 hora de fin. Abrir su enlace desde la plataforma cuenta una sola vez únicamente dentro de esa
-ventana; antes o después no registra asistencia. La corrección manual cubre excepciones y se
+ventana. La tarjeta de sesión permanece visible, pero el enlace real no se expone y el botón está
+deshabilitado fuera de la ventana; al terminar muestra la grabación o GRABACION_PENDIENTE. La
+corrección manual cubre excepciones y se
 mantiene aceptado que abrir el enlace no demuestra permanencia en Zoom.* (§7, §9 y §11)
 
 **19.29 — Habilitación de cuentas creadas por administración** ✅ *Resuelto: existen tres caminos
@@ -2296,8 +2434,10 @@ también exige aceptar los documentos antes de matricular.* (§9, §10 y §16)
 **19.30 — Cancelación completa de un curso** ✅ *Resuelto: CANCELADO se diferencia del cierre
 normal. Detiene matrículas y pagos nuevos, cancela sesiones futuras, avisa a los alumnos y conserva
 todo el historial. El aviso es único por curso y reemplaza los avisos individuales de sus sesiones.
-Quien ya cumplió mantiene su finalización; quien no cumplió no certifica
-automáticamente. Si Culqi comunica APROBADO después de la cancelación, se registra el pago y la
+Quien ya finalizó mantiene la confirmación y emisión programada incluso si después su matrícula
+vence o se cancela. Quien no finalizó conserva como consulta el contenido ya liberado, pero no
+puede crear nuevos checks, progreso, intentos, asistencia, finalización ni certificado. Si Culqi
+comunica APROBADO después de la cancelación, se registra el pago y la
 matrícula permanece CANCELADA para atención externa. La Escuela resuelve los pagos fuera del
 sistema y registra la atención de cada matrícula.* (§8, §9 y §16)
 
@@ -2317,7 +2457,8 @@ definida.* (§14)
 
 **19.34 — Reportes y dashboard administrativo** ✅ *Resuelto: administración dispone de cinco
 reportes exportables a Excel: matrículas, pagos registrados, seguimiento académico, certificados
-y asistencia. El dashboard es únicamente informativo y utiliza cuatro gráficos simples de
+y asistencia. El rango temporal tiene un significado definido por reporte. El dashboard es
+únicamente informativo y utiliza exactamente cuatro gráficos simples de
 matrículas y pagos; no muestra pendientes, alertas ni tareas. Se implementa al final, después de
 los procesos principales y los reportes.* (§15 y §18)
 

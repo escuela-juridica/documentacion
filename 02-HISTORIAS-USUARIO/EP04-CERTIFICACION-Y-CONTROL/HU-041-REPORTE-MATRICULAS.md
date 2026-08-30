@@ -24,7 +24,7 @@ forma de ingreso, situación académica y estado del certificado.
   autoservicio.
 - Situación académica: no iniciado, en curso o finalizado; finalizado usa `fecha_finalizacion` y no
   se confunde con estado de acceso.
-- Filtros: rango de fechas, curso, modalidad, estado y alumno.
+- Filtros: rango de fechas aplicado a `fecha_matricula`, curso, modalidad, estado y alumno.
 - Exportación Excel conserva filtros y columnas.
 - Una matrícula/confirmación repetida aparece y cuenta una sola vez.
 

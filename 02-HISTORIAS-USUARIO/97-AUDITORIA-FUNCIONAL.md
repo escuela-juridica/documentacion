@@ -1,6 +1,6 @@
 # Auditoría funcional de las historias de usuario
 
-Fecha de revisión: 24 de agosto de 2026.
+Fecha de revisión final: 30 de agosto de 2026.
 
 ## Objetivo de la auditoría
 
@@ -66,10 +66,45 @@ Cada historia fue revisada para confirmar:
 - Se explicitó que los correos no utilizan seguimiento avanzado de apertura o entrega y que un fallo
   no modifica la operación funcional ya confirmada, salvo el caso especial de respuesta a una
   reclamación, que permanece pendiente hasta enviarse correctamente.
+- Se cerró la finalización de lecciones EN_VIVO: asistencia al terminar, grabación para ausentes,
+  exclusión de sesión cancelada y ausencia de avance mientras la grabación está pendiente.
+- Se hizo irreversible el check completado, de solo lectura cuando es automático, y se definió
+  “Completar lección” para el último elemento.
+- Se definieron la ventana real del enlace en vivo, la asistencia “No aplica” con cero sesiones y
+  la zona horaria `America/Lima` como convención transversal.
+- Se cerraron aprobaciones Culqi tardías tras cierre, fecha o cupo, y su tratamiento sin acceso si
+  el curso o la matrícula fueron cancelados.
+- Se estableció que PRACTICA siempre tiene intentos ilimitados y que desactivar exámenes impide
+  conservar evaluaciones CALIFICADO.
+- Se detallaron redondeo de notas, plazo de revisión no modificable tras iniciar, puntaje abierto
+  inclusivo y observación opcional visible.
+- Se eliminó la selección manual del nivel del certificado: una emisión excepcional solo es
+  Refrendada si la nota definitiva alcanza ese umbral; cualquier otro caso es Normal.
+- Se definieron días calendario y hora de emisión, lugar institucional, momento del correo de
+  confirmación y continuidad de una certificación ya finalizada tras vencimiento o cancelación.
+- Se aclaró que una corrección conserva el estado VIGENTE y no crea un estado CORREGIDO.
+- Se definieron las fechas que gobiernan cada reporte y se limitó el dashboard exactamente a cuatro
+  gráficos sin tarjetas de indicadores ni pendientes.
+- Se completaron política de contraseña, vigencia/invalidez de enlaces, creación de administradores,
+  otorgante del rol y protección del último administrador habilitado.
+- Se añadió la especificación de wireframes PF-001 a PF-040, sus estados, modales, responsive,
+  navegación administrativa y paleta contextual 60/25/10/5.
+
+## Comprobaciones automáticas finales
+
+- Se encontraron exactamente 46 archivos `HU-001` a `HU-046`, sin saltos ni duplicados.
+- Todas las historias contienen información general, formulación Como/Quiero/Para, criterios de
+  aceptación, dependencia, orientación frontend/backend/integración y demostración.
+- Ninguna historia recomienda más de dos personas.
+- No existen referencias RN, decisiones numeradas ni instrucciones de consultar `01-NEGOCIO.md`
+  dentro de las historias.
+- El inventario conserva exactamente 109 reglas numeradas y 34 decisiones funcionales.
+- Las búsquedas de residuos no encontraron reintento de pago PENDIENTE, límite configurable de
+  PRACTICA, selección manual de nivel, dashboard de tres gráficos ni CORREGIDO como estado.
 
 ## Conclusión
 
-No queda una inconsistencia funcional conocida ni una regla del negocio que requiera consultar otra
-especificación para comprender una historia. Las decisiones de base de datos, API, infraestructura y
-despliegue permanecen fuera de estos archivos porque no cambian el comportamiento funcional que el
-equipo debe construir y demostrar.
+Con el alcance actualmente acordado no queda una inconsistencia funcional conocida ni una regla
+aplicable que obligue a consultar el documento de negocio para comprender una historia. Las
+decisiones de base de datos, API, infraestructura y despliegue permanecen fuera de las historias;
+el documento técnico solo traduce los resultados funcionales sin alterarlos.

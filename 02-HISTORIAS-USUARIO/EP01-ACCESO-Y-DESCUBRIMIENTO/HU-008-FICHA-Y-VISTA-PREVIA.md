@@ -34,6 +34,9 @@
   límite de matrículas ACTIVA. Si la capacidad está vacía, no presenta un límite artificial.
 - Lecciones marcadas como vista previa, públicas sin registro.
 - Badge “En vivo” según modalidad.
+- El botón comercial se muestra como “Acceder gratis” solo para un curso gratuito disponible y como
+  “Pagar ahora” para un curso pagado disponible.
+- Fechas, horas, vigencias promocionales y estados se interpretan y muestran en `America/Lima`.
 
 ## Flujo principal
 
@@ -67,6 +70,10 @@
 - **Dado** una lección de vista previa, **cuando** la abre sin sesión, **entonces** accede al
   contenido real permitido.
 - **Dado** material no público, **cuando** intenta abrir su enlace, **entonces** no obtiene acceso.
+- **Dado** un curso gratuito o pagado disponible, **cuando** consulta la ficha, **entonces** ve
+  respectivamente “Acceder gratis” o “Pagar ahora”, sin intercambiar ambos caminos.
+- **Dado** una fecha u hora del curso, **cuando** se presenta en ficha o calendario, **entonces** se
+  muestra en `America/Lima`.
 
 ## Dependencia interna
 

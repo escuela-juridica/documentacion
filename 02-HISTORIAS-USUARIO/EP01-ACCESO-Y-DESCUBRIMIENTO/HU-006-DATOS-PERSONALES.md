@@ -23,6 +23,9 @@
 - Posibilidad de confirmar antes o después de completar el curso.
 - Una cuenta creada con Google puede definir una contraseña propia desde el perfil sin eliminar el
   acceso con Google ni crear otra cuenta.
+- La nueva contraseña debe tener al menos ocho caracteres, una mayúscula, una minúscula, un número
+  y un carácter especial.
+- La fecha y hora de la confirmación de identidad se registran y muestran en `America/Lima`.
 
 No permite cambiar silenciosamente los datos congelados de un certificado ya emitido. Después de
 la emisión, solo administración puede corregir nombres mediante una acción con motivo, historial y
@@ -48,6 +51,8 @@ conservación del mismo código; editar el perfil no modifica el documento.
   recalcula ni cambia automáticamente.
 - **Dado** el correo de la cuenta, **cuando** edita el perfil, **entonces** puede consultarlo pero no
   sustituirlo por otro correo desde esta pantalla.
+- **Dado** una cuenta de Google, **cuando** intenta definir una contraseña que no cumple todas las
+  condiciones mínimas, **entonces** no se guarda y su acceso con Google permanece intacto.
 
 ## Privacidad
 

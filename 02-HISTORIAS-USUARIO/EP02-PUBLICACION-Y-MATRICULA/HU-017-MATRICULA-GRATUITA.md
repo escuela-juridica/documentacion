@@ -20,7 +20,8 @@
 - Validación de cuenta, estado del curso, cierre de matrícula, cupo y matrícula previa.
 - Activación inmediata de matrícula y ocupación de cupo al activarla.
 - Acceso inmediato o desde `fecha_inicio`.
-- Vigencia en días o acceso permanente.
+- Vigencia en días o acceso permanente. Con N días, la base es la fecha posterior entre activación
+  e inicio del curso, cuenta como día 1 y vence a las 23:59:59 de `America/Lima` del día N.
 - Correo de matrícula confirmada.
 - Curso gratuito certifica sin segundo cobro.
 - La matrícula gratuita por autoservicio no crea un pago APROBADO, REGISTRADO_MANUAL ni EXONERADO;

@@ -12,6 +12,20 @@ dependencias explícitas y entregables funcionales demostrables durante un ciclo
 Ninguna historia se considera terminada si solo existe su frontend o su backend: debe quedar
 integrada y cumplir sus criterios de aceptación.
 
+## Convenciones funcionales transversales
+
+- Todas las fechas, horas, ventanas, vencimientos, cuentas regresivas y tareas programadas se
+  interpretan en `America/Lima`, aunque el servidor o el dispositivo usen otra zona.
+- Los porcentajes se muestran con su numerador, denominador y meta cuando ayude a comprenderlos;
+  nunca se divide entre cero.
+- Las notas se redondean convencionalmente a dos decimales antes de comparar aprobación, mejor
+  intento, promedio o nivel de certificado.
+- Una acción repetida o una notificación externa duplicada no puede duplicar cuenta, matrícula,
+  pago, cupo, progreso, intento, asistencia ni certificado.
+- Los estados se explican con texto e icono; el color por sí solo no comunica una decisión.
+- Estas convenciones forman parte de los criterios de todas las historias que manejen esos datos,
+  aunque no se repitan literalmente en cada sección.
+
 ## Actores
 
 | Actor | Responsabilidad |

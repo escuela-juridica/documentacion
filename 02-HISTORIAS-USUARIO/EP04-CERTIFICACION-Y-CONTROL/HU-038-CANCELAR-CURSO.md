@@ -23,11 +23,12 @@
   progreso y secuencia.
 - No borra curso, contenido, pagos, matrículas, progreso, intentos, asistencia o certificados.
 - Los alumnos que ya tenían acceso conservan la consulta del contenido que estuvo disponible antes
-  de cancelar, excepto los enlaces de reuniones futuras. La cancelación no habilita contenido nuevo.
+  de cancelar, excepto los enlaces de reuniones futuras. Queda en modo lectura: no permite nuevos
+  checks, progreso, intentos, asistencia ni finalización. La cancelación no habilita contenido nuevo.
 - Envía **un solo correo por curso** a cada afectado, con motivo y canal de atención; reemplaza
   correos individuales de sesiones.
-- Alumno que ya cumplió conserva `fecha_finalizacion` y su certificado existente o pendiente según
-  condiciones previas.
+- Alumno que ya cumplió conserva `fecha_finalizacion`, confirmación de datos y certificado existente
+  o emisión programada según condiciones previas, aunque después su matrícula venza o se cancele.
 - Alumno que no cumplió no recibe certificado automático por la cancelación.
 - Un certificado ya emitido no cambia ni se anula automáticamente. Quien no cumplió solo puede
   recibir una emisión manual excepcional con motivo; cancelar no crea finalización por sí mismo.

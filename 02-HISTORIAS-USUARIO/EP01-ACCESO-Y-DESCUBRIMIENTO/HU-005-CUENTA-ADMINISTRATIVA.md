@@ -23,6 +23,16 @@
 - Aviso permanente en el panel hasta verificar correo, aceptar documentos y cambiar contraseña.
 - Bloqueo de cursos, exámenes y certificados mientras exista una condición pendiente.
 - Una cuenta existente conserva su contraseña y no se duplica.
+- La contraseña propia que reemplaza a la temporal debe tener al menos ocho caracteres, una letra
+  mayúscula, una letra minúscula, un número y un carácter especial.
+- El enlace de verificación dura 24 horas. Reenviarlo invalida el anterior y no crea otra cuenta.
+- Cualquier administrador habilitado puede crear otra cuenta con rol Administrador. El nuevo
+  administrador queda restringido al panel y a completar su habilitación hasta verificar correo,
+  aceptar documentos y reemplazar la contraseña temporal.
+- Cada creación con rol Administrador registra quién concedió el perfil, además de fecha y hora.
+- Un administrador no puede desactivarse a sí mismo y una operación nunca puede dejar al sistema
+  sin al menos un administrador habilitado y activo.
+- Fechas y horas de creación, verificación y habilitación se registran en `America/Lima`.
 - La matrícula administrativa se realiza en HU-019, no en esta historia.
 
 ## Flujo principal
@@ -41,6 +51,9 @@
 - Teléfono vacío: válido.
 - No se permite omitir ninguna de las tres condiciones de habilitación.
 - El fallo de correo no marca el correo como verificado.
+- Un enlace de verificación vencido, usado o sustituido por un reenvío no habilita la cuenta.
+- La desactivación propia o la desactivación del último administrador activo se rechaza sin
+  modificar permisos.
 
 ## Criterios de aceptación
 
@@ -52,6 +65,15 @@
   cuenta queda habilitada.
 - **Dado** un correo existente, **cuando** administración lo selecciona, **entonces** no cambia su
   contraseña ni crea duplicados.
+- **Dado** un administrador habilitado, **cuando** crea otro administrador, **entonces** la nueva
+  cuenta queda CAMBIO_PENDIENTE y no recibe capacidades administrativas completas hasta terminar
+  verificación, aceptación y cambio de contraseña, y queda identificado quién le concedió el rol.
+- **Dado** el último administrador activo o el propio administrador autenticado, **cuando** intenta
+  desactivarlo, **entonces** ESEJUR impide la operación y conserva al menos un administrador activo.
+- **Dado** un enlace de verificación reenviado, **cuando** usa el anterior, **entonces** se rechaza;
+  el enlace más reciente puede utilizarse una sola vez dentro de 24 horas.
+- **Dado** una contraseña propia que incumple alguna condición mínima, **cuando** intenta reemplazar
+  la temporal, **entonces** CAMBIO_PENDIENTE se conserva y se indican los requisitos faltantes.
 
 ## Notificación
 
@@ -68,7 +90,8 @@
 ## Orientación de trabajo
 
 - **Frontend:** creación administrativa, aviso persistente y pasos de habilitación.
-- **Backend:** búsqueda por correo, contraseña temporal, restricciones y transición de estado.
+- **Backend:** búsqueda por correo, contraseña temporal, restricciones, transición de estado y
+  protección para conservar al menos un administrador activo.
 - **Integración:** crear → recibir instrucciones → entrar restringido → completar → entrar habilitado.
 
 ## Demostración esperada

@@ -23,7 +23,8 @@ y motivo cuando corresponda.
 - Total de pagos confirmados suma APROBADO y REGISTRADO_MANUAL con monto mayor que cero.
 - Excluye del total PENDIENTE, RECHAZADO, ERROR, EXPIRADO y EXONERADO.
 - Confirmación repetida de un mismo pago cuenta una sola vez.
-- Filtros: rango, curso, alumno, resultado, medio y origen.
+- Filtros: rango aplicado a la fecha del resultado Culqi o del registro administrativo, curso,
+  alumno, resultado, medio y origen.
 - Exportación Excel respeta filtros.
 - No calcula impuestos, comisiones, devoluciones ni comprobantes tributarios.
 

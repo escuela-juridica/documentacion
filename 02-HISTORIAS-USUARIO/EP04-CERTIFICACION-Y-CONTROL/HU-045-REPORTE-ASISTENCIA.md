@@ -25,7 +25,10 @@
 - Grabación no cuenta asistencia.
 - Porcentaje acumulado = sesiones asistidas / sesiones elegibles × 100. Son elegibles solo las
   sesiones no canceladas posteriores a la matrícula del alumno.
-- Filtros: rango, curso, sesión, alumno, modalidad, asistencia, origen y cumplimiento.
+- Si el alumno no tiene sesiones elegibles, el porcentaje es “No aplica”; no se divide entre cero y,
+  si asistencia era requisito, no se considera cumplida.
+- Filtros: rango aplicado a la fecha de la sesión, curso, sesión, alumno, modalidad, asistencia,
+  origen y cumplimiento.
 - Exportación Excel conserva filtros.
 
 ## Criterios de aceptación
@@ -34,6 +37,8 @@
 - **Dado** sesión CANCELADA, **cuando** calcula, **entonces** no entra al denominador.
 - **Dado** matrícula tardía, **cuando** calcula acumulado, **entonces** excluye sesiones anteriores.
 - **Dado** corrección, **cuando** reporta, **entonces** distingue origen administrativo.
+- **Dado** cero sesiones elegibles, **cuando** reporta, **entonces** muestra “No aplica” sin valor
+  numérico engañoso.
 
 ## Dependencia interna
 

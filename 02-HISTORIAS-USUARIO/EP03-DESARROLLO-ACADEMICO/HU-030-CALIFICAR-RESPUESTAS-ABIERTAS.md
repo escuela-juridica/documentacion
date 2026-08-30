@@ -20,7 +20,8 @@
 - La bandeja permite identificar pendientes, próximos a vencer y vencidos, ordenados por la fecha
   límite más cercana.
 - Respuesta completa y puntaje máximo por pregunta.
-- Puntaje administrativo válido y finalización de revisión.
+- Puntaje administrativo inclusivo entre 0 y el máximo de cada pregunta, y observación opcional
+  visible para el alumno al publicar la revisión.
 - Recalcular nota del intento y mejor resultado; después CALIFICADO.
 - Liberar nuevo intento, avance/finalización y certificación según reglas.
 - Enviar correo “Tu examen fue calificado”.
@@ -39,6 +40,7 @@
 ## Excepciones
 
 - Puntaje fuera del máximo o preguntas pendientes de revisar: no finaliza.
+- Puntaje menor que cero: no finaliza. La observación puede quedar vacía.
 - Intento ya calificado: evita una segunda publicación no controlada.
 - Fecha vencida: mantiene obligación y señala demora, sin modificar la respuesta.
 
@@ -46,6 +48,8 @@
 
 - **Dado** puntajes completos, **cuando** confirma, **entonces** queda CALIFICADO, publica nota y
   reevalúa finalización.
+- **Dado** puntaje 0 o exactamente igual al máximo, **cuando** confirma, **entonces** ambos valores
+  son válidos; si agregó observación, el alumno puede verla junto al resultado.
 - **Dado** revisión incompleta, **cuando** intenta finalizar, **entonces** se impide.
 - **Dado** plazo vencido, **cuando** consulta bandeja, **entonces** aparece vencido hasta calificarse.
 - **Dado** varios pendientes, **cuando** abre la bandeja, **entonces** puede distinguir próximos y

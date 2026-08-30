@@ -23,8 +23,10 @@
 - `HIBRIDO`: las tres activas por defecto.
 - Todas configurables antes de iniciar; asistencia solo EN_VIVO/HIBRIDO.
 - Secuencia obligatoria activa por defecto, configurable por curso.
-- Días de espera del certificado, cero por defecto.
-- Si no exige exámenes, no hay nota final ni nivel Refrendado.
+- Días de espera del certificado, cero por defecto, contados en días calendario; una emisión
+  programada se ejecuta a las 00:00 de `America/Lima` de la fecha calculada.
+- Si no exige exámenes, no hay nota final ni nivel Refrendado. No puede guardar ni publicar con un
+  examen CALIFICADO restante: antes debe convertirlo a PRACTICA o retirarlo.
 - Si desactiva las tres condiciones, emisión únicamente manual con motivo.
 - El progreso se calcula y muestra siempre, aunque no sea requisito. La asistencia se registra en
   EN_VIVO/HIBRIDO aunque esté desactivada como requisito; en VIRTUAL no se ofrece ni se calcula.
@@ -47,6 +49,8 @@ debe ser estrictamente mayor. Los días de espera no pueden ser negativos.
 - **Dado** VIRTUAL, **cuando** abre reglas, **entonces** asistencia no aparece.
 - **Dado** un curso sin exámenes obligatorios, **cuando** guarda, **entonces** no existe nota final
   para certificar ni nivel Refrendado.
+- **Dado** `requiere_examenes` desactivado y un examen CALIFICADO, **cuando** intenta guardar,
+  **entonces** se bloquea y se indica convertirlo a PRACTICA o retirarlo.
 - **Dado** las tres condiciones desactivadas, **cuando** guarda, **entonces** se informa que solo
   habrá emisión manual.
 - **Dado** un curso iniciado, **cuando** intenta aumentar requisitos, **entonces** se impide.

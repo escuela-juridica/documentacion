@@ -19,13 +19,19 @@
 1. La persona solicita recuperación e ingresa su correo.
 2. ESEJUR muestra una respuesta neutral.
 3. Si existe una cuenta aplicable, envía un enlace de recuperación.
-4. La persona abre un enlace válido y define una contraseña propia.
+4. La persona abre un enlace válido y define una contraseña propia de al menos ocho caracteres,
+   con mayúscula, minúscula, número y carácter especial.
 5. El enlace utilizado deja de servir y puede iniciar sesión con la nueva contraseña.
+
+El enlace vence 60 minutos después de emitirse. Una nueva solicitud invalida todos los enlaces de
+recuperación anteriores de esa cuenta; usar correctamente uno también invalida cualquier otro que
+continuara pendiente. Emisión y vencimiento se interpretan en `America/Lima`.
 
 ## Excepciones
 
 - La respuesta pública no confirma si el correo existe.
 - Un enlace inválido, vencido o ya usado no cambia la contraseña.
+- Una nueva solicitud invalida el enlace anterior aunque sus 60 minutos todavía no hayan terminado.
 - Recuperar una cuenta existente no crea otra ni altera matrículas.
 - Una cuenta vinculada exclusivamente a Google puede ser orientada a ese ingreso según su estado.
 
@@ -36,6 +42,12 @@
 - **Dado** un correo inexistente, **cuando** solicita recuperación, **entonces** recibe el mismo
   mensaje público sin envío ni revelación.
 - **Dado** un enlace inválido, **cuando** intenta usarlo, **entonces** no cambia ninguna credencial.
+- **Dado** un enlace emitido hace más de 60 minutos, **cuando** intenta usarlo, **entonces** se
+  rechaza y puede solicitar uno nuevo.
+- **Dado** dos solicitudes de recuperación, **cuando** usa el enlace de la primera, **entonces** se
+  rechaza porque solo el enlace más reciente puede continuar vigente.
+- **Dado** una nueva contraseña sin alguna condición mínima, **cuando** intenta confirmarla,
+  **entonces** no cambia la credencial y se explica qué requisito falta.
 
 ## Notificación
 

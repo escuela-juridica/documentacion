@@ -23,6 +23,8 @@
 - Precio neto en soles: gratuito o pagado; regular, promocional y vigencia opcional de promoción.
 - Capacidad de venta opcional; vacío significa sin límite.
 - Vigencia de acceso en días opcional; vacío significa permanente.
+- Si hay vigencia, su día 1 es la fecha posterior entre activación de matrícula e inicio del curso;
+  vence a las 23:59:59 de `America/Lima` del día N. Nunca consume vigencia antes de poder acceder.
 - `VIRTUAL`: inicio opcional y sin fecha de fin ni cierre de matrícula.
 - `EN_VIVO`/`HIBRIDO`: inicio y fin obligatorios y cierre de matrícula configurable.
 - Si asistencia es obligatoria en `EN_VIVO` o `HIBRIDO`, el cierre de matrícula propone inicialmente
@@ -65,6 +67,8 @@ ya compartidos dejarían de conducir a la ficha anterior.
   vigente hasta edición administrativa.
 - **Dado** capacidad o vigencia vacías, **cuando** guarda, **entonces** se interpretan sin límite y
   permanente respectivamente.
+- **Dado** vigencia N, **cuando** se activa antes del inicio, **entonces** el inicio del curso es el
+  día 1; si se activa después, la activación es el día 1, y en ambos casos vence al terminar el día N.
 - **Dado** asistencia obligatoria en EN_VIVO/HIBRIDO, **cuando** crea el curso, **entonces** el cierre
   se propone igual al inicio y puede modificarse únicamente dentro del periodo del curso.
 

@@ -35,6 +35,9 @@ esta épica.
 - **Debe mostrar mediante secciones:** datos generales, modalidad y fechas, precio y promoción,
   módulos y lecciones, materiales, sesiones, exámenes, requisitos de certificación y validación de
   publicación.
+- **Editor de exámenes:** tipo CALIFICADO/PRACTICA, cuatro tipos de pregunta, opciones y respuestas,
+  puntajes, tiempo, barajado, publicación de respuestas, intentos —solo CALIFICADO—,
+  `dias_revision` y bloqueo de secuencia. PRACTICA siempre se muestra ilimitado.
 - **Estados importantes:** borrador incompleto, error por modalidad, validaciones pendientes,
   publicación correcta y restricciones posteriores al inicio.
 - **Acción para la review:** configurar el curso completo e intentar publicarlo antes y después de
@@ -65,7 +68,8 @@ esta épica.
 - **Debe mostrar:** curso, importe, moneda, promoción vigente y medios habilitados por Culqi.
 - **Estados importantes:** procesando, pendiente, rechazado, error recuperable y cupo agotado antes
   de la aprobación.
-- **Acción para la review:** ejecutar un rechazo y luego reintentar el pago.
+- **Acción para la review:** ejecutar un rechazo y luego reintentar; mostrar que PENDIENTE espera a
+  Culqi y no ofrece un segundo intento.
 
 ### PF-018 — Resultado del pago y comprobante informativo
 
@@ -74,7 +78,7 @@ esta épica.
 - **Debe mostrar:** resultado, orden, importe, moneda, medio, fecha y hora, alumno, curso y últimos
   dígitos de tarjeta cuando correspondan.
 - **Estados importantes:** aprobado con acceso, rechazado o pendiente sin acceso y confirmación
-  repetida sin duplicidad.
+  repetida sin duplicidad; APROBADO tardío tras cierre/cupo y APROBADO sin acceso tras cancelación.
 - **Acción para la review:** mostrar un pago aprobado y su matrícula única.
 
 ### PF-019 — Mis cursos

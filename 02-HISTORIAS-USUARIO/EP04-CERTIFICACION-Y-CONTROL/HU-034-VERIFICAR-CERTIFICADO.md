@@ -20,7 +20,8 @@
 - VIGENTE muestra: código, nombre completo, curso, horas, nivel, entidad cuando aplica, fecha de
   emisión y “Certificado vigente”.
 - Nunca muestra DNI, correo, teléfono, nota, firmas, PDF ni otros datos personales.
-- CORREGIDO mantiene código y muestra únicamente datos vigentes corregidos.
+- Una corrección no crea el estado CORREGIDO: el certificado permanece VIGENTE, mantiene el código
+  y la consulta muestra únicamente los datos de su versión vigente.
 - ANULADO muestra nombre, curso, código, emisión, fecha de anulación y “Certificado anulado — no
   válido”; motivo completo permanece privado.
 - Código inexistente responde “Certificado no encontrado” sin revelar personas.
@@ -38,8 +39,8 @@
 
 ## Orientación de trabajo
 
-- **Frontend:** lectura por QR/código y cuatro resultados públicos: vigente, corregido, anulado e
-  inexistente.
+- **Frontend:** lectura por QR/código y tres estados de resultado: vigente —incluida su versión
+  corregida—, anulado e inexistente.
 - **Backend:** búsqueda mínima, versión vigente y exclusión estricta de datos privados.
 - **Integración:** el mismo código debe reflejar correcciones y anulaciones sin entregar el PDF.
 

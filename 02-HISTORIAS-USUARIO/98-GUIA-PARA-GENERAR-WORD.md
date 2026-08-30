@@ -18,7 +18,9 @@ completo.
 6. Épica 3: descripción, entregables de meses 3 y 4, dependencias, diagrama e historias HU-022 a
    HU-031.
 7. Épica 4: descripción, entregable, dependencias, diagrama e historias HU-032 a HU-046.
-8. Matriz de cobertura de 109 reglas, 34 decisiones y 11 correos.
+
+La matriz de cobertura y la auditoría son instrumentos internos de control y no se incorporan al
+Word, salvo que el usuario las solicite expresamente como anexos.
 
 ## Tratamiento de cada historia
 

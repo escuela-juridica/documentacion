@@ -18,6 +18,8 @@
 
 - Disponible incluso si el curso desactivó las tres condiciones o existe excepción académica/
   temporal.
+- No está disponible mientras exista una respuesta abierta de examen CALIFICADO en
+  PENDIENTE_REVISION; primero debe publicarse la calificación definitiva.
 - Exige motivo y registra administrador, fecha y acción.
 - Nombres, apellido paterno, apellido materno y DNI confirmados siguen obligatorios.
 - Solo un certificado por alumno/curso.
@@ -29,10 +31,11 @@
 - El alumno solo puede consultar y descargar su propio certificado desde una sesión autenticada; el
   correo contiene un enlace privado y nunca adjunta el PDF.
 - El certificado guarda una copia de los datos impresos y no se recalcula después de emitirse.
-- Congela nota/nivel existentes cuando aplican y cierra nuevos intentos calificados.
-- Si existen exámenes obligatorios, el nivel se deriva de la nota final y de los umbrales del curso;
-  administración no elige libremente Normal o Refrendado. Sin exámenes obligatorios, el nivel es
-  Normal y no existe nota final.
+- Si ya existe nota definitiva, la congela; si aún no existe, emite sin nota. Cierra nuevos intentos
+  calificados.
+- Si la nota definitiva alcanza el umbral Refrendado, el nivel es Refrendado. En cualquier otra
+  excepción manual el nivel es Normal, incluso si la nota es menor que la mínima o no existe.
+  Administración nunca selecciona el nivel.
 - No borra incumplimientos ni altera intentos; deja evidencia de excepción.
 
 ## Flujo principal
@@ -54,7 +57,11 @@
   a cualquier certificado: solo el titular descarga, el QR verifica, los datos quedan congelados y
   los nuevos intentos calificados quedan cerrados.
 - **Dado** una nota existente, **cuando** emite manualmente, **entonces** el nivel se calcula con los
-  umbrales configurados y no puede ser seleccionado para favorecer el caso.
+  umbrales configurados: Refrendado solo si alcanza ese umbral y Normal en cualquier otro caso.
+- **Dado** una respuesta abierta CALIFICADA pendiente de revisión, **cuando** intenta emitir,
+  **entonces** se bloquea hasta obtener la nota definitiva.
+- **Dado** que no existe nota definitiva, **cuando** emite la excepción válida, **entonces** genera
+  nivel Normal sin inventar ni mostrar una nota.
 
 ## Notificación
 

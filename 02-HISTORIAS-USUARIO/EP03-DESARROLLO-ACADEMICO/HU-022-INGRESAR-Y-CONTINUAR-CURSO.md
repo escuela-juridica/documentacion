@@ -22,12 +22,14 @@
 - Apertura de la última lección utilizada o siguiente acción aplicable.
 - Porcentaje general visible.
 - Lecciones completadas permanecen accesibles; reabrir no borra avance.
-- Sesiones en vivo muestran fecha; el enlace se habilita el día programado, solo registra
-  asistencia entre hora de inicio y fin, y después muestra grabación o “grabación pendiente”.
+- La tarjeta de sesión en vivo permanece visible. Antes del inicio muestra fecha y hora con el botón
+  deshabilitado; el enlace real solo se expone y habilita entre inicio y fin en `America/Lima`.
+  Después muestra la grabación o “grabación pendiente”.
 - Un alumno matriculado después del inicio puede revisar las grabaciones ya disponibles; las
   sesiones anteriores a su matrícula no registran asistencia ni entran en su porcentaje.
 - Si el curso completo fue CANCELADO, quien ya tenía acceso conserva la consulta del contenido que
-  estuvo disponible antes de la cancelación, pero nunca los enlaces de reuniones futuras. Una
+  estuvo disponible antes de la cancelación en modo lectura, sin nuevos checks, progreso, intentos,
+  asistencia ni finalización, y nunca los enlaces de reuniones futuras. Una
   matrícula CANCELADA individualmente o aprobada después de cancelar el curso no abre contenido.
 
 ## Precondiciones

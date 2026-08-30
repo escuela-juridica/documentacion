@@ -29,7 +29,8 @@ Por alumno/curso muestra:
 
 No presenta como pendientes condiciones desactivadas. Progreso puede mostrarse aunque no sea
 requisito; asistencia nunca se calcula en VIRTUAL. Filtros: rango, curso, modalidad, alumno,
-situación académica, cumplimiento y estado de certificado. Exportación Excel respeta filtros.
+situación académica, cumplimiento y estado de certificado. El rango se aplica a `fecha_matricula`
+para definir la cohorte analizada. Exportación Excel respeta filtros.
 
 ## Criterios de aceptación
 

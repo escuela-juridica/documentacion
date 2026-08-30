@@ -100,7 +100,8 @@ a todos los cursos a usar examen, asistencia o progreso como requisito de certif
 
 1. Activar o desactivar examen, asistencia y progreso según corresponda.
 2. Mostrar valores iniciales lógicos y sus rangos permitidos.
-3. Configurar el modo de certificación normal o refrendado.
+3. Configurar los umbrales Normal y Refrendado; comprobar que el nivel se deriva de la nota y no se
+   selecciona manualmente por alumno.
 4. Confirmar que el progreso continúa visible aunque no sea requisito de certificación.
 
 **Resultado esperado:** la escuela define reglas flexibles y verificables para completar el curso.
@@ -170,7 +171,10 @@ alumnos.
 - Rechazar promociones inválidas y configuraciones incompatibles con la modalidad.
 - Impedir matrícula cuando ya no hay cupos o la matrícula está cerrada.
 - Repetir la confirmación de Culqi y comprobar que no duplica pago, matrícula ni cupo consumido.
-- Permitir reintentar un pago pendiente o rechazado sobre la misma intención de matrícula.
+- Permitir un nuevo intento únicamente tras RECHAZADO, ERROR o EXPIRADO; mientras exista PENDIENTE
+  no se crea otro intento y ESEJUR espera el resultado de Culqi.
+- Demostrar que un APROBADO tardío iniciado válidamente se respeta tras cierre, fecha vencida o
+  cupo lleno, mientras una cancelación del curso o matrícula conserva el pago sin entregar acceso.
 - Mantener una matrícula confirmada aunque falle su correo; permitir el reenvío.
 
 ## Evidencias que deben conservarse

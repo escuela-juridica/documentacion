@@ -22,6 +22,8 @@
 - Entidades certificadoras/refrendantes.
 - Firmantes: nombre, cargo, imagen de firma y estado activo.
 - Extensiones de archivo permitidas y tamaño máximo.
+- Configuración institucional del lugar de emisión del certificado, con “Lima, Perú” como valor
+  inicial; los certificados emitidos conservan la copia usada en su momento.
 - Activar o desactivar elementos sin borrar la información usada históricamente.
 
 ## Valores iniciales administrables
@@ -41,6 +43,7 @@ agregar, editar, activar o desactivar valores sin modificar código.
 - **Firmantes iniciales:** Mgt. Lilia Mercedes Guerra Macedo, Directora Ejecutiva; Mgt. Yourka
   Lisbeth Lucich Berrio, Comité Consultivo de Asuntos Académicos.
 - **Tipos de material:** PDF, DOC, PPT, EXCEL, IMAGEN, AUDIO, VIDEO, ZIP y ENLACE.
+- **Lugar de emisión del certificado:** Lima, Perú.
 
 “In-house” se conserva únicamente como etiqueta comercial de tipo de curso. No crea grupos,
 matrículas corporativas, accesos cerrados ni reglas especiales de venta.

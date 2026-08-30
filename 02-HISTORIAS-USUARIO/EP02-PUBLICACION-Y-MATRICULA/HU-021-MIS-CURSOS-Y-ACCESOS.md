@@ -27,7 +27,8 @@
   matrícula aprobada después de esa cancelación queda CANCELADA y nunca abre contenido.
 - Un curso CERRADO no admite nuevas matrículas, pero el alumno ya matriculado conserva su acceso
   mientras su matrícula siga ACTIVA y vigente.
-- Fecha de inicio futura se comunica claramente.
+- Con fecha de inicio futura se muestra el temario completo, pero no el contenido protegido de las
+  lecciones; se presenta la fecha y una cuenta regresiva en `America/Lima`.
 - VIRTUAL sin inicio abre al activar matrícula; sin fecha de fin permanece hasta cierre manual.
 - No muestra cursos de otras personas.
 
@@ -43,11 +44,14 @@
 - **Dado** ACTIVA, cuenta habilitada y fecha alcanzada, **cuando** consulta, **entonces** puede
   continuar.
 - **Dado** ACTIVA con inicio futuro, **cuando** consulta, **entonces** ve la fecha y no abre antes.
+- **Dado** ACTIVA con inicio futuro, **cuando** revisa la tarjeta o el aula previa, **entonces** ve
+  temario y cuenta regresiva, pero ningún video, archivo, enlace ni examen protegido.
 - **Dado** matrícula VENCIDA, cancelada individualmente o aprobada después de cancelar el curso,
   **cuando** consulta, **entonces** no abre contenido, pero el certificado propio ya emitido continúa
   disponible en “Mis certificados”.
 - **Dado** curso completo CANCELADO y acceso previo, **cuando** consulta, **entonces** puede revisar
-  el contenido que ya estuvo disponible, pero no ve enlaces de sesiones futuras canceladas.
+  el contenido que ya estuvo disponible en modo lectura, pero no registra nuevos checks, progreso,
+  intentos, asistencia ni finalización. Si finalizó antes, su certificación sí continúa.
 - **Dado** otro alumno, **cuando** inicia sesión, **entonces** nunca ve estas matrículas.
 
 ## Dependencia interna

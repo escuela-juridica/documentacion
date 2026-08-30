@@ -36,6 +36,8 @@
   autorizar expresamente que la respuesta llegue al correo consignado.
 - Al enviar genera número correlativo, fecha, PENDIENTE_RESPUESTA y fecha límite de 15 días hábiles
   improrrogables.
+- El día hábil posterior a presentar es el día 1; si se presenta en un día no hábil, el conteo
+  comienza el siguiente día hábil. Se excluyen sábados, domingos y feriados oficiales del Perú.
 - Conserva formulario y adjuntos.
 - Envía una constancia con número de caso, copia de los datos presentados y fecha máxima de
   respuesta.

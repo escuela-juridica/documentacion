@@ -16,19 +16,23 @@
 
 ## Excepciones incluidas
 
-### Sobrecupo simultáneo
+### Sobrecupo por aprobación simultánea o tardía
 
 - Antes de checkout se comprueba disponibilidad; PENDIENTE no reserva.
-- Si dos operaciones distintas son aprobadas simultáneamente para el último cupo, ambas matrículas
-  quedan ACTIVA porque ambas fueron cobradas.
-- ESEJUR registra alerta de sobrecupo; esta es la única excepción a la capacidad.
+- Si dos operaciones distintas son aprobadas simultáneamente para el último cupo, o un pago
+  iniciado válidamente se aprueba cuando el cupo ya se llenó, las matrículas quedan ACTIVA porque
+  fueron cobradas.
+- ESEJUR registra alerta de sobrecupo; un pago nuevo nunca puede iniciarse sin cupo.
 - Administración consulta alumnos, curso, pagos y registra atención. No existe lista de espera.
 
-### Aprobación posterior a cancelación de curso
+### Aprobación tardía después de cambios del curso o matrícula
 
-- Si Culqi informa APROBADO después de CANCELADO, el pago se registra una vez.
-- La matrícula permanece CANCELADA, no ocupa acceso utilizable ni entrega contenido.
-- Se muestra como caso de atención externa.
+- Si el pago comenzó cuando el curso admitía matrícula y Culqi informa APROBADO después de que el
+  curso quedó CERRADO, venció `fecha_cierre_matricula` o se completó el cupo, se respeta: activa
+  matrícula y alerta sobrecupo cuando corresponda.
+- Si el curso quedó CANCELADO o esa matrícula fue CANCELADA antes de APROBADO, el pago se registra
+  una vez, la matrícula permanece CANCELADA, no concede acceso y pasa a atención externa.
+
 - La Escuela resuelve comunicación/devolución por su canal y registra qué atención brindó; ESEJUR
   no procesa devolución ni cambia el resultado de Culqi.
 
@@ -44,6 +48,8 @@
   ACTIVA y existe una sola alerta atendible.
 - **Dado** APROBADO posterior a cancelación, **cuando** se registra, **entonces** el pago existe,
   matrícula CANCELADA y ningún acceso.
+- **Dado** APROBADO de una operación iniciada válidamente antes del cierre, fecha o cupo completo,
+  **cuando** llega, **entonces** activa la matrícula y alerta sobrecupo si excede la capacidad.
 - **Dado** administración registra atención, **cuando** guarda, **entonces** conserva detalle,
   fecha y responsable sin inventar devolución automática.
 

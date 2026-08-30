@@ -22,7 +22,7 @@ estado, código y forma de emisión.
 - Forma: automática programada, confirmada por alumno o manual administrativa.
 - Estado definitivo: VIGENTE o ANULADO.
 - Un corregido permanece VIGENTE y conserva el mismo código; el reporte muestra datos vigentes.
-- Filtros: rango, curso, alumno, nivel, entidad, estado y forma de emisión.
+- Filtros: rango aplicado a `fecha_emision`, curso, alumno, nivel, entidad, estado y forma de emisión.
 - Exportación Excel respeta filtros y no contiene DNI, nota, firmas ni PDF.
 
 ## Criterios de aceptación

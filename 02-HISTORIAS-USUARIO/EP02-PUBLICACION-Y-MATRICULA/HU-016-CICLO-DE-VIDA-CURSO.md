@@ -40,7 +40,8 @@
   materiales, exámenes, preguntas, opciones, reglas de certificación, docentes y beneficios.
   Reutiliza archivos o URL físicas, conserva referencia al curso de origen y no copia matrículas,
   pagos, progreso, intentos, asistencia ni certificados. La copia es independiente y debe revisar
-  nuevas fechas, precio, cupo y sesiones antes de publicarse.
+  nuevas fechas, precio, cupo y sesiones antes de publicarse. ESEJUR propone y valida una nueva
+  dirección amigable única; nunca reutiliza la dirección pública del curso original.
 - La cancelación completa no forma parte de esta operación ordinaria: exige motivo, bloquea nuevas
   matrículas/pagos, cancela sesiones futuras, conserva todo el historial y notifica a afectados en
   un solo correo por curso.
@@ -64,7 +65,8 @@
 - **Dado** curso iniciado, **cuando** intenta agregar requisitos obligatorios, **entonces** se
   rechaza; un material complementario no reduce progreso.
 - **Dado** curso duplicado, **cuando** abre la copia, **entonces** conserva estructura/configuración,
-  pero no matrículas, pagos, progreso, intentos, asistencia ni certificados.
+  pero no matrículas, pagos, progreso, intentos, asistencia ni certificados, y posee una dirección
+  amigable distinta y única.
 
 ## Dependencia interna
 

@@ -29,11 +29,14 @@
 - ESEJUR no asigna vencimiento propio a PENDIENTE ni convierte fallos en aprobados.
 - Mientras no exista APROBADO, la matrícula permanece PENDIENTE_PAGO y no concede contenido.
 - Confirmaciones repetidas son idempotentes: no duplican pago, matrícula, acceso ni cupo.
-- Si dos aprobaciones distintas toman el último cupo, ambas reciben acceso y se registra sobrecupo.
+- Si aprobaciones simultáneas o tardías iniciadas válidamente superan el cupo, todas reciben acceso
+  y se registra una alerta de sobrecupo.
 - Cuando no queda cupo se muestra “Sin cupos”; no se reserva un lugar ni se crea lista de espera.
 - Constancia imprimible: número de pedido, importe y moneda, método, fecha y hora, datos del alumno,
   curso y, para tarjeta, últimos dígitos. No es comprobante SUNAT.
 - Pago y certificado están incluidos en un único importe.
+- La vigencia, si existe, comienza en la fecha posterior entre APROBADO/activación e inicio del
+  curso; esa fecha es el día 1 y vence a las 23:59:59 de `America/Lima` del día N.
 
 ## Flujo principal
 
@@ -55,6 +58,10 @@
 - Aprobación simultánea que causa sobrecupo: acceso para ambos y alerta administrativa.
 - Curso CANCELADO mientras Culqi procesa: registra APROBADO, matrícula CANCELADA, sin contenido y
   caso para atención externa; ESEJUR no devuelve automáticamente.
+- Curso CERRADO, fecha de cierre vencida o cupo completado después de iniciar válidamente el pago:
+  un APROBADO tardío se respeta, activa la matrícula y alerta sobrecupo si corresponde.
+- Matrícula individual CANCELADA antes del APROBADO: registra el pago una sola vez, mantiene la
+  matrícula CANCELADA, no entrega acceso y deja el caso para atención externa.
 
 ## Criterios de aceptación
 
@@ -91,6 +98,14 @@
 - **Dado** un pago iniciado antes de cancelar el curso,
 - **cuando** APROBADO llega después,
 - **entonces** se registra, pero la matrícula permanece CANCELADA y sin acceso.
+
+### Aprobación tardía válida
+
+- **Dado** un pago iniciado cuando el curso admitía matrícula, **cuando** Culqi informa APROBADO
+  después del cierre, del vencimiento de la fecha o de completarse el cupo, **entonces** se activa
+  el acceso y, si excede la capacidad, se alerta a administración.
+- **Dado** que antes del resultado se canceló el curso o esa matrícula, **cuando** llega APROBADO,
+  **entonces** se registra una sola vez, no se reactiva el acceso y queda para atención externa.
 
 ## Notificaciones
 

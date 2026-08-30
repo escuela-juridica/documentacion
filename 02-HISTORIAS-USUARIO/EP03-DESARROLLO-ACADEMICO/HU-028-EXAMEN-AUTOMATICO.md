@@ -24,11 +24,13 @@
 - Tiempo opcional: corre desde inicio, no pausa al cerrar/perder conexión y se retoma con restante.
 - Al llegar a cero: envío automático, pendientes cero y consumo del intento.
 - Barajado cuando se configuró.
-- Nota `puntaje_obtenido / total × 20`, hasta dos decimales, sin penalización.
+- Nota `puntaje_obtenido / total × 20`, redondeada convencionalmente a dos decimales antes de
+  comparar aprobación, mejor intento o umbrales, sin penalización.
 - En selección múltiple, solo obtiene el puntaje si marca todas las correctas y ninguna incorrecta;
   no existe puntaje parcial automático. Una respuesta incorrecta o vacía vale cero.
 - Aprobación desde nota mínima, mejor intento y promedio final con igual peso.
-- Intentos ilimitados por defecto o hasta el máximo configurado. Las respuestas correctas se
+- CALIFICADO admite intentos ilimitados por defecto o hasta el máximo configurado; PRACTICA es
+  siempre ilimitado. Las respuestas correctas se
   muestran al aprobar, al agotar el límite o nunca; “al agotar” no existe con intentos ilimitados.
 - En VIRTUAL con secuencia, un examen de módulo abre al completar sus lecciones y el final al
   completar todos los módulos; sin secuencia abre con matrícula ACTIVA. En EN_VIVO/HIBRIDO, una

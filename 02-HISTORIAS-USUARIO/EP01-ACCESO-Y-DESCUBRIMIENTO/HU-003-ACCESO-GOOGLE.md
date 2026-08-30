@@ -28,6 +28,9 @@
   se completan como apellido paterno y materno antes de emitir un certificado.
 - Desde su perfil, la persona puede definir una contraseña propia y conservar ambos métodos de
   acceso: Google y correo con contraseña.
+- Toda contraseña propia que se defina debe tener como mínimo ocho caracteres, una letra mayúscula,
+  una letra minúscula, un número y un carácter especial.
+- La fecha y hora de aceptación de los documentos se muestran y conservan en `America/Lima`.
 
 ## Flujo principal
 
@@ -56,6 +59,8 @@
 - **Dado** que cancela Google, **cuando** vuelve a ESEJUR, **entonces** no queda una cuenta parcial.
 - **Dado** una cuenta creada mediante Google, **cuando** define una contraseña desde su perfil,
   **entonces** puede usar cualquiera de los dos métodos sin crear otra cuenta ni perder historial.
+- **Dado** una contraseña propia que no cumple todas las condiciones mínimas, **cuando** intenta
+  guardarla, **entonces** se rechaza sin retirar el acceso con Google.
 
 ## Privacidad y conservación
 

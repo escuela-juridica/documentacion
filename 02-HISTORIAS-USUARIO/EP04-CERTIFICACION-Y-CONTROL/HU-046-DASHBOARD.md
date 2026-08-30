@@ -26,8 +26,10 @@ exactamente cuatro gráficos:
 4. **Pagos confirmados por periodo:** importe de APROBADO y REGISTRADO_MANUAL con monto mayor que
    cero; excluye PENDIENTE, RECHAZADO, ERROR, EXPIRADO y EXONERADO.
 
-Una matrícula/pago repetido cuenta una vez. No muestra tareas pendientes, vencimientos, alertas,
-reclamaciones por atender ni acciones. El detalle pertenece a los reportes. No es contabilidad.
+Una matrícula/pago repetido cuenta una vez. No muestra tarjetas de indicadores, métricas extra,
+tareas pendientes, vencimientos, alertas, reclamaciones por atender ni acciones. Los cuatro
+gráficos y sus filtros constituyen todo el dashboard. El detalle pertenece a los reportes. No es
+contabilidad.
 
 ## Criterios de aceptación
 

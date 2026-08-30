@@ -87,7 +87,8 @@ permiso de descarga; el acceso protegido no se vuelve público.
 2. Mostrar que la lección todavía no se completa.
 3. Alcanzar el umbral del video y comprobar la finalización.
 4. Completar manualmente una lección de solo material mediante la acción disponible, como
-   “Siguiente” o una marca de completado.
+   “Siguiente”, “Completar lección” en la última o una marca de completado pendiente; comprobar que
+   un check automático o manual ya completado no puede desmarcarse.
 5. Mostrar el cálculo `lecciones completadas / lecciones consideradas × 100`.
 
 **Resultado esperado:** cada tipo de lección se completa de forma comprensible y el progreso se
@@ -105,11 +106,14 @@ continuar cuando existe una condición académica.
 
 ### 5. Participar en una sesión en vivo
 
-1. Consultar calendario, fecha, horario y enlace de la sesión.
-2. Ingresar a una sesión habilitada.
+1. Consultar calendario, fecha y horario; mostrar la tarjeta antes de la ventana con botón
+   deshabilitado y sin exponer el enlace.
+2. Dentro de la ventana, habilitar el enlace e ingresar a la sesión.
 3. Registrar o ajustar la asistencia de acuerdo con la operación establecida.
 4. Mostrar el porcentaje `sesiones asistidas / sesiones elegibles × 100`.
 5. Consultar una sesión finalizada cuya grabación aún está pendiente y otra que ya la tiene.
+6. Comprobar que la asistencia completa la lección EN_VIVO al terminar; para el ausente, la
+   grabación completa por umbral detectable o por acción manual según su fuente.
 
 **Resultado esperado:** el alumno conoce sus sesiones y su asistencia real; las sesiones
 canceladas o no elegibles no perjudican el cálculo.
@@ -161,7 +165,8 @@ evadir las reglas académicas.
 
 - Impedir acceso académico a una matrícula individual cancelada o vencida.
 - Mantener para alumnos previamente habilitados el contenido ya disponible cuando se cancela todo
-  el curso, excepto enlaces de futuras reuniones.
+  el curso en modo lectura, excepto enlaces de futuras reuniones y sin nuevos checks, progreso,
+  intentos, asistencia ni finalización.
 - No completar un video si no alcanza el umbral requerido.
 - Entregar automáticamente al vencer el tiempo y asignar cero a respuestas no contestadas.
 - Impedir intentos calificables adicionales después de emitido el certificado.

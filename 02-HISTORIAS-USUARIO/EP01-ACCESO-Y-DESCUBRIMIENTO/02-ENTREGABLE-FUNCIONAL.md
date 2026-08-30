@@ -34,7 +34,7 @@ reales en pantalla; no se considera suficiente enseñar formularios aislados, c�
 
 - **Visitante:** explora la oferta y crea una cuenta.
 - **Alumno:** inicia sesión y administra sus datos.
-- **Administrador:** crea una cuenta administrativa para un alumno.
+- **Administrador:** crea una cuenta administrativa para un alumno o para otro administrador.
 - **Google:** interviene como alternativa de identidad.
 - **Servicio de correo:** permite verificar la cuenta y recuperar la contraseña.
 
@@ -117,11 +117,15 @@ están registrados.
 
 ### 7. Habilitar una cuenta creada por administración
 
-1. Crear la cuenta indicando correo y teléfono opcional.
+1. Crear la cuenta indicando nombres, apellidos, correo y teléfono opcional; mostrar también la
+   creación de otro administrador y el registro de quién concedió ese perfil.
 2. Mostrar el aviso enviado al nuevo usuario.
 3. Ingresar con la contraseña temporal `Escuela1415@`.
-4. Mostrar la advertencia persistente que solicita cambiarla.
-5. Cambiar la contraseña y comprobar que la advertencia desaparece.
+4. Mostrar la advertencia persistente con las tres condiciones: verificar correo, aceptar términos
+   y privacidad, y cambiar la contraseña.
+5. Completar las tres y comprobar que solo entonces desaparece la advertencia y se habilita el
+   acceso. Intentar desactivar al propio administrador y al último habilitado para demostrar ambos
+   bloqueos.
 
 **Resultado esperado:** la cuenta administrativa queda habilitada y no conserva de forma
 indefinida la contraseña inicial.

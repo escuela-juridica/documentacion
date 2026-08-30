@@ -76,7 +76,8 @@ no depende visualmente de pantallas construidas en otra épica.
 - **Historias:** HU-001 y HU-005.
 - **Actor:** alumno y administrador.
 - **Debe mostrar:** identidad de la sesión, navegación permitida y aviso persistente si utiliza la
-  contraseña temporal.
+  contraseña temporal. En administrador, la barra lateral muestra Dashboard, Cursos, Usuarios,
+  Matrículas y pagos, Operación académica, Certificados, Reclamaciones, Reportes y Configuración.
 - **Estados importantes:** alumno no habilitado, cambio pendiente y sesión normal.
 - **Acción para la review:** ingresar con `Escuela1415@` y mostrar la advertencia.
 
@@ -95,9 +96,11 @@ no depende visualmente de pantallas construidas en otra épica.
 - **Historias:** HU-005.
 - **Actor:** administrador.
 - **Debe mostrar:** búsqueda o selección de usuarios, datos principales, estado de cuenta y acción
-  de creación administrativa.
-- **Estados importantes:** correo duplicado, teléfono omitido, cuenta creada y correo fallido.
-- **Acción para la review:** crear una cuenta con teléfono opcional y contraseña temporal.
+  de creación administrativa con rol Alumno o Administrador y quién concedió el perfil.
+- **Estados importantes:** correo duplicado, teléfono omitido, cuenta creada, correo fallido,
+  habilitación incompleta, auto-desactivación bloqueada y último administrador protegido.
+- **Acción para la review:** crear una cuenta con teléfono opcional y contraseña temporal; mostrar
+  que correo, documentos y nueva contraseña son las tres condiciones de habilitación.
 
 ### PF-011 — Documentos legales públicos
 

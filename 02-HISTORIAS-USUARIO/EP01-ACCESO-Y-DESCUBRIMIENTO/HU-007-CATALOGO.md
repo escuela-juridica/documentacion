@@ -29,6 +29,7 @@
   “Matrícula cerrada” al alcanzar el cierre comercial; y “Sin cupos” cuando las matrículas ACTIVA
   alcanzan la capacidad configurada.
 - Resultado vacío comprensible.
+- Todas las fechas y horas comerciales se muestran en la zona `America/Lima`.
 
 ## Flujo principal
 
@@ -48,6 +49,8 @@
 - **Dado** cualquier tarjeta visible, **cuando** se presenta, **entonces** contiene imagen, tipo,
   título, docentes, fecha o estado y una acción para consultar los detalles.
 - **Dado** ningún resultado, **cuando** filtra, **entonces** recibe un estado vacío y puede limpiar.
+- **Dado** un curso con fecha u hora, **cuando** se muestra su estado comercial, **entonces** la
+  comparación y el texto visible utilizan `America/Lima`.
 
 ## Datos y permisos
 

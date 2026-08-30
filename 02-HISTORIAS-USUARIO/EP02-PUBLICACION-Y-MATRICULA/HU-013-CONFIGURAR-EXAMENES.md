@@ -21,9 +21,9 @@
 - Al agregar una pregunta, `SELECCION_UNICA` aparece como tipo inicial; administración puede
   cambiarlo a cualquiera de los otros tres tipos antes de guardar.
 - Puntaje por pregunta, 1 por defecto; respuestas correctas para tipos objetivos.
-- Los intentos son ilimitados por defecto; administración puede fijar un máximo entero mayor que
-  cero. Agotar intentos sin aprobar deja al alumno sin una nueva oportunidad hasta una excepción
-  administrativa con motivo.
+- En un examen CALIFICADO, los intentos son ilimitados por defecto y administración puede fijar un
+  máximo entero mayor que cero. Agotarlos sin aprobar requiere una excepción administrativa con
+  motivo. Un examen PRACTICA siempre tiene intentos ilimitados y no permite reducirlos.
 - Tiempo límite opcional en minutos; vacío significa sin límite. El tiempo corre desde el inicio y
   no se pausa por cerrar la página, salir de la cuenta o perder conexión.
 - Barajado opcional de preguntas y opciones en cada intento.
@@ -35,7 +35,9 @@
 - EN_VIVO/HIBRIDO puede tener fecha de habilitación opcional. Con fecha, deben cumplirse tanto el
   avance previo como la fecha; sin fecha se usa la apertura automática por avance.
 - Decidir si un examen calificado de módulo bloquea el siguiente cuando hay secuencia.
-- `dias_revision` para abiertas, tres días calendario por defecto.
+- `dias_revision` para abiertas, tres días calendario por defecto; queda bloqueado cuando el curso
+  inicia. La calificación manual acepta desde 0 hasta el puntaje máximo de la pregunta, ambos
+  incluidos, y una observación opcional visible para el alumno.
 - La nota del intento se calcula como `puntaje_obtenido / puntaje_total × 20`, se muestra con hasta
   dos decimales y aprueba desde la nota mínima del curso, 12 por defecto. No existe penalización.
 - En selección múltiple solo se entrega el puntaje completo si se marcan todas las alternativas
@@ -74,6 +76,10 @@
 - **Dado** VIRTUAL, **cuando** configura habilitación, **entonces** no necesita fecha programada.
 - **Dado** un examen nuevo, **cuando** no se configura límite de intentos, **entonces** permite
   intentos ilimitados y no ofrece mostrar respuestas “al agotar”.
+- **Dado** un examen PRACTICA, **cuando** administración revisa los intentos, **entonces** son
+  ilimitados y no existe control para fijar un máximo.
+- **Dado** un curso iniciado, **cuando** intenta modificar `dias_revision`, **entonces** se impide
+  para no cambiar la fecha prometida a los alumnos.
 
 ## Dependencia interna
 

@@ -33,6 +33,7 @@ También se valida de manera explícita:
 - porcentajes de progreso, video y asistencia entre 0 y 100;
 - nota mínima y Refrendado entre 0 y 20, con Refrendado mayor que la mínima;
 - al menos un examen CALIFICADO con preguntas y puntaje positivo si se exigen exámenes;
+- ningún examen CALIFICADO si `requiere_examenes` está desactivado;
 - al menos una lección obligatoria completable si se exige progreso;
 - modalidad EN_VIVO/HIBRIDO y al menos una sesión futura completa si se exige asistencia;
 - ausencia de sesiones y asistencia en VIRTUAL; fechas de inicio, fin y sesiones coherentes en
@@ -46,14 +47,18 @@ También se valida de manera explícita:
 2. ESEJUR evalúa todas las reglas aplicables.
 3. Si hay problemas, muestra la lista completa y conserva BORRADOR.
 4. Administración corrige y vuelve a validar.
-5. Sin bloqueos, pasa a PUBLICADO y queda disponible según fechas y cupo.
+5. Sin bloqueos, pasa a PUBLICADO, salvo VIRTUAL sin fecha de inicio, que queda inmediatamente EN
+   CURSO; en ambos casos queda disponible según fechas y cupo.
 
 ## Criterios de aceptación
 
 - **Dado** varios faltantes, **cuando** valida, **entonces** se muestran juntos y no se publica.
 - **Dado** un curso pagado sin vista previa real, **cuando** valida, **entonces** permanece BORRADOR.
 - **Dado** solo advertencia de duración, **cuando** publica, **entonces** no se bloquea.
-- **Dado** configuración completa, **cuando** confirma, **entonces** cambia una sola vez a PUBLICADO.
+- **Dado** configuración completa con inicio futuro, **cuando** confirma, **entonces** cambia una
+  sola vez a PUBLICADO.
+- **Dado** VIRTUAL sin fecha de inicio, **cuando** confirma la publicación, **entonces** queda EN
+  CURSO en la misma operación, sin estado PUBLICADO intermedio visible.
 - **Dado** reglas activas, **cuando** falta un examen, lección completable, sesión futura o dato de
   certificado requerido, **entonces** la publicación permanece bloqueada y señala cada faltante.
 

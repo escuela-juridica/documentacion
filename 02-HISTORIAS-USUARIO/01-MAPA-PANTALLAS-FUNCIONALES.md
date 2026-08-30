@@ -123,7 +123,8 @@ mostrar el cumplimiento académico y PF-013 para ejecutar la cancelación comple
 - La cancelación completa se ejecuta desde PF-013; no requiere una pantalla independiente.
 - PF-039 presenta cinco pestañas: matrículas, pagos, seguimiento académico, certificados y
   asistencia.
-- PF-040 solo contiene indicadores y gráficos simples; no incluye tareas pendientes.
+- PF-040 contiene exactamente cuatro gráficos —evolución de matrículas, matrículas por curso,
+  forma de ingreso y pagos confirmados—, sin tarjetas de indicadores, tareas, alertas ni pendientes.
 
 ## Uso durante el diseño y desarrollo
 

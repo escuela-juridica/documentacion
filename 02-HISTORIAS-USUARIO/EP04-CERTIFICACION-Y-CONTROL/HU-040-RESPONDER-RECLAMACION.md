@@ -21,6 +21,8 @@
   respondidos y buscar por número, documento, nombre o correo; los próximos a vencer y vencidos se
   resaltan sin cerrar el caso.
 - Tanto QUEJA como RECLAMO exigen respuesta en máximo 15 días hábiles improrrogables.
+- El día hábil posterior a la presentación es el día 1. Si se presenta en día no hábil, se comienza
+  el siguiente día hábil; se excluyen sábados, domingos y feriados oficiales del Perú.
 - Administración consulta el formulario original y escribe una respuesta.
 - Al confirmar se conserva texto, fecha, responsable e intento de envío.
 - Solo pasa de PENDIENTE_RESPUESTA a RESPONDIDO cuando el correo se envía correctamente.

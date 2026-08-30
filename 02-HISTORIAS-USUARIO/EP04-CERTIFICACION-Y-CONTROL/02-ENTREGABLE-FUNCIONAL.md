@@ -106,7 +106,8 @@ privada innecesaria.
 
 1. Emitir manualmente un certificado justificando la operación.
 2. Mostrar que el nivel se deriva de la nota y los umbrales; si no existen exámenes corresponde
-   nivel normal.
+   nivel Normal. En una excepción con nota bajo el mínimo o sin nota también corresponde Normal;
+   Refrendado solo se obtiene si una nota definitiva alcanza su umbral.
 3. Corregir un certificado mediante el flujo autorizado, conservando el historial.
 4. Anular otro certificado indicando el motivo.
 5. Comprobar la respuesta de la verificación pública después del cambio.
@@ -177,9 +178,10 @@ operaciones demostradas, sin modificar los registros desde los reportes.
 ### 11. Consultar el dashboard
 
 1. Abrir el panel principal de administración.
-2. Mostrar gráficos simples sobre matrículas y su evolución o distribución.
+2. Mostrar exactamente los cuatro gráficos: evolución de matrículas, matrículas por curso, forma
+   de ingreso y pagos confirmados por periodo.
 3. Cambiar filtros aplicables y comparar los resultados con el reporte de matrículas.
-4. Confirmar que el dashboard no presenta una lista de tareas o pendientes por hacer.
+4. Confirmar que el dashboard no presenta tarjetas de indicadores, tareas, alertas ni pendientes.
 
 **Resultado esperado:** la escuela identifica visualmente cómo se están matriculando los alumnos
 sin convertir el panel en un módulo operativo complejo.

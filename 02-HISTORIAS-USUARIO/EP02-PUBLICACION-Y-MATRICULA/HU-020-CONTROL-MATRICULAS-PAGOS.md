@@ -22,7 +22,11 @@
 - Consulta de alumno, curso, fechas, forma de ingreso y responsable administrativo.
 - Cancelar una matrícula con motivo; no borrar ni devolver dinero.
 - Vencimiento automático de acceso según vigencia.
-- Conservación de finalización y certificado si ya existen.
+- La vigencia usa `max(fecha_activacion, fecha_inicio si existe)` como día 1 y vence a las 23:59:59
+  de `America/Lima` del día N; si está vacía, el acceso es permanente mientras no se cierre por otra
+  regla.
+- Conservación de la finalización ya obtenida, la confirmación de datos, la emisión programada y el
+  certificado, aunque la matrícula luego venza o sea cancelada.
 - Un sobrecupo simultáneo se muestra con los dos pagos APROBADO, las dos matrículas ACTIVA y una
   alerta pendiente de atención. Una aprobación posterior a cancelar un curso muestra el pago
   APROBADO separado de la matrícula CANCELADA y sin acceso, con su caso de atención externa.
@@ -45,6 +49,8 @@
   convertir fallos en APROBADO.
 - **Dado** sobrecupo o aprobación posterior a cancelación, **cuando** consulta, **entonces** puede
   explicar por separado resultado de pago, matrícula, cupo, acceso y atención registrada.
+- **Dado** una matrícula ya finalizada, **cuando** posteriormente vence o se cancela, **entonces**
+  continúa el proceso de certificación sin reabrir el acceso académico.
 
 ## Dependencia interna
 

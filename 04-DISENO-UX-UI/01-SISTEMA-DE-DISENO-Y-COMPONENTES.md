@@ -42,7 +42,27 @@ estados normales, alternativos, vacíos, de carga, error, bloqueo y confirmació
 | `Color/Acento/100` | `#D9FAFA` | Fondo de selección |
 | `Color/Acento/050` | `#F0FFFF` | Superficie informativa suave |
 
-### 3.2 Colores neutrales
+### 3.2 Colores complementarios
+
+Antes de los neutrales, la interfaz dispone de colores complementarios para diferenciar contextos.
+No reemplazan los estados semánticos.
+
+| Variable Figma | Valor | Contexto |
+|---|---|---|
+| `Color/Violeta/700` | `#6941C6` | Exámenes y evaluación |
+| `Color/Violeta/050` | `#F4F3FF` | Fondo de evaluación |
+| `Color/Celeste/700` | `#026AA2` | Sesiones y calendario |
+| `Color/Celeste/050` | `#F0F9FF` | Fondo de sesiones |
+| `Color/Coral/400` | `#FF8A7A` | Modalidad En vivo y acento comercial |
+| `Color/Coral/050` | `#FFF1EF` | Fondo de modalidad En vivo |
+| `Color/Dorado/500` | `#F4B740` | Certificación y logro |
+| `Color/Dorado/050` | `#FFF8E1` | Fondo de certificación |
+
+Distribución recomendada: 60 % neutrales, 25 % marca, 10 % acentos de contexto y hasta 5 % colores
+semánticos vinculados a estados reales. En administración se reduce el acento decorativo, pero se
+mantiene el mismo 60/25/10/5 como límite visual.
+
+### 3.3 Colores neutrales
 
 | Variable Figma | Valor |
 |---|---|
@@ -57,7 +77,7 @@ estados normales, alternativos, vacíos, de carga, error, bloqueo y confirmació
 | `Color/Neutral/050` | `#F8FAFC` |
 | `Color/Blanco` | `#FFFFFF` |
 
-### 3.3 Colores semánticos
+### 3.4 Colores semánticos
 
 | Variable | Fuerte | Fondo suave | Borde suave |
 |---|---|---|---|
@@ -66,7 +86,7 @@ estados normales, alternativos, vacíos, de carga, error, bloqueo y confirmació
 | `Error` | `#B42318` | `#FEF3F2` | `#FECDCA` |
 | `Informacion` | `#175CD3` | `#EFF8FF` | `#B2DDFF` |
 
-### 3.4 Espaciado
+### 3.5 Espaciado
 
 | Variable | Valor |
 |---|---:|
@@ -85,7 +105,7 @@ estados normales, alternativos, vacíos, de carga, error, bloqueo y confirmació
 
 No crear valores nuevos si uno existente resuelve la separación con una diferencia mínima.
 
-### 3.5 Radios
+### 3.6 Radios
 
 | Variable | Valor | Uso |
 |---|---:|---|
@@ -96,7 +116,7 @@ No crear valores nuevos si uno existente resuelve la separación con una diferen
 | `Radio/XL` | 16 px | Modal y panel destacado |
 | `Radio/Completo` | 999 px | Badge, avatar y chip |
 
-### 3.6 Sombras
+### 3.7 Sombras
 
 | Variable | Valor | Uso |
 |---|---|---|
@@ -105,7 +125,7 @@ No crear valores nuevos si uno existente resuelve la separación con una diferen
 | `Sombra/MD` | `0 8px 24px rgba(16,24,40,0.12)` | Menú y panel flotante |
 | `Sombra/LG` | `0 20px 40px rgba(16,24,40,0.18)` | Modal |
 
-### 3.7 Capas
+### 3.8 Capas
 
 | Capa | Valor conceptual |
 |---|---:|
@@ -567,6 +587,13 @@ Utilizar solo cuando exista una secuencia real, por ejemplo publicación de curs
 
 Estados: normal, destacado, inmediato, próximo, en progreso, cerrado y sin cupos.
 
+Color contextual por modalidad:
+
+- `Virtual`: badge y detalle turquesa;
+- `En vivo`: badge coral con texto azul oscuro;
+- `Híbrido`: badge violeta;
+- la modalidad se escribe siempre; el color no la sustituye.
+
 ### 14.3 Tarjeta de “Mis cursos”
 
 - Imagen `16:9` o miniatura horizontal.
@@ -893,6 +920,19 @@ Cada requisito presenta:
 Un curso puede no exigir examen, asistencia o progreso para certificar. En ese caso el componente
 no lo presenta como pendiente. El progreso puede seguir visible como información académica.
 
+Mapa de acentos académicos:
+
+| Contexto | Acento | Fondo suave |
+|---|---|---|
+| Progreso y lecciones | `#00D8D8` | `#F0FFFF` |
+| Sesiones y calendario | `#026AA2` | `#F0F9FF` |
+| Exámenes | `#6941C6` | `#F4F3FF` |
+| Certificación | `#F4B740` | `#FFF8E1` |
+| Modalidad En vivo | `#FF8A7A` | `#FFF1EF` |
+
+Estos colores ayudan a orientarse, pero aprobado, pendiente, rechazado y anulado conservan siempre
+su color semántico.
+
 ## 24. Reglas visuales según modalidad
 
 ### Virtual
@@ -958,7 +998,11 @@ Fila de 56–64 px con:
 
 - “Anterior” secundario.
 - “Siguiente” primario o acento.
+- En la última lección la acción se denomina “Completar lección”; no se muestra “Siguiente” sin
+  destino.
 - En una lección manual, check y “Siguiente” completan la lección de manera equivalente.
+- El check automático es de solo lectura; el manual es accionable solo mientras está pendiente.
+  Ningún check completado puede desmarcarse.
 - En una lección con video detectable, la acción explica por qué aún no se completa si falta el
   umbral.
 
@@ -976,7 +1020,8 @@ Fila de 56–64 px con:
 - Título.
 - Fecha y horario de Lima.
 - Estado.
-- Enlace solo cuando corresponda.
+- La tarjeta siempre permanece visible. Fuera de la ventana muestra el botón deshabilitado y nunca
+  expone el enlace real; entre inicio y fin en `America/Lima` habilita “Ingresar a la sesión”.
 - Asistencia.
 - Grabación disponible o pendiente.
 - Datos anteriores y nuevos si fue reprogramada.
@@ -1179,10 +1224,10 @@ El estado vacío distingue “no hay información” de “los filtros no encont
 
 ### Estructura
 
-- Primera fila: hasta cuatro indicadores.
-- Segunda fila: gráfico principal de 2/3 y gráfico secundario de 1/3.
-- Tercera fila opcional: gráfico de ancho completo.
-- No mostrar más de tres gráficos simultáneos.
+- No usa tarjetas de indicadores.
+- Primera fila: evolución de matrículas a 2/3 y matrículas por curso a 1/3.
+- Segunda fila: forma de ingreso y pagos confirmados por periodo, cada uno a 1/2.
+- Mostrar exactamente esos cuatro gráficos; no agregar otros.
 - No mostrar pendientes, tareas ni alertas operativas.
 
 ### Gráficos permitidos
@@ -1197,13 +1242,14 @@ El estado vacío distingue “no hay información” de “los filtros no encont
 Secuencia recomendada:
 
 ```text
-#103860, #00AEB5, #1F5F8B, #66E3E3, #667085, #98A2B3
+#103860, #00AEB5, #6941C6, #026AA2, #F4B740, #FF8A7A
 ```
 
 - Mostrar leyenda y valores mediante tooltip.
 - No depender solo del color.
 - Evitar gráficos 3D.
 - No utilizar rojo o verde salvo que representen un estado semántico real.
+- Cuando existan más series, reutilizar tonos neutrales antes de inventar nuevos colores.
 
 ## 34. Responsive por componente
 
@@ -1318,7 +1364,7 @@ No utilizar nombres como `Frame 132`, `Botón copia 4` o `Nuevo componente`.
 | PF-035 | Comparación de pago, matrícula y acceso |
 | PF-036–PF-038 | Formulario extenso, carga de imágenes, bandeja y respuesta |
 | PF-039 | Filtros, pestañas, tablas, paginación y exportación |
-| PF-040 | Indicadores, filtros y gráficos |
+| PF-040 | Filtros y exactamente cuatro gráficos, sin indicadores |
 
 ## 38. Criterio de terminado de un componente
 
