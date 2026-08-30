@@ -52,17 +52,18 @@ requiere un segundo pago.
 
 ### Datos obligatorios
 
-Antes de emitir debe confirmar nombres, apellido paterno, apellido materno y DNI. La pantalla viene
-prellenada, los cuatro son obligatorios y se registra fecha/hora de confirmación. Si faltan datos,
+Antes de emitir debe confirmar nombres, apellido paterno y apellido materno. La pantalla viene
+prellenada, los tres son obligatorios y se registra fecha/hora de confirmación. Si falta alguno,
 queda PENDIENTE_DATOS, muestra el acceso al formulario y envía un correo solicitando la
-confirmación únicamente cuando ya cumple las condiciones académicas y temporales. Si la fecha programada
-ya pasó, la emisión continúa al confirmar.
+confirmación únicamente cuando ya cumple las condiciones académicas y temporales. Si la fecha
+programada ya pasó, la emisión continúa al confirmar.
 
 El sistema completa lo que ya conoce según el origen de la cuenta: el registro por formulario ya
-separa nombres y apellidos, pero normalmente solicitará el DNI; una cuenta de Google puede requerir
-separar apellido paterno y materno porque Google puede entregar los apellidos en un solo bloque; en
-una cuenta creada por administración se solicitará cualquier dato que haya quedado incompleto. El
-alumno puede corregir y volver a confirmar estos datos mientras el certificado no se haya emitido.
+separa nombres y apellidos; una cuenta de Google puede requerir separar apellido paterno y materno
+porque Google puede entregar los apellidos en un solo bloque; en una cuenta creada por
+administración se solicitará cualquier nombre o apellido que haya quedado incompleto. El alumno
+puede corregir y volver a confirmar estos datos mientras el certificado no se haya emitido. El DNI
+es opcional, se administra desde el perfil y no interviene en este flujo ni en el PDF.
 
 ### Nota y nivel
 

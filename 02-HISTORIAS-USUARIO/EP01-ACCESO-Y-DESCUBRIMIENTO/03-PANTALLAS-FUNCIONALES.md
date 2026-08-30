@@ -41,11 +41,12 @@ no depende visualmente de pantallas construidas en otra épica.
 
 - **Historias:** HU-002 y HU-003.
 - **Actor:** visitante.
-- **Debe mostrar:** nombres, apellidos, correo, teléfono opcional, contraseña, aceptación de
+- **Debe mostrar:** nombres, apellidos, correo, teléfono opcional, DNI opcional, contraseña, aceptación de
   documentos, alternativa de Google y contacto por WhatsApp para creación administrativa.
 - **Estados importantes:** correo existente, contraseña inválida, consentimientos faltantes y
   registro enviado.
-- **Acción para la review:** crear una cuenta sin solicitar DNI.
+- **Acción para la review:** crear una cuenta dejando vacío el DNI y mostrar que también puede
+  registrarse o editarse como dato opcional.
 
 ### PF-005 — Resultado de verificación del correo
 

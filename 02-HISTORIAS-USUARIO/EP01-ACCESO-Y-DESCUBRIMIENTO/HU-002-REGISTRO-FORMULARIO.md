@@ -17,9 +17,9 @@
 
 ## Alcance incluido
 
-- Correo, nombres y apellidos separados; teléfono o WhatsApp opcional.
-- El DNI no se solicita durante el registro; se completa posteriormente al confirmar los datos del
-  certificado.
+- Correo, nombres y apellidos separados; teléfono o WhatsApp opcional y DNI opcional.
+- El visitante decide si registra su DNI. Dejarlo vacío no impide crear o habilitar la cuenta ni
+  condiciona ninguna matrícula, pago, actividad académica o certificado.
 - El teléfono se muestra al visitante con la etiqueta “WhatsApp”, pero las notificaciones
   automáticas del sistema se envían por correo; no se envían avisos automáticos por WhatsApp.
 - Contraseña elegida por la persona y un segundo ingreso que debe coincidir antes de guardar.
@@ -53,6 +53,7 @@ Las fechas y horas de registro, consentimiento, emisión y vencimiento se muestr
 
 - Sin aceptación o protección anti-robot válida no se crea la cuenta.
 - Teléfono vacío es válido.
+- DNI vacío es válido y no genera una tarea pendiente posterior.
 - Un correo ya registrado no produce una segunda cuenta; se orienta al ingreso o recuperación.
 - Si existe por Google, se vincula el acceso por formulario a la misma cuenta.
 - Un fallo al enviar la verificación no convierte el correo en verificado.
@@ -69,8 +70,12 @@ Las fechas y horas de registro, consentimiento, emisión y vencimiento se muestr
 - **cuando** se registra,
 - **entonces** existe una sola cuenta, se guardan versión/fecha de aceptación y se envía la
   verificación.
-- **Dado** el formulario de registro, **cuando** el visitante lo completa, **entonces** el DNI no se
-  exige y los enlaces públicos permiten consultar la versión vigente de términos y privacidad.
+- **Dado** el formulario de registro, **cuando** el visitante deja vacío el DNI, **entonces** puede
+  crear y verificar la cuenta con normalidad; los enlaces públicos permiten consultar la versión
+  vigente de términos y privacidad.
+- **Dado** que el visitante decide proporcionar el DNI, **cuando** completa y envía el formulario,
+  **entonces** el dato queda registrado como información personal opcional y puede consultarse o
+  editarse posteriormente desde su perfil.
 
 ### Verificación pendiente
 
@@ -121,7 +126,7 @@ Las fechas y horas de registro, consentimiento, emisión y vencimiento se muestr
 
 ## Orientación de trabajo
 
-- **Frontend:** formulario, consentimiento visible, teléfono opcional, validaciones y confirmación.
+- **Frontend:** formulario, consentimiento visible, teléfono y DNI opcionales, validaciones y confirmación.
 - **Backend:** unicidad, protección anti-robot, consentimiento versionado y verificación de correo.
 - **Integración:** registro → correo → verificación → inicio de sesión.
 

@@ -783,6 +783,7 @@ Sigue la forma del formulario de udeapolis, con tres diferencias: **apellido mat
 | Apellido paterno | obligatorio |
 | Apellido materno | obligatorio |
 | WhatsApp | **opcional**; se guarda como `telefono` |
+| DNI | **opcional**; se registra como dato personal y no se utiliza para emitir el certificado |
 | Contraseña | obligatorio |
 | Confirmar contraseña | obligatorio |
 | ☐ Acepto la política de privacidad y los términos | obligatorio |
@@ -796,8 +797,9 @@ y símbolo. La interfaz muestra estas cuatro condiciones mientras se escribe y n
 si falta alguna.
 
 Los apellidos van **separados desde el inicio**: es la convención peruana y es como deben salir
-en el certificado. **El DNI no se pide aquí** — va al final, en la pantalla del certificado
-(§13.8). No hay que poner fricción antes de comprar.
+en el certificado. El alumno puede registrar su **DNI de manera opcional** durante el registro o
+después desde su perfil. Dejarlo vacío no impide crear la cuenta, matricularse, estudiar, pagar,
+rendir evaluaciones ni obtener el certificado.
 
 **WhatsApp es la etiqueta visible; `telefono` es el dato común.** Es el canal por el que la
 Escuela opera hoy — matrícula, avisos y consultas — y el que sus alumnos realmente usan. Sigue
@@ -832,13 +834,14 @@ cuenta por ti"*.
 Reconoce algo cierto: una parte del público de la Escuela no se va a registrar solo. En vez de
 perder a esa persona, la captura por el canal que ya usa y el administrador completa el proceso:
 
-- Ingresa correo, nombres, apellidos y `telefono` opcional.
+- Ingresa correo, nombres, apellidos, `telefono` opcional y DNI opcional.
 - Si el correo ya tiene cuenta, utiliza esa misma cuenta y **no cambia su contraseña**.
 - Si es una cuenta nueva, su contraseña temporal es **`Escuela1415@`** y queda con la condición
   **CAMBIO_PENDIENTE**.
 - Puede crear al mismo tiempo la matrícula manual y su operación REGISTRADO_MANUAL o EXONERADO
   (§9).
-- El DNI no es necesario para crearla; se confirma antes del certificado.
+- El DNI puede dejarse vacío o registrarse como dato personal opcional; no forma parte de los
+  requisitos del certificado.
 
 Al crear una cuenta nueva, el sistema envía un correo de bienvenida con el enlace de verificación,
 la contraseña temporal y el orden de los pasos que debe completar. La administración también
@@ -898,7 +901,7 @@ A la inversa también: quien entró por Google puede **definirse una contraseña
 cuando quiera — por ejemplo, para entrar desde una computadora donde no tiene su sesión abierta.
 Su cuenta queda con los dos accesos.
 
-#### Dónde se completan los datos del certificado
+#### Dónde se completan los datos personales y del certificado
 
 Los tres caminos convergen en la pantalla **"Confirma tus datos"** (§13.8), antes de emitir el
 certificado. El alumno puede completarla desde su perfil o desde el avance del curso, incluso
@@ -906,17 +909,19 @@ antes de terminar:
 
 | Se registró por... | Qué le falta completar ahí |
 |---|---|
-| **Formulario** | Solo el **DNI**. Nombres y apellidos vienen ya desglosados. |
-| **Google** | El **DNI** y **separar los apellidos** en paterno y materno. |
-| **Creación administrativa** | El **DNI** y cualquier dato personal que no haya sido completado por la administración. |
+| **Formulario** | Puede registrar o editar el **DNI opcional**. Los nombres y apellidos ya vienen desglosados. |
+| **Google** | Debe **separar los apellidos** en paterno y materno para el certificado. Puede registrar el DNI opcionalmente. |
+| **Creación administrativa** | Completa cualquier nombre o apellido faltante. Puede registrar el DNI opcionalmente. |
 
-Así ninguno de los tres caminos obliga a llenar datos que todavía no hacen falta, y todos terminan
-con exactamente lo que el certificado necesita.
+Los tres caminos permiten conservar el DNI cuando el propio alumno decide proporcionarlo, sin
+convertirlo en una condición de acceso o certificación. Para emitir el certificado solo deben
+estar completos y confirmados los nombres, apellido paterno y apellido materno.
 
 ### Datos personales y condiciones de uso
 
-El sistema recolecta nombres, apellidos, DNI, correo y teléfono de profesionales. En Perú eso
-está regulado por la **Ley N.º 29733 de Protección de Datos Personales**.
+El sistema recolecta nombres, apellidos y correo; el teléfono y el DNI solo se registran cuando la
+persona decide proporcionarlos. En Perú estos datos están regulados por la **Ley N.º 29733 de
+Protección de Datos Personales**.
 
 - El registro por formulario o Google exige aceptar la política de privacidad y los términos
   antes de habilitar la cuenta para matricularse. Una cuenta creada por administración puede
@@ -1472,7 +1477,7 @@ alumno debe haber confirmado sus datos.
 | 1 | El alumno **cumple la regla de certificación** del curso | §13.1 |
 | 2 | El curso **llegó a su fecha de fin**, si tiene una | |
 | 3 | Pasaron los **días de espera** configurados para ese curso, o el alumno confirmó la emisión inmediata cuando son cero | 0 por defecto |
-| 4 | El alumno confirmó **nombres, apellido paterno, apellido materno y DNI** | §13.8 |
+| 4 | El alumno confirmó **nombres, apellido paterno y apellido materno** | §13.8 |
 
 **Por qué la condición 2.** Sin ella se emitirían documentos con fechas futuras. En un diplomado
 en vivo de diez semanas, un alumno puede cumplir la regla en la semana tres — y el certificado
@@ -1653,15 +1658,16 @@ completar el curso:
 Nombres            [ ................ ]
 Apellido paterno   [ ................ ]
 Apellido materno   [ ................ ]
-DNI                [ ................ ]
 ```
 
 - Viene **prellenada** con lo que el alumno ya tiene en su cuenta.
-- **Los cuatro son obligatorios.** Sin ellos no se genera el certificado.
+- **Los tres son obligatorios.** Sin ellos no se genera el certificado.
 - **Todos pasan por aquí, por los tres caminos de registro** (§10): a quien se registró por
-  formulario solo le falta el DNI; a quien entró con Google le falta además **separar sus
-  apellidos**, porque Google los entrega en un solo bloque; y quien recibió una cuenta creada por
-  administración completa cualquier dato que todavía falte.
+  formulario normalmente ya le aparecen completos; quien entró con Google puede necesitar
+  **separar sus apellidos**, porque Google puede entregarlos en un solo bloque; y quien recibió una
+  cuenta creada por administración completa cualquier nombre o apellido que todavía falte.
+- El **DNI es un dato opcional del perfil**. Puede registrarse o editarse allí, pero no aparece en
+  esta confirmación, no se imprime en el certificado y su ausencia nunca bloquea la emisión.
 - Mientras no se haya emitido, el alumno puede volver a modificar y confirmar sus datos.
 - El sistema registra la fecha y hora de la última confirmación.
 - Una vez emitido, el nombre **no se edita libremente** — solo el administrador puede corregirlo
@@ -1762,7 +1768,7 @@ Es la pantalla que más usa el alumno:
 | **Mis cursos** | En progreso y completados, con su porcentaje de avance y un botón para **continuar** donde se quedó |
 | **Próximas sesiones** | Las sesiones en vivo de todos sus cursos, ordenadas por fecha, con acceso directo al enlace cuando se habilite |
 | **Mis certificados** | Los suyos, y solo los suyos. Con descarga y enlace de verificación |
-| **Mi perfil** | Datos personales, incluida la confirmación de nombres y DNI para el certificado *(§13.8)* |
+| **Mi perfil** | Datos personales, incluido el DNI opcional, y confirmación de nombres y apellidos para el certificado *(§13.8)* |
 
 ### Dentro del curso — el aula
 
@@ -1976,7 +1982,7 @@ Once correos del sistema:
 | 2 | **Matrícula confirmada** | Al activarse la matrícula. **Sirve igual para curso gratuito y pagado**; en el pagado incluye el detalle del pago. |
 | 3 | **Pago no completado** | Cuando Culqi informa un resultado no aprobado que permite reintentar, avisando que no se activó la matrícula. |
 | 4 | **Sesión en vivo** | El día antes como recordatorio y también inmediatamente cuando una sesión se reprograma o cancela. |
-| 5 | **Confirma tus datos para emitir tu certificado** | Cuando ya se cumplieron las condiciones académicas y temporales, pero faltan nombres, apellidos o DNI confirmados. |
+| 5 | **Confirma tus datos para emitir tu certificado** | Cuando ya se cumplieron las condiciones académicas y temporales, pero faltan nombres o apellidos confirmados. |
 | 6 | **Recuperar contraseña** | Imprescindible: si el alumno se registra solo a las 2 a.m., no hay administrador que le resetee la clave. |
 | 7 | **Tu certificado está listo** | Al emitirse, después de cumplirse las condiciones de §13.4, incluidos los datos confirmados y los días de espera del curso. |
 | 8 | **Tu examen fue calificado** | Cuando el administrador termina de revisar las respuestas abiertas y se publica la nota. |
@@ -2105,7 +2111,7 @@ puede reenviar a cualquiera.
 | RN-70 | El alumno solo ve sus propios certificados. |
 | RN-71 | El correo para confirmar datos del certificado se envía únicamente cuando el alumno ya cumple las condiciones académicas y temporales de emisión y solo faltan sus datos. Una vez emitido, el correo del certificado lleva un enlace de descarga, nunca el PDF adjunto. |
 | RN-72 | El QR o el código manual llevan a una verificación pública con código, nombre, curso, horas, nivel, entidad, fecha y estado. Nunca muestra DNI, contacto, nota, firmas ni PDF. Un ANULADO muestra su fecha y que no es válido; una corrección muestra los datos vigentes y un código inexistente responde "Certificado no encontrado". |
-| RN-73 | Sin nombres, apellidos y DNI confirmados no se genera el certificado. La confirmación puede realizarse antes o después de completar el curso y queda registrada. |
+| RN-73 | Sin nombres, apellido paterno y apellido materno confirmados no se genera el certificado. La confirmación puede realizarse antes o después de completar el curso y queda registrada. El DNI es opcional, se administra desde el perfil y nunca condiciona la emisión. |
 | RN-74 | Cada curso indica qué entidad lo refrenda; entidades, firmantes, tipos de curso y categorías temáticas son tablas maestras. El lugar de emisión proviene de la configuración institucional y su valor inicial es "Lima, Perú". |
 
 ### Contenido protegido
@@ -2126,7 +2132,7 @@ puede reenviar a cualquiera.
 | RN-81 | La plataforma ofrece Libro de Reclamaciones como página pública enlazada en el pie y accesible con o sin cuenta; con sesión, completa los datos conocidos. |
 | RN-82 | La reclamación distingue QUEJA de RECLAMO, admite varias imágenes opcionales de hasta 5 MB cada una y exige declaración jurada y autorización de respuesta por correo. |
 | RN-83 | Cada QUEJA o RECLAMO debe ser respondido. Recibe número, fecha, PENDIENTE_RESPUESTA y una fecha límite de 15 días hábiles improrrogables. El primer día hábil posterior a la presentación es el día 1; si se presenta en día no hábil, el conteo comienza el siguiente día hábil. Se excluyen sábados, domingos y feriados oficiales del Perú. Se envía constancia; la administración responde por correo y solo entonces pasa a RESPONDIDO. Si el envío falla, permanece pendiente. |
-| RN-84 | Existen tres caminos de registro: formulario, Google y creación administrativa. Formulario y creación administrativa usan correo, nombres y apellidos separados y `telefono` opcional; Google entrega el correo verificado y sus datos disponibles. |
+| RN-84 | Existen tres caminos de registro: formulario, Google y creación administrativa. Formulario y creación administrativa usan correo, nombres y apellidos separados, `telefono` opcional y DNI opcional; Google entrega el correo verificado y sus datos disponibles, y permite completar después los apellidos separados y el DNI opcional. |
 | RN-85 | El correo que llega por Google ya está verificado: ese usuario no recibe el correo de verificación. |
 | RN-86 | Un mismo correo es una sola cuenta: los accesos por formulario y por Google se vinculan entre sí. |
 | RN-87 | El login no bloquea el catálogo ni las lecciones de vista previa; la sesión se pide solo al matricularse. |
@@ -2251,11 +2257,12 @@ acceso propio del docente queda fuera del alcance actual y podrá evaluarse post
 
 **19.3 — Qué nota queda con varios intentos** ✅ *Resuelto: la más alta.* (§12)
 
-**19.4 — Datos del certificado** ✅ *Resuelto: nombres, apellidos y DNI son obligatorios y deben
-confirmarse antes de emitir. Pueden modificarse mientras el certificado no exista; una vez
-emitido quedan congelados y solo el administrador puede corregirlos. Si las demás condiciones ya
-se cumplieron, el sistema solicita los datos y, al confirmarse, continúa con la emisión programada
-o muestra el aviso final si la emisión es inmediata.* (§13.8)
+**19.4 — Datos del certificado** ✅ *Resuelto: nombres, apellido paterno y apellido materno son
+obligatorios y deben confirmarse antes de emitir. Pueden modificarse mientras el certificado no
+exista; una vez emitido quedan congelados y solo el administrador puede corregirlos. El DNI es un
+dato opcional del perfil: no se imprime ni condiciona la emisión. Si las demás condiciones ya se
+cumplieron, el sistema solicita únicamente los datos obligatorios y, al confirmarse, continúa con
+la emisión programada o muestra el aviso final si la emisión es inmediata.* (§13.8)
 
 **19.5 — Preguntas de respuesta abierta** ✅ *Resuelto: están habilitadas y requieren revisión
 del administrador. El intento queda PENDIENTE_REVISION, tiene una fecha máxima visible y, si el
@@ -2386,7 +2393,7 @@ nota, firmas ni PDF. Un certificado corregido muestra sus datos vigentes; uno an
 no es válido y su fecha de anulación; un código inexistente no revela información.* (§13.7)
 
 **19.24 — Cuenta y matrícula creadas por administración** ✅ *Resuelto: el administrador puede
-crear una cuenta con correo, nombres, apellidos y teléfono opcional. Una cuenta nueva recibe la
+crear una cuenta con correo, nombres, apellidos, teléfono opcional y DNI opcional. Una cuenta nueva recibe la
 contraseña temporal `Escuela1415@` y CAMBIO_PENDIENTE; puede ver el panel, pero el aviso permanece
 y no accede a cursos, exámenes ni certificados hasta verificar el correo, aceptar los documentos
 y cambiar la contraseña. Recibe por correo las instrucciones y el enlace de verificación. Una

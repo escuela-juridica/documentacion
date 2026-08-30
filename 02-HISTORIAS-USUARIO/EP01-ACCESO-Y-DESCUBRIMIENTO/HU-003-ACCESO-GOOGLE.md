@@ -26,6 +26,8 @@
 - No se envía correo de verificación al correo confirmado por Google.
 - Como Google puede entregar los apellidos en un solo bloque, no se obliga a separarlos al ingresar;
   se completan como apellido paterno y materno antes de emitir un certificado.
+- Google no proporciona el DNI. La persona puede registrarlo posteriormente desde su perfil como
+  dato opcional; dejarlo vacío no limita la cuenta ni la certificación.
 - Desde su perfil, la persona puede definir una contraseña propia y conservar ambos métodos de
   acceso: Google y correo con contraseña.
 - Toda contraseña propia que se defina debe tener como mínimo ocho caracteres, una letra mayúscula,
@@ -61,6 +63,8 @@
   **entonces** puede usar cualquiera de los dos métodos sin crear otra cuenta ni perder historial.
 - **Dado** una contraseña propia que no cumple todas las condiciones mínimas, **cuando** intenta
   guardarla, **entonces** se rechaza sin retirar el acceso con Google.
+- **Dado** una cuenta creada mediante Google sin DNI, **cuando** usa la plataforma o confirma los
+  nombres de su certificado, **entonces** el dato ausente no bloquea ninguna operación.
 
 ## Privacidad y conservación
 

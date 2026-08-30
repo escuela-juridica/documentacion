@@ -17,8 +17,9 @@
 ## Alcance incluido
 
 - Buscar por correo y reutilizar una única cuenta existente. Si no existe, administración registra
-  correo, nombres, apellido paterno, apellido materno y teléfono opcional; se crea con la contraseña
-  temporal `Escuela1415@`, correo pendiente de verificar y estado CAMBIO_PENDIENTE.
+  correo, nombres, apellido paterno, apellido materno, teléfono opcional y DNI opcional; se crea con
+  la contraseña temporal `Escuela1415@`, correo pendiente de verificar y estado CAMBIO_PENDIENTE.
+- Dejar vacío el DNI no impide crear la cuenta, activar la matrícula ni certificar posteriormente.
 - `REGISTRADO_MANUAL` si hubo dinero: importe, medio, referencia y motivo obligatorios.
 - `EXONERADO` si no hubo dinero: importe cero y motivo obligatorio.
 - Responsable y fecha siempre registrados.
@@ -51,6 +52,8 @@
 - **Dado** cuenta CAMBIO_PENDIENTE, **cuando** matrícula, **entonces** el derecho queda ACTIVA, pero
   el contenido continúa bloqueado.
 - **Dado** una matrícula previa, **cuando** intenta repetir, **entonces** no duplica.
+- **Dado** una cuenta nueva sin DNI, **cuando** administración confirma la matrícula, **entonces**
+  la cuenta y el acceso siguen el mismo flujo sin generar un pendiente por ese dato.
 - **Dado** cierre alcanzado y ausencia de sesiones futuras con asistencia obligatoria, **cuando**
   administración matricula, **entonces** debe confirmar la advertencia académica y queda registrada
   la matrícula sin afirmar que el alumno certificará automáticamente.

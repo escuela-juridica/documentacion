@@ -11,15 +11,17 @@
 
 ## Historia
 
-> Como **alumno**, quiero **consultar y actualizar mis datos**, para **mantener mi contacto y
-> confirmar correctamente la identidad que aparecerá en mis certificados**.
+> Como **alumno**, quiero **consultar y actualizar mis datos**, para **mantener mi información
+> personal y confirmar correctamente el nombre que aparecerá en mis certificados**.
 
 ## Alcance incluido
 
-- Consulta y edición de nombres, apellidos y teléfono opcional según permisos definidos.
+- Consulta y edición de nombres, apellidos, teléfono opcional y DNI opcional según permisos definidos.
 - El correo se muestra como identidad de la cuenta y no se modifica desde este formulario.
-- Captura de DNI para certificación.
-- Confirmación explícita de nombres, apellidos y DNI, registrada con fecha.
+- Registro, edición o eliminación del DNI por decisión del alumno; dejarlo vacío es válido.
+- El DNI no se imprime en el certificado ni condiciona el registro, la matrícula, el pago, el
+  aprendizaje, las evaluaciones o la certificación.
+- Confirmación explícita de nombres y apellidos para certificación, registrada con fecha.
 - Posibilidad de confirmar antes o después de completar el curso.
 - Una cuenta creada con Google puede definir una contraseña propia desde el perfil sin eliminar el
   acceso con Google ni crear otra cuenta.
@@ -35,7 +37,7 @@ conservación del mismo código; editar el perfil no modifica el documento.
 
 1. El alumno abre su perfil.
 2. Consulta los datos conocidos y completa los faltantes.
-3. Guarda el teléfono opcional y demás información editable.
+3. Guarda el teléfono y el DNI cuando decida proporcionarlos, o los deja vacíos.
 4. Cuando confirma los datos de certificación, ESEJUR registra la confirmación.
 5. Si su cuenta solo tenía acceso con Google, puede crear una contraseña propia y conservar ambos
    métodos de ingreso.
@@ -45,8 +47,10 @@ conservación del mismo código; editar el perfil no modifica el documento.
 - **Dado** una sesión de alumno, **cuando** actualiza datos válidos, **entonces** vuelve a verlos
   conservados.
 - **Dado** teléfono vacío, **cuando** guarda el perfil, **entonces** no se bloquea la operación.
-- **Dado** nombres, apellidos o DNI incompletos, **cuando** intenta confirmar identidad, **entonces**
-  se indican los faltantes y no se marca confirmado.
+- **Dado** nombres o apellidos incompletos, **cuando** intenta confirmar los datos del certificado,
+  **entonces** se indican los faltantes y no se marca confirmado.
+- **Dado** un DNI vacío, **cuando** guarda el perfil o confirma sus nombres y apellidos,
+  **entonces** ambas operaciones terminan sin bloquearse ni crear una condición pendiente.
 - **Dado** un certificado ya emitido, **cuando** cambia el perfil, **entonces** el certificado no se
   recalcula ni cambia automáticamente.
 - **Dado** el correo de la cuenta, **cuando** edita el perfil, **entonces** puede consultarlo pero no
@@ -65,11 +69,11 @@ conservación del mismo código; editar el perfil no modifica el documento.
 
 ## Orientación de trabajo
 
-- **Frontend:** formulario prellenado, teléfono opcional, faltantes y confirmación de identidad.
+- **Frontend:** formulario prellenado, teléfono y DNI opcionales, faltantes y confirmación de nombres.
 - **Backend:** autorización, conservación y fecha/hora de la última confirmación.
 - **Integración:** editar y confirmar sin alterar documentos congelados.
 
 ## Demostración esperada
 
-Mostrar edición, teléfono opcional, validación de identidad y confirmación registrada; comprobar
-que un certificado emitido conserva su copia histórica.
+Mostrar edición, teléfono y DNI opcionales, confirmación de nombres registrada y guardado válido
+con DNI vacío; comprobar que un certificado emitido conserva su copia histórica.

@@ -21,7 +21,8 @@
 - No está disponible mientras exista una respuesta abierta de examen CALIFICADO en
   PENDIENTE_REVISION; primero debe publicarse la calificación definitiva.
 - Exige motivo y registra administrador, fecha y acción.
-- Nombres, apellido paterno, apellido materno y DNI confirmados siguen obligatorios.
+- Nombres, apellido paterno y apellido materno confirmados siguen obligatorios. El DNI es opcional
+  y su ausencia nunca bloquea la emisión manual.
 - Solo un certificado por alumno/curso.
 - Si no existe `fecha_finalizacion`, se establece con la fecha de la acción; nunca anterior a la
   matrícula ni futura.

@@ -17,7 +17,7 @@
 
 ## Alcance incluido
 
-- Correo, nombres y apellidos obligatorios; teléfono opcional.
+- Correo, nombres y apellidos obligatorios; teléfono y DNI opcionales.
 - Para una cuenta nueva: contraseña temporal `Escuela1415@` y CAMBIO_PENDIENTE.
 - Correo con instrucciones, contraseña temporal y verificación.
 - Aviso permanente en el panel hasta verificar correo, aceptar documentos y cambiar contraseña.
@@ -49,6 +49,8 @@
 - Correo existente: se reutiliza la cuenta, se conservan clave e historial y no se envía una nueva
   contraseña temporal.
 - Teléfono vacío: válido.
+- DNI vacío: válido; la persona puede registrarlo o editarlo después desde su perfil y nunca es un
+  requisito de habilitación o certificación.
 - No se permite omitir ninguna de las tres condiciones de habilitación.
 - El fallo de correo no marca el correo como verificado.
 - Un enlace de verificación vencido, usado o sustituido por un reenvío no habilita la cuenta.

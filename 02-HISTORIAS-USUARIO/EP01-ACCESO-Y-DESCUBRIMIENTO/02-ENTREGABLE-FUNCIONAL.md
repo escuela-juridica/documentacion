@@ -77,20 +77,21 @@ queda expuesto.
 
 ### 3. Registrar una cuenta mediante formulario
 
-1. Completar nombres, apellidos, correo y contraseña.
+1. Completar nombres, apellidos, correo y contraseña; decidir si se registra el DNI opcional.
 2. Aceptar los documentos públicos aplicables desde sus enlaces.
 3. Enviar el registro y mostrar la solicitud de verificación de correo.
 4. Verificar el correo e iniciar sesión con la nueva cuenta.
 
 **Resultado esperado:** se crea una sola cuenta válida y queda registrado el consentimiento
-aceptado. El DNI no se solicita durante este registro.
+aceptado. El DNI puede registrarse, pero dejarlo vacío no impide completar el flujo.
 
 ### 4. Administrar los datos personales
 
 1. Abrir el perfil de la cuenta autenticada.
 2. Completar o actualizar sus datos editables.
-3. Mostrar que el correo de acceso se consulta, pero no se modifica desde el perfil.
-4. Guardar y volver a abrir el perfil para comprobar la conservación de cambios.
+3. Registrar, editar o retirar el DNI opcional y comprobar que dejarlo vacío es válido.
+4. Mostrar que el correo de acceso se consulta, pero no se modifica desde el perfil.
+5. Guardar y volver a abrir el perfil para comprobar la conservación de cambios.
 
 **Resultado esperado:** el alumno controla sus datos sin alterar su identidad de acceso ni datos
 que ya hayan quedado congelados en certificados emitidos.

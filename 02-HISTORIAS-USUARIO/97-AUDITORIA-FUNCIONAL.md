@@ -55,6 +55,9 @@ Cada historia fue revisada para confirmar:
 - Se detallaron fórmula de notas, selección múltiple sin puntaje parcial, intentos ilimitados por
   defecto, habilitación por modalidad, revisión de respuestas abiertas y bloqueos académicos.
 - Se completaron las reglas de Google, datos personales, páginas legales y registros de acceso.
+- Se corrigió el DNI como dato personal opcional del registro y del perfil: nunca bloquea cuenta,
+  matrícula, pago, aprendizaje, evaluación o certificado; la emisión solo exige nombres y apellidos
+  confirmados y la verificación pública no expone el DNI.
 - Se ampliaron las validaciones exactas antes de publicar un curso.
 - Se detallaron duplicación, restricciones de edición y comportamiento de CERRADO y CANCELADO.
 - Se completó la matrícula tardía y su efecto sobre asistencia y certificación.
