@@ -37,8 +37,6 @@ completa, no el flujo paso a paso de cada historia.
 - Registrarse mediante formulario.
 - Registrarse o ingresar con Google.
 - Recuperar contraseña.
-- Crear cuenta administrativamente.
-- Completar habilitación de cuenta temporal.
 - Administrar datos personales.
 - Explorar catálogo.
 - Buscar y filtrar cursos.
@@ -51,10 +49,10 @@ completa, no el flujo paso a paso de cada historia.
 
 - Visitante: registrarse, ingresar con Google, recuperar contraseña, explorar catálogo, buscar,
   consultar ficha y revisar vista previa.
-- Alumno: iniciar sesión, administrar datos y completar habilitación temporal.
-- Administrador: iniciar sesión y crear cuenta administrativamente.
+- Alumno: iniciar sesión y administrar datos.
+- Administrador: iniciar sesión.
 - Google: registrarse o ingresar con Google.
-- Servicio de correo: verificar correo, recuperar contraseña y habilitar cuenta temporal.
+- Servicio de correo: verificar correo y recuperar contraseña.
 
 ## Relaciones UML
 
@@ -62,9 +60,6 @@ completa, no el flujo paso a paso de cada historia.
 - `Registrarse mediante formulario` **incluye** `Verificar correo`.
 - `Registrarse o ingresar con Google` **incluye** `Aceptar términos y política` cuando sea una
   cuenta nueva.
-- `Crear cuenta administrativamente` **incluye** `Completar habilitación de cuenta temporal`.
-- `Completar habilitación de cuenta temporal` **incluye** verificar correo, aceptar documentos y
-  cambiar contraseña.
 - `Buscar y filtrar cursos` puede modelarse como extensión de `Explorar catálogo`.
 - `Revisar lección de vista previa` extiende `Consultar ficha de curso`.
 
@@ -81,4 +76,3 @@ otras épicas. Google y correo son actores externos, no componentes dentro del r
 > Google y Servicio de correo a la derecha. Usa exactamente los actores, casos, asociaciones y
 > exclusiones definidos en este documento. La salida debe ser horizontal, legible en Word y no
 > contener arquitectura técnica ni flujos de actividades.
-

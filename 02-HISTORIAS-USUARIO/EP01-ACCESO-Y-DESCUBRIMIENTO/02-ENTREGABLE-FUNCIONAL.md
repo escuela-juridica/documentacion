@@ -19,10 +19,9 @@ El recorrido que resume el valor entregado es:
 | HU-002 | Registro mediante formulario y verificación de correo |
 | HU-003 | Registro o ingreso mediante Google |
 | HU-004 | Recuperación de contraseña |
-| HU-005 | Creación administrativa y habilitación de una cuenta temporal |
-| HU-006 | Consulta y actualización de datos personales |
-| HU-007 | Catálogo, búsqueda y filtros de cursos |
-| HU-008 | Ficha pública y contenido de vista previa |
+| HU-005 | Consulta y actualización de datos personales |
+| HU-006 | Catálogo, búsqueda y filtros de cursos |
+| HU-007 | Ficha pública y contenido de vista previa |
 
 ## Objetivo de la review
 
@@ -34,7 +33,7 @@ reales en pantalla; no se considera suficiente enseñar formularios aislados, c�
 
 - **Visitante:** explora la oferta y crea una cuenta.
 - **Alumno:** inicia sesión y administra sus datos.
-- **Administrador:** crea una cuenta administrativa para un alumno o para otro administrador.
+- **Administrador:** inicia sesión por el acceso correspondiente a su rol.
 - **Google:** interviene como alternativa de identidad.
 - **Servicio de correo:** permite verificar la cuenta y recuperar la contraseña.
 
@@ -46,7 +45,6 @@ Antes de comenzar la review deben existir:
 - al menos un curso con contenido autorizado para vista previa;
 - una cuenta registrada y verificada;
 - una cuenta creada con Google;
-- una cuenta creada por administración con la contraseña temporal `Escuela1415@`;
 - acceso al correo utilizado para mostrar verificación y recuperación;
 - una sesión cerrada para iniciar el recorrido como visitante.
 
@@ -77,10 +75,11 @@ queda expuesto.
 
 ### 3. Registrar una cuenta mediante formulario
 
-1. Completar nombres, apellidos, correo y contraseña; decidir si se registra el DNI opcional.
+1. Completar nombres, apellido paterno, correo y contraseña; decidir si se registran el apellido
+   materno, teléfono y DNI opcionales.
 2. Aceptar los documentos públicos aplicables desde sus enlaces.
-3. Enviar el registro y mostrar la solicitud de verificación de correo.
-4. Verificar el correo e iniciar sesión con la nueva cuenta.
+3. Enviar el registro y mostrar el código de seis dígitos enviado al correo.
+4. Ingresar el código más reciente, verificar el correo e iniciar sesión con la nueva cuenta.
 
 **Resultado esperado:** se crea una sola cuenta válida y queda registrado el consentimiento
 aceptado. El DNI puede registrarse, pero dejarlo vacío no impide completar el flujo.
@@ -116,21 +115,6 @@ duplicados por intentos repetidos.
 **Resultado esperado:** el usuario recupera el acceso sin revelar públicamente si otros correos
 están registrados.
 
-### 7. Habilitar una cuenta creada por administración
-
-1. Crear la cuenta indicando nombres, apellidos, correo y teléfono opcional; mostrar también la
-   creación de otro administrador y el registro de quién concedió ese perfil.
-2. Mostrar el aviso enviado al nuevo usuario.
-3. Ingresar con la contraseña temporal `Escuela1415@`.
-4. Mostrar la advertencia persistente con las tres condiciones: verificar correo, aceptar términos
-   y privacidad, y cambiar la contraseña.
-5. Completar las tres y comprobar que solo entonces desaparece la advertencia y se habilita el
-   acceso. Intentar desactivar al propio administrador y al último habilitado para demostrar ambos
-   bloqueos.
-
-**Resultado esperado:** la cuenta administrativa queda habilitada y no conserva de forma
-indefinida la contraseña inicial.
-
 ## Comprobaciones alternativas durante la review
 
 - Rechazar credenciales incorrectas sin abrir una sesión.
@@ -144,15 +128,15 @@ indefinida la contraseña inicial.
 
 - capturas o grabación del recorrido completo;
 - resultado de verificación y recuperación por correo;
-- cuenta creada por formulario, Google y administración;
+- cuenta creada por formulario y Google;
 - evidencia del bloqueo de contenido protegido;
 - lista de historias aceptadas y observaciones surgidas en la review.
 
 ## Criterios para aceptar el entregable
 
-- Las ocho historias incluidas cumplen sus criterios de aceptación.
+- Las siete historias incluidas cumplen sus criterios de aceptación.
 - El catálogo y la ficha funcionan sin autenticación.
-- Los tres caminos de creación o habilitación de cuenta no producen duplicidad.
+- Los caminos de creación por formulario y Google no producen duplicidad.
 - El inicio, cierre y recuperación de acceso funcionan de extremo a extremo.
 - Los cambios del perfil se conservan correctamente.
 - Los errores mostrados permiten al usuario saber cómo continuar.

@@ -68,7 +68,7 @@
 
 ## Dependencia interna
 
-- Depende de HU-015 y utiliza cuenta de EP01/HU-005.
+- Depende de HU-008 para gestionar la cuenta y de HU-015 para disponer del curso publicado.
 - HU-020 y HU-021 consumen su resultado.
 
 ## Orientación de trabajo

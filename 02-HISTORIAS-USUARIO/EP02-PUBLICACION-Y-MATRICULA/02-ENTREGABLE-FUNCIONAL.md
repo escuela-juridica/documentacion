@@ -3,8 +3,9 @@
 ## Producto funcional obtenido
 
 Al finalizar la épica queda operativo el **flujo de publicación, comercialización y matrícula de
-cursos de ESEJUR**. La escuela puede construir una oferta académica y un alumno puede adquirir el
-acceso mediante gratuidad, pago automático con Culqi o matrícula administrativa.
+cursos de ESEJUR**. La escuela puede gestionar las cuentas de sus usuarios, construir una oferta
+académica y entregar acceso mediante gratuidad, pago automático con Culqi o matrícula
+administrativa.
 
 El recorrido que resume el valor entregado es:
 
@@ -15,6 +16,7 @@ El recorrido que resume el valor entregado es:
 
 | Historia | Capacidad que aporta al entregable |
 |---|---|
+| HU-008 | Gestión administrativa y habilitación de usuarios |
 | HU-009 | Administración de información base |
 | HU-010 | Creación y configuración de cursos |
 | HU-011 | Organización de módulos, lecciones y materiales |
@@ -55,6 +57,20 @@ Antes de comenzar deben existir:
 - cupos controlados para demostrar disponibilidad y ausencia de reserva.
 
 ## Guion principal de demostración
+
+### 0. Gestionar y habilitar un usuario
+
+1. Buscar un correo antes de crear la cuenta.
+2. Crear un alumno o administrador con nombres y apellido paterno obligatorios; dejar apellido
+   materno, teléfono y DNI vacíos para demostrar que son opcionales.
+3. Ingresar con `Escuela1415@` y mostrar las restricciones de la cuenta temporal.
+4. Ingresar el código de seis dígitos enviado por correo, aceptar los documentos y definir una
+   contraseña propia con ocho caracteres, mayúscula, minúscula y número.
+5. Comprobar que la cuenta queda habilitada y que no puede desactivarse al propio administrador ni
+   al último administrador activo.
+
+**Resultado esperado:** la Escuela incorpora usuarios sin duplicarlos y conserva control sobre su
+habilitación y sus roles.
 
 ### 1. Administrar la información base
 
@@ -180,6 +196,7 @@ alumnos.
 ## Evidencias que deben conservarse
 
 - curso configurado y publicado;
+- cuenta creada y habilitada administrativamente sin duplicidad;
 - estructura de módulos, sesiones, exámenes y requisitos;
 - tres matrículas con sus diferentes orígenes;
 - resultado aprobado y rechazado de Culqi;
@@ -189,7 +206,7 @@ alumnos.
 
 ## Criterios para aceptar el entregable
 
-- Las trece historias incluidas cumplen sus criterios de aceptación.
+- Las catorce historias incluidas cumplen sus criterios de aceptación.
 - El curso se configura y publica desde administración sin datos precargados manualmente.
 - Las reglas de modalidad se mantienen durante todo el flujo.
 - Los tres caminos de matrícula conceden el resultado correcto.

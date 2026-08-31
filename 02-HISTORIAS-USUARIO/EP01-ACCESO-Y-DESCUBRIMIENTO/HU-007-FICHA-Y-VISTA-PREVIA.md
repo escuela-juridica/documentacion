@@ -1,4 +1,4 @@
-# HU-008 — Consultar la ficha y vista previa de un curso
+# HU-007 — Consultar la ficha y vista previa de un curso
 
 ## Información general
 
@@ -77,7 +77,7 @@
 
 ## Dependencia interna
 
-- Se integra con HU-007 para el recorrido desde catálogo.
+- Se integra con HU-006 para el recorrido desde catálogo.
 - Puede desarrollarse en paralelo usando una URL y curso controlados.
 
 ## Orientación de trabajo

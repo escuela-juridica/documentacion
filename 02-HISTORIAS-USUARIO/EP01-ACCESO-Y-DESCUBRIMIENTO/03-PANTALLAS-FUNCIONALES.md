@@ -2,14 +2,14 @@
 
 ## Cantidad
 
-La épica incorpora **11 pantallas principales nuevas**. En su review se muestran las once porque
+La épica incorpora **10 pantallas principales nuevas**. En su review se muestran las diez porque
 no depende visualmente de pantallas construidas en otra épica.
 
 ## Pantallas principales
 
 ### PF-001 — Inicio y catálogo de cursos
 
-- **Historias:** HU-007.
+- **Historias:** HU-006.
 - **Actor:** visitante y alumno.
 - **Debe mostrar:** oferta de cursos, búsqueda, selector de tipo, selector de categoría y tarjetas
   con nombre, imagen, modalidad, precio o gratuidad y disponibilidad. Los selectores comienzan en
@@ -20,7 +20,7 @@ no depende visualmente de pantallas construidas en otra épica.
 
 ### PF-002 — Ficha pública y vista previa del curso
 
-- **Historias:** HU-008.
+- **Historias:** HU-007.
 - **Actor:** visitante y alumno.
 - **Debe mostrar:** información comercial, modalidad, precio y promoción vigente, fechas cuando
   correspondan, docente, beneficios, temario, duración disponible y lecciones de vista previa.
@@ -36,30 +36,33 @@ no depende visualmente de pantallas construidas en otra épica.
 - **Actor:** alumno y administrador.
 - **Debe mostrar:** correo, contraseña, acción de ingreso, “Continuar con Google”, acceso al
   registro y recuperación de contraseña.
-- **Estados importantes:** credenciales inválidas, cuenta no habilitada, cambio de contraseña
-  pendiente e ingreso correcto por rol.
+- **Estados importantes:** credenciales inválidas, correo pendiente de verificar e ingreso correcto
+  por rol. El estado de contraseña temporal se incorpora al reutilizar esta pantalla en HU-008 de
+  EP02.
 - **Acción para la review:** ingresar como alumno y como administrador.
 
 ### PF-004 — Registro mediante formulario
 
 - **Historias:** HU-002 y HU-003.
 - **Actor:** visitante.
-- **Debe mostrar:** nombres, apellidos, correo, teléfono opcional, DNI opcional, contraseña, aceptación de
-  documentos, alternativa de Google y contacto por WhatsApp para creación administrativa.
-- **Jerarquía:** formulario centrado de una columna, sin ilustración lateral; “Crear cuenta” es la
-  única acción principal y WhatsApp aparece como ayuda secundaria.
+- **Debe mostrar:** nombres, apellido paterno, apellido materno opcional, correo, teléfono opcional,
+  DNI opcional, contraseña, aceptación de documentos, alternativa de Google y contacto por
+  WhatsApp para solicitar ayuda.
+- **Jerarquía:** en escritorio utiliza dos columnas: panel institucional visual a la izquierda y
+  formulario de una columna a la derecha. En móvil queda únicamente el formulario en una columna.
+  “Crear cuenta” es la única acción principal y WhatsApp aparece como ayuda secundaria.
 - **Estados importantes:** correo existente, contraseña inválida, consentimientos faltantes y
   registro enviado.
 - **Acción para la review:** crear una cuenta dejando vacío el DNI y mostrar que también puede
   registrarse o editarse como dato opcional.
 
-### PF-005 — Resultado de verificación del correo
+### PF-005 — Verificación del correo
 
 - **Historias:** HU-002.
 - **Actor:** visitante registrado.
-- **Debe mostrar:** verificación exitosa, enlace inválido o vencido y acción para continuar al
-  ingreso o solicitar un nuevo aviso.
-- **Acción para la review:** abrir el enlace válido y habilitar la cuenta.
+- **Debe mostrar:** correo parcialmente oculto, campo para el código de seis dígitos, código
+  incorrecto, verificación exitosa y acciones para verificar o reenviar el código.
+- **Acción para la review:** ingresar el código más reciente y habilitar la cuenta.
 
 ### PF-006 — Solicitud de recuperación de contraseña
 
@@ -79,40 +82,26 @@ no depende visualmente de pantallas construidas en otra épica.
 
 ### PF-008 — Panel inicial del usuario
 
-- **Historias:** HU-001 y HU-005.
+- **Historias:** HU-001.
 - **Actor:** alumno y administrador.
-- **Debe mostrar:** identidad de la sesión, navegación permitida y aviso persistente si utiliza la
-  contraseña temporal. En administrador, la barra lateral muestra Dashboard, Cursos, Usuarios,
+- **Debe mostrar:** identidad de la sesión y navegación permitida. En administrador, la barra lateral muestra Dashboard, Cursos, Usuarios,
   Matrículas y pagos, Operación académica, Certificados, Reclamaciones, Reportes y Configuración.
 - **Jerarquía:** alumno prioriza “Mis cursos”; administrador ve navegación sin gráficos ni tarjetas
-  que dupliquen el dashboard. Una cuenta restringida prioriza “Completar habilitación”.
-- **Estados importantes:** alumno no habilitado, cambio pendiente y sesión normal.
-- **Acción para la review:** ingresar con `Escuela1415@` y mostrar la advertencia.
+  que dupliquen el dashboard.
+- **Estados importantes:** sesión de alumno y sesión de administrador.
+- **Acción para la review:** ingresar con ambos roles y comprobar el destino correspondiente.
 
 ### PF-009 — Mi perfil, datos y seguridad
 
-- **Historias:** HU-005 y HU-006.
+- **Historias:** HU-005.
 - **Actor:** alumno y administrador.
 - **Debe mostrar:** datos personales editables, correo de acceso de solo lectura y sección para
   definir o cambiar contraseña.
 - **Jerarquía:** dos pestañas, Datos y Seguridad, con una sola visible; el aviso de datos congelados
   solo aparece si existe un certificado emitido afectado.
-- **Estados importantes:** cuenta creada por formulario, Google o administración; datos
+- **Estados importantes:** cuenta creada por formulario o Google; datos
   incompletos y guardado correcto.
-- **Acción para la review:** actualizar datos y reemplazar la contraseña temporal.
-
-### PF-010 — Gestión administrativa de usuarios
-
-- **Historias:** HU-005.
-- **Actor:** administrador.
-- **Debe mostrar:** búsqueda o selección de usuarios, datos principales, estado de cuenta y acción
-  de creación administrativa con rol Alumno o Administrador y quién concedió el perfil.
-- **Jerarquía:** el listado aparece primero y la creación o el detalle se abre en panel; reenviar y
-  deshabilitar no compiten con “Crear usuario” en cada fila.
-- **Estados importantes:** correo duplicado, teléfono omitido, cuenta creada, correo fallido,
-  habilitación incompleta, auto-desactivación bloqueada y último administrador protegido.
-- **Acción para la review:** crear una cuenta con teléfono opcional y contraseña temporal; mostrar
-  que correo, documentos y nueva contraseña son las tres condiciones de habilitación.
+- **Acción para la review:** actualizar datos y definir o cambiar la contraseña.
 
 ### PF-011 — Documentos legales públicos
 
@@ -126,12 +115,9 @@ no depende visualmente de pantallas construidas en otra épica.
 ## Elementos que no cuentan como pantallas adicionales
 
 - selector externo de cuentas de Google;
-- formulario emergente para crear una cuenta desde PF-010;
-- alerta persistente de contraseña temporal;
 - mensajes de validación o envío de correo;
 - confirmación de cierre de sesión.
 
 ## Orden recomendado de presentación
 
-PF-001 → PF-002 → PF-004 → PF-011 → PF-005 → PF-003 → PF-008 → PF-009 → PF-006 → PF-007 →
-PF-010.
+PF-001 → PF-002 → PF-004 → PF-011 → PF-005 → PF-003 → PF-008 → PF-009 → PF-006 → PF-007.

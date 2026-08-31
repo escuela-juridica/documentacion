@@ -20,7 +20,7 @@
 2. ESEJUR muestra una respuesta neutral.
 3. Si existe una cuenta aplicable, envía un enlace de recuperación.
 4. La persona abre un enlace válido y define una contraseña propia de al menos ocho caracteres,
-   con mayúscula, minúscula, número y carácter especial.
+   con mayúscula, minúscula y número.
 5. El enlace utilizado deja de servir y puede iniciar sesión con la nueva contraseña.
 
 El enlace vence 60 minutos después de emitirse. Una nueva solicitud invalida todos los enlaces de

@@ -31,7 +31,7 @@
 - Desde su perfil, la persona puede definir una contraseña propia y conservar ambos métodos de
   acceso: Google y correo con contraseña.
 - Toda contraseña propia que se defina debe tener como mínimo ocho caracteres, una letra mayúscula,
-  una letra minúscula, un número y un carácter especial.
+  una letra minúscula y un número.
 - La fecha y hora de aceptación de los documentos se muestran y conservan en `America/Lima`.
 
 ## Flujo principal

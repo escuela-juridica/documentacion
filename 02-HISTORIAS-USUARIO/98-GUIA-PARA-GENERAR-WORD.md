@@ -13,8 +13,8 @@ completo.
 2. Índice automático.
 3. Objetivo, actores, regla de máximo dos personas y cinco incrementos.
 4. Épica 1: descripción, entregable, dependencias, diagrama de casos de uso e historias HU-001 a
-   HU-008.
-5. Épica 2: descripción, entregable, dependencias, diagrama e historias HU-009 a HU-021.
+   HU-007.
+5. Épica 2: descripción, entregable, dependencias, diagrama e historias HU-008 a HU-021.
 6. Épica 3: descripción, entregables de meses 3 y 4, dependencias, diagrama e historias HU-022 a
    HU-031.
 7. Épica 4: descripción, entregable, dependencias, diagrama e historias HU-032 a HU-046.

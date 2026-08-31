@@ -93,15 +93,15 @@ flujo. La propuesta consolidada contempla **40 pantallas principales únicas**.
 | HU-002 | Registrarme mediante formulario | 2 | Ninguna; se integra con HU-001 |
 | HU-003 | Registrarme o ingresar con Google | 2 | Ninguna; se integra con HU-001 |
 | HU-004 | Recuperar mi contraseña | 1 | Ninguna |
-| HU-005 | Crear y habilitar una cuenta administrativamente | 2 | HU-001 para el ingreso con clave temporal |
-| HU-006 | Administrar mis datos personales | 1 | HU-001 |
-| HU-007 | Explorar, buscar y filtrar cursos | 2 | Ninguna |
-| HU-008 | Consultar la ficha y vista previa de un curso | 2 | HU-007 para el recorrido integrado |
+| HU-005 | Administrar mis datos personales | 1 | HU-001 |
+| HU-006 | Explorar, buscar y filtrar cursos | 2 | Ninguna |
+| HU-007 | Consultar la ficha y vista previa de un curso | 2 | HU-006 para el recorrido integrado |
 
 ### EP02 — Publicación y matrícula
 
 | ID | Historia | Personas | Dependencia interna |
 |---|---|---:|---|
+| HU-008 | Gestionar usuarios administrativamente | 2 | Reutiliza HU-001, HU-002 y HU-005 de EP01 |
 | HU-009 | Administrar información base | 1 | Ninguna |
 | HU-010 | Crear y configurar un curso | 2 | HU-009 |
 | HU-011 | Organizar el contenido de un curso | 2 | HU-010 |
@@ -112,7 +112,7 @@ flujo. La propuesta consolidada contempla **40 pantallas principales únicas**.
 | HU-016 | Administrar el ciclo de vida del curso | 2 | HU-015 |
 | HU-017 | Matricularme en un curso gratuito | 2 | HU-015 |
 | HU-018 | Matricularme pagando en línea | 2 | HU-015 |
-| HU-019 | Matricular administrativamente a un alumno | 2 | HU-015 |
+| HU-019 | Matricular administrativamente a un alumno | 2 | HU-008 y HU-015 |
 | HU-020 | Consultar y controlar matrículas y pagos | 2 | Al menos una de HU-017, HU-018 o HU-019 |
 | HU-021 | Consultar mis cursos y accesos | 2 | Al menos una de HU-017, HU-018 o HU-019 |
 

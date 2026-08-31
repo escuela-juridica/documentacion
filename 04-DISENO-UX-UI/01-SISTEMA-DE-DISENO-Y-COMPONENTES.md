@@ -358,6 +358,8 @@ Propiedad AccionFinal: Ninguna | Limpiar | MostrarClave | Calendario
 - Acción mostrar/ocultar al final.
 - No cambiar el valor al alternar visibilidad.
 - Lista de condiciones debajo durante creación o cambio.
+- Las cuatro condiciones visibles son: mínimo ocho caracteres, una mayúscula, una minúscula y un
+  número. No se exige símbolo.
 - Indicadores de condición con texto e icono.
 - No comunicar seguridad mediante una barra de color sin explicación.
 

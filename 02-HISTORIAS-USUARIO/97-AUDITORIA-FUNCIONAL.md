@@ -31,8 +31,8 @@ Cada historia fue revisada para confirmar:
 
 | Épica | Historias | Resultado |
 |---|---:|---|
-| EP01 — Acceso y descubrimiento | 8 | Completa y autosuficiente |
-| EP02 — Publicación y matrícula | 13 | Completa y autosuficiente |
+| EP01 — Acceso y descubrimiento | 7 | Completa y autosuficiente |
+| EP02 — Publicación y matrícula | 14 | Completa y autosuficiente |
 | EP03 — Desarrollo académico | 10 | Completa y autosuficiente |
 | EP04 — Certificación y control | 15 | Completa y autosuficiente |
 

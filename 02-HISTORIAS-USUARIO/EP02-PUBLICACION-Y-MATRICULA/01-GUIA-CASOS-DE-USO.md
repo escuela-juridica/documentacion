@@ -30,6 +30,9 @@ de software.
 ## Casos de uso
 
 - Administrar datos maestros.
+- Gestionar usuarios.
+- Crear cuenta administrativamente.
+- Completar habilitación de cuenta temporal.
 - Crear y configurar curso.
 - Organizar módulos, lecciones y materiales.
 - Reutilizar módulos existentes.
@@ -50,11 +53,15 @@ de software.
 
 ## Asociaciones y relaciones
 
-- Administrador se asocia con todos los casos de configuración, validación, publicación, ciclo de
-  vida, matrícula administrativa y consulta operativa.
+- Administrador se asocia con la gestión de usuarios y con todos los casos de configuración,
+  validación, publicación, ciclo de vida, matrícula administrativa y consulta operativa.
+- Alumno se asocia con completar la habilitación de su cuenta temporal.
 - Alumno se asocia con matrícula gratuita, pago, reintento, constancia y “Mis cursos”.
 - Culqi se asocia con pagar y reintentar pago.
-- Servicio de correo se asocia con confirmación de matrícula y pago no completado.
+- Servicio de correo se asocia con verificación de cuenta, instrucciones de habilitación,
+  confirmación de matrícula y pago no completado.
+- `Gestionar usuarios` incluye `Crear cuenta administrativamente`.
+- `Crear cuenta administrativamente` incluye `Completar habilitación de cuenta temporal`.
 - `Publicar curso` incluye `Validar curso`.
 - `Crear y configurar curso` incluye organizar contenido, configurar sesiones cuando aplique,
   configurar exámenes cuando aplique y configurar certificación.
@@ -76,4 +83,3 @@ de software.
 > “ESEJUR — Publicación y matrícula”. Coloca Administrador y Alumno a la izquierda; Culqi y
 > Servicio de correo a la derecha. Usa el rectángulo del sistema, actores de palo, elipses y
 > relaciones UML include/extend. Respeta exactamente los casos y restricciones de este archivo.
-

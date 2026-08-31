@@ -17,14 +17,15 @@
 
 ## Alcance incluido
 
-- Correo, nombres y apellidos separados; teléfono o WhatsApp opcional y DNI opcional.
+- Correo, nombres y apellido paterno obligatorios; apellido materno, teléfono o WhatsApp y DNI
+  opcionales. Los apellidos se capturan en campos separados.
 - El visitante decide si registra su DNI. Dejarlo vacío no impide crear o habilitar la cuenta ni
   condiciona ninguna matrícula, pago, actividad académica o certificado.
 - El teléfono se muestra al visitante con la etiqueta “WhatsApp”, pero las notificaciones
   automáticas del sistema se envían por correo; no se envían avisos automáticos por WhatsApp.
 - Contraseña elegida por la persona y un segundo ingreso que debe coincidir antes de guardar.
 - La contraseña propia debe tener como mínimo ocho caracteres e incluir al menos una letra
-  mayúscula, una letra minúscula, un número y un carácter especial.
+  mayúscula, una letra minúscula y un número.
 - Aceptación obligatoria de términos y política, conservando versión y fecha.
 - Política de privacidad y términos y condiciones existen como páginas públicas enlazadas desde el
   pie de la plataforma. El visitante puede leerlas antes de aceptarlas.
@@ -40,12 +41,12 @@
 1. El visitante completa los datos, acepta documentos y supera la protección anti-robot.
 2. ESEJUR valida obligatoriedad, formato, unicidad del correo y contraseña.
 3. Crea la cuenta todavía no habilitada y registra los consentimientos.
-4. Envía el correo de bienvenida/verificación.
-5. La persona abre el enlace y el correo queda verificado.
+4. Envía el correo de bienvenida con un código de verificación de seis dígitos.
+5. La persona ingresa el código más reciente y el correo queda verificado.
 6. La cuenta queda habilitada cuando todas las condiciones están completas.
 
-El enlace de verificación es válido durante 24 horas desde su emisión. Solicitar un nuevo envío
-invalida inmediatamente cualquier enlace de verificación anterior que todavía no se haya usado.
+El código de verificación puede utilizarse una sola vez. Solicitar un nuevo envío invalida
+inmediatamente cualquier código anterior que todavía no se haya usado.
 Las fechas y horas de registro, consentimiento, emisión y vencimiento se muestran en
 `America/Lima`.
 
@@ -57,8 +58,8 @@ Las fechas y horas de registro, consentimiento, emisión y vencimiento se muestr
 - Un correo ya registrado no produce una segunda cuenta; se orienta al ingreso o recuperación.
 - Si existe por Google, se vincula el acceso por formulario a la misma cuenta.
 - Un fallo al enviar la verificación no convierte el correo en verificado.
-- Un enlace de verificación vencido, utilizado o invalidado por un reenvío no verifica la cuenta;
-  la persona puede solicitar uno nuevo sin crear otra cuenta.
+- Un código incorrecto, utilizado o invalidado por un reenvío no verifica la cuenta; la persona
+  puede solicitar uno nuevo sin crear otra cuenta.
 - Solicitar ayuda por WhatsApp no evita la verificación del correo, la aceptación de documentos ni
   el cambio de contraseña que correspondan a una cuenta creada por administración.
 
@@ -92,18 +93,18 @@ Las fechas y horas de registro, consentimiento, emisión y vencimiento se muestr
 ### Contraseña propia
 
 - **Dado** el registro por formulario,
-- **cuando** las dos contraseñas coinciden pero no tienen ocho caracteres, mayúscula, minúscula,
-  número y carácter especial,
+- **cuando** las dos contraseñas coinciden pero no tienen ocho caracteres, mayúscula, minúscula
+  y número,
 - **entonces** la cuenta no se crea y se indican las condiciones faltantes.
 
-### Vigencia de verificación
+### Código de verificación
 
-- **Dado** un enlace de verificación emitido,
-- **cuando** se usa dentro de las 24 horas y no fue reemplazado,
+- **Dado** un código de seis dígitos emitido,
+- **cuando** se ingresa correctamente y no fue reemplazado,
 - **entonces** puede verificar el correo una sola vez.
 - **Dado** que se solicita un reenvío,
-- **cuando** se intenta usar un enlace anterior,
-- **entonces** se rechaza y solo el enlace más reciente permanece vigente.
+- **cuando** se intenta usar un código anterior,
+- **entonces** se rechaza y solo el código más reciente permanece vigente.
 
 ### Solicitud de cuenta asistida
 
@@ -115,7 +116,7 @@ Las fechas y horas de registro, consentimiento, emisión y vencimiento se muestr
 ## Notificación
 
 - Se envía un correo de bienvenida y verificación. No habilita la cuenta por sí solo: la persona
-  debe abrir y confirmar el enlace recibido.
+  debe ingresar correctamente el código de seis dígitos recibido.
 - ESEJUR registra si el envío fue aceptado o falló, sin seguimiento de apertura o entrega. Si falla,
   la cuenta permanece sin verificar y debe poder solicitarse un nuevo envío.
 

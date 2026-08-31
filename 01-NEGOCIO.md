@@ -781,7 +781,7 @@ Sigue la forma del formulario de udeapolis, con tres diferencias: **apellido mat
 | Correo electrónico | obligatorio |
 | Nombres | obligatorio |
 | Apellido paterno | obligatorio |
-| Apellido materno | obligatorio |
+| Apellido materno | **opcional** durante el registro; obligatorio al confirmar los datos del certificado |
 | WhatsApp | **opcional**; se guarda como `telefono` |
 | DNI | **opcional**; se registra como dato personal y no se utiliza para emitir el certificado |
 | Contraseña | obligatorio |
@@ -792,12 +792,14 @@ Sigue la forma del formulario de udeapolis, con tres diferencias: **apellido mat
 arreglo cómodo: alguien se equivoca al tipear, queda registrado con una clave que no conoce, y
 tiene que pasar por recuperar contraseña antes siquiera de haber entrado la primera vez.
 
-Toda contraseña propia debe tener al menos ocho caracteres e incluir mayúscula, minúscula, número
-y símbolo. La interfaz muestra estas cuatro condiciones mientras se escribe y no permite guardar
-si falta alguna.
+Toda contraseña propia debe tener al menos ocho caracteres e incluir una letra mayúscula, una letra
+minúscula y un número. La interfaz muestra estas cuatro condiciones mientras se escribe y no
+permite guardar si falta alguna.
 
-Los apellidos van **separados desde el inicio**: es la convención peruana y es como deben salir
-en el certificado. El alumno puede registrar su **DNI de manera opcional** durante el registro o
+Los apellidos van **separados desde el inicio**: el paterno es obligatorio y el materno puede
+dejarse vacío durante el registro o la edición del perfil. Antes de emitir un certificado, la
+persona debe completar y confirmar ambos apellidos porque así aparecerán en el documento. El
+alumno puede registrar su **DNI de manera opcional** durante el registro o
 después desde su perfil. Dejarlo vacío no impide crear la cuenta, matricularse, estudiar, pagar,
 rendir evaluaciones ni obtener el certificado.
 
@@ -843,8 +845,8 @@ perder a esa persona, la captura por el canal que ya usa y el administrador comp
 - El DNI puede dejarse vacío o registrarse como dato personal opcional; no forma parte de los
   requisitos del certificado.
 
-Al crear una cuenta nueva, el sistema envía un correo de bienvenida con el enlace de verificación,
-la contraseña temporal y el orden de los pasos que debe completar. La administración también
+Al crear una cuenta nueva, el sistema envía un correo de bienvenida con un código de verificación
+de seis dígitos, la contraseña temporal y el orden de los pasos que debe completar. La administración también
 puede comunicar esas instrucciones por el canal mediante el cual el alumno solicitó ayuda.
 
 Una cuenta con rol Administrador solo puede ser creada por otro administrador habilitado. Se
@@ -871,11 +873,11 @@ Correo y contraseña, o el botón de Google. Más **"¿Olvidaste tu contraseña?
 Una cuenta administrativa con CAMBIO_PENDIENTE puede iniciar sesión con `Escuela1415@`, pero solo
 accede al panel y al cambio de contraseña hasta completar la verificación y seguridad inicial.
 
-El enlace de verificación dura **24 horas**. Solicitar un reenvío invalida cualquier enlace de
-verificación anterior que todavía no se hubiera utilizado. El enlace para recuperar contraseña
-dura **60 minutos**; usarlo o solicitar uno nuevo invalida el anterior. En ambos casos, un enlace
-vencido o consumido explica el problema y ofrece una acción segura para volver a solicitarlo sin
-revelar públicamente si el correo existe.
+La verificación del correo utiliza un **código de seis dígitos** enviado a la dirección registrada.
+Solo el código más reciente puede utilizarse una vez; solicitar un reenvío invalida el anterior.
+El enlace para recuperar contraseña dura **60 minutos**; usarlo o solicitar uno nuevo invalida el
+anterior. Un código incorrecto o un enlace vencido o consumido explica el problema y ofrece una
+acción segura para volver a solicitarlo sin revelar públicamente si el correo existe.
 
 > **Por qué con contraseña y no sin ella.** Existe la opción de entrar solo con el correo, sin
 > contraseña, recibiendo un código en cada login — es lo que hace udeapolis. Se descartó por una
@@ -2130,16 +2132,16 @@ puede reenviar a cualquiera.
 |---|---|
 | RN-78 | El docente tiene un perfil público sin acceso al sistema; el alumno y el administrador sí utilizan una cuenta. |
 | RN-79 | Se registra cada acceso al sistema. |
-| RN-80 | El registro por formulario o Google exige aceptar la política de privacidad y los términos, guardando cuándo y qué versión se aceptó. Una cuenta creada por administración puede existir antes, pero no queda habilitada hasta que el alumno los acepte. La contraseña debe tener al menos 8 caracteres e incluir mayúscula, minúscula, número y símbolo. El enlace de verificación dura 24 horas y reenviarlo invalida el anterior; el de recuperación dura 60 minutos y usarlo o solicitar uno nuevo invalida el anterior. |
+| RN-80 | El registro por formulario o Google exige aceptar la política de privacidad y los términos, guardando cuándo y qué versión se aceptó. Una cuenta creada por administración puede existir antes, pero no queda habilitada hasta que el alumno los acepte. La contraseña propia debe tener al menos 8 caracteres e incluir mayúscula, minúscula y número. La verificación usa un código de 6 dígitos de un solo uso; reenviarlo invalida el anterior. El enlace de recuperación dura 60 minutos y usarlo o solicitar uno nuevo invalida el anterior. |
 | RN-81 | La plataforma ofrece Libro de Reclamaciones como página pública enlazada en el pie y accesible con o sin cuenta; con sesión, completa los datos conocidos. |
 | RN-82 | La reclamación distingue QUEJA de RECLAMO, admite varias imágenes opcionales de hasta 5 MB cada una y exige declaración jurada y autorización de respuesta por correo. |
 | RN-83 | Cada QUEJA o RECLAMO debe ser respondido. Recibe número, fecha, PENDIENTE_RESPUESTA y una fecha límite de 15 días hábiles improrrogables. El primer día hábil posterior a la presentación es el día 1; si se presenta en día no hábil, el conteo comienza el siguiente día hábil. Se excluyen sábados, domingos y feriados oficiales del Perú. Se envía constancia; la administración responde por correo y solo entonces pasa a RESPONDIDO. Si el envío falla, permanece pendiente. |
-| RN-84 | Existen tres caminos de registro: formulario, Google y creación administrativa. Formulario y creación administrativa usan correo, nombres y apellidos separados, `telefono` opcional y DNI opcional; Google entrega el correo verificado y sus datos disponibles, y permite completar después los apellidos separados y el DNI opcional. |
+| RN-84 | Existen tres caminos de registro: formulario, Google y creación administrativa. Formulario y creación administrativa usan correo, nombres, apellido paterno obligatorio, apellido materno opcional, `telefono` opcional y DNI opcional; Google entrega el correo verificado y sus datos disponibles, y permite completar después los apellidos separados y el DNI opcional. El apellido materno solo pasa a ser obligatorio al confirmar los datos que se imprimirán en el certificado. |
 | RN-85 | El correo que llega por Google ya está verificado: ese usuario no recibe el correo de verificación. |
 | RN-86 | Un mismo correo es una sola cuenta: los accesos por formulario y por Google se vinculan entre sí. |
 | RN-87 | El login no bloquea el catálogo ni las lecciones de vista previa; la sesión se pide solo al matricularse. |
 | RN-88 | El registro guarda el WhatsApp del alumno como dato de contacto opcional; las notificaciones automáticas van por correo. |
-| RN-89 | La pantalla de registro ofrece WhatsApp para solicitar una cuenta manual. Cualquier administrador HABILITADO puede crear otro administrador o un alumno usando correo, nombres, apellidos y `telefono` opcional; se registra quién concedió el perfil. No puede deshabilitarse a sí mismo ni dejar al sistema sin al menos un administrador habilitado. Una cuenta nueva recibe por correo las instrucciones, el enlace de verificación y `Escuela1415@`, y queda con CAMBIO_PENDIENTE. Puede entrar al panel, pero no abrir cursos, exámenes ni certificados hasta verificar el correo, aceptar los documentos y cambiar la contraseña. Una cuenta existente nunca cambia su clave. |
+| RN-89 | La pantalla de registro ofrece WhatsApp para solicitar una cuenta manual. Cualquier administrador HABILITADO puede crear otro administrador o un alumno usando correo, nombres, apellido paterno obligatorio, apellido materno opcional y `telefono` y DNI opcionales; se registra quién concedió el perfil. No puede deshabilitarse a sí mismo ni dejar al sistema sin al menos un administrador habilitado. Una cuenta nueva recibe por correo las instrucciones, el código de verificación de seis dígitos y `Escuela1415@`, y queda con CAMBIO_PENDIENTE. Puede entrar al panel, pero no abrir cursos, exámenes ni certificados hasta verificar el correo, aceptar los documentos y cambiar la contraseña. Una cuenta existente nunca cambia su clave. |
 | RN-90 | El formulario de registro lleva protección anti-robot. |
 
 ### Catálogo y administración
@@ -2398,13 +2400,13 @@ no es válido y su fecha de anulación; un código inexistente no revela informa
 crear una cuenta con correo, nombres, apellidos, teléfono opcional y DNI opcional. Una cuenta nueva recibe la
 contraseña temporal `Escuela1415@` y CAMBIO_PENDIENTE; puede ver el panel, pero el aviso permanece
 y no accede a cursos, exámenes ni certificados hasta verificar el correo, aceptar los documentos
-y cambiar la contraseña. Recibe por correo las instrucciones y el enlace de verificación. Una
+y cambiar la contraseña. Recibe por correo las instrucciones y el código de verificación de seis dígitos. Una
 cuenta existente conserva su clave. Toda matrícula administrativa
 genera REGISTRADO_MANUAL o EXONERADO según exista cobro.* (§9 y §10)
 
-La verificación dura 24 horas y su reenvío invalida el enlace anterior; la recuperación dura 60
-minutos y usarla o solicitar otra invalida la anterior. La contraseña exige al menos ocho
-caracteres, mayúscula, minúscula, número y símbolo. Un administrador habilitado puede crear a otro,
+El código de verificación es de un solo uso y su reenvío invalida el anterior; la recuperación dura
+60 minutos y usarla o solicitar otra invalida la anterior. La contraseña propia exige al menos
+ocho caracteres, mayúscula, minúscula y número. Un administrador habilitado puede crear a otro,
 queda registrado como otorgante, no puede deshabilitarse a sí mismo ni dejar al sistema sin un
 administrador habilitado.
 
@@ -2438,7 +2440,7 @@ mantiene aceptado que abrir el enlace no demuestra permanencia en Zoom.* (§7, �
 **19.29 — Habilitación de cuentas creadas por administración** ✅ *Resuelto: existen tres caminos
 de registro. Una cuenta administrativa puede existir y tener una matrícula ACTIVA antes de la
 aceptación, pero ACTIVA representa el derecho concedido, no que la cuenta ya pueda utilizarlo. El
-correo de bienvenida entrega instrucciones, verificación y contraseña temporal; el acceso se
+correo de bienvenida entrega instrucciones, código de verificación de seis dígitos y contraseña temporal; el acceso se
 habilita después de verificar el correo, aceptar los documentos y cambiar la contraseña. Google
 también exige aceptar los documentos antes de matricular.* (§9, §10 y §16)
 

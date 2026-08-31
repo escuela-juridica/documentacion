@@ -27,8 +27,8 @@ el número técnico de vistas, pero no el alcance funcional del negocio.
 
 | Épica | Pantallas nuevas | Pantallas anteriores reutilizadas en su review | Total aproximado mostrado en la review |
 |---|---:|---:|---:|
-| EP01 — Acceso y descubrimiento | 11 | 0 | 11 |
-| EP02 — Publicación y matrícula | 8 | 3 | 11 |
+| EP01 — Acceso y descubrimiento | 10 | 0 | 10 |
+| EP02 — Publicación y matrícula | 9 | 6 | 15 |
 | EP03 — Desarrollo académico | 9 | 2 | 11 |
 | EP04 — Certificación y control | 12 | 4 | 16 |
 | **Producto completo** | **40 pantallas principales únicas** | — | — |
@@ -49,13 +49,13 @@ No significa que vuelvan a desarrollarse.
 | PF-007 | Definición de nueva contraseña | Usuario con enlace válido |
 | PF-008 | Panel inicial del usuario | Alumno y administrador |
 | PF-009 | Mi perfil, datos y seguridad | Alumno y administrador |
-| PF-010 | Gestión administrativa de usuarios | Administrador |
 | PF-011 | Documentos legales públicos | Visitante y usuario |
 
 ## Pantallas de EP02 — Publicación y matrícula
 
 | ID | Pantalla principal | Actor |
 |---|---|---|
+| PF-010 | Gestión administrativa de usuarios | Administrador |
 | PF-012 | Administración de información base | Administrador |
 | PF-013 | Gestión y listado de cursos | Administrador |
 | PF-014 | Editor integral del curso | Administrador |
@@ -65,8 +65,8 @@ No significa que vuelvan a desarrollarse.
 | PF-018 | Resultado del pago y comprobante informativo | Alumno |
 | PF-019 | Mis cursos | Alumno |
 
-La review reutiliza PF-003 para ingresar, PF-001 para encontrar el curso y PF-002 para abrir su
-ficha pública.
+La review reutiliza PF-003 para ingresar, PF-005 para verificar el correo, PF-008 y PF-009 para
+completar la habilitación, PF-001 para encontrar el curso y PF-002 para abrir su ficha pública.
 
 ## Pantallas de EP03 — Desarrollo académico
 

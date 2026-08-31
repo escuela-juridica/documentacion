@@ -2,12 +2,26 @@
 
 ## Cantidad
 
-La épica incorpora **8 pantallas principales nuevas**. Su review utiliza además tres pantallas de
-EP01: inicio de sesión, catálogo y ficha pública. Por ello, el recorrido completo muestra
-aproximadamente **11 pantallas principales**, aunque solo ocho se desarrollan como incremento de
-esta épica.
+La épica incorpora **9 pantallas principales nuevas**. Su review reutiliza seis pantallas de EP01:
+inicio de sesión, verificación del correo, panel, perfil, catálogo y ficha pública. Por ello, el
+recorrido completo puede mostrar aproximadamente **15 pantallas principales**, aunque solo nueve
+se desarrollan como incremento de esta épica.
 
 ## Pantallas nuevas
+
+### PF-010 — Gestión administrativa de usuarios
+
+- **Historias:** HU-008.
+- **Actor:** administrador.
+- **Debe mostrar:** búsqueda y listado de usuarios, datos principales, rol, origen y estado de la
+  cuenta; permite crear un alumno o administrador y consultar quién concedió el perfil.
+- **Jerarquía:** el listado aparece primero y la creación o el detalle se abre en panel. Reenviar
+  instrucciones y deshabilitar quedan dentro del detalle y no compiten con “Crear usuario”.
+- **Estados importantes:** correo existente sin duplicidad, apellido materno/teléfono/DNI vacíos,
+  código de verificación reenviado, CAMBIO_PENDIENTE, cuenta habilitada, correo fallido,
+  auto-desactivación bloqueada y último administrador protegido.
+- **Acción para la review:** crear una cuenta con `Escuela1415@`, completar código de verificación,
+  documentos y contraseña propia, y comprobar su habilitación.
 
 ### PF-012 — Administración de información base
 
@@ -104,6 +118,9 @@ esta épica.
 ## Pantallas reutilizadas de EP01
 
 - **PF-003:** ingreso del administrador y de los alumnos.
+- **PF-005:** ingreso y reenvío del código de verificación.
+- **PF-008:** aviso y acceso restringido de la cuenta temporal.
+- **PF-009:** aceptación pendiente y definición de la contraseña propia.
 - **PF-001:** localización del curso publicado.
 - **PF-002:** consulta de la ficha y comienzo de la matrícula.
 
@@ -118,5 +135,5 @@ esta épica.
 
 ## Orden recomendado de presentación
 
-PF-003 → PF-012 → PF-013 → PF-014 → PF-001 → PF-002 → PF-016 → PF-017 → PF-018 → PF-015 →
-PF-019.
+PF-003 → PF-010 → PF-005 → PF-008 → PF-009 → PF-012 → PF-013 → PF-014 → PF-001 → PF-002 →
+PF-016 → PF-017 → PF-018 → PF-015 → PF-019.

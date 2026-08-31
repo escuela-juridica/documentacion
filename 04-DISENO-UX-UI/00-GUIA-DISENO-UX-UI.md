@@ -574,18 +574,24 @@ Los badges deben contener texto, no solo color.
 - Temario en acordeones por módulo.
 - Vista previa integrada en reproductor o panel amplio, sin exponer contenido protegido.
 
-### PF-003 a PF-011 — Acceso y cuenta
+### PF-003 a PF-009 y PF-011 — Acceso y cuenta de EP01
 
 - Formularios centrados de máximo 480 px.
 - Fondo claro con bloque institucional azul discreto en escritorio.
 - El registro no debe parecer un formulario legal extenso; consentimientos al final con enlaces.
-- El formulario de registro usa una sola columna y separadores suaves; no necesita ilustración
-  lateral que compita con los campos.
+- En escritorio, el registro usa un panel institucional visual a la izquierda y el formulario en
+  una sola columna a la derecha. En móvil se conserva únicamente el formulario en una columna.
 - Google se presenta como alternativa equivalente, no como botón dominante sobre el registro.
-- Verificación y recuperación usan estados simples con icono, título, explicación y siguiente paso.
+- La verificación usa un código de seis dígitos, correo parcialmente oculto, error junto al campo y
+  reenvío; la recuperación usa estados simples con icono, título, explicación y siguiente paso.
 - Perfil dividido en Datos personales y Seguridad.
 - El aviso sobre datos congelados solo aparece cuando ya existe un certificado afectado.
-- Gestión administrativa de usuarios utiliza tabla más panel lateral de creación.
+
+### PF-010 — Gestión de usuarios de EP02
+
+- Utiliza tabla más panel lateral de creación o detalle.
+- Mantiene el listado como contexto principal y no muestra el formulario hasta solicitarlo.
+- Permite buscar antes de crear para evitar cuentas duplicadas.
 
 ### PF-012 a PF-015 — Configuración administrativa
 
@@ -922,13 +928,14 @@ elemento si puede resolverse con reglas de distribución.
 Catálogo → Ficha → Registro → Documentos → Verificación → Login → Panel → Perfil
 ```
 
-Debe permitir también mostrar recuperación, Google y creación administrativa.
+Debe permitir también mostrar recuperación y Google.
 
 ### EP02
 
 ```text
 Administración → Crear curso → Contenido → Requisitos → Publicar
 Catálogo → Ficha → Matrícula gratuita o pago → Resultado → Mis cursos
+Administración → Usuarios → Crear cuenta → Verificar código → Cambiar contraseña → Habilitar
 ```
 
 ### EP03

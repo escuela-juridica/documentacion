@@ -1,4 +1,4 @@
-# HU-006 — Administrar mis datos personales
+# HU-005 — Administrar mis datos personales
 
 ## Información general
 
@@ -16,7 +16,8 @@
 
 ## Alcance incluido
 
-- Consulta y edición de nombres, apellidos, teléfono opcional y DNI opcional según permisos definidos.
+- Consulta y edición de nombres, apellido paterno obligatorio, apellido materno opcional, teléfono
+  opcional y DNI opcional según permisos definidos.
 - El correo se muestra como identidad de la cuenta y no se modifica desde este formulario.
 - Registro, edición o eliminación del DNI por decisión del alumno; dejarlo vacío es válido.
 - El DNI no se imprime en el certificado ni condiciona el registro, la matrícula, el pago, el
@@ -26,7 +27,7 @@
 - Una cuenta creada con Google puede definir una contraseña propia desde el perfil sin eliminar el
   acceso con Google ni crear otra cuenta.
 - La nueva contraseña debe tener al menos ocho caracteres, una mayúscula, una minúscula, un número
-  y un carácter especial.
+  y un número.
 - La fecha y hora de la confirmación de identidad se registran y muestran en `America/Lima`.
 
 No permite cambiar silenciosamente los datos congelados de un certificado ya emitido. Después de
@@ -47,7 +48,7 @@ conservación del mismo código; editar el perfil no modifica el documento.
 - **Dado** una sesión de alumno, **cuando** actualiza datos válidos, **entonces** vuelve a verlos
   conservados.
 - **Dado** teléfono vacío, **cuando** guarda el perfil, **entonces** no se bloquea la operación.
-- **Dado** nombres o apellidos incompletos, **cuando** intenta confirmar los datos del certificado,
+- **Dado** nombres o cualquiera de los dos apellidos incompletos, **cuando** intenta confirmar los datos del certificado,
   **entonces** se indican los faltantes y no se marca confirmado.
 - **Dado** un DNI vacío, **cuando** guarda el perfil o confirma sus nombres y apellidos,
   **entonces** ambas operaciones terminan sin bloquearse ni crear una condición pendiente.

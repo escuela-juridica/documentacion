@@ -1,4 +1,4 @@
-# HU-007 — Explorar, buscar y filtrar cursos
+# HU-006 — Explorar, buscar y filtrar cursos
 
 ## Información general
 
@@ -40,7 +40,7 @@
 2. Visualiza la oferta en el orden acordado.
 3. Escribe una búsqueda o elige un tipo y una categoría en sus selectores.
 4. ESEJUR muestra solo coincidencias y permite volver individualmente a “Todos” o limpiar todo.
-5. Selecciona un curso para HU-008.
+5. Selecciona un curso para HU-007.
 
 ## Criterios de aceptación
 
@@ -67,7 +67,7 @@ sesión.
 ## Dependencia interna
 
 - Ninguna. Puede comenzar con cursos controlados.
-- HU-008 se integra mediante la selección de una tarjeta.
+- HU-007 se integra mediante la selección de una tarjeta.
 
 ## Orientación de trabajo
 
