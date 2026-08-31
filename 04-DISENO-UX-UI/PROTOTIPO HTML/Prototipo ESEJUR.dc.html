@@ -111,18 +111,6 @@
           </div>
         </div>
       </header>
-      <sc-if value="{{ avisoVerificacion }}">
-        <div style="background: #FFFAEB; border-bottom: 1px solid #FEDF89;">
-          <div style="max-width: 1200px; margin: 0 auto; padding: 16px 24px; display: flex; align-items: flex-start; gap: 12px; flex-wrap: wrap;">
-            <span style="flex: 0 0 20px; height: 20px; border-radius: 999px; background: #B54708; color: #FFFFFF; display: grid; place-items: center; font-size: 12px; font-weight: 600; margin-top: 1px;">!</span>
-            <div style="flex: 1 1 300px;">
-              <div style="font-size: 14px; line-height: 20px; font-weight: 600; color: #B54708;">Verifica tu correo electrónico</div>
-              <div style="font-size: 14px; line-height: 20px; color: #B54708;">Enviamos un código a {{ sesionEmail }}. Sin verificarlo no puedes matricularte por autoservicio.</div>
-            </div>
-            <button onClick="{{ verificarCorreo }}" style="height: 36px; padding: 0 12px; border-radius: 8px; border: 1px solid #B54708; background: #FFFFFF; color: #B54708; font-size: 14px; font-weight: 600; cursor: pointer;">Ya verifiqué mi correo</button>
-          </div>
-        </div>
-      </sc-if>
     </sc-if>
 
     <sc-if value="{{ esCatalogo }}">

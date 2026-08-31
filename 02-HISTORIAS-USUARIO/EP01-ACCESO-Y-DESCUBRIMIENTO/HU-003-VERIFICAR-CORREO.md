@@ -45,8 +45,8 @@ correo.
 - Cada código se utiliza una sola vez.
 - Solicitar un reenvio inválida inmediatamente cualquier código anterior no utilizado.
 - Un fallo de envío no convierte el correo en verificado.
-- La verificación del correo no sustituye otros requisitos pendientes, como aceptar documentos o
-  cambiar una contraseña temporal en una cuenta administrativa.
+- La verificación del correo no sustituye el cambio de una contraseña temporal cuando la cuenta
+  fue creada administrativamente.
 - Emision, reenvio, uso y resultado se registran con fecha y hora en `America/Lima`.
 
 ## Flujo principal
@@ -56,8 +56,8 @@ correo.
 3. ESEJUR válida que corresponda a la cuenta, siga vigente y no haya sido utilizado o reemplazado.
 4. Marca el correo como verificado y consume el código.
 5. Si no existen otros requisitos pendientes, permite continuar al inicio de sesión.
-6. Si la cuenta fue creada administrativamente y faltan documentos o cambio de contraseña, informa
-   el siguiente paso sin afirmar que la habilitacion termino.
+6. Si la cuenta fue creada administrativamente y falta cambiar la contraseña temporal, informa el
+   siguiente paso sin afirmar que la habilitacion termino.
 
 ## Alternativas y excepciones
 
@@ -123,4 +123,3 @@ correo.
 
 Crear una cuenta por formulario, rechazar un código incorrecto, reenviar, comprobar que el anterior
 ya no sirve, verificar con el código más reciente e iniciar sesión sin crear otra cuenta.
-

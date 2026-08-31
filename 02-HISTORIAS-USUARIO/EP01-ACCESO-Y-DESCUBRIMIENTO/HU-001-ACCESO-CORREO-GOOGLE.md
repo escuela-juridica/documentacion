@@ -28,8 +28,8 @@ La pantalla también ofrece acceso al registro y a la recuperacion de contraseñ
 recorridos pertenecen a HU-002 y HU-004.
 
 Si Google confirma un correo que aún no corresponde a una cuenta ESEJUR, no se crea una cuenta
-incompleta desde esta historia: la persona es enviada a HU-002 para revisar sus datos y aceptar los
-documentos requeridos.
+incompleta desde esta historia: la persona es enviada a HU-002 para revisar sus datos y marcar la
+casilla legal antes de crearla.
 
 ## Precondiciones
 
@@ -41,15 +41,14 @@ documentos requeridos.
 
 1. La persona ingresa su correo y contraseña.
 2. ESEJUR válida las credenciales y el estado de la cuenta.
-3. Registra la fecha, hora, origen disponible y resultado del intento.
-4. Abre el panel correspondiente al alumno o administrador.
+3. Abre el panel correspondiente al rol principal de la cuenta.
 
 ## Flujo principal con Google
 
 1. La persona selecciona "Continuar con Google" y autoriza su identidad.
 2. ESEJUR recibe el correo verificado y busca una cuenta con ese mismo correo.
 3. Si la cuenta existe, vincula o reconoce el acceso sin duplicarla.
-4. Registra el intento y abre el panel autorizado.
+4. Abre el panel correspondiente al rol principal de la cuenta.
 5. Si la cuenta no existe, conserva los datos autorizados durante el recorrido y conduce a HU-002
    para completar la creación de cuenta.
 
@@ -72,7 +71,7 @@ Todas las fechas y horas visibles o registradas se interpretan y muestran en `Am
 
 - **Dado** un usuario con credenciales válidas, correo verificado y cuenta habilitada,
 - **cuando** inicia sesión,
-- **entonces** accede a su panel y queda registrado el intento.
+- **entonces** accede a su panel sin crear otra cuenta.
 
 ### Acceso mediante Google existente
 
@@ -103,6 +102,8 @@ Todas las fechas y horas visibles o registradas se interpretan y muestran en `Am
 
 - Estados relevantes: cuenta habilitada, correo pendiente y habilitacion pendiente.
 - Alumno y administrador reciben capacidades diferentes; el docente no posee acceso propio.
+- Una cuenta puede conservar varios roles, pero en esta versión ingresa al panel de su único rol
+  principal; el cambio de rol durante la sesión pertenece a una versión futura.
 - ESEJUR valida el intento actual, pero no conserva historial de ingresos, dirección IP ni datos del
   dispositivo.
 - No se limita automáticamente la cantidad de sesiones simultáneas.
@@ -120,8 +121,8 @@ Todas las fechas y horas visibles o registradas se interpretan y muestran en `Am
 
 - **Frontend:** pantalla de acceso, correo y contraseña, alternativa Google, carga, errores y
   destinos por estado.
-- **Backend:** validación de credenciales, identidad Google, vinculación por correo, permisos y
-  registro de intentos.
+- **Backend:** validación de credenciales, identidad Google, vinculación por correo y permisos, sin
+  conservar historial del ingreso, IP ni dispositivo.
 - **Integración:** demostrar correo y contraseña, Google existente, Google nuevo, correo pendiente
   y rechazo de acceso.
 

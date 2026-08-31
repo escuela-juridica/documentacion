@@ -18,7 +18,8 @@
 
 - Buscar por correo y reutilizar una única cuenta existente. Si no existe, administración registra
   correo, nombres, apellido paterno, apellido materno, teléfono opcional y DNI opcional; se crea con
-  la contraseña temporal `Escuela1415@`, correo pendiente de verificar y estado CAMBIO_PENDIENTE.
+  la contraseña temporal `Escuela1415@`, correo pendiente de verificar y condición
+  CAMBIO_PENDIENTE.
 - Dejar vacío el DNI no impide crear la cuenta, activar la matrícula ni certificar posteriormente.
 - `REGISTRADO_MANUAL` si hubo dinero: importe, medio, referencia y motivo obligatorios.
 - `EXONERADO` si no hubo dinero: importe cero y motivo obligatorio.

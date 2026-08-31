@@ -235,6 +235,18 @@ historias de matrícula y pago, no como usuario humano.
 - Si en el futuro un docente necesita ingresar, esa decisión se evaluará como una ampliación del
   negocio; no forma parte del alcance actual.
 
+### Varios roles y rol principal
+
+- Una misma cuenta puede acumular los roles de Alumno y Administrador sin crear otra identidad ni
+  duplicar su historial.
+- Cada cuenta debe tener exactamente un rol principal entre los roles que tenga asignados. Ese rol
+  determina el panel inicial que se abre después de ingresar.
+- En la versión actual se trabajará con el rol principal y no se mostrará una opción para cambiar
+  de rol durante la sesión. La selección o alternancia entre varios roles queda preparada para una
+  versión futura.
+- El rol principal no convierte al docente en usuario del sistema. La condición de docente sigue
+  dependiendo exclusivamente de su participación en uno o varios cursos.
+
 ---
 
 ## 7. Estructura del contenido
@@ -868,8 +880,24 @@ Puede entrar al panel principal, donde ve en todo momento un aviso que no puede 
 
 Mientras alguna de las dos condiciones continúe pendiente puede revisar su panel, pero no abrir
 cursos, rendir exámenes ni consultar certificados. El aviso desaparece y la cuenta queda
-habilitada únicamente después de verificar el correo y cambiar la
-contraseña. Entonces puede utilizar el acceso correspondiente a sus matrículas ACTIVA.
+plenamente operativa únicamente después de verificar el correo y cambiar la contraseña. Entonces
+puede utilizar el acceso correspondiente a sus matrículas ACTIVA.
+
+#### Estado de la cuenta y condiciones pendientes
+
+La cuenta indica directamente si se encuentra **activa** o **inactiva** mediante una condición de
+sí o no. La verificación del correo y el cambio de la contraseña temporal son condiciones
+independientes:
+
+- **PENDIENTE_VERIFICACION** se muestra cuando todavía no existe una verificación correcta del
+  correo.
+- **CAMBIO_PENDIENTE** se muestra mientras la contraseña temporal todavía deba reemplazarse.
+- Una cuenta está plenamente operativa únicamente cuando está activa, tiene el correo
+  verificado y no conserva un cambio de contraseña pendiente.
+
+Estas dos etiquetas describen condiciones calculadas y no sustituyen la condición activa o
+inactiva de la cuenta. De esta manera no puede aparecer una cuenta como verificada y pendiente de
+verificación al mismo tiempo.
 
 #### Iniciar sesión
 
@@ -883,6 +911,10 @@ Solo el código más reciente puede utilizarse una vez; solicitar un reenvío in
 El enlace para recuperar contraseña dura **60 minutos**; usarlo o solicitar uno nuevo invalida el
 anterior. Un código incorrecto o un enlace vencido o consumido explica el problema y ofrece una
 acción segura para volver a solicitarlo sin revelar públicamente si el correo existe.
+
+La situación de un código o enlace no se conserva como un estado separado: se determina por su
+fecha de uso, su fecha de invalidación y, en el enlace de recuperación, su fecha de vencimiento.
+El resultado del envío por correo sí se conserva porque no puede deducirse de esas fechas.
 
 > **Por qué con contraseña y no sin ella.** Existe la opción de entrar solo con el correo, sin
 > contraseña, recibiendo un código en cada login — es lo que hace udeapolis. Se descartó por una
@@ -911,8 +943,8 @@ Su cuenta queda con los dos accesos.
 #### Dónde se completan los datos personales y del certificado
 
 Los tres caminos convergen en la pantalla **"Confirma tus datos"** (§13.8), antes de emitir el
-certificado. El alumno puede completarla desde su perfil o desde el avance del curso, incluso
-antes de terminar:
+certificado. Esta pantalla pertenece al flujo de certificación y se abre desde el estado del curso
+cuando corresponda; el perfil común solo permite mantener actualizados los datos personales:
 
 | Se registró por... | Qué le falta completar ahí |
 |---|---|
@@ -1651,8 +1683,8 @@ ninguna persona.
 El certificado es **válido para concursos públicos**: si el nombre está mal, es un problema real.
 
 Antes de emitirlo, el alumno pasa por la pantalla **"Confirma tus datos — así aparecerán en tu
-certificado"**. Puede hacerlo desde su perfil o desde el bloque de avance, antes o después de
-completar el curso:
+certificado"**. La abre desde el estado de certificación cuando las condiciones académicas y
+temporales permiten preparar la emisión:
 
 ```
 Nombres            [ ................ ]
@@ -1668,8 +1700,10 @@ Apellido materno   [ ................ ]
   cuenta creada por administración completa cualquier nombre o apellido que todavía falte.
 - El **DNI es un dato opcional del perfil**. Puede registrarse o editarse allí, pero no aparece en
   esta confirmación, no se imprime en el certificado y su ausencia nunca bloquea la emisión.
-- Mientras no se haya emitido, el alumno puede volver a modificar y confirmar sus datos.
-- El sistema registra la fecha y hora de la última confirmación.
+- Mientras no se haya emitido, el alumno puede volver a modificar y confirmar sus datos desde este
+  flujo.
+- La fecha y hora de la confirmación se conserva en el proceso de certificación que se incorpora en
+  la Épica 4; no se guarda como un atributo general de `persona`.
 - Una vez emitido, el nombre **no se edita libremente** — solo el administrador puede corregirlo
   (§13.6).
 
@@ -1770,7 +1804,7 @@ Es la pantalla que más usa el alumno:
 | **Mis cursos** | Dos pestañas de navegación, **En progreso** y **Completados**, con su porcentaje de avance y un botón para **continuar** donde se quedó. No utiliza los filtros del catálogo. |
 | **Próximas sesiones** | Las sesiones en vivo de todos sus cursos, ordenadas por fecha, con acceso directo al enlace cuando se habilite |
 | **Mis certificados** | Los suyos, y solo los suyos. Con descarga y enlace de verificación |
-| **Mi perfil** | Datos personales, incluido el DNI opcional, y confirmación de nombres y apellidos para el certificado *(§13.8)* |
+| **Mi perfil** | Consulta y edición de datos personales, incluido el DNI opcional. La confirmación de nombres y apellidos se realiza en el flujo de certificación *(§13.8)* |
 
 ### Dentro del curso — el aula
 
@@ -2113,7 +2147,7 @@ puede reenviar a cualquiera.
 | RN-70 | El alumno solo ve sus propios certificados. |
 | RN-71 | El correo para confirmar datos del certificado se envía únicamente cuando el alumno ya cumple las condiciones académicas y temporales de emisión y solo faltan sus datos. Una vez emitido, el correo del certificado lleva un enlace de descarga, nunca el PDF adjunto. |
 | RN-72 | El QR o el código manual llevan a una verificación pública con código, nombre, curso, horas, nivel, entidad, fecha y estado. Nunca muestra DNI, contacto, nota, firmas ni PDF. Un ANULADO muestra su fecha y que no es válido; una corrección muestra los datos vigentes y un código inexistente responde "Certificado no encontrado". |
-| RN-73 | Sin nombres, apellido paterno y apellido materno confirmados no se genera el certificado. La confirmación puede realizarse antes o después de completar el curso y queda registrada. El DNI es opcional, se administra desde el perfil y nunca condiciona la emisión. |
+| RN-73 | Sin nombres, apellido paterno y apellido materno confirmados no se genera el certificado. La confirmación se realiza y se registra dentro del proceso de certificación cuando corresponde preparar la emisión; no forma parte del perfil general de `persona`. El DNI es opcional, se administra desde el perfil y nunca condiciona la emisión. |
 | RN-74 | Cada curso indica qué entidad lo refrenda; entidades, firmantes, tipos de curso y categorías temáticas son tablas maestras. El lugar de emisión proviene de la configuración institucional y su valor inicial es "Lima, Perú". |
 
 ### Contenido protegido
@@ -2128,7 +2162,7 @@ puede reenviar a cualquiera.
 
 | # | Regla |
 |---|---|
-| RN-78 | El docente tiene un perfil público sin acceso al sistema; el alumno y el administrador sí utilizan una cuenta. |
+| RN-78 | El docente tiene un perfil público sin acceso al sistema; el alumno y el administrador sí utilizan una cuenta. Una cuenta puede acumular estos roles de acceso, pero debe tener exactamente uno como principal. La versión actual abre el panel de ese rol y deja el cambio entre roles para una versión futura. |
 | RN-79 | ESEJUR valida cada solicitud de ingreso, pero no conserva un historial de intentos de acceso, direcciones IP ni dispositivos. Tampoco controla sesiones simultáneas. |
 | RN-80 | El registro por formulario o Google exige marcar la casilla de conformidad con la política de privacidad y los términos antes de crear la cuenta. Si no se marca, no se crea el usuario. La existencia de la cuenta implica que esta condición fue cumplida; no se guarda contenido, versión, fecha ni historial de aceptación. En la creación administrativa se asume cumplida desde que el administrador crea la cuenta a solicitud de la persona. La contraseña propia debe tener al menos 8 caracteres e incluir mayúscula, minúscula y número. La verificación usa un código de 6 dígitos de un solo uso; reenviarlo invalida el anterior. El enlace de recuperación dura 60 minutos y usarlo o solicitar uno nuevo invalida el anterior. |
 | RN-81 | La plataforma ofrece Libro de Reclamaciones como página pública enlazada en el pie y accesible con o sin cuenta; con sesión, completa los datos conocidos. |

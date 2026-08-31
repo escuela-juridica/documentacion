@@ -45,7 +45,6 @@ CREATE TABLE IF NOT EXISTS persona (
     foto_url                         text,
     cargo_profesional                varchar(180),
     biografia_profesional            text,
-    datos_certificado_confirmados_en timestamptz,
     activo                           boolean NOT NULL DEFAULT true,
     creado_en                        timestamptz NOT NULL DEFAULT CURRENT_TIMESTAMP,
     modificado_en                    timestamptz NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -65,7 +64,6 @@ COMMENT ON COLUMN esejur.persona.documento_identidad IS 'Documento de identidad 
 COMMENT ON COLUMN esejur.persona.foto_url IS 'Ubicacion de la fotografia opcional de la persona.';
 COMMENT ON COLUMN esejur.persona.cargo_profesional IS 'Cargo o especialidad profesional mostrada cuando participa como docente.';
 COMMENT ON COLUMN esejur.persona.biografia_profesional IS 'Resena profesional publica utilizada cuando participa como docente.';
-COMMENT ON COLUMN esejur.persona.datos_certificado_confirmados_en IS 'Fecha y hora de confirmacion de nombres y apellidos para certificacion.';
 COMMENT ON COLUMN esejur.persona.activo IS 'Indica si la persona puede seguir utilizandose en nuevos procesos.';
 COMMENT ON COLUMN esejur.persona.creado_en IS 'Fecha y hora de creacion del registro.';
 COMMENT ON COLUMN esejur.persona.modificado_en IS 'Fecha y hora de la ultima modificacion del registro.';
@@ -75,14 +73,13 @@ CREATE TABLE IF NOT EXISTS usuario (
     persona_id                  bigint NOT NULL,
     correo                      varchar(254) NOT NULL,
     origen_registro             varchar(20) NOT NULL,
-    estado                      varchar(30) NOT NULL,
+    activo                      boolean NOT NULL DEFAULT true,
     contrasena_hash             text,
     google_subject              varchar(255),
     requiere_cambio_contrasena  boolean NOT NULL DEFAULT false,
     correo_verificado_en        timestamptz,
     creado_por_usuario_id       bigint,
     deshabilitado_en            timestamptz,
-    ultimo_acceso_en            timestamptz,
     creado_en                   timestamptz NOT NULL DEFAULT CURRENT_TIMESTAMP,
     modificado_en               timestamptz NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
@@ -102,21 +99,21 @@ COMMENT ON COLUMN esejur.usuario.usuario_id IS 'Identificador interno unico de l
 COMMENT ON COLUMN esejur.usuario.persona_id IS 'Persona propietaria de la cuenta; una persona puede tener como maximo una cuenta.';
 COMMENT ON COLUMN esejur.usuario.correo IS 'Correo usado como identificador unico de acceso.';
 COMMENT ON COLUMN esejur.usuario.origen_registro IS 'Medio por el cual se creo la cuenta: formulario, Google o administracion.';
-COMMENT ON COLUMN esejur.usuario.estado IS 'Situacion actual de la cuenta respecto a verificacion y acceso.';
+COMMENT ON COLUMN esejur.usuario.activo IS 'Indica si la cuenta puede utilizarse. La verificacion del correo y el cambio de contrasena se controlan por separado.';
 COMMENT ON COLUMN esejur.usuario.contrasena_hash IS 'Hash de la contrasena; nunca contiene la contrasena en texto plano.';
 COMMENT ON COLUMN esejur.usuario.google_subject IS 'Identificador unico entregado por Google para la cuenta vinculada.';
 COMMENT ON COLUMN esejur.usuario.requiere_cambio_contrasena IS 'Indica si debe cambiar la contrasena temporal al ingresar.';
 COMMENT ON COLUMN esejur.usuario.correo_verificado_en IS 'Fecha y hora en que el correo quedo verificado.';
 COMMENT ON COLUMN esejur.usuario.creado_por_usuario_id IS 'Administrador que creo la cuenta, cuando el registro fue administrativo.';
 COMMENT ON COLUMN esejur.usuario.deshabilitado_en IS 'Fecha y hora en que se deshabilito la cuenta.';
-COMMENT ON COLUMN esejur.usuario.ultimo_acceso_en IS 'Fecha y hora del ultimo acceso exitoso.';
 COMMENT ON COLUMN esejur.usuario.creado_en IS 'Fecha y hora de creacion del registro.';
 COMMENT ON COLUMN esejur.usuario.modificado_en IS 'Fecha y hora de la ultima modificacion del registro.';
 
 CREATE TABLE IF NOT EXISTS usuario_rol (
-    usuario_id  bigint NOT NULL,
-    rol_id      bigint NOT NULL,
-    asignado_en timestamptz NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    usuario_id   bigint NOT NULL,
+    rol_id       bigint NOT NULL,
+    es_principal boolean NOT NULL DEFAULT true,
+    asignado_en  timestamptz NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
     CONSTRAINT pk_usuario_rol PRIMARY KEY (usuario_id, rol_id),
     CONSTRAINT fk_usuario_rol_usuario
@@ -129,13 +126,13 @@ COMMENT ON TABLE esejur.usuario_rol IS
 'Asigna uno o varios roles del sistema a cada cuenta de usuario.';
 COMMENT ON COLUMN esejur.usuario_rol.usuario_id IS 'Usuario que recibe el rol.';
 COMMENT ON COLUMN esejur.usuario_rol.rol_id IS 'Rol asignado al usuario.';
+COMMENT ON COLUMN esejur.usuario_rol.es_principal IS 'Indica el rol utilizado como perfil inicial de la cuenta; cada usuario debe tener solo uno marcado como principal.';
 COMMENT ON COLUMN esejur.usuario_rol.asignado_en IS 'Fecha y hora en que se realizo la asignacion.';
 
 CREATE TABLE IF NOT EXISTS codigo_verificacion_correo (
     codigo_verificacion_id bigint GENERATED BY DEFAULT AS IDENTITY,
     usuario_id              bigint NOT NULL,
     codigo_hash             text NOT NULL,
-    estado                  varchar(15) NOT NULL DEFAULT 'VIGENTE',
     estado_envio            varchar(15) NOT NULL DEFAULT 'PENDIENTE',
     solicitado_en           timestamptz NOT NULL DEFAULT CURRENT_TIMESTAMP,
     utilizado_en            timestamptz,
@@ -153,7 +150,6 @@ COMMENT ON TABLE esejur.codigo_verificacion_correo IS
 COMMENT ON COLUMN esejur.codigo_verificacion_correo.codigo_verificacion_id IS 'Identificador interno unico de la emision del codigo.';
 COMMENT ON COLUMN esejur.codigo_verificacion_correo.usuario_id IS 'Usuario cuyo correo debe ser verificado.';
 COMMENT ON COLUMN esejur.codigo_verificacion_correo.codigo_hash IS 'Hash del codigo de verificacion; no conserva el codigo visible.';
-COMMENT ON COLUMN esejur.codigo_verificacion_correo.estado IS 'Situacion del codigo: vigente, utilizado o invalidado.';
 COMMENT ON COLUMN esejur.codigo_verificacion_correo.estado_envio IS 'Resultado del intento de entrega del correo.';
 COMMENT ON COLUMN esejur.codigo_verificacion_correo.solicitado_en IS 'Fecha y hora en que se genero el codigo.';
 COMMENT ON COLUMN esejur.codigo_verificacion_correo.utilizado_en IS 'Fecha y hora en que el codigo fue validado correctamente.';
@@ -164,7 +160,6 @@ CREATE TABLE IF NOT EXISTS token_recuperacion_acceso (
     token_recuperacion_id bigint GENERATED BY DEFAULT AS IDENTITY,
     usuario_id            bigint NOT NULL,
     token_hash            text NOT NULL,
-    estado                varchar(15) NOT NULL DEFAULT 'VIGENTE',
     estado_envio          varchar(15) NOT NULL DEFAULT 'PENDIENTE',
     solicitado_en         timestamptz NOT NULL DEFAULT CURRENT_TIMESTAMP,
     expira_en             timestamptz NOT NULL,
@@ -183,7 +178,6 @@ COMMENT ON TABLE esejur.token_recuperacion_acceso IS
 COMMENT ON COLUMN esejur.token_recuperacion_acceso.token_recuperacion_id IS 'Identificador interno unico de la solicitud de recuperacion.';
 COMMENT ON COLUMN esejur.token_recuperacion_acceso.usuario_id IS 'Usuario que solicito recuperar su acceso.';
 COMMENT ON COLUMN esejur.token_recuperacion_acceso.token_hash IS 'Hash del token; no conserva el valor enviado al usuario.';
-COMMENT ON COLUMN esejur.token_recuperacion_acceso.estado IS 'Situacion del token: vigente, utilizado o invalidado.';
 COMMENT ON COLUMN esejur.token_recuperacion_acceso.estado_envio IS 'Resultado del intento de entrega del correo de recuperacion.';
 COMMENT ON COLUMN esejur.token_recuperacion_acceso.solicitado_en IS 'Fecha y hora de solicitud del enlace.';
 COMMENT ON COLUMN esejur.token_recuperacion_acceso.expira_en IS 'Fecha y hora limite para utilizar el enlace.';
@@ -262,6 +256,29 @@ COMMENT ON COLUMN esejur.entidad_certificadora.activo IS 'Indica si la entidad p
 COMMENT ON COLUMN esejur.entidad_certificadora.creado_en IS 'Fecha y hora de creacion del registro.';
 COMMENT ON COLUMN esejur.entidad_certificadora.modificado_en IS 'Fecha y hora de la ultima modificacion del registro.';
 
+CREATE TABLE IF NOT EXISTS estado_curso (
+    estado_curso_id bigint GENERATED BY DEFAULT AS IDENTITY,
+    codigo          varchar(20) NOT NULL,
+    nombre          varchar(80) NOT NULL,
+    descripcion     text NOT NULL,
+    orden           integer NOT NULL,
+    creado_en       timestamptz NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    modificado_en   timestamptz NOT NULL DEFAULT CURRENT_TIMESTAMP,
+
+    CONSTRAINT pk_estado_curso PRIMARY KEY (estado_curso_id),
+    CONSTRAINT uq_estado_curso_codigo UNIQUE (codigo)
+);
+
+COMMENT ON TABLE esejur.estado_curso IS
+'Catalogo de estados que representan el ciclo de vida de un curso.';
+COMMENT ON COLUMN esejur.estado_curso.estado_curso_id IS 'Identificador interno unico del estado de curso.';
+COMMENT ON COLUMN esejur.estado_curso.codigo IS 'Codigo estable utilizado por las reglas del ciclo de vida.';
+COMMENT ON COLUMN esejur.estado_curso.nombre IS 'Nombre del estado mostrado en la plataforma.';
+COMMENT ON COLUMN esejur.estado_curso.descripcion IS 'Significado funcional del estado dentro del ciclo de vida del curso.';
+COMMENT ON COLUMN esejur.estado_curso.orden IS 'Posicion logica del estado dentro del ciclo normal del curso.';
+COMMENT ON COLUMN esejur.estado_curso.creado_en IS 'Fecha y hora de creacion del registro.';
+COMMENT ON COLUMN esejur.estado_curso.modificado_en IS 'Fecha y hora de la ultima modificacion del registro.';
+
 
 
 -- -----------------------------------------------------------------------------
@@ -280,7 +297,7 @@ CREATE TABLE IF NOT EXISTS curso (
     entidad_certificadora_id bigint,
     modalidad                varchar(15),
     tipo_venta               varchar(10),
-    estado                   varchar(15) NOT NULL DEFAULT 'BORRADOR',
+    estado_curso_id          bigint NOT NULL,
     destacado                boolean NOT NULL DEFAULT false,
     precio_regular           numeric(10,2) NOT NULL DEFAULT 0,
     precio_promocional       numeric(10,2),
@@ -310,6 +327,8 @@ CREATE TABLE IF NOT EXISTS curso (
     CONSTRAINT fk_curso_entidad_certificadora
         FOREIGN KEY (entidad_certificadora_id)
         REFERENCES entidad_certificadora(entidad_certificadora_id),
+    CONSTRAINT fk_curso_estado
+        FOREIGN KEY (estado_curso_id) REFERENCES estado_curso(estado_curso_id),
     CONSTRAINT fk_curso_creado_por
         FOREIGN KEY (creado_por_usuario_id) REFERENCES usuario(usuario_id)
 );
@@ -327,7 +346,7 @@ COMMENT ON COLUMN esejur.curso.categoria_tematica_id IS 'Area juridica principal
 COMMENT ON COLUMN esejur.curso.entidad_certificadora_id IS 'Entidad que refrenda la certificacion del curso.';
 COMMENT ON COLUMN esejur.curso.modalidad IS 'Forma de desarrollo del curso: virtual, en vivo o hibrido.';
 COMMENT ON COLUMN esejur.curso.tipo_venta IS 'Indica si el acceso al curso es gratuito o pagado.';
-COMMENT ON COLUMN esejur.curso.estado IS 'Situacion actual de publicacion y desarrollo del curso.';
+COMMENT ON COLUMN esejur.curso.estado_curso_id IS 'Estado actual del curso dentro de su ciclo de vida.';
 COMMENT ON COLUMN esejur.curso.destacado IS 'Indica si el curso recibe posicion preferente en el catalogo.';
 COMMENT ON COLUMN esejur.curso.precio_regular IS 'Precio normal del curso en soles.';
 COMMENT ON COLUMN esejur.curso.precio_promocional IS 'Precio promocional opcional en soles.';

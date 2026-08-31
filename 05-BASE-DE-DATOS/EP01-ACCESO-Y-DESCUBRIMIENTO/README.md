@@ -20,7 +20,7 @@ programará posteriormente en el backend.
 
 | Orden | Archivo | Contenido | Uso |
 |---:|---|---|---|
-| 1 | `01-tablas-y-llaves-ep01.sql` | 16 tablas, llaves, relaciones y descripciones | Obligatorio |
+| 1 | `01-tablas-y-llaves-ep01.sql` | 17 tablas, llaves, relaciones y descripciones | Obligatorio |
 | 2 | `02-datos-iniciales-ep01.sql` | Datos maestros y registros mínimos para probar la épica | Desarrollo/review |
 
 Ejecución con `psql` desde esta carpeta:
@@ -31,9 +31,9 @@ psql -v ON_ERROR_STOP=1 -d esejur -f "02-datos-iniciales-ep01.sql"
 ```
 
 El segundo archivo carga los maestros completos del negocio y el mínimo de registros conectados
-para probar las siete historias: dos roles, cuatro personas, dos cuentas, dos asignaciones de rol,
-un código, un token, dos docentes públicos, dos cursos,
-un módulo, una lección, un recurso, un material y una
+para probar las siete historias: dos roles, cinco estados de curso, cinco personas, tres cuentas,
+cuatro asignaciones de rol —una secundaria de ejemplo—, un código, un token, dos docentes públicos, tres cursos,
+tres módulos, cuatro lecciones, dos recursos, dos materiales y una
 matrícula activa. No incorpora datos repetidos solo para llenar listados.
 
 ## Tablas funcionales
@@ -44,10 +44,10 @@ matrícula activa. No incorpora datos repetidos solo para llenar listados.
 |---|---|
 | `rol` | Roles disponibles para organizar el acceso a las funciones del sistema |
 | `persona` | Identidad y perfil personal o profesional, tenga o no una cuenta |
-| `usuario` | Cuenta, medios de acceso y estado del alumno o administrador |
-| `usuario_rol` | Uno o varios roles asignados a cada cuenta |
-| `codigo_verificacion_correo` | Códigos emitidos para verificar el correo y su estado |
-| `token_recuperacion_acceso` | Enlaces de recuperación emitidos, vencimiento y estado |
+| `usuario` | Cuenta, medios de acceso, disponibilidad administrativa y condiciones de habilitación |
+| `usuario_rol` | Uno o varios roles asignados y el rol principal de cada cuenta |
+| `codigo_verificacion_correo` | Códigos emitidos, resultado de envío y fechas de uso o invalidación |
+| `token_recuperacion_acceso` | Enlaces emitidos, resultado de envío, vencimiento, uso e invalidación |
 
 ### Catálogo y ficha del curso
 
@@ -56,6 +56,7 @@ matrícula activa. No incorpora datos repetidos solo para llenar listados.
 | `tipo_curso` | Clasificación comercial: diplomado, seminario, taller y otros |
 | `categoria_tematica` | Área jurídica usada como filtro del catálogo |
 | `entidad_certificadora` | Entidad que refrenda el curso |
+| `estado_curso` | Los cinco estados del ciclo de vida del curso |
 | `curso` | Ficha, modalidad, precio, promoción, fechas, cupo y beneficios |
 | `curso_docente` | Personas que aparecen como docentes de un curso y su orden de presentación |
 | `modulo` | Módulos ordenados del temario |
@@ -77,8 +78,8 @@ matrícula se incorporarán en EP02.
 | HU-003 — Verificar correo | `usuario`, `codigo_verificacion_correo` |
 | HU-004 — Recuperar acceso | `usuario`, `token_recuperacion_acceso` |
 | HU-005 — Consultar y actualizar mis datos | `persona`, `usuario` |
-| HU-006 — Explorar, buscar y filtrar cursos | `curso`, maestros, `persona`, `curso_docente`, `matricula` |
-| HU-007 — Consultar ficha y vista previa | `curso`, `persona`, `curso_docente`, `modulo`, `leccion`, `recurso`, `material_leccion` |
+| HU-006 — Explorar, buscar y filtrar cursos | `curso`, `estado_curso`, maestros, `persona`, `curso_docente`, `matricula` |
+| HU-007 — Consultar ficha y vista previa | `curso`, `estado_curso`, `persona`, `curso_docente`, `modulo`, `leccion`, `recurso`, `material_leccion` |
 
 ## Valores que deberá controlar el backend
 
@@ -87,23 +88,33 @@ automatizan en los scripts:
 
 - rol del sistema: `ROLE_ALUMNO` o `ROLE_ADMINISTRADOR`;
 - origen del registro: `FORMULARIO`, `GOOGLE` o `ADMINISTRATIVO`;
-- estado de usuario: `PENDIENTE_VERIFICACION`, `CAMBIO_PENDIENTE`, `HABILITADO` o `DESHABILITADO`;
+- disponibilidad de la cuenta: `activo = true` para una cuenta utilizable y `activo = false` para
+  una cuenta inactiva;
+- condiciones visibles de la cuenta: `PENDIENTE_VERIFICACION` se deriva de la ausencia de
+  `correo_verificado_en` y `CAMBIO_PENDIENTE` de `requiere_cambio_contrasena`;
 - modalidad: `VIRTUAL`, `EN_VIVO` o `HIBRIDO`;
 - tipo de venta: `GRATUITO` o `PAGADO`;
-- estado de curso: `BORRADOR`, `PUBLICADO`, `EN_CURSO`, `CERRADO` o `CANCELADO`;
-- estado de código o token: `VIGENTE`, `UTILIZADO` o `INVALIDADO`;
+- estado de curso almacenado en `estado_curso`: `BORRADOR`, `PUBLICADO`, `EN_CURSO`, `CERRADO` o `CANCELADO`;
 - estado de matrícula: `PENDIENTE`, `ACTIVA`, `VENCIDA` o `CANCELADA`.
 
 El backend también será responsable de normalizar el correo, calcular fechas, invalidar códigos o
-enlaces anteriores, actualizar `modificado_en`, validar las reglas del curso y contar solamente
-matrículas `ACTIVA` para determinar la disponibilidad de cupos.
+enlaces anteriores, derivar si están vigentes, utilizados, invalidados o vencidos a partir de sus
+fechas, actualizar `modificado_en`, validar las reglas del curso y contar solamente matrículas
+`ACTIVA` para determinar la disponibilidad de cupos.
+
+La activación general se conserva mediante valores booleanos. Los estados de proceso mantienen su
+significado completo: el curso conserva sus cinco estados, la matrícula mantiene `PENDIENTE`,
+`ACTIVA`, `VENCIDA` y `CANCELADA`, y la lección conserva su situación de disponibilidad o
+programación.
 
 La autenticación valida cada solicitud de ingreso, pero en este alcance no conserva historial de
 intentos, direcciones IP ni información del dispositivo.
 
-Una cuenta puede tener varios registros en `usuario_rol`. El docente no recibe un rol ni acceso en
-el alcance actual: se identifica por la relación entre `persona` y `curso_docente`, y sus datos son
-gestionados por un administrador.
+Una cuenta puede tener varios registros en `usuario_rol`, pero exactamente uno debe mantener
+`es_principal = true`. En la versión actual ese rol define el panel inicial y no existe un selector
+para alternar roles; esa posibilidad queda preparada para una versión futura. El docente no recibe
+un rol ni acceso en el alcance actual: se identifica por la relación entre `persona` y
+`curso_docente`, y sus datos son gestionados por un administrador.
 
 ## Datos legales
 
