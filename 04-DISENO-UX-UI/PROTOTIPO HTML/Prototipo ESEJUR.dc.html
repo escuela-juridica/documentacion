@@ -2876,7 +2876,10 @@ const PANTALLAS = [
   { id: 'adminDashboard', label: 'ADM · PF-040 · Dashboard' }
 ];
 
-const PUBLICAS = ['catalogo', 'ficha', 'verificacion', 'reclamo', 'verifCorreo', 'recuperar', 'nuevaPass', 'privacidad', 'terminos'];
+const PUBLICAS = ['catalogo', 'ficha', 'verificacion', 'reclamo', 'privacidad', 'terminos'];
+// Login/registro/recuperar/nueva-contraseña/verificar-correo: llevan el mismo header y footer
+// públicos, pero sin los botones "Iniciar sesión"/"Crear cuenta" (no tiene sentido mostrarlos ahí).
+const AUTH_SIN_BOTONES = ['login', 'registro', 'recuperar', 'nuevaPass', 'verifCorreo'];
 const ALUMNAS = ['panel', 'perfil', 'gratuita', 'checkout', 'pago', 'misCursos', 'aula', 'leccion', 'calendario', 'examen', 'examenResultado', 'certificacion', 'misCertificados', 'visor'];
 const ADMINS = ['adminCursos', 'adminEditor', 'adminMatriculas', 'adminUsuarios', 'adminBase', 'adminSesiones', 'adminCola', 'adminCalificar', 'adminExcAcad', 'adminCertLista', 'adminCertOp', 'adminExcPago', 'adminReclamos', 'adminReclamoDet', 'adminReportes', 'adminDashboard'];
 
@@ -3749,7 +3752,7 @@ class Component extends DCLogic {
       reiniciar: () => this.reiniciarDemo(),
       noop: () => {},
 
-      layoutPublico: PUBLICAS.indexOf(p) >= 0,
+      layoutPublico: PUBLICAS.indexOf(p) >= 0 || AUTH_SIN_BOTONES.indexOf(p) >= 0,
       layoutAlumno: ALUMNAS.indexOf(p) >= 0,
       layoutAdmin: ADMINS.indexOf(p) >= 0,
       esCatalogo: p === 'catalogo',
@@ -3757,7 +3760,7 @@ class Component extends DCLogic {
       esLogin: p === 'login',
       esRegistro: p === 'registro',
 
-      sinSesion: !sesion,
+      sinSesion: !sesion && AUTH_SIN_BOTONES.indexOf(p) < 0,
       conSesion: !!sesion,
       iniciales: nombre ? nombre.split(' ').slice(0, 2).map(function (x) { return x.charAt(0); }).join('') : '',
       nombreCorto: nombre ? nombre.split(' ')[0] : 'colega',
