@@ -241,6 +241,9 @@ historias de matrícula y pago, no como usuario humano.
   duplicar su historial.
 - Cada cuenta debe tener exactamente un rol principal entre los roles que tenga asignados. Ese rol
   determina el panel inicial que se abre después de ingresar.
+- Cuando un administrador concede un rol, se conserva qué administrador realizó la asignación y
+  cuándo la realizó. Las asignaciones automáticas del registro y la configuración administrativa
+  inicial pueden no tener un otorgante.
 - En la versión actual se trabajará con el rol principal y no se mostrará una opción para cambiar
   de rol durante la sesión. La selección o alternancia entre varios roles queda preparada para una
   versión futura.
@@ -279,6 +282,8 @@ CURSO
   Sesión 1 = un video de YouTube **más** un PDF de presentación.
 - Los materiales no se dividen en principal y complementarios dentro de la lección. El
   administrador simplemente los ordena arrastrando y soltando, y el alumno los ve en ese orden.
+- Un mismo recurso puede reutilizarse en cursos o lecciones diferentes, pero no puede agregarse dos
+  veces dentro de la misma lección.
 - Cada lección debe enfocarse editorialmente en **un solo concepto**. Cortar y preparar el
   contenido sigue siendo responsabilidad de la Escuela; la plataforma facilita el control sin
   hacer más lenta la carga.
@@ -2156,7 +2161,7 @@ puede reenviar a cualquiera.
 |---|---|
 | RN-75 | Los videos de YouTube deben ser no listados; el sistema lo advierte. |
 | RN-76 | Compartir el enlace de un material o certificado no concede acceso: siempre se valida la identidad, la matrícula o la propiedad del certificado. |
-| RN-77 | Los materiales se ven en línea; la descarga se habilita material por material. |
+| RN-77 | Los materiales se ven en línea; la descarga se habilita material por material. Un recurso puede reutilizarse en diferentes lecciones, pero no repetirse dentro de una misma lección. |
 
 ### Cuentas y acceso
 

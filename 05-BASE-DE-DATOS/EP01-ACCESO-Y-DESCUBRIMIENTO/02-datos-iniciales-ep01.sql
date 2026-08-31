@@ -200,15 +200,19 @@ WHERE u.correo = 'valeria.mendoza@demo.esejur.pe'
 ON CONFLICT (usuario_id, rol_id) DO UPDATE
 SET es_principal = EXCLUDED.es_principal;
 
--- Rol secundario de ejemplo: la cuenta conserva un unico perfil inicial.
-INSERT INTO usuario_rol (usuario_id, rol_id, es_principal)
-SELECT u.usuario_id, r.rol_id, false
+-- Rol secundario concedido por administracion: la cuenta conserva su perfil inicial de alumno.
+INSERT INTO usuario_rol
+    (usuario_id, rol_id, es_principal, asignado_por_usuario_id)
+SELECT u.usuario_id, r.rol_id, false, otorgante.usuario_id
 FROM usuario u
 CROSS JOIN rol r
-WHERE u.correo = 'valeria.mendoza@demo.esejur.pe'
-  AND r.codigo = 'ROLE_ALUMNO'
+CROSS JOIN usuario otorgante
+WHERE u.correo = 'lucia.fernandez@demo.esejur.pe'
+  AND r.codigo = 'ROLE_ADMINISTRADOR'
+  AND otorgante.correo = 'valeria.mendoza@demo.esejur.pe'
 ON CONFLICT (usuario_id, rol_id) DO UPDATE
-SET es_principal = EXCLUDED.es_principal;
+SET es_principal = EXCLUDED.es_principal,
+    asignado_por_usuario_id = EXCLUDED.asignado_por_usuario_id;
 
 -- Hash SHA-256 de un codigo ficticio; no se guarda el codigo en texto plano.
 INSERT INTO codigo_verificacion_correo

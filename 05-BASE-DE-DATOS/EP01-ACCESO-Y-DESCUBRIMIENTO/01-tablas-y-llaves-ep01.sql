@@ -110,16 +110,19 @@ COMMENT ON COLUMN esejur.usuario.creado_en IS 'Fecha y hora de creacion del regi
 COMMENT ON COLUMN esejur.usuario.modificado_en IS 'Fecha y hora de la ultima modificacion del registro.';
 
 CREATE TABLE IF NOT EXISTS usuario_rol (
-    usuario_id   bigint NOT NULL,
-    rol_id       bigint NOT NULL,
-    es_principal boolean NOT NULL DEFAULT true,
-    asignado_en  timestamptz NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    usuario_id                bigint NOT NULL,
+    rol_id                    bigint NOT NULL,
+    es_principal              boolean NOT NULL DEFAULT true,
+    asignado_por_usuario_id   bigint,
+    asignado_en               timestamptz NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
     CONSTRAINT pk_usuario_rol PRIMARY KEY (usuario_id, rol_id),
     CONSTRAINT fk_usuario_rol_usuario
         FOREIGN KEY (usuario_id) REFERENCES usuario(usuario_id),
     CONSTRAINT fk_usuario_rol_rol
-        FOREIGN KEY (rol_id) REFERENCES rol(rol_id)
+        FOREIGN KEY (rol_id) REFERENCES rol(rol_id),
+    CONSTRAINT fk_usuario_rol_asignado_por
+        FOREIGN KEY (asignado_por_usuario_id) REFERENCES usuario(usuario_id)
 );
 
 COMMENT ON TABLE esejur.usuario_rol IS
@@ -127,6 +130,7 @@ COMMENT ON TABLE esejur.usuario_rol IS
 COMMENT ON COLUMN esejur.usuario_rol.usuario_id IS 'Usuario que recibe el rol.';
 COMMENT ON COLUMN esejur.usuario_rol.rol_id IS 'Rol asignado al usuario.';
 COMMENT ON COLUMN esejur.usuario_rol.es_principal IS 'Indica el rol utilizado como perfil inicial de la cuenta; cada usuario debe tener solo uno marcado como principal.';
+COMMENT ON COLUMN esejur.usuario_rol.asignado_por_usuario_id IS 'Administrador que concedio el rol; permanece vacio en asignaciones automaticas o de configuracion inicial.';
 COMMENT ON COLUMN esejur.usuario_rol.asignado_en IS 'Fecha y hora en que se realizo la asignacion.';
 
 CREATE TABLE IF NOT EXISTS codigo_verificacion_correo (
@@ -508,6 +512,7 @@ CREATE TABLE IF NOT EXISTS material_leccion (
 
     CONSTRAINT pk_material_leccion PRIMARY KEY (material_leccion_id),
     CONSTRAINT uq_material_leccion_orden UNIQUE (leccion_id, orden),
+    CONSTRAINT uq_material_leccion_recurso UNIQUE (leccion_id, recurso_id),
     CONSTRAINT fk_material_leccion_leccion
         FOREIGN KEY (leccion_id) REFERENCES leccion(leccion_id),
     CONSTRAINT fk_material_leccion_recurso

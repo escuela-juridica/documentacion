@@ -45,7 +45,7 @@ matrícula activa. No incorpora datos repetidos solo para llenar listados.
 | `rol` | Roles disponibles para organizar el acceso a las funciones del sistema |
 | `persona` | Identidad y perfil personal o profesional, tenga o no una cuenta |
 | `usuario` | Cuenta, medios de acceso, disponibilidad administrativa y condiciones de habilitación |
-| `usuario_rol` | Uno o varios roles asignados y el rol principal de cada cuenta |
+| `usuario_rol` | Uno o varios roles, el rol principal y el administrador que concedió cada asignación |
 | `codigo_verificacion_correo` | Códigos emitidos, resultado de envío y fechas de uso o invalidación |
 | `token_recuperacion_acceso` | Enlaces emitidos, resultado de envío, vencimiento, uso e invalidación |
 
@@ -112,9 +112,15 @@ intentos, direcciones IP ni información del dispositivo.
 
 Una cuenta puede tener varios registros en `usuario_rol`, pero exactamente uno debe mantener
 `es_principal = true`. En la versión actual ese rol define el panel inicial y no existe un selector
-para alternar roles; esa posibilidad queda preparada para una versión futura. El docente no recibe
-un rol ni acceso en el alcance actual: se identifica por la relación entre `persona` y
+para alternar roles; esa posibilidad queda preparada para una versión futura. Cuando el rol fue
+concedido por administración, `asignado_por_usuario_id` identifica al administrador responsable;
+permanece vacío para el registro automático y la configuración inicial. El docente no recibe un
+rol ni acceso en el alcance actual: se identifica por la relación entre `persona` y
 `curso_docente`, y sus datos son gestionados por un administrador.
+
+Un mismo `recurso` puede relacionarse con lecciones diferentes para permitir su reutilización. La
+restricción única de `material_leccion` impide agregar ese mismo recurso dos veces dentro de una
+sola lección.
 
 ## Datos legales
 
