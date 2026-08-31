@@ -46,13 +46,13 @@ no depende visualmente de pantallas construidas en otra épica.
 - **Historias:** HU-002.
 - **Actor:** visitante.
 - **Debe mostrar:** nombres, apellido paterno, apellido materno opcional, correo, teléfono opcional,
-  DNI opcional, contraseña, aceptación de documentos, alternativa de Google y contacto por
+  DNI opcional, contraseña, casilla legal, alternativa de Google y contacto por
   WhatsApp para solicitar ayuda. Si llega desde PF-003 con un correo Google nuevo, conserva los
   datos autorizados y solicita solo lo necesario para crear la cuenta.
 - **Jerarquía:** en escritorio utiliza dos columnas: panel institucional visual a la izquierda y
   formulario de una columna a la derecha. En móvil queda únicamente el formulario en una columna.
   “Crear cuenta” es la única acción principal y WhatsApp aparece como ayuda secundaria.
-- **Estados importantes:** correo existente, contraseña inválida, consentimientos faltantes y
+- **Estados importantes:** correo existente, contraseña inválida, casilla legal sin marcar y
   registro enviado.
 - **Acción para la review:** crear una cuenta dejando vacío el DNI y mostrar que también puede
   registrarse o editarse como dato opcional.

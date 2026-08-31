@@ -22,7 +22,7 @@
 - Correo, nombres y apellido paterno obligatorios; apellido materno, teléfono y DNI opcionales.
 - Para una cuenta nueva: contraseña temporal `Escuela1415@` y CAMBIO_PENDIENTE.
 - Correo con instrucciones, contraseña temporal y verificación.
-- Aviso permanente en el panel hasta verificar correo, aceptar documentos y cambiar contraseña.
+- Aviso permanente en el panel hasta verificar correo y cambiar contraseña.
 - Bloqueo de cursos, exámenes y certificados mientras exista una condición pendiente.
 - Una cuenta existente conserva su contraseña y no se duplica.
 - La contraseña propia que reemplaza a la temporal debe tener al menos ocho caracteres, una letra
@@ -30,8 +30,8 @@
 - La verificación utiliza un código de seis dígitos y de un solo uso. Reenviarlo invalida el código
   anterior y no crea otra cuenta.
 - Cualquier administrador habilitado puede crear otra cuenta con rol Administrador. El nuevo
-  administrador queda restringido al panel y a completar su habilitación hasta verificar correo,
-  aceptar documentos y reemplazar la contraseña temporal.
+  administrador queda restringido al panel y a completar su habilitación hasta verificar correo y
+  reemplazar la contraseña temporal.
 - Cada creación con rol Administrador registra quién concedió el perfil, además de fecha y hora.
 - Un administrador no puede desactivarse a sí mismo y una operación nunca puede dejar al sistema
   sin al menos un administrador habilitado y activo.
@@ -48,7 +48,7 @@
 3. Completa los datos, selecciona Alumno o Administrador y crea la cuenta temporal.
 4. ESEJUR envía instrucciones y deja CAMBIO_PENDIENTE.
 5. La persona inicia sesión con la clave temporal.
-6. Verifica correo con el código más reciente, acepta documentos y establece contraseña propia.
+6. Verifica correo con el código más reciente y establece contraseña propia.
 7. La cuenta queda habilitada y desaparece el aviso.
 
 ## Excepciones
@@ -60,7 +60,7 @@
   requisito de habilitación o certificación.
 - Apellido materno vacío: válido para crear y habilitar la cuenta; deberá completarse posteriormente
   si la persona confirma los datos que se imprimirán en un certificado.
-- No se permite omitir ninguna de las tres condiciones de habilitación.
+- No se permite omitir ninguna de las dos condiciones de habilitación.
 - El fallo de correo no marca el correo como verificado.
 - Un código de verificación incorrecto, usado o sustituido por un reenvío no habilita la cuenta.
 - La desactivación propia o la desactivación del último administrador activo se rechaza sin
@@ -72,7 +72,7 @@
   CAMBIO_PENDIENTE con la contraseña temporal y recibe instrucciones.
 - **Dado** una condición pendiente, **cuando** la persona entra, **entonces** ve el aviso y no abre
   cursos, exámenes ni certificados.
-- **Dado** las tres condiciones completas, **cuando** guarda su contraseña propia, **entonces** la
+- **Dado** las dos condiciones completas, **cuando** guarda su contraseña propia, **entonces** la
   cuenta queda habilitada.
 - **Dado** un correo existente, **cuando** administración lo selecciona, **entonces** no cambia su
   contraseña ni crea duplicados.
@@ -80,7 +80,7 @@
   bloquea la operación ni se inventa información para esos campos.
 - **Dado** un administrador habilitado, **cuando** crea otro administrador, **entonces** la nueva
   cuenta queda CAMBIO_PENDIENTE y no recibe capacidades administrativas completas hasta terminar
-  verificación, aceptación y cambio de contraseña, y queda identificado quién le concedió el rol.
+  verificación y cambio de contraseña, y queda identificado quién le concedió el rol.
 - **Dado** el último administrador activo o el propio administrador autenticado, **cuando** intenta
   desactivarlo, **entonces** ESEJUR impide la operación y conserva al menos un administrador activo.
 - **Dado** un código de verificación reenviado, **cuando** usa el anterior, **entonces** se rechaza;

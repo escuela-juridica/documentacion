@@ -19,9 +19,11 @@
 ## Alcance común
 
 - Nunca se crea más de una cuenta para el mismo correo.
-- La aceptación de términos y política de privacidad es obligatoria y conserva versión, fecha y
-  hora en `America/Lima`.
-- Las páginas vigentes de términos y privacidad pueden consultarse antes de aceptar.
+- La casilla de conformidad con los términos y la política de privacidad es obligatoria antes de
+  crear la cuenta.
+- Las páginas de términos y privacidad pueden consultarse antes de marcar la casilla.
+- No se guarda contenido, versión, fecha ni historial de aceptación. Si la cuenta existe, ESEJUR
+  asume que la casilla fue validada durante su creación.
 - El apellido materno, teléfono o WhatsApp y documento de identidad son opcionales.
 - El documento de identidad vacío no bloquea cuenta, matricula, pago, actividad ni certificado.
 - El teléfono se presenta como WhatsApp, pero las notificaciones automáticas se envian por correo.
@@ -32,7 +34,7 @@
 - Son obligatorios nombres, apellido paterno, correo, contraseña y confirmacion.
 - La contraseña debe tener al menos ocho caracteres, una mayúscula, una minúscula y un número.
 - Las dos contraseñas deben coincidir.
-- La persona debe aceptar los documentos y superar la protección anti-robot.
+- La persona debe marcar la casilla legal y superar la protección anti-robot.
 - La cuenta se crea con correo pendiente y continua en HU-003.
 
 ## Creación mediante Google
@@ -45,14 +47,14 @@
   paso; se completan antes de emitir un certificado cuando corresponda.
 - Google no entrega documento de identidad y este permanece opcional.
 - No se envía un código de verificación al correo ya confirmado por Google.
-- La cuenta queda habilitada al completar los datos obligatorios y aceptar los documentos.
+- La cuenta queda habilitada al completar los datos obligatorios y marcar la casilla legal.
 
 ## Flujo principal mediante formulario
 
 1. El visitante completa sus datos, contraseña y confirmacion.
-2. Acepta términos y privacidad y supera la protección anti-robot.
+2. Marca la casilla legal y supera la protección anti-robot.
 3. ESEJUR válida obligatoriedad, formato y unicidad del correo.
-4. Crea una sola cuenta con correo pendiente y registra los consentimientos.
+4. Crea una sola cuenta con correo pendiente; la cuenta creada implica que la casilla fue validada.
 5. Envia la bienvenida con un código de seis dígitos.
 6. Conduce a HU-003 para verificar el correo.
 
@@ -61,34 +63,34 @@
 1. El visitante selecciona Google desde la creación de cuenta o llega derivado desde HU-001.
 2. Autoriza la identidad y ESEJUR recibe el correo verificado.
 3. ESEJUR busca una cuenta con el mismo correo.
-4. Si no existe, presenta los datos disponibles y solicita los consentimientos pendientes.
+4. Si no existe, presenta los datos disponibles y solicita marcar la casilla legal.
 5. Crea y habilita una sola cuenta sin enviar un código de verificación adicional.
 6. Permite continuar al panel correspondiente.
 
 ## Alternativas y excepciones
 
-- Sin consentimientos o protección anti-robot válida no se crea la cuenta por formulario.
+- Sin la casilla legal marcada o sin protección anti-robot válida no se crea la cuenta por formulario.
 - Autorizacion Google cancelada: no se crea ni modifica una cuenta.
 - Correo ya registrado: no se duplica; se orienta al ingresó o recuperacion.
 - Correo existente por otro medio: se conserva una sola cuenta y sus accesos pueden vincularse.
 - Fallo al enviar el código del registro por formulario: la cuenta permanece pendiente y HU-003
   permite solicitar un nuevo envío.
 - Telefono, apellido materno o documento vacíos son validos y no generan tareas pendientes.
-- Solicitar ayuda por WhatsApp no sustituye consentimientos ni la posterior habilitacion.
+- Solicitar ayuda por WhatsApp no crea una cuenta ni sustituye su posterior habilitacion.
 
 ## Criterios de aceptación
 
 ### Cuenta mediante formulario
 
-- **Dado** datos validos, consentimientos aceptados y control anti-robot superado,
+- **Dado** datos validos, casilla legal marcada y control anti-robot superado,
 - **cuando** se envía el formulario,
-- **entonces** se crea una sola cuenta pendiente, se guardan los consentimientos y se conduce a
-  HU-003.
+- **entonces** se crea una sola cuenta pendiente y se conduce a HU-003, sin generar un registro
+  adicional sobre la casilla legal.
 
 ### Cuenta mediante Google
 
 - **Dado** un correo nuevo verificado por Google,
-- **cuando** la persona completa los datos obligatorios y acepta los documentos,
+- **cuando** la persona completa los datos obligatorios y marca la casilla legal,
 - **entonces** se crea una sola cuenta habilitada sin solicitar verificación adicional.
 
 ### Correo existente
@@ -110,11 +112,11 @@
 - **cuando** se intenta registrar,
 - **entonces** no se crea la cuenta y se muestran las condiciones pendientes.
 
-### Consentimientos
+### Casilla legal
 
 - **Dado** una creación por formulario o Google,
-- **cuando** la persona no acepta términos y privacidad,
-- **entonces** la cuenta no queda habilitada para continuar.
+- **cuando** la persona no marca su conformidad con términos y privacidad,
+- **entonces** no se crea ninguna cuenta.
 
 ### Solicitud asistida
 
@@ -136,10 +138,10 @@
 
 ## Orientación de trabajo
 
-- **Frontend:** PF-004 con formulario, alternativa Google, consentimientos, anti-robot, campos
+- **Frontend:** PF-004 con formulario, alternativa Google, casilla legal, anti-robot, campos
   opcionales, validaciones y estados.
-- **Backend:** unicidad, creación por ambos medios, vinculación por correo, consentimiento
-  versionado y preparacion de la verificación por formulario.
+- **Backend:** unicidad, creación por ambos medios, vinculación por correo, validación de que la
+  casilla legal fue marcada y preparacion de la verificación por formulario; no persiste aceptación.
 - **Integración:** formulario hacia HU-003; Google nuevo desde HU-001 hacia PF-004 y panel.
 
 ## Demostración esperada

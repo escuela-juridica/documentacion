@@ -64,8 +64,8 @@ Antes de comenzar deben existir:
 2. Crear un alumno o administrador con nombres y apellido paterno obligatorios; dejar apellido
    materno, teléfono y DNI vacíos para demostrar que son opcionales.
 3. Ingresar con `Escuela1415@` y mostrar las restricciones de la cuenta temporal.
-4. Ingresar el código de seis dígitos enviado por correo, aceptar los documentos y definir una
-   contraseña propia con ocho caracteres, mayúscula, minúscula y número.
+4. Ingresar el código de seis dígitos enviado por correo y definir una contraseña propia con ocho
+   caracteres, mayúscula, minúscula y número.
 5. Comprobar que la cuenta queda habilitada y que no puede desactivarse al propio administrador ni
    al último administrador activo.
 

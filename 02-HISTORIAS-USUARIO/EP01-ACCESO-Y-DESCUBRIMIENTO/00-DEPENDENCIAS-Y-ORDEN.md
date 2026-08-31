@@ -44,7 +44,7 @@ otro equipo para iniciar.
 1. HU-001 recibe de Google un correo verificado.
 2. Si ya existe una cuenta, HU-001 inicia la sesión.
 3. Si no existe, HU-001 conduce a PF-004 conservando solamente los datos autorizados necesarios.
-4. HU-002 completa los datos y consentimientos y crea la cuenta.
+4. HU-002 completa los datos, exige la casilla legal y crea la cuenta.
 
 Gabriel y Ariana son responsables de PF-003. Joel y Juan son responsables de PF-004. El acuerdo
 entre ambos equipos es el conjunto mínimo de datos que pasa de una pantalla a otra; no comparten la
@@ -73,7 +73,7 @@ se acuerdan los datos mínimos de tarjeta, curso seleccionado, modalidad, precio
 
 1. Explorar y filtrar cursos sin iniciar sesión.
 2. Abrir la ficha y una lección de vista previa.
-3. Crear una cuenta mediante formulario, aceptar documentos y verificar el correo.
+3. Crear una cuenta mediante formulario, marcar la casilla legal y verificar el correo.
 4. Iniciar sesión y actualizar datos personales.
 5. Recuperar el acceso mediante correo.
 6. Mostrar una cuenta Google existente y una identidad Google nueva derivada a la creación de

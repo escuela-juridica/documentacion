@@ -1,6 +1,6 @@
 -- ESEJUR - EP01 Datos iniciales y de prueba
 -- Requiere 01-tablas-y-llaves-ep01.sql.
--- Los usuario, documentos y cursos incluidos son ficticios.
+-- Los usuarios, documentos y cursos incluidos son ficticios.
 
 BEGIN;
 SET search_path TO esejur, public;
@@ -9,7 +9,7 @@ SET search_path TO esejur, public;
 -- Datos maestros del negocio
 -- -----------------------------------------------------------------------------
 
-INSERT INTO tipos_curso (codigo, nombre, orden)
+INSERT INTO tipo_curso (codigo, nombre, orden)
 VALUES
     ('DIPLOMADO', 'Diplomado', 10),
     ('PROGRAMA_ACTUALIZACION', 'Programa de actualización', 20),
@@ -24,7 +24,7 @@ SET nombre = EXCLUDED.nombre,
     activo = true,
     modificado_en = CURRENT_TIMESTAMP;
 
-INSERT INTO categorias_tematicas (codigo, nombre, orden)
+INSERT INTO categoria_tematica (codigo, nombre, orden)
 VALUES
     ('DERECHO_REGISTRAL', 'Derecho Registral', 10),
     ('DERECHO_NOTARIAL', 'Derecho Notarial', 20),
@@ -39,7 +39,7 @@ SET nombre = EXCLUDED.nombre,
     activo = true,
     modificado_en = CURRENT_TIMESTAMP;
 
-INSERT INTO entidades_certificadoras (nombre, activo)
+INSERT INTO entidad_certificadora (nombre, activo)
 VALUES
     ('Colegio de Abogados de Lima', true),
     ('Colegio de Abogados de Lima Sur', true),
@@ -60,25 +60,8 @@ SET nombre = EXCLUDED.nombre,
     modificado_en = CURRENT_TIMESTAMP;
 
 -- -----------------------------------------------------------------------------
--- Datos minimos para probar cuenta, acceso y perfil
+-- Datos minimos para probar cuenta y acceso
 -- -----------------------------------------------------------------------------
-
-INSERT INTO documentos_legales
-    (tipo, version, titulo, contenido, estado, vigente_desde)
-VALUES
-    ('POLITICA_PRIVACIDAD', 'DEMO-1.0', 'Política de privacidad — demostración',
-     '[DEMO] Sustituir por el contenido legal aprobado por la Escuela.',
-     'VIGENTE', CURRENT_TIMESTAMP),
-    ('TERMINOS_SERVICIO', 'DEMO-1.0', 'Términos del servicio — demostración',
-     '[DEMO] Sustituir por el contenido legal aprobado por la Escuela.',
-     'VIGENTE', CURRENT_TIMESTAMP)
-ON CONFLICT (tipo, version) DO UPDATE
-SET titulo = EXCLUDED.titulo,
-    contenido = EXCLUDED.contenido,
-    estado = EXCLUDED.estado,
-    vigente_desde = EXCLUDED.vigente_desde,
-    retirado_en = NULL,
-    modificado_en = CURRENT_TIMESTAMP;
 
 -- Personas realistas de prueba: dos con cuenta y dos docentes publicos sin cuenta.
 INSERT INTO persona (
@@ -166,16 +149,8 @@ WHERE u.correo IN ('lucia.fernandez@demo.esejur.pe', 'diego.salazar@demo.esejur.
   AND r.codigo = 'ROLE_ALUMNO'
 ON CONFLICT (usuario_id, rol_id) DO NOTHING;
 
-INSERT INTO consentimientos_usuario (usuario_id, documento_legal_id)
-SELECT u.usuario_id, d.documento_legal_id
-FROM usuario u
-CROSS JOIN documentos_legales d
-WHERE u.correo IN ('lucia.fernandez@demo.esejur.pe', 'diego.salazar@demo.esejur.pe')
-  AND d.version = 'DEMO-1.0'
-ON CONFLICT (usuario_id, documento_legal_id) DO NOTHING;
-
 -- Hash SHA-256 de un codigo ficticio; no se guarda el codigo en texto plano.
-INSERT INTO codigos_verificacion_correo
+INSERT INTO codigo_verificacion_correo
     (usuario_id, codigo_hash, estado, estado_envio)
 SELECT usuario_id,
        '0a14e0db42e1a9cc8680ab5395bcae92416186796fa4eb636c431d4d53d8f53d',
@@ -185,7 +160,7 @@ FROM usuario
 WHERE correo = 'diego.salazar@demo.esejur.pe'
 ON CONFLICT (codigo_hash) DO NOTHING;
 
-INSERT INTO tokens_recuperacion_acceso
+INSERT INTO token_recuperacion_acceso
     (usuario_id, token_hash, estado, estado_envio, expira_en)
 SELECT usuario_id,
        '9d504a09b3caa4d01105c85c91fdb518aac2e0bdf94cf930728d9f049cfb7f34',
@@ -196,12 +171,6 @@ FROM usuario
 WHERE correo = 'lucia.fernandez@demo.esejur.pe'
 ON CONFLICT (token_hash) DO NOTHING;
 
-INSERT INTO intentos_acceso
-    (usuario_id, correo_referencia, metodo, resultado, motivo_resultado)
-SELECT usuario_id, correo, 'GOOGLE', 'EXITOSO', 'CREDENCIALES_VALIDAS'
-FROM usuario
-WHERE correo = 'lucia.fernandez@demo.esejur.pe';
-
 -- -----------------------------------------------------------------------------
 -- Datos minimos para probar catalogo, ficha y vista previa
 -- -----------------------------------------------------------------------------
@@ -209,7 +178,7 @@ WHERE correo = 'lucia.fernandez@demo.esejur.pe';
 
 
 -- Curso virtual pagado, sin fecha de fin y con dos docentes.
-INSERT INTO cursos (
+INSERT INTO curso (
     url_amigable, titulo, descripcion, imagen_portada_url,
     tipo_curso_id, categoria_tematica_id, entidad_certificadora_id,
     modalidad, tipo_venta, estado, destacado,
@@ -227,9 +196,9 @@ SELECT
     650.00, 450.00, 120.00,
     ARRAY['Acceso las 24 horas', 'Material académico', 'Certificación'],
     CURRENT_TIMESTAMP
-FROM tipos_curso tc
-CROSS JOIN categorias_tematicas ct
-CROSS JOIN entidades_certificadoras ec
+FROM tipo_curso tc
+CROSS JOIN categoria_tematica ct
+CROSS JOIN entidad_certificadora ec
 WHERE tc.codigo = 'DIPLOMADO'
   AND ct.codigo = 'DERECHO_REGISTRAL'
   AND ec.nombre = 'Colegio de Abogados de Lima'
@@ -253,7 +222,7 @@ SET titulo = EXCLUDED.titulo,
     modificado_en = CURRENT_TIMESTAMP;
 
 -- Curso hibrido gratuito, con fechas y un cupo para comprobar "Sin cupos".
-INSERT INTO cursos (
+INSERT INTO curso (
     url_amigable, titulo, descripcion, imagen_portada_url,
     tipo_curso_id, categoria_tematica_id, entidad_certificadora_id,
     modalidad, tipo_venta, estado, precio_regular,
@@ -271,9 +240,9 @@ SELECT
     'HIBRIDO', 'GRATUITO', 'PUBLICADO', 0.00,
     CURRENT_DATE + 15, CURRENT_DATE + 20, CURRENT_DATE + 14, 1,
     12.00, ARRAY['Casos prácticos', 'Material descargable'], CURRENT_TIMESTAMP
-FROM tipos_curso tc
-CROSS JOIN categorias_tematicas ct
-CROSS JOIN entidades_certificadoras ec
+FROM tipo_curso tc
+CROSS JOIN categoria_tematica ct
+CROSS JOIN entidad_certificadora ec
 WHERE tc.codigo = 'TALLER_CASOS_PRACTICOS'
   AND ct.codigo = 'DERECHO_REGISTRAL'
   AND ec.nombre = 'Colegio de Abogados de Lima'
@@ -298,7 +267,7 @@ SET titulo = EXCLUDED.titulo,
 
 INSERT INTO curso_docente (curso_id, persona_id, orden)
 SELECT c.curso_id, p.persona_id, 1
-FROM cursos c
+FROM curso c
 CROSS JOIN persona p
 WHERE c.url_amigable = 'diplomado-derecho-registral-notarial'
   AND p.nombres = 'Mariela'
@@ -308,7 +277,7 @@ ON CONFLICT (curso_id, persona_id) DO UPDATE SET orden = EXCLUDED.orden;
 
 INSERT INTO curso_docente (curso_id, persona_id, orden)
 SELECT c.curso_id, p.persona_id, 2
-FROM cursos c
+FROM curso c
 CROSS JOIN persona p
 WHERE c.url_amigable = 'diplomado-derecho-registral-notarial'
   AND p.nombres = 'Alfonso'
@@ -316,10 +285,10 @@ WHERE c.url_amigable = 'diplomado-derecho-registral-notarial'
   AND p.apellido_materno = 'Cueto'
 ON CONFLICT (curso_id, persona_id) DO UPDATE SET orden = EXCLUDED.orden;
 
-INSERT INTO modulos (curso_id, titulo, descripcion, orden)
+INSERT INTO modulo (curso_id, titulo, descripcion, orden)
 SELECT curso_id, 'Fundamentos del sistema registral',
        'Bases para comprender la calificación registral.', 1
-FROM cursos
+FROM curso
 WHERE url_amigable = 'diplomado-derecho-registral-notarial'
 ON CONFLICT (curso_id, orden) DO UPDATE
 SET titulo = EXCLUDED.titulo,
@@ -327,13 +296,13 @@ SET titulo = EXCLUDED.titulo,
     activo = true,
     modificado_en = CURRENT_TIMESTAMP;
 
-INSERT INTO lecciones
+INSERT INTO leccion
     (modulo_id, titulo, descripcion, orden, tipo, estado, es_vista_previa)
 SELECT m.modulo_id, 'Principios registrales',
        'Lección pública de introducción al curso.', 1,
        'GRABADA', 'DISPONIBLE', true
-FROM modulos m
-JOIN cursos c ON c.curso_id = m.curso_id
+FROM modulo m
+JOIN curso c ON c.curso_id = m.curso_id
 WHERE c.url_amigable = 'diplomado-derecho-registral-notarial'
   AND m.orden = 1
 ON CONFLICT (modulo_id, orden) DO UPDATE
@@ -345,7 +314,7 @@ SET titulo = EXCLUDED.titulo,
     activo = true,
     modificado_en = CURRENT_TIMESTAMP;
 
-INSERT INTO recursos
+INSERT INTO recurso
     (tipo, origen, referencia, nombre_archivo, tipo_mime, tamano_bytes,
      duracion_segundos, duracion_detectada)
 VALUES
@@ -361,13 +330,13 @@ SET nombre_archivo = EXCLUDED.nombre_archivo,
     activo = true,
     modificado_en = CURRENT_TIMESTAMP;
 
-INSERT INTO materiales_leccion
+INSERT INTO material_leccion
     (leccion_id, recurso_id, titulo, orden, permite_descarga)
 SELECT l.leccion_id, r.recurso_id, 'Video de introducción', 1, false
-FROM lecciones l
-JOIN modulos m ON m.modulo_id = l.modulo_id
-JOIN cursos c ON c.curso_id = m.curso_id
-CROSS JOIN recursos r
+FROM leccion l
+JOIN modulo m ON m.modulo_id = l.modulo_id
+JOIN curso c ON c.curso_id = m.curso_id
+CROSS JOIN recurso r
 WHERE c.url_amigable = 'diplomado-derecho-registral-notarial'
   AND m.orden = 1
   AND l.orden = 1
@@ -379,11 +348,11 @@ SET recurso_id = EXCLUDED.recurso_id,
     activo = true,
     modificado_en = CURRENT_TIMESTAMP;
 
-INSERT INTO matriculas
+INSERT INTO matricula
     (usuario_id, curso_id, estado, forma_ingreso, fecha_activacion)
 SELECT u.usuario_id, c.curso_id, 'ACTIVA', 'GRATUITA', CURRENT_TIMESTAMP
 FROM usuario u
-CROSS JOIN cursos c
+CROSS JOIN curso c
 WHERE u.correo = 'lucia.fernandez@demo.esejur.pe'
   AND c.url_amigable = 'taller-casos-practicos-registrales'
 ON CONFLICT (usuario_id, curso_id) DO UPDATE

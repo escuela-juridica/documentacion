@@ -77,13 +77,14 @@ queda expuesto.
 
 1. Completar nombres, apellido paterno, correo y contraseña; decidir si se registran el apellido
    materno, teléfono y DNI opcionales.
-2. Aceptar los documentos públicos aplicables desde sus enlaces.
+2. Consultar los documentos públicos desde sus enlaces y marcar la casilla legal.
 3. Enviar el registro y comprobar que la cuenta queda pendiente sin duplicarse.
 4. Abrir PF-005, ingresar el código más reciente y verificar el correo.
 5. Iniciar sesión con la nueva cuenta.
 
-**Resultado esperado:** se crea una sola cuenta válida y queda registrado el consentimiento
-aceptado. El DNI puede registrarse, pero dejarlo vacío no impide completar el flujo.
+**Resultado esperado:** se crea una sola cuenta válida únicamente después de marcar la casilla
+legal. No se guarda un registro adicional de esa aceptación. El DNI puede registrarse, pero dejarlo
+vacío no impide completar el flujo.
 
 ### 4. Administrar los datos personales
 
@@ -101,7 +102,7 @@ que ya hayan quedado congelados en certificados emitidos.
 1. Cerrar la sesión actual.
 2. Ingresar con una cuenta de Google ya vinculada y comprobar que abre la cuenta existente.
 3. Repetir con un correo Google nuevo y mostrar el traslado desde PF-003 hacia PF-004.
-4. Revisar los datos autorizados, aceptar los documentos y completar la creación.
+4. Revisar los datos autorizados, marcar la casilla legal y completar la creación.
 5. Comprobar que Google no solicita el código de HU-003 porque ya confirmó el correo.
 
 **Resultado esperado:** Google permite ingresar a una cuenta existente o completar una cuenta
@@ -124,7 +125,6 @@ están registrados.
 - Informar una contraseña que no cumple las condiciones requeridas.
 - Mostrar el tratamiento controlado de un correo que no pudo enviarse, sin duplicar la cuenta.
 - Impedir que un visitante abra materiales protegidos.
-- Registrar el resultado de los intentos de acceso con la información disponible.
 
 ## Evidencias que deben conservarse
 

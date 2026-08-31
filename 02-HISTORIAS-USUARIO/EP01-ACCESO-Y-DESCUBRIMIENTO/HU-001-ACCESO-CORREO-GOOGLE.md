@@ -99,21 +99,14 @@ Todas las fechas y horas visibles o registradas se interpretan y muestran en `Am
 - **cuando** intenta ingresar,
 - **entonces** se conduce a HU-003 para ingresar o reenviar el código.
 
-### Registro horario
-
-- **Dado** cualquier intento de acceso,
-- **cuando** ESEJUR registra o muestra su fecha y hora,
-- **entonces** utiliza `America/Lima`.
-
 ## Estados, permisos y conservación
 
 - Estados relevantes: cuenta habilitada, correo pendiente y habilitacion pendiente.
 - Alumno y administrador reciben capacidades diferentes; el docente no posee acceso propio.
-- Cada intento queda registrado con cuenta cuando pueda identificarse, fecha, hora, origen
-  disponible y resultado.
-- Los registros de acceso son privados para administración.
+- ESEJUR valida el intento actual, pero no conserva historial de ingresos, dirección IP ni datos del
+  dispositivo.
 - No se limita automáticamente la cantidad de sesiones simultáneas.
-- Vincular Google nunca reemplaza datos, consentimientos ni historial existentes.
+- Vincular Google nunca reemplaza datos ni historial existentes.
 
 ## Dependencia interna
 
@@ -137,4 +130,3 @@ Todas las fechas y horas visibles o registradas se interpretan y muestran en `Am
 Ingresar como alumno y administrador mediante correo; ingresar con una cuenta Google existente;
 mostrar que un correo Google nuevo conduce a HU-002; comprobar el desvío a HU-003 y el rechazo de
 credenciales inválidas.
-

@@ -23,7 +23,7 @@
 | [7](#7-estructura-del-contenido) | **Estructura del contenido** | Curso → Módulo → Lección → Material · modalidad · archivos |
 | [8](#8-ciclo-de-vida-del-curso) | **Ciclo de vida del curso** | Estados, transiciones y qué no se borra |
 | [9](#9-matrícula-y-pago) | **Matrícula y pago** | Flujos, estados, matrícula manual, cupo y cancelación |
-| [10](#10-cuentas-y-datos-personales) | **Cuentas y datos personales** | Registro con formulario, Google o creación administrativa, login, consentimiento y cuentas compartidas |
+| [10](#10-cuentas-y-datos-personales) | **Cuentas y datos personales** | Registro con formulario, Google o creación administrativa, login, condiciones de registro y cuentas compartidas |
 | [11](#11-progreso-del-alumno) | **Progreso del alumno** | Secuencia definida por el administrador, marcado de lecciones y asistencia |
 | [12](#12-exámenes) | **Exámenes** | Calificados y de práctica, cuándo se habilitan, control y cálculo de notas |
 | [13](#13-certificación) | **Certificación** | Reglas, niveles, emisión, privacidad y verificación |
@@ -824,8 +824,8 @@ Un clic. Google entrega **el correo ya verificado**, el nombre, los apellidos y 
 
 - Ese usuario **se salta el correo de verificación**: Google ya validó que la cuenta es suya. Es
   el paso donde más gente se pierde, así que ahorrarlo importa.
-- Antes de habilitar la cuenta para matricularse, debe aceptar la política de privacidad y los
-  términos vigentes. La aceptación se registra igual que en el formulario.
+- Antes de crear la cuenta, debe marcar la casilla de conformidad con la política de privacidad y
+  los términos. Si la casilla no está marcada, la cuenta no se crea.
 - ⚠️ **Google entrega los apellidos en un solo bloque** (*"Pérez García"*), no separados en
   paterno y materno: esa separación es una convención peruana que Google no maneja. Por eso el
   desglose se completa después, en la pantalla del certificado.
@@ -858,17 +858,17 @@ Una cuenta con rol Administrador solo puede ser creada por otro administrador ha
 registra quién concedió el rol. Un administrador no puede desactivarse a sí mismo y el sistema no
 permite dejar a la plataforma sin al menos un administrador habilitado. El nuevo administrador
 entra restringido a su propia habilitación; no ejecuta operaciones administrativas hasta verificar
-el correo, aceptar los documentos y cambiar la contraseña temporal.
+el correo y cambiar la contraseña temporal.
 
-En el primer ingreso, el alumno debe completar, en este orden, la verificación de su correo, la
-aceptación de los términos y la política de privacidad, y la definición de una contraseña propia.
+En el primer ingreso, el alumno debe completar, en este orden, la verificación de su correo y la
+definición de una contraseña propia.
 Puede entrar al panel principal, donde ve en todo momento un aviso que no puede ocultar:
 
 > **Estás usando una contraseña temporal. Cámbiala para proteger tu cuenta.**
 
-Mientras alguna de las tres condiciones continúe pendiente puede revisar su panel, pero no abrir
+Mientras alguna de las dos condiciones continúe pendiente puede revisar su panel, pero no abrir
 cursos, rendir exámenes ni consultar certificados. El aviso desaparece y la cuenta queda
-habilitada únicamente después de verificar el correo, aceptar los documentos y cambiar la
+habilitada únicamente después de verificar el correo y cambiar la
 contraseña. Entonces puede utilizar el acceso correspondiente a sus matrículas ACTIVA.
 
 #### Iniciar sesión
@@ -930,12 +930,13 @@ El sistema recolecta nombres, apellidos y correo; el teléfono y el DNI solo se 
 persona decide proporcionarlos. En Perú estos datos están regulados por la **Ley N.º 29733 de
 Protección de Datos Personales**.
 
-- El registro por formulario o Google exige aceptar la política de privacidad y los términos
-  antes de habilitar la cuenta para matricularse. Una cuenta creada por administración puede
-  existir antes de esa aceptación, pero no permite utilizar cursos, exámenes ni certificados hasta
-  que el alumno acepte los documentos en su primer ingreso.
-- Existen dos páginas públicas: **política de privacidad** y **términos y condiciones**.
-- Se guarda **cuándo** aceptó cada usuario y **qué versión** del texto aceptó.
+- El registro por formulario o Google exige marcar una casilla de conformidad con la política de
+  privacidad y los términos antes de crear la cuenta. Si no se marca, no se crea ningún usuario.
+- Existen dos páginas públicas en HTML: **política de privacidad** y **términos y condiciones**.
+- La base de datos no guarda el contenido, la versión, la fecha ni un historial de aceptación. La
+  existencia de la cuenta significa que esta condición fue cumplida en el flujo que la creó.
+- Cuando la cuenta es creada por administración a solicitud de la persona, el sistema también
+  asume cumplida esta condición desde su creación y no la vuelve a solicitar en el primer ingreso.
 
 Es barato de implementar y evita un problema real: son datos de abogados y funcionarios públicos.
 
@@ -1038,14 +1039,6 @@ El administrador dispone de una bandeja exclusiva del Libro de Reclamaciones:
 No se construye una sección de seguimiento para el consumidor: recibe la constancia inicial y la
 respuesta final por correo. El formulario, la reclamación original, sus imágenes, la respuesta y
 los datos de atención se conservan juntos.
-
-### Cuentas compartidas
-
-Riesgo real en formación profesional: una persona compra y pasa la clave a cinco colegas del
-estudio. **Se registra cada acceso** (quién, cuándo, desde dónde), que es la base para
-detectarlo. Limitar las sesiones simultáneas queda identificado pero **no se implementa ahora**.
-
----
 
 ## 11. Progreso del alumno
 
@@ -2058,7 +2051,7 @@ puede reenviar a cualquiera.
 | RN-23 | El primer resultado APROBADO se registra una vez. Una repetición no genera otro pago ni matrícula y ESEJUR no convierte fallos en APROBADO. Una aprobación posterior a CANCELADO mantiene la matrícula CANCELADA y abre atención externa; una aprobación que encuentra el cupo lleno activa y genera alerta de sobrecupo. |
 | RN-24 | Solo puede existir un intento PENDIENTE por matrícula. ESEJUR no le asigna un plazo propio y no permite reintentarlo mientras siga PENDIENTE. Solo RECHAZADO, ERROR o EXPIRADO permiten un nuevo intento sobre la misma matrícula, conservando historial. |
 | RN-25 | Toda matrícula manual genera REGISTRADO_MANUAL con importe, medio, referencia y motivo, o EXONERADO con importe cero y motivo; ambas registran responsable y fecha y activan la matrícula. |
-| RN-26 | En autoservicio no se matricula sin correo verificado y documentos aceptados. Administración puede crear cuenta y matrícula, pero el contenido queda bloqueado hasta verificar el correo, aceptar los documentos y cambiar la contraseña temporal. ACTIVA representa el derecho concedido; utilizarlo también exige una cuenta habilitada y que haya llegado la fecha de inicio cuando exista. |
+| RN-26 | En autoservicio no se matricula sin correo verificado. Administración puede crear cuenta y matrícula, pero el contenido queda bloqueado hasta verificar el correo y cambiar la contraseña temporal. ACTIVA representa el derecho concedido; utilizarlo también exige una cuenta habilitada y que haya llegado la fecha de inicio cuando exista. |
 | RN-27 | Un alumno no puede matricularse dos veces en el mismo curso. |
 | RN-28 | Los cursos PUBLICADO y EN CURSO admiten matrícula mientras tengan cupo y no se haya alcanzado su cierre de matrícula o cierre administrativo. VIRTUAL no usa fecha de cierre de matrícula. |
 | RN-29 | Un curso puede definir una capacidad de venta; vacío significa sin límite. Un pago PENDIENTE no reserva cupo. El cupo se ocupa cuando Culqi informa APROBADO y la matrícula pasa a ACTIVA, o cuando se activa una matrícula gratuita o administrativa. |
@@ -2136,8 +2129,8 @@ puede reenviar a cualquiera.
 | # | Regla |
 |---|---|
 | RN-78 | El docente tiene un perfil público sin acceso al sistema; el alumno y el administrador sí utilizan una cuenta. |
-| RN-79 | Se registra cada acceso al sistema. |
-| RN-80 | El registro por formulario o Google exige aceptar la política de privacidad y los términos, guardando cuándo y qué versión se aceptó. Una cuenta creada por administración puede existir antes, pero no queda habilitada hasta que el alumno los acepte. La contraseña propia debe tener al menos 8 caracteres e incluir mayúscula, minúscula y número. La verificación usa un código de 6 dígitos de un solo uso; reenviarlo invalida el anterior. El enlace de recuperación dura 60 minutos y usarlo o solicitar uno nuevo invalida el anterior. |
+| RN-79 | ESEJUR valida cada solicitud de ingreso, pero no conserva un historial de intentos de acceso, direcciones IP ni dispositivos. Tampoco controla sesiones simultáneas. |
+| RN-80 | El registro por formulario o Google exige marcar la casilla de conformidad con la política de privacidad y los términos antes de crear la cuenta. Si no se marca, no se crea el usuario. La existencia de la cuenta implica que esta condición fue cumplida; no se guarda contenido, versión, fecha ni historial de aceptación. En la creación administrativa se asume cumplida desde que el administrador crea la cuenta a solicitud de la persona. La contraseña propia debe tener al menos 8 caracteres e incluir mayúscula, minúscula y número. La verificación usa un código de 6 dígitos de un solo uso; reenviarlo invalida el anterior. El enlace de recuperación dura 60 minutos y usarlo o solicitar uno nuevo invalida el anterior. |
 | RN-81 | La plataforma ofrece Libro de Reclamaciones como página pública enlazada en el pie y accesible con o sin cuenta; con sesión, completa los datos conocidos. |
 | RN-82 | La reclamación distingue QUEJA de RECLAMO, admite varias imágenes opcionales de hasta 5 MB cada una y exige declaración jurada y autorización de respuesta por correo. |
 | RN-83 | Cada QUEJA o RECLAMO debe ser respondido. Recibe número, fecha, PENDIENTE_RESPUESTA y una fecha límite de 15 días hábiles improrrogables. El primer día hábil posterior a la presentación es el día 1; si se presenta en día no hábil, el conteo comienza el siguiente día hábil. Se excluyen sábados, domingos y feriados oficiales del Perú. Se envía constancia; la administración responde por correo y solo entonces pasa a RESPONDIDO. Si el envío falla, permanece pendiente. |
@@ -2146,7 +2139,7 @@ puede reenviar a cualquiera.
 | RN-86 | Un mismo correo es una sola cuenta: los accesos por formulario y por Google se vinculan entre sí. |
 | RN-87 | El login no bloquea el catálogo ni las lecciones de vista previa; la sesión se pide solo al matricularse. |
 | RN-88 | El registro guarda el WhatsApp del alumno como dato de contacto opcional; las notificaciones automáticas van por correo. |
-| RN-89 | La pantalla de registro ofrece WhatsApp para solicitar una cuenta manual. Cualquier administrador HABILITADO puede crear otro administrador o un alumno usando correo, nombres, apellido paterno obligatorio, apellido materno opcional y `telefono` y DNI opcionales; se registra quién concedió el perfil. No puede deshabilitarse a sí mismo ni dejar al sistema sin al menos un administrador habilitado. Una cuenta nueva recibe por correo las instrucciones, el código de verificación de seis dígitos y `Escuela1415@`, y queda con CAMBIO_PENDIENTE. Puede entrar al panel, pero no abrir cursos, exámenes ni certificados hasta verificar el correo, aceptar los documentos y cambiar la contraseña. Una cuenta existente nunca cambia su clave. |
+| RN-89 | La pantalla de registro ofrece WhatsApp para solicitar una cuenta manual. Cualquier administrador HABILITADO puede crear otro administrador o un alumno usando correo, nombres, apellido paterno obligatorio, apellido materno opcional y `telefono` y DNI opcionales; se registra quién concedió el perfil. No puede deshabilitarse a sí mismo ni dejar al sistema sin al menos un administrador habilitado. Una cuenta nueva recibe por correo las instrucciones, el código de verificación de seis dígitos y `Escuela1415@`, y queda con CAMBIO_PENDIENTE. Puede entrar al panel, pero no abrir cursos, exámenes ni certificados hasta verificar el correo y cambiar la contraseña. Una cuenta existente nunca cambia su clave. |
 | RN-90 | El formulario de registro lleva protección anti-robot. |
 
 ### Catálogo y administración
@@ -2179,8 +2172,9 @@ puede reenviar a cualquiera.
 ### 🟢 Se construye
 
 **Cuentas y acceso** — registro por formulario o con Google, creación administrativa con
-contraseña temporal y cambio obligatorio, login, recuperación de contraseña, aceptación de
-política de privacidad y términos, registro de accesos.
+contraseña temporal y cambio obligatorio, login, recuperación de contraseña, casilla legal previa
+a la creación en autoservicio y páginas públicas de privacidad y términos. No conserva historial
+de intentos de ingreso ni controla IP o sesiones simultáneas.
 
 **Catálogo** — público, con filtros por tipo, buscador por título y descripción, orden por fecha
 de inicio, cursos destacados, badge "En vivo", ficha con temario y vista previa gratuita.
@@ -2404,8 +2398,8 @@ no es válido y su fecha de anulación; un código inexistente no revela informa
 **19.24 — Cuenta y matrícula creadas por administración** ✅ *Resuelto: el administrador puede
 crear una cuenta con correo, nombres, apellidos, teléfono opcional y DNI opcional. Una cuenta nueva recibe la
 contraseña temporal `Escuela1415@` y CAMBIO_PENDIENTE; puede ver el panel, pero el aviso permanece
-y no accede a cursos, exámenes ni certificados hasta verificar el correo, aceptar los documentos
-y cambiar la contraseña. Recibe por correo las instrucciones y el código de verificación de seis dígitos. Una
+y no accede a cursos, exámenes ni certificados hasta verificar el correo y cambiar la contraseña.
+Recibe por correo las instrucciones y el código de verificación de seis dígitos. Una
 cuenta existente conserva su clave. Toda matrícula administrativa
 genera REGISTRADO_MANUAL o EXONERADO según exista cobro.* (§9 y §10)
 
@@ -2443,11 +2437,12 @@ corrección manual cubre excepciones y se
 mantiene aceptado que abrir el enlace no demuestra permanencia en Zoom.* (§7, §9 y §11)
 
 **19.29 — Habilitación de cuentas creadas por administración** ✅ *Resuelto: existen tres caminos
-de registro. Una cuenta administrativa puede existir y tener una matrícula ACTIVA antes de la
-aceptación, pero ACTIVA representa el derecho concedido, no que la cuenta ya pueda utilizarlo. El
-correo de bienvenida entrega instrucciones, código de verificación de seis dígitos y contraseña temporal; el acceso se
-habilita después de verificar el correo, aceptar los documentos y cambiar la contraseña. Google
-también exige aceptar los documentos antes de matricular.* (§9, §10 y §16)
+de registro. Una cuenta administrativa puede existir y tener una matrícula ACTIVA antes de quedar
+habilitada para usarla; ACTIVA representa el derecho concedido, no que la cuenta ya pueda utilizarlo.
+El correo de bienvenida entrega instrucciones, código de verificación de seis dígitos y contraseña
+temporal; el acceso se habilita después de verificar el correo y cambiar la contraseña. En formulario
+y Google, la casilla legal se exige antes de crear la cuenta y no genera un registro adicional; en la
+creación administrativa se asume cumplida al crearla a solicitud de la persona.* (§9, §10 y §16)
 
 **19.30 — Cancelación completa de un curso** ✅ *Resuelto: CANCELADO se diferencia del cierre
 normal. Detiene matrículas y pagos nuevos, cancela sesiones futuras, avisa a los alumnos y conserva

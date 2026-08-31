@@ -578,7 +578,9 @@ Los badges deben contener texto, no solo color.
 
 - Formularios centrados de máximo 480 px.
 - Fondo claro con bloque institucional azul discreto en escritorio.
-- El registro no debe parecer un formulario legal extenso; consentimientos al final con enlaces.
+- El registro no debe parecer un formulario legal extenso; usa una sola casilla legal al final con
+  enlaces a privacidad y términos. Si no se marca, no se crea la cuenta; no se muestra ni se guarda
+  historial de aceptación.
 - En escritorio, el registro usa un panel institucional visual a la izquierda y el formulario en
   una sola columna a la derecha. En móvil se conserva únicamente el formulario en una columna.
 - Google se presenta como alternativa equivalente, no como botón dominante. En PF-003 permite

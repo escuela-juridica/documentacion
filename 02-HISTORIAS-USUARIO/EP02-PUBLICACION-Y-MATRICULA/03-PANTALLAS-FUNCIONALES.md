@@ -20,8 +20,8 @@ se desarrollan como incremento de esta épica.
 - **Estados importantes:** correo existente sin duplicidad, apellido materno/teléfono/DNI vacíos,
   código de verificación reenviado, CAMBIO_PENDIENTE, cuenta habilitada, correo fallido,
   auto-desactivación bloqueada y último administrador protegido.
-- **Acción para la review:** crear una cuenta con `Escuela1415@`, completar código de verificación,
-  documentos y contraseña propia, y comprobar su habilitación.
+- **Acción para la review:** crear una cuenta con `Escuela1415@`, completar código de verificación
+  y contraseña propia, y comprobar su habilitación.
 
 ### PF-012 — Administración de información base
 
@@ -120,7 +120,7 @@ se desarrollan como incremento de esta épica.
 - **PF-003:** ingreso del administrador y de los alumnos.
 - **PF-005:** ingreso y reenvío del código de verificación.
 - **PF-008:** aviso y acceso restringido de la cuenta temporal.
-- **PF-009:** aceptación pendiente y definición de la contraseña propia.
+- **PF-009:** definición de la contraseña propia.
 - **PF-001:** localización del curso publicado.
 - **PF-002:** consulta de la ficha y comienzo de la matrícula.
 

@@ -30,14 +30,14 @@
   sesiones futuras, ESEJUR muestra antes de confirmar que el alumno no podrá alcanzar por sí solo
   la certificación automática basada en asistencia; la advertencia no impide la excepción manual.
 - La cuenta puede tener matrícula ACTIVA antes de habilitarse, pero no usar contenido hasta
-  verificar correo, aceptar documentos y cambiar clave temporal.
+  verificar correo y cambiar la clave temporal.
 - No cambia contraseña de una cuenta existente.
 
 ## Flujo principal
 
 1. Administración busca correo y selecciona curso disponible.
-2. Si la cuenta no existe, completa sus datos y ESEJUR envía las instrucciones de verificación,
-   aceptación de documentos y cambio obligatorio de la contraseña temporal.
+2. Si la cuenta no existe, completa sus datos y ESEJUR envía las instrucciones de verificación y
+   cambio obligatorio de la contraseña temporal.
 3. Elige registro manual con pago o exoneración.
 4. Completa los datos y motivo.
 5. ESEJUR valida duplicidad/cupo y activa la matrícula.
@@ -77,7 +77,7 @@
 - **Backend:** registro económico, responsable, fecha, matrícula/cupo y restricciones de cuenta.
 - **Integración:** la acción administrativa debe dejar sincronizados cuenta, registro económico,
   matrícula, cupo y acceso; si la cuenta no está habilitada, conserva el derecho pero bloquea el
-  contenido hasta completar verificación, aceptación y cambio de contraseña.
+  contenido hasta completar verificación y cambio de contraseña.
 
 ## Demostración esperada
 
