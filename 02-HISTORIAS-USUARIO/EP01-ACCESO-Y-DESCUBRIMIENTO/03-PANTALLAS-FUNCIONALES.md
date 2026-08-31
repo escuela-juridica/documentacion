@@ -30,24 +30,25 @@ no depende visualmente de pantallas construidas en otra épica.
   protegido y promoción vencida.
 - **Acción para la review:** abrir una vista previa e intentar acceder a una lección protegida.
 
-### PF-003 — Inicio de sesión
+### PF-003 — Acceso con correo o Google
 
-- **Historias:** HU-001 y HU-003.
-- **Actor:** alumno y administrador.
+- **Historias:** HU-001.
+- **Actor:** visitante, alumno y administrador.
 - **Debe mostrar:** correo, contraseña, acción de ingreso, “Continuar con Google”, acceso al
   registro y recuperación de contraseña.
-- **Estados importantes:** credenciales inválidas, correo pendiente de verificar e ingreso correcto
-  por rol. El estado de contraseña temporal se incorpora al reutilizar esta pantalla en HU-008 de
-  EP02.
+- **Estados importantes:** credenciales inválidas, correo pendiente de verificar, autorización
+  Google cancelada, Google vinculado, correo Google nuevo derivado a PF-004 e ingreso correcto por
+  rol. El estado de contraseña temporal se incorpora al reutilizar esta pantalla en HU-008 de EP02.
 - **Acción para la review:** ingresar como alumno y como administrador.
 
-### PF-004 — Registro mediante formulario
+### PF-004 — Creación de cuenta
 
-- **Historias:** HU-002 y HU-003.
+- **Historias:** HU-002.
 - **Actor:** visitante.
 - **Debe mostrar:** nombres, apellido paterno, apellido materno opcional, correo, teléfono opcional,
   DNI opcional, contraseña, aceptación de documentos, alternativa de Google y contacto por
-  WhatsApp para solicitar ayuda.
+  WhatsApp para solicitar ayuda. Si llega desde PF-003 con un correo Google nuevo, conserva los
+  datos autorizados y solicita solo lo necesario para crear la cuenta.
 - **Jerarquía:** en escritorio utiliza dos columnas: panel institucional visual a la izquierda y
   formulario de una columna a la derecha. En móvil queda únicamente el formulario en una columna.
   “Crear cuenta” es la única acción principal y WhatsApp aparece como ayuda secundaria.
@@ -58,8 +59,8 @@ no depende visualmente de pantallas construidas en otra épica.
 
 ### PF-005 — Verificación del correo
 
-- **Historias:** HU-002.
-- **Actor:** visitante registrado.
+- **Historias:** HU-003.
+- **Actor:** usuario con correo pendiente.
 - **Debe mostrar:** correo parcialmente oculto, campo para el código de seis dígitos, código
   incorrecto, verificación exitosa y acciones para verificar o reenviar el código.
 - **Acción para la review:** ingresar el código más reciente y habilitar la cuenta.

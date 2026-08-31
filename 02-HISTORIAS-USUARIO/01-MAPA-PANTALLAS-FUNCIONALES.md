@@ -42,9 +42,9 @@ No significa que vuelvan a desarrollarse.
 |---|---|---|
 | PF-001 | Inicio y catálogo de cursos | Visitante y alumno |
 | PF-002 | Ficha pública y vista previa del curso | Visitante y alumno |
-| PF-003 | Inicio de sesión | Alumno y administrador |
-| PF-004 | Registro mediante formulario | Visitante |
-| PF-005 | Resultado de verificación del correo | Visitante |
+| PF-003 | Acceso con correo o Google | Visitante, alumno y administrador |
+| PF-004 | Creación de cuenta con formulario o Google | Visitante |
+| PF-005 | Verificación del correo mediante código | Usuario con correo pendiente |
 | PF-006 | Solicitud de recuperación de contraseña | Visitante |
 | PF-007 | Definición de nueva contraseña | Usuario con enlace válido |
 | PF-008 | Panel inicial del usuario | Alumno y administrador |

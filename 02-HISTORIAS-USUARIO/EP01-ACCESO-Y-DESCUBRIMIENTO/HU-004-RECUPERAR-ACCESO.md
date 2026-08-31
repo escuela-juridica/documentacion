@@ -1,4 +1,4 @@
-# HU-004 — Recuperar mi contraseña
+# HU-004 — Recuperar el acceso a mi cuenta
 
 ## Información general
 
@@ -6,8 +6,8 @@
 |---|---|
 | Actor principal | Alumno o Administrador |
 | Incremento | Mes 1 |
-| Personas recomendadas | 1 |
-| Responsable | Por asignar |
+| Personas recomendadas | 2 |
+| Responsable / participante | Gabriel y Ariana |
 
 ## Historia
 

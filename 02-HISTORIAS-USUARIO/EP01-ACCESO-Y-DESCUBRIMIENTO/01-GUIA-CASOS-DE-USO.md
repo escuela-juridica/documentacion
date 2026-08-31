@@ -33,11 +33,10 @@ completa, no el flujo paso a paso de cada historia.
 
 ## Casos de uso dentro de ESEJUR
 
-- Iniciar sesión.
-- Registrarse mediante formulario.
-- Registrarse o ingresar con Google.
-- Recuperar contraseña.
-- Administrar datos personales.
+- Iniciar sesión con correo o Google.
+- Crear cuenta con formulario o Google.
+- Recuperar acceso a la cuenta.
+- Consultar y actualizar datos personales.
 - Explorar catálogo.
 - Buscar y filtrar cursos.
 - Consultar ficha de curso.
@@ -47,19 +46,20 @@ completa, no el flujo paso a paso de cada historia.
 
 ## Asociaciones
 
-- Visitante: registrarse, ingresar con Google, recuperar contraseña, explorar catálogo, buscar,
-  consultar ficha y revisar vista previa.
-- Alumno: iniciar sesión y administrar datos.
+- Visitante: crear cuenta, recuperar acceso, explorar catálogo, buscar, consultar ficha y revisar
+  vista previa.
+- Alumno: iniciar sesión y consultar o actualizar datos.
 - Administrador: iniciar sesión.
-- Google: registrarse o ingresar con Google.
-- Servicio de correo: verificar correo y recuperar contraseña.
+- Google: iniciar sesión o crear cuenta con Google.
+- Servicio de correo: verificar correo y recuperar acceso.
 
 ## Relaciones UML
 
-- `Registrarse mediante formulario` **incluye** `Aceptar términos y política`.
-- `Registrarse mediante formulario` **incluye** `Verificar correo`.
-- `Registrarse o ingresar con Google` **incluye** `Aceptar términos y política` cuando sea una
-  cuenta nueva.
+- `Crear cuenta con formulario o Google` **incluye** `Aceptar términos y política`.
+- `Verificar correo` extiende `Crear cuenta con formulario o Google` solo cuando la cuenta se crea
+  mediante formulario; Google ya entrega el correo verificado.
+- `Crear cuenta con formulario o Google` extiende `Iniciar sesión con correo o Google` cuando
+  Google identifica un correo nuevo desde la pantalla de acceso.
 - `Buscar y filtrar cursos` puede modelarse como extensión de `Explorar catálogo`.
 - `Revisar lección de vista previa` extiende `Consultar ficha de curso`.
 

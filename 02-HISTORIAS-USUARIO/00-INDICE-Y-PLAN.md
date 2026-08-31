@@ -89,11 +89,11 @@ flujo. La propuesta consolidada contempla **40 pantallas principales únicas**.
 
 | ID | Historia | Personas | Dependencia interna |
 |---|---|---:|---|
-| HU-001 | Iniciar sesión | 2 | Ninguna |
-| HU-002 | Registrarme mediante formulario | 2 | Ninguna; se integra con HU-001 |
-| HU-003 | Registrarme o ingresar con Google | 2 | Ninguna; se integra con HU-001 |
-| HU-004 | Recuperar mi contraseña | 1 | Ninguna |
-| HU-005 | Administrar mis datos personales | 1 | HU-001 |
+| HU-001 | Iniciar sesión con correo o Google | 2 | Ninguna |
+| HU-002 | Crear una cuenta con formulario o Google | 2 | Ninguna; acuerda con HU-001 el traspaso de Google |
+| HU-003 | Verificar mi correo electrónico | 2 | HU-002 para el registro propio |
+| HU-004 | Recuperar el acceso a mi cuenta | 2 | Ninguna; retorna a HU-001 |
+| HU-005 | Consultar y actualizar mis datos personales | 2 | HU-001 |
 | HU-006 | Explorar, buscar y filtrar cursos | 2 | Ninguna |
 | HU-007 | Consultar la ficha y vista previa de un curso | 2 | HU-006 para el recorrido integrado |
 
@@ -101,7 +101,7 @@ flujo. La propuesta consolidada contempla **40 pantallas principales únicas**.
 
 | ID | Historia | Personas | Dependencia interna |
 |---|---|---:|---|
-| HU-008 | Gestionar usuarios administrativamente | 2 | Reutiliza HU-001, HU-002 y HU-005 de EP01 |
+| HU-008 | Gestionar usuarios administrativamente | 2 | Reutiliza HU-001, HU-003 y HU-005 de EP01 |
 | HU-009 | Administrar información base | 1 | Ninguna |
 | HU-010 | Crear y configurar un curso | 2 | HU-009 |
 | HU-011 | Organizar el contenido de un curso | 2 | HU-010 |

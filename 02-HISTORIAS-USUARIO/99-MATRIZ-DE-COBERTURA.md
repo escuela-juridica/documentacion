@@ -32,7 +32,7 @@
 | RN-23 | HU-018, HU-037, HU-038 |
 | RN-24 | HU-018, HU-020 |
 | RN-25 | HU-019, HU-020 |
-| RN-26 | HU-002, HU-008, HU-017, HU-018, HU-019, HU-021 |
+| RN-26 | HU-002, HU-003, HU-008, HU-017, HU-018, HU-019, HU-021 |
 | RN-27 | HU-017, HU-018, HU-019 |
 | RN-28 | HU-017, HU-018 |
 | RN-29 | HU-010, HU-017, HU-018, HU-019 |
@@ -86,13 +86,13 @@
 | RN-77 | HU-011, HU-023 |
 | RN-78 | HU-001, HU-009 |
 | RN-79 | HU-001 |
-| RN-80 | HU-002, HU-003, HU-008 |
+| RN-80 | HU-002, HU-003, HU-004, HU-008 |
 | RN-81 | HU-039 |
 | RN-82 | HU-039 |
 | RN-83 | HU-039, HU-040 |
-| RN-84 | HU-002, HU-003, HU-008 |
-| RN-85 | HU-003 |
-| RN-86 | HU-002, HU-003, HU-008 |
+| RN-84 | HU-002, HU-008 |
+| RN-85 | HU-001, HU-002 |
+| RN-86 | HU-001, HU-002, HU-008 |
 | RN-87 | HU-001, HU-006, HU-007 |
 | RN-88 | HU-002, HU-008, HU-005 |
 | RN-89 | HU-001, HU-008, HU-019 |
@@ -160,7 +160,7 @@
 
 | # | Correo | Historia(s) que especifican disparador y resultado |
 |---:|---|---|
-| 1 | Bienvenida, acceso inicial y verificación | HU-002, HU-008 |
+| 1 | Bienvenida, acceso inicial y verificación | HU-002, HU-003, HU-008 |
 | 2 | Matrícula confirmada | HU-017, HU-018, HU-019 |
 | 3 | Pago no completado | HU-018 |
 | 4 | Sesión en vivo, recordatorio/cambio | HU-026, HU-027 |
@@ -180,4 +180,3 @@
 - Historias: **46 de 46**, organizadas en cuatro épicas.
 - Cada historia recomienda máximo dos personas.
 - Cada épica tiene dependencias internas, olas paralelas, entregable funcional y guía Rational Rose.
-

@@ -581,7 +581,9 @@ Los badges deben contener texto, no solo color.
 - El registro no debe parecer un formulario legal extenso; consentimientos al final con enlaces.
 - En escritorio, el registro usa un panel institucional visual a la izquierda y el formulario en
   una sola columna a la derecha. En móvil se conserva únicamente el formulario en una columna.
-- Google se presenta como alternativa equivalente, no como botón dominante sobre el registro.
+- Google se presenta como alternativa equivalente, no como botón dominante. En PF-003 permite
+  ingresar a una cuenta existente; si el correo es nuevo conduce a PF-004. En PF-004 permite crear
+  la cuenta con los datos autorizados y sin verificación adicional del correo.
 - La verificación usa un código de seis dígitos, correo parcialmente oculto, error junto al campo y
   reenvío; la recuperación usa estados simples con icono, título, explicación y siguiente paso.
 - Perfil dividido en Datos personales y Seguridad.
@@ -705,8 +707,8 @@ Los estados completos permanecen definidos en las historias y en el mapa de pant
 |---|---|---|---|
 | PF-001 | Inicio y catálogo | Hero, buscador, filtros y cuadrícula | Encontrar y abrir un curso |
 | PF-002 | Ficha y vista previa | Hero del curso, contenido y tarjeta comercial | Ver muestra o iniciar matrícula |
-| PF-003 | Inicio de sesión | Formulario centrado | Ingresar |
-| PF-004 | Registro | Formulario por bloques | Crear cuenta |
+| PF-003 | Acceso con correo o Google | Formulario centrado | Ingresar |
+| PF-004 | Creación de cuenta | Formulario por bloques | Crear cuenta |
 | PF-005 | Verificación del correo | Estado ilustrado simple | Continuar al ingreso o reenviar |
 | PF-006 | Solicitud de recuperación | Formulario centrado | Solicitar enlace |
 | PF-007 | Nueva contraseña | Formulario centrado con condiciones | Guardar contraseña |
@@ -925,7 +927,7 @@ elemento si puede resolverse con reglas de distribución.
 ### EP01
 
 ```text
-Catálogo → Ficha → Registro → Documentos → Verificación → Login → Panel → Perfil
+Catálogo → Ficha → Creación de cuenta → Documentos → Verificación → Acceso → Panel → Perfil
 ```
 
 Debe permitir también mostrar recuperación y Google.

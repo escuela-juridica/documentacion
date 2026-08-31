@@ -10,7 +10,7 @@ administrativa, y el acceso aparece correctamente en “Mis cursos”.
 
 | Historia | Depende de | Bloqueante para aceptar | Puede adelantarse |
 |---|---|---|---|
-| HU-008 | Reutiliza HU-001, HU-002 y HU-005 de EP01 | Sí para probar la habilitación completa | Sí, con cuentas controladas |
+| HU-008 | Reutiliza HU-001, HU-003 y HU-005 de EP01 | Sí para probar la habilitación completa | Sí, con cuentas controladas |
 | HU-009 | Ninguna | No | Sí |
 | HU-010 | HU-009 | Sí para usar datos maestros reales | Sí, con valores acordados |
 | HU-011 | HU-010 | Sí | Sí, con curso controlado |

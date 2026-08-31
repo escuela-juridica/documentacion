@@ -97,7 +97,7 @@
 
 ## Dependencia interna
 
-- Reutiliza HU-001 para probar el ingreso temporal, HU-002 para el código de verificación y HU-005
+- Reutiliza HU-001 para probar el ingreso temporal, HU-003 para el código de verificación y HU-005
   para completar datos y definir la contraseña propia.
 - Puede adelantarse si los equipos acuerdan los estados CAMBIO_PENDIENTE, HABILITADA y
   DESHABILITADA.

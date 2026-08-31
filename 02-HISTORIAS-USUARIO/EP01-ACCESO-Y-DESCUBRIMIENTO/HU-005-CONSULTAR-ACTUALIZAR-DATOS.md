@@ -1,4 +1,4 @@
-# HU-005 — Administrar mis datos personales
+# HU-005 — Consultar y actualizar mis datos personales
 
 ## Información general
 
@@ -6,8 +6,8 @@
 |---|---|
 | Actor principal | Alumno |
 | Incremento | Mes 1 |
-| Personas recomendadas | 1 |
-| Responsable | Por asignar |
+| Personas recomendadas | 2 |
+| Responsable / participante | Gabriel y Ariana |
 
 ## Historia
 

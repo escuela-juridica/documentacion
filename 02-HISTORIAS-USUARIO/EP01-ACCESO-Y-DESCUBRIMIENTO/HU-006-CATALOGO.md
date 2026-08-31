@@ -7,7 +7,7 @@
 | Actor principal | Visitante |
 | Incremento | Mes 1 |
 | Personas recomendadas | 2 |
-| Responsable / participante | Por asignar / Por asignar |
+| Responsable / participante | Enrique y Miguel |
 
 ## Historia
 

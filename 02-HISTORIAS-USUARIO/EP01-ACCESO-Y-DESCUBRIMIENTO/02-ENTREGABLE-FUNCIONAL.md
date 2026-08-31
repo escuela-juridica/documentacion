@@ -15,10 +15,10 @@ El recorrido que resume el valor entregado es:
 
 | Historia | Capacidad que aporta al entregable |
 |---|---|
-| HU-001 | Inicio de sesión y control de accesos |
-| HU-002 | Registro mediante formulario y verificación de correo |
-| HU-003 | Registro o ingreso mediante Google |
-| HU-004 | Recuperación de contraseña |
+| HU-001 | Inicio de sesión con correo o Google y control de accesos |
+| HU-002 | Creación de una cuenta mediante formulario o Google |
+| HU-003 | Verificación del correo mediante código |
+| HU-004 | Recuperación del acceso a la cuenta |
 | HU-005 | Consulta y actualización de datos personales |
 | HU-006 | Catálogo, búsqueda y filtros de cursos |
 | HU-007 | Ficha pública y contenido de vista previa |
@@ -73,13 +73,14 @@ demuestra en la EP02.
 **Resultado esperado:** la información pública puede consultarse, pero el contenido protegido no
 queda expuesto.
 
-### 3. Registrar una cuenta mediante formulario
+### 3. Crear una cuenta mediante formulario
 
 1. Completar nombres, apellido paterno, correo y contraseña; decidir si se registran el apellido
    materno, teléfono y DNI opcionales.
 2. Aceptar los documentos públicos aplicables desde sus enlaces.
-3. Enviar el registro y mostrar el código de seis dígitos enviado al correo.
-4. Ingresar el código más reciente, verificar el correo e iniciar sesión con la nueva cuenta.
+3. Enviar el registro y comprobar que la cuenta queda pendiente sin duplicarse.
+4. Abrir PF-005, ingresar el código más reciente y verificar el correo.
+5. Iniciar sesión con la nueva cuenta.
 
 **Resultado esperado:** se crea una sola cuenta válida y queda registrado el consentimiento
 aceptado. El DNI puede registrarse, pero dejarlo vacío no impide completar el flujo.
@@ -95,15 +96,16 @@ aceptado. El DNI puede registrarse, pero dejarlo vacío no impide completar el f
 **Resultado esperado:** el alumno controla sus datos sin alterar su identidad de acceso ni datos
 que ya hayan quedado congelados en certificados emitidos.
 
-### 5. Ingresar o registrarse con Google
+### 5. Ingresar o crear una cuenta con Google
 
 1. Cerrar la sesión actual.
-2. Ingresar con una cuenta de Google personal o corporativa.
-3. Mostrar los datos obtenidos de Google y el consentimiento registrado.
-4. Completar posteriormente los datos que Google no haya entregado.
+2. Ingresar con una cuenta de Google ya vinculada y comprobar que abre la cuenta existente.
+3. Repetir con un correo Google nuevo y mostrar el traslado desde PF-003 hacia PF-004.
+4. Revisar los datos autorizados, aceptar los documentos y completar la creación.
+5. Comprobar que Google no solicita el código de HU-003 porque ya confirmó el correo.
 
-**Resultado esperado:** Google funciona como camino alternativo hacia una única cuenta, sin crear
-duplicados por intentos repetidos.
+**Resultado esperado:** Google permite ingresar a una cuenta existente o completar una cuenta
+nueva en PF-004, sin duplicados ni verificación innecesaria.
 
 ### 6. Recuperar una contraseña
 
