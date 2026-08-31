@@ -223,9 +223,14 @@ historias de matrícula y pago, no como usuario humano.
 
 ### Perfil y acceso son responsabilidades diferentes
 
+- Cada persona se registra una sola vez como identidad, tenga o no una cuenta de acceso.
 - El docente tiene un perfil público con nombre, foto, cargo y biografía, pero no recibe acceso al
   sistema.
 - El alumno y el administrador sí utilizan una cuenta para ingresar y realizar sus actividades.
+- Una persona se reconoce como docente por su participación en uno o varios cursos, no por un rol
+  de acceso. La administración mantiene su perfil y sus asignaciones.
+- Si una persona que aparece como docente también posee una cuenta por ser alumno o administrador,
+  esa cuenta conserva únicamente las funciones de dichos roles y no habilita un entorno docente.
 - Los nombres y apellidos se conservan separados porque así deben mostrarse en los certificados.
 - Si en el futuro un docente necesita ingresar, esa decisión se evaluará como una ampliación del
   negocio; no forma parte del alcance actual.
