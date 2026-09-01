@@ -37,7 +37,7 @@ base conserva su hash.
 - DTO de solicitud y nueva contraseña;
 - controlador público;
 - `MailService` compartido y plantilla `mail/password-recovery.html` para entregar el enlace.
-- propiedad de URL base del frontend agregada a `application.yml` al implementar esta HU.
+- propiedad de URL base del frontend agregada a `application.properties` al implementar esta HU.
 
 ### Solicitud paso a paso
 
@@ -218,7 +218,7 @@ public void solicitar(String correoRecibido) {
 
 El controlador siempre responde 202 con el mismo mensaje, tanto si encontró la cuenta como si no y
 aunque SMTP falle. El servicio no registra el correo, el token ni la URL completa. Al implementar
-esta HU se agrega la URL base a `application.yml`; no se duplica en archivos por perfil.
+esta HU se agrega la URL base a `application.properties`; no se duplica en archivos por perfil.
 
 ### 4. Definir la nueva contraseña
 

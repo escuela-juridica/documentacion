@@ -47,14 +47,14 @@ llevar ese comportamiento al proyecto actual.
 
 ### Regla universal de configuración
 
-- `application.yml` concentra toda configuración funcional compartida de la aplicación.
-- `application-dev.yml` y `application-prod.yml` solo contienen conexión de base de datos y logging.
-  Si se agrega `application-local.yml`, debe respetar el mismo límite.
-- `application-test.yml` solo contiene ajustes técnicos de pruebas. La prueba básica de contexto
-  no inicia JPA; las pruebas de repositorio se ejecutan contra PostgreSQL y nunca contra una base
-  de datos que simule parcialmente su comportamiento.
+- `application.properties` concentra toda configuración funcional compartida de la aplicación.
+- `application-dev.properties` y `application-prod.properties` solo contienen conexión de base de
+  datos y logging. Si se agrega `application-local.properties`, debe respetar el mismo límite.
+- `application-test.properties` solo contiene ajustes técnicos de pruebas. La prueba básica de
+  contexto no inicia JPA; las pruebas de repositorio se ejecutan contra PostgreSQL y nunca contra una
+  base de datos que simule parcialmente su comportamiento.
 - Una propiedad de JWT, CORS, correo, Google, catálogo, verificación u otra HU se agrega a
-  `application.yml` recién cuando exista una clase que la utilice.
+  `application.properties` recién cuando exista una clase que la utilice.
 - No se anticipan bloques de propiedades sin consumidor ni se repiten valores entre perfiles.
 
 ## Recorrido obligatorio de una operación

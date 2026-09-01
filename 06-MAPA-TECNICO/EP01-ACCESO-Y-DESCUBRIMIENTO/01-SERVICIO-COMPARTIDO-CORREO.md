@@ -93,7 +93,7 @@ el correo; la base de datos conserva su hash.
 
 - Generar un token aleatorio, guardar únicamente su hash y construir una URL hacia
   `/nueva-password?token=...`.
-- La URL base del frontend se agrega a `application.yml` cuando se implemente HU-004 y se consume
+- La URL base del frontend se agrega a `application.properties` cuando se implemente HU-004 y se consume
   desde una clase de configuración; no se escribe directamente dentro del servicio.
 - Enviar el enlace mediante `mail/password-recovery.html`.
 - La API siempre conserva la misma respuesta `202`, exista o no la cuenta. Un fallo SMTP tampoco

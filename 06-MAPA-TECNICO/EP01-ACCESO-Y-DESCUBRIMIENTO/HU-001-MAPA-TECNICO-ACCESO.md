@@ -265,7 +265,7 @@ public ResponseEntity<Void> cerrar() {
 
 La cookie se crea con nombre `ESEJUR_SESION`, `HttpOnly`, ruta `/`, `SameSite=Lax` y duración igual
 al JWT. Al eliminarla se repiten nombre, ruta y `SameSite`, con edad cero. JWT y CORS ya están
-configurados en `application.yml`; la propiedad de Google se agrega allí cuando exista su clase
+configurados en `application.properties`; la propiedad de Google se agrega allí cuando exista su clase
 consumidora. Ninguno de esos valores se duplica en los perfiles de base de datos.
 
 ### 6. Servicio Angular
