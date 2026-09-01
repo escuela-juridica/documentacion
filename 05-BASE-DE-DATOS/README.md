@@ -18,7 +18,7 @@ triggers, funciones, procedimientos, vistas ni automatizaciones de base de datos
 ## Convenciones
 
 - Motor: PostgreSQL 15 o superior.
-- Esquema de aplicación: `esejur`.
+- Esquema de aplicación: `public`.
 - Identificadores internos: `bigint` autogenerado.
 - Fechas de eventos: `timestamp with time zone` (`timestamptz`).
 - Zona de presentación del negocio: `America/Lima`.

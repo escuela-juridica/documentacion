@@ -18,7 +18,7 @@ llevar ese comportamiento al proyecto actual.
 - Spring Boot 4.1.1 y Java 21.
 - Dependencias disponibles: Web, JPA, Validation, Mail, Security, OAuth2 Resource Server,
   PostgreSQL, Lombok, Swagger y herramientas de prueba de seguridad.
-- Hibernate valida el esquema `esejur`; no crea ni modifica tablas.
+- Hibernate valida el esquema `public`; no crea ni modifica tablas.
 - Perfiles configurados: `dev`, `prod` y `test`. Los componentes de prueba manual también admiten
   `local` cuando se provea una configuración local de base de datos.
 - Ya existe la base técnica común: configuración de CORS, seguridad, contraseña y reloj; sesión JWT
@@ -39,8 +39,8 @@ llevar ese comportamiento al proyecto actual.
 
 ### Base de datos
 
-- El esquema se crea con los SQL ubicados en el backend bajo
-  `sql/EP01-ACCESO-Y-DESCUBRIMIENTO`.
+- Las tablas se crean con los SQL ubicados en el backend bajo
+  `sql/EP01-ACCESO-Y-DESCUBRIMIENTO`, en el esquema `public`.
 - Existen 17 tablas y datos de prueba con 15 cursos.
 - No se deben cambiar tablas desde una HU sin comprobar primero que la historia realmente exige un
   dato nuevo.
@@ -177,7 +177,7 @@ explícitamente los endpoints públicos y rechace el resto sin sesión.
 
 ## Persistencia y consultas
 
-- Las entidades deben mapear nombres reales de tabla y columna en el esquema `esejur`.
+- Las entidades deben mapear nombres reales de tabla y columna en el esquema `public`.
 - Las relaciones se cargan solo cuando la operación las necesita.
 - Los listados no deben generar una consulta adicional por cada fila.
 - Las operaciones con varios cambios relacionados usan una sola transacción.
@@ -410,7 +410,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @Entity
-@Table(name = "rol", schema = "esejur")
+@Table(name = "rol")
 public class Rol {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
