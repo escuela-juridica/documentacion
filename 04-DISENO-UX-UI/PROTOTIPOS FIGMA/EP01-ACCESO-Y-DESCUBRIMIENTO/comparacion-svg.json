@@ -1,0 +1,170 @@
+[
+  {
+    "file": "escritorio/EP01-PF-001-HU-006-Inicio-y-catalogo-escritorio.svg",
+    "mean_absolute_pixel_error_0_255": 2.729,
+    "external_images": 0,
+    "vector_paths": 795,
+    "horizontal_overflow_in_html": false
+  },
+  {
+    "file": "escritorio/EP01-PF-002-HU-007-Ficha-y-vista-previa-escritorio.svg",
+    "mean_absolute_pixel_error_0_255": 1.053,
+    "external_images": 0,
+    "vector_paths": 481,
+    "horizontal_overflow_in_html": false
+  },
+  {
+    "file": "escritorio/EP01-PF-003-HU-001-Acceso-con-correo-o-Google-escritorio.svg",
+    "mean_absolute_pixel_error_0_255": 1.254,
+    "external_images": 0,
+    "vector_paths": 270,
+    "horizontal_overflow_in_html": false
+  },
+  {
+    "file": "escritorio/EP01-PF-004-HU-002-Creacion-de-cuenta-escritorio.svg",
+    "mean_absolute_pixel_error_0_255": 1.253,
+    "external_images": 0,
+    "vector_paths": 326,
+    "horizontal_overflow_in_html": false
+  },
+  {
+    "file": "escritorio/EP01-PF-005-HU-003-Verificacion-del-correo-escritorio.svg",
+    "mean_absolute_pixel_error_0_255": 0.685,
+    "external_images": 0,
+    "vector_paths": 201,
+    "horizontal_overflow_in_html": false
+  },
+  {
+    "file": "escritorio/EP01-PF-006-HU-004-Recuperar-acceso-escritorio.svg",
+    "mean_absolute_pixel_error_0_255": 0.623,
+    "external_images": 0,
+    "vector_paths": 132,
+    "horizontal_overflow_in_html": false
+  },
+  {
+    "file": "escritorio/EP01-PF-007-HU-004-Nueva-contrasena-escritorio.svg",
+    "mean_absolute_pixel_error_0_255": 0.709,
+    "external_images": 0,
+    "vector_paths": 156,
+    "horizontal_overflow_in_html": false
+  },
+  {
+    "file": "escritorio/EP01-PF-008-HU-001-Panel-inicial-escritorio.svg",
+    "mean_absolute_pixel_error_0_255": 0.374,
+    "external_images": 0,
+    "vector_paths": 152,
+    "horizontal_overflow_in_html": false
+  },
+  {
+    "file": "escritorio/EP01-PF-009-HU-005-Mi-perfil-escritorio.svg",
+    "mean_absolute_pixel_error_0_255": 0.454,
+    "external_images": 0,
+    "vector_paths": 209,
+    "horizontal_overflow_in_html": false
+  },
+  {
+    "file": "escritorio/EP01-PF-011a-HU-002-Politica-de-privacidad-escritorio.svg",
+    "mean_absolute_pixel_error_0_255": 1.214,
+    "external_images": 0,
+    "vector_paths": 193,
+    "horizontal_overflow_in_html": false
+  },
+  {
+    "file": "escritorio/EP01-PF-011b-HU-002-Terminos-del-servicio-escritorio.svg",
+    "mean_absolute_pixel_error_0_255": 1.205,
+    "external_images": 0,
+    "vector_paths": 194,
+    "horizontal_overflow_in_html": false
+  },
+  {
+    "file": "celular/EP01-PF-001-HU-006-Inicio-y-catalogo-celular-principal.svg",
+    "mean_absolute_pixel_error_0_255": 4.735,
+    "external_images": 0,
+    "vector_paths": 777,
+    "horizontal_overflow_in_html": false
+  },
+  {
+    "file": "celular/EP01-PF-001-HU-006-Inicio-y-catalogo-celular-cursos.svg",
+    "mean_absolute_pixel_error_0_255": 3.826,
+    "external_images": 0,
+    "vector_paths": 777,
+    "horizontal_overflow_in_html": false
+  },
+  {
+    "file": "celular/EP01-PF-002-HU-007-Ficha-y-vista-previa-celular-principal.svg",
+    "mean_absolute_pixel_error_0_255": 6.069,
+    "external_images": 0,
+    "vector_paths": 484,
+    "horizontal_overflow_in_html": false
+  },
+  {
+    "file": "celular/EP01-PF-003-HU-001-Acceso-con-correo-o-Google-celular-principal.svg",
+    "mean_absolute_pixel_error_0_255": 3.176,
+    "external_images": 0,
+    "vector_paths": 273,
+    "horizontal_overflow_in_html": false
+  },
+  {
+    "file": "celular/EP01-PF-004-HU-002-Creacion-de-cuenta-celular-formulario.svg",
+    "mean_absolute_pixel_error_0_255": 2.39,
+    "external_images": 0,
+    "vector_paths": 326,
+    "horizontal_overflow_in_html": false
+  },
+  {
+    "file": "celular/EP01-PF-004-HU-002-Creacion-de-cuenta-celular-contrasena-y-confirmacion.svg",
+    "mean_absolute_pixel_error_0_255": 2.437,
+    "external_images": 0,
+    "vector_paths": 326,
+    "horizontal_overflow_in_html": false
+  },
+  {
+    "file": "celular/EP01-PF-005-HU-003-Verificacion-del-correo-celular-principal.svg",
+    "mean_absolute_pixel_error_0_255": 2.233,
+    "external_images": 0,
+    "vector_paths": 202,
+    "horizontal_overflow_in_html": false
+  },
+  {
+    "file": "celular/EP01-PF-006-HU-004-Recuperar-acceso-celular-principal.svg",
+    "mean_absolute_pixel_error_0_255": 2.948,
+    "external_images": 0,
+    "vector_paths": 133,
+    "horizontal_overflow_in_html": false
+  },
+  {
+    "file": "celular/EP01-PF-007-HU-004-Nueva-contrasena-celular-principal.svg",
+    "mean_absolute_pixel_error_0_255": 2.917,
+    "external_images": 0,
+    "vector_paths": 157,
+    "horizontal_overflow_in_html": false
+  },
+  {
+    "file": "celular/EP01-PF-008-HU-001-Panel-inicial-celular-principal.svg",
+    "mean_absolute_pixel_error_0_255": 2.216,
+    "external_images": 0,
+    "vector_paths": 153,
+    "horizontal_overflow_in_html": false
+  },
+  {
+    "file": "celular/EP01-PF-009-HU-005-Mi-perfil-celular-principal.svg",
+    "mean_absolute_pixel_error_0_255": 1.516,
+    "external_images": 0,
+    "vector_paths": 210,
+    "horizontal_overflow_in_html": false
+  },
+  {
+    "file": "celular/EP01-PF-011a-HU-002-Politica-de-privacidad-celular-principal.svg",
+    "mean_absolute_pixel_error_0_255": 4.463,
+    "external_images": 0,
+    "vector_paths": 196,
+    "horizontal_overflow_in_html": false
+  },
+  {
+    "file": "celular/EP01-PF-011b-HU-002-Terminos-del-servicio-celular-principal.svg",
+    "mean_absolute_pixel_error_0_255": 4.27,
+    "external_images": 0,
+    "vector_paths": 197,
+    "horizontal_overflow_in_html": false
+  }
+]
