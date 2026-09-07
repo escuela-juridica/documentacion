@@ -1,0 +1,1025 @@
+{
+  "source_sha256": "eec4970c530596173761cc68104a911bdfb8e4e9d1a8868da6a634e9b0c05a6d",
+  "screens": [
+    {
+      "screen": "adminUsuarios",
+      "label": "EP02 · PF-010 · HU-008 · Gestión de usuarios",
+      "mode": "escritorio",
+      "file": "escritorio/EP02-PF-010-HU-008-Gestion-de-usuarios-escritorio.svg",
+      "metrics": {
+        "height": 1000,
+        "width": 1440,
+        "sections": [
+          "PF-010 Gestión de usuarios"
+        ],
+        "brokenImages": [],
+        "fonts": [
+          {
+            "family": "Inter",
+            "status": "unloaded"
+          },
+          {
+            "family": "Inter",
+            "status": "unloaded"
+          },
+          {
+            "family": "Inter",
+            "status": "unloaded"
+          },
+          {
+            "family": "Inter",
+            "status": "unloaded"
+          },
+          {
+            "family": "Inter",
+            "status": "unloaded"
+          },
+          {
+            "family": "Inter",
+            "status": "unloaded"
+          },
+          {
+            "family": "Inter",
+            "status": "loaded"
+          },
+          {
+            "family": "Inter",
+            "status": "unloaded"
+          },
+          {
+            "family": "Inter",
+            "status": "unloaded"
+          },
+          {
+            "family": "Inter",
+            "status": "unloaded"
+          },
+          {
+            "family": "Inter",
+            "status": "unloaded"
+          },
+          {
+            "family": "Inter",
+            "status": "unloaded"
+          },
+          {
+            "family": "Inter",
+            "status": "unloaded"
+          },
+          {
+            "family": "Inter",
+            "status": "unloaded"
+          },
+          {
+            "family": "Inter",
+            "status": "unloaded"
+          },
+          {
+            "family": "Inter",
+            "status": "unloaded"
+          },
+          {
+            "family": "Inter",
+            "status": "unloaded"
+          },
+          {
+            "family": "Inter",
+            "status": "unloaded"
+          },
+          {
+            "family": "Inter",
+            "status": "unloaded"
+          },
+          {
+            "family": "Inter",
+            "status": "unloaded"
+          },
+          {
+            "family": "Inter",
+            "status": "loaded"
+          },
+          {
+            "family": "Inter",
+            "status": "unloaded"
+          },
+          {
+            "family": "Inter",
+            "status": "unloaded"
+          },
+          {
+            "family": "Inter",
+            "status": "unloaded"
+          },
+          {
+            "family": "Inter",
+            "status": "unloaded"
+          },
+          {
+            "family": "Inter",
+            "status": "unloaded"
+          },
+          {
+            "family": "Inter",
+            "status": "unloaded"
+          },
+          {
+            "family": "Inter",
+            "status": "loaded"
+          },
+          {
+            "family": "Merriweather",
+            "status": "unloaded"
+          },
+          {
+            "family": "Merriweather",
+            "status": "unloaded"
+          },
+          {
+            "family": "Merriweather",
+            "status": "unloaded"
+          },
+          {
+            "family": "Merriweather",
+            "status": "unloaded"
+          },
+          {
+            "family": "Merriweather",
+            "status": "unloaded"
+          },
+          {
+            "family": "Merriweather",
+            "status": "unloaded"
+          },
+          {
+            "family": "Merriweather",
+            "status": "unloaded"
+          },
+          {
+            "family": "Merriweather",
+            "status": "unloaded"
+          },
+          {
+            "family": "Merriweather",
+            "status": "unloaded"
+          },
+          {
+            "family": "Merriweather",
+            "status": "unloaded"
+          }
+        ]
+      },
+      "errors": []
+    },
+    {
+      "screen": "adminBase",
+      "label": "EP02 · PF-012 · Información base",
+      "mode": "escritorio",
+      "file": "escritorio/EP02-PF-012-Informacion-base-escritorio.svg",
+      "metrics": {
+        "height": 1000,
+        "width": 1440,
+        "sections": [
+          "PF-012 Información base"
+        ],
+        "brokenImages": [],
+        "fonts": [
+          {
+            "family": "Inter",
+            "status": "unloaded"
+          },
+          {
+            "family": "Inter",
+            "status": "unloaded"
+          },
+          {
+            "family": "Inter",
+            "status": "unloaded"
+          },
+          {
+            "family": "Inter",
+            "status": "unloaded"
+          },
+          {
+            "family": "Inter",
+            "status": "unloaded"
+          },
+          {
+            "family": "Inter",
+            "status": "unloaded"
+          },
+          {
+            "family": "Inter",
+            "status": "loaded"
+          },
+          {
+            "family": "Inter",
+            "status": "unloaded"
+          },
+          {
+            "family": "Inter",
+            "status": "unloaded"
+          },
+          {
+            "family": "Inter",
+            "status": "unloaded"
+          },
+          {
+            "family": "Inter",
+            "status": "unloaded"
+          },
+          {
+            "family": "Inter",
+            "status": "unloaded"
+          },
+          {
+            "family": "Inter",
+            "status": "unloaded"
+          },
+          {
+            "family": "Inter",
+            "status": "unloaded"
+          },
+          {
+            "family": "Inter",
+            "status": "unloaded"
+          },
+          {
+            "family": "Inter",
+            "status": "unloaded"
+          },
+          {
+            "family": "Inter",
+            "status": "unloaded"
+          },
+          {
+            "family": "Inter",
+            "status": "unloaded"
+          },
+          {
+            "family": "Inter",
+            "status": "unloaded"
+          },
+          {
+            "family": "Inter",
+            "status": "unloaded"
+          },
+          {
+            "family": "Inter",
+            "status": "loaded"
+          },
+          {
+            "family": "Inter",
+            "status": "unloaded"
+          },
+          {
+            "family": "Inter",
+            "status": "unloaded"
+          },
+          {
+            "family": "Inter",
+            "status": "unloaded"
+          },
+          {
+            "family": "Inter",
+            "status": "unloaded"
+          },
+          {
+            "family": "Inter",
+            "status": "unloaded"
+          },
+          {
+            "family": "Inter",
+            "status": "unloaded"
+          },
+          {
+            "family": "Inter",
+            "status": "loaded"
+          },
+          {
+            "family": "Merriweather",
+            "status": "unloaded"
+          },
+          {
+            "family": "Merriweather",
+            "status": "unloaded"
+          },
+          {
+            "family": "Merriweather",
+            "status": "unloaded"
+          },
+          {
+            "family": "Merriweather",
+            "status": "unloaded"
+          },
+          {
+            "family": "Merriweather",
+            "status": "unloaded"
+          },
+          {
+            "family": "Merriweather",
+            "status": "unloaded"
+          },
+          {
+            "family": "Merriweather",
+            "status": "unloaded"
+          },
+          {
+            "family": "Merriweather",
+            "status": "unloaded"
+          },
+          {
+            "family": "Merriweather",
+            "status": "unloaded"
+          },
+          {
+            "family": "Merriweather",
+            "status": "unloaded"
+          }
+        ]
+      },
+      "errors": []
+    },
+    {
+      "screen": "adminEditor",
+      "label": "ADM · PF-014 · Editor del curso",
+      "mode": "escritorio",
+      "file": "escritorio/ADM-PF-014-Editor-del-curso-escritorio.svg",
+      "metrics": {
+        "height": 1000,
+        "width": 1440,
+        "sections": [
+          "PF-014 Editor del curso"
+        ],
+        "brokenImages": [],
+        "fonts": [
+          {
+            "family": "Inter",
+            "status": "unloaded"
+          },
+          {
+            "family": "Inter",
+            "status": "unloaded"
+          },
+          {
+            "family": "Inter",
+            "status": "unloaded"
+          },
+          {
+            "family": "Inter",
+            "status": "unloaded"
+          },
+          {
+            "family": "Inter",
+            "status": "unloaded"
+          },
+          {
+            "family": "Inter",
+            "status": "unloaded"
+          },
+          {
+            "family": "Inter",
+            "status": "loaded"
+          },
+          {
+            "family": "Inter",
+            "status": "unloaded"
+          },
+          {
+            "family": "Inter",
+            "status": "unloaded"
+          },
+          {
+            "family": "Inter",
+            "status": "unloaded"
+          },
+          {
+            "family": "Inter",
+            "status": "unloaded"
+          },
+          {
+            "family": "Inter",
+            "status": "unloaded"
+          },
+          {
+            "family": "Inter",
+            "status": "unloaded"
+          },
+          {
+            "family": "Inter",
+            "status": "unloaded"
+          },
+          {
+            "family": "Inter",
+            "status": "unloaded"
+          },
+          {
+            "family": "Inter",
+            "status": "unloaded"
+          },
+          {
+            "family": "Inter",
+            "status": "unloaded"
+          },
+          {
+            "family": "Inter",
+            "status": "unloaded"
+          },
+          {
+            "family": "Inter",
+            "status": "unloaded"
+          },
+          {
+            "family": "Inter",
+            "status": "unloaded"
+          },
+          {
+            "family": "Inter",
+            "status": "loaded"
+          },
+          {
+            "family": "Inter",
+            "status": "unloaded"
+          },
+          {
+            "family": "Inter",
+            "status": "unloaded"
+          },
+          {
+            "family": "Inter",
+            "status": "unloaded"
+          },
+          {
+            "family": "Inter",
+            "status": "unloaded"
+          },
+          {
+            "family": "Inter",
+            "status": "unloaded"
+          },
+          {
+            "family": "Inter",
+            "status": "unloaded"
+          },
+          {
+            "family": "Inter",
+            "status": "loaded"
+          },
+          {
+            "family": "Merriweather",
+            "status": "unloaded"
+          },
+          {
+            "family": "Merriweather",
+            "status": "unloaded"
+          },
+          {
+            "family": "Merriweather",
+            "status": "unloaded"
+          },
+          {
+            "family": "Merriweather",
+            "status": "unloaded"
+          },
+          {
+            "family": "Merriweather",
+            "status": "unloaded"
+          },
+          {
+            "family": "Merriweather",
+            "status": "unloaded"
+          },
+          {
+            "family": "Merriweather",
+            "status": "unloaded"
+          },
+          {
+            "family": "Merriweather",
+            "status": "unloaded"
+          },
+          {
+            "family": "Merriweather",
+            "status": "unloaded"
+          },
+          {
+            "family": "Merriweather",
+            "status": "unloaded"
+          }
+        ]
+      },
+      "errors": []
+    },
+    {
+      "screen": "adminUsuarios",
+      "label": "EP02 · PF-010 · HU-008 · Gestión de usuarios · principal",
+      "mode": "celular",
+      "file": "celular/EP02-PF-010-HU-008-Gestion-de-usuarios-celular-principal.svg",
+      "metrics": {
+        "height": 844,
+        "width": 390,
+        "sections": [
+          "PF-010 Gestión de usuarios"
+        ],
+        "brokenImages": [],
+        "fonts": [
+          {
+            "family": "Inter",
+            "status": "unloaded"
+          },
+          {
+            "family": "Inter",
+            "status": "unloaded"
+          },
+          {
+            "family": "Inter",
+            "status": "unloaded"
+          },
+          {
+            "family": "Inter",
+            "status": "unloaded"
+          },
+          {
+            "family": "Inter",
+            "status": "unloaded"
+          },
+          {
+            "family": "Inter",
+            "status": "unloaded"
+          },
+          {
+            "family": "Inter",
+            "status": "loaded"
+          },
+          {
+            "family": "Inter",
+            "status": "unloaded"
+          },
+          {
+            "family": "Inter",
+            "status": "unloaded"
+          },
+          {
+            "family": "Inter",
+            "status": "unloaded"
+          },
+          {
+            "family": "Inter",
+            "status": "unloaded"
+          },
+          {
+            "family": "Inter",
+            "status": "unloaded"
+          },
+          {
+            "family": "Inter",
+            "status": "unloaded"
+          },
+          {
+            "family": "Inter",
+            "status": "unloaded"
+          },
+          {
+            "family": "Inter",
+            "status": "unloaded"
+          },
+          {
+            "family": "Inter",
+            "status": "unloaded"
+          },
+          {
+            "family": "Inter",
+            "status": "unloaded"
+          },
+          {
+            "family": "Inter",
+            "status": "unloaded"
+          },
+          {
+            "family": "Inter",
+            "status": "unloaded"
+          },
+          {
+            "family": "Inter",
+            "status": "unloaded"
+          },
+          {
+            "family": "Inter",
+            "status": "loaded"
+          },
+          {
+            "family": "Inter",
+            "status": "unloaded"
+          },
+          {
+            "family": "Inter",
+            "status": "unloaded"
+          },
+          {
+            "family": "Inter",
+            "status": "unloaded"
+          },
+          {
+            "family": "Inter",
+            "status": "unloaded"
+          },
+          {
+            "family": "Inter",
+            "status": "unloaded"
+          },
+          {
+            "family": "Inter",
+            "status": "unloaded"
+          },
+          {
+            "family": "Inter",
+            "status": "loaded"
+          },
+          {
+            "family": "Merriweather",
+            "status": "unloaded"
+          },
+          {
+            "family": "Merriweather",
+            "status": "unloaded"
+          },
+          {
+            "family": "Merriweather",
+            "status": "unloaded"
+          },
+          {
+            "family": "Merriweather",
+            "status": "unloaded"
+          },
+          {
+            "family": "Merriweather",
+            "status": "unloaded"
+          },
+          {
+            "family": "Merriweather",
+            "status": "unloaded"
+          },
+          {
+            "family": "Merriweather",
+            "status": "unloaded"
+          },
+          {
+            "family": "Merriweather",
+            "status": "unloaded"
+          },
+          {
+            "family": "Merriweather",
+            "status": "unloaded"
+          },
+          {
+            "family": "Merriweather",
+            "status": "unloaded"
+          }
+        ],
+        "original_height": 1369
+      },
+      "scroll_y": 0,
+      "errors": []
+    },
+    {
+      "screen": "adminBase",
+      "label": "EP02 · PF-012 · Información base · principal",
+      "mode": "celular",
+      "file": "celular/EP02-PF-012-Informacion-base-celular-principal.svg",
+      "metrics": {
+        "height": 844,
+        "width": 390,
+        "sections": [
+          "PF-012 Información base"
+        ],
+        "brokenImages": [],
+        "fonts": [
+          {
+            "family": "Inter",
+            "status": "unloaded"
+          },
+          {
+            "family": "Inter",
+            "status": "unloaded"
+          },
+          {
+            "family": "Inter",
+            "status": "unloaded"
+          },
+          {
+            "family": "Inter",
+            "status": "unloaded"
+          },
+          {
+            "family": "Inter",
+            "status": "unloaded"
+          },
+          {
+            "family": "Inter",
+            "status": "unloaded"
+          },
+          {
+            "family": "Inter",
+            "status": "loaded"
+          },
+          {
+            "family": "Inter",
+            "status": "unloaded"
+          },
+          {
+            "family": "Inter",
+            "status": "unloaded"
+          },
+          {
+            "family": "Inter",
+            "status": "unloaded"
+          },
+          {
+            "family": "Inter",
+            "status": "unloaded"
+          },
+          {
+            "family": "Inter",
+            "status": "unloaded"
+          },
+          {
+            "family": "Inter",
+            "status": "unloaded"
+          },
+          {
+            "family": "Inter",
+            "status": "unloaded"
+          },
+          {
+            "family": "Inter",
+            "status": "unloaded"
+          },
+          {
+            "family": "Inter",
+            "status": "unloaded"
+          },
+          {
+            "family": "Inter",
+            "status": "unloaded"
+          },
+          {
+            "family": "Inter",
+            "status": "unloaded"
+          },
+          {
+            "family": "Inter",
+            "status": "unloaded"
+          },
+          {
+            "family": "Inter",
+            "status": "unloaded"
+          },
+          {
+            "family": "Inter",
+            "status": "loaded"
+          },
+          {
+            "family": "Inter",
+            "status": "unloaded"
+          },
+          {
+            "family": "Inter",
+            "status": "unloaded"
+          },
+          {
+            "family": "Inter",
+            "status": "unloaded"
+          },
+          {
+            "family": "Inter",
+            "status": "unloaded"
+          },
+          {
+            "family": "Inter",
+            "status": "unloaded"
+          },
+          {
+            "family": "Inter",
+            "status": "unloaded"
+          },
+          {
+            "family": "Inter",
+            "status": "loaded"
+          },
+          {
+            "family": "Merriweather",
+            "status": "unloaded"
+          },
+          {
+            "family": "Merriweather",
+            "status": "unloaded"
+          },
+          {
+            "family": "Merriweather",
+            "status": "unloaded"
+          },
+          {
+            "family": "Merriweather",
+            "status": "unloaded"
+          },
+          {
+            "family": "Merriweather",
+            "status": "unloaded"
+          },
+          {
+            "family": "Merriweather",
+            "status": "unloaded"
+          },
+          {
+            "family": "Merriweather",
+            "status": "unloaded"
+          },
+          {
+            "family": "Merriweather",
+            "status": "unloaded"
+          },
+          {
+            "family": "Merriweather",
+            "status": "unloaded"
+          },
+          {
+            "family": "Merriweather",
+            "status": "unloaded"
+          }
+        ],
+        "original_height": 1144
+      },
+      "scroll_y": 0,
+      "errors": []
+    },
+    {
+      "screen": "adminEditor",
+      "label": "ADM · PF-014 · Editor del curso · principal",
+      "mode": "celular",
+      "file": "celular/ADM-PF-014-Editor-del-curso-celular-principal.svg",
+      "metrics": {
+        "height": 844,
+        "width": 390,
+        "sections": [
+          "PF-014 Editor del curso"
+        ],
+        "brokenImages": [],
+        "fonts": [
+          {
+            "family": "Inter",
+            "status": "unloaded"
+          },
+          {
+            "family": "Inter",
+            "status": "unloaded"
+          },
+          {
+            "family": "Inter",
+            "status": "unloaded"
+          },
+          {
+            "family": "Inter",
+            "status": "unloaded"
+          },
+          {
+            "family": "Inter",
+            "status": "unloaded"
+          },
+          {
+            "family": "Inter",
+            "status": "unloaded"
+          },
+          {
+            "family": "Inter",
+            "status": "loaded"
+          },
+          {
+            "family": "Inter",
+            "status": "unloaded"
+          },
+          {
+            "family": "Inter",
+            "status": "unloaded"
+          },
+          {
+            "family": "Inter",
+            "status": "unloaded"
+          },
+          {
+            "family": "Inter",
+            "status": "unloaded"
+          },
+          {
+            "family": "Inter",
+            "status": "unloaded"
+          },
+          {
+            "family": "Inter",
+            "status": "unloaded"
+          },
+          {
+            "family": "Inter",
+            "status": "unloaded"
+          },
+          {
+            "family": "Inter",
+            "status": "unloaded"
+          },
+          {
+            "family": "Inter",
+            "status": "unloaded"
+          },
+          {
+            "family": "Inter",
+            "status": "unloaded"
+          },
+          {
+            "family": "Inter",
+            "status": "unloaded"
+          },
+          {
+            "family": "Inter",
+            "status": "unloaded"
+          },
+          {
+            "family": "Inter",
+            "status": "unloaded"
+          },
+          {
+            "family": "Inter",
+            "status": "loaded"
+          },
+          {
+            "family": "Inter",
+            "status": "unloaded"
+          },
+          {
+            "family": "Inter",
+            "status": "unloaded"
+          },
+          {
+            "family": "Inter",
+            "status": "unloaded"
+          },
+          {
+            "family": "Inter",
+            "status": "unloaded"
+          },
+          {
+            "family": "Inter",
+            "status": "unloaded"
+          },
+          {
+            "family": "Inter",
+            "status": "unloaded"
+          },
+          {
+            "family": "Inter",
+            "status": "loaded"
+          },
+          {
+            "family": "Merriweather",
+            "status": "unloaded"
+          },
+          {
+            "family": "Merriweather",
+            "status": "unloaded"
+          },
+          {
+            "family": "Merriweather",
+            "status": "unloaded"
+          },
+          {
+            "family": "Merriweather",
+            "status": "unloaded"
+          },
+          {
+            "family": "Merriweather",
+            "status": "unloaded"
+          },
+          {
+            "family": "Merriweather",
+            "status": "unloaded"
+          },
+          {
+            "family": "Merriweather",
+            "status": "unloaded"
+          },
+          {
+            "family": "Merriweather",
+            "status": "unloaded"
+          },
+          {
+            "family": "Merriweather",
+            "status": "unloaded"
+          },
+          {
+            "family": "Merriweather",
+            "status": "unloaded"
+          }
+        ],
+        "original_height": 1731
+      },
+      "scroll_y": 0,
+      "errors": []
+    }
+  ]
+}

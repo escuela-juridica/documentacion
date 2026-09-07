@@ -1,0 +1,44 @@
+[
+  {
+    "file": "escritorio/EP02-PF-010-HU-008-Gestion-de-usuarios-escritorio.svg",
+    "mean_absolute_pixel_error_0_255": 0.916,
+    "external_images": 0,
+    "vector_paths": 258,
+    "horizontal_overflow_in_html": false
+  },
+  {
+    "file": "escritorio/EP02-PF-012-Informacion-base-escritorio.svg",
+    "mean_absolute_pixel_error_0_255": 0.478,
+    "external_images": 0,
+    "vector_paths": 135,
+    "horizontal_overflow_in_html": false
+  },
+  {
+    "file": "escritorio/ADM-PF-014-Editor-del-curso-escritorio.svg",
+    "mean_absolute_pixel_error_0_255": 0.654,
+    "external_images": 0,
+    "vector_paths": 166,
+    "horizontal_overflow_in_html": false
+  },
+  {
+    "file": "celular/EP02-PF-010-HU-008-Gestion-de-usuarios-celular-principal.svg",
+    "mean_absolute_pixel_error_0_255": 1.722,
+    "external_images": 0,
+    "vector_paths": 167,
+    "horizontal_overflow_in_html": false
+  },
+  {
+    "file": "celular/EP02-PF-012-Informacion-base-celular-principal.svg",
+    "mean_absolute_pixel_error_0_255": 2.164,
+    "external_images": 0,
+    "vector_paths": 133,
+    "horizontal_overflow_in_html": false
+  },
+  {
+    "file": "celular/ADM-PF-014-Editor-del-curso-celular-principal.svg",
+    "mean_absolute_pixel_error_0_255": 2.013,
+    "external_images": 0,
+    "vector_paths": 166,
+    "horizontal_overflow_in_html": false
+  }
+]
