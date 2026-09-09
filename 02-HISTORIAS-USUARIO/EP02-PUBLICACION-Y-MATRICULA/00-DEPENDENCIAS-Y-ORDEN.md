@@ -25,9 +25,15 @@ administrativa, y el acceso aparece correctamente en “Mis cursos”.
 | HU-020 | HU-017, HU-018 o HU-019 | Sí para datos reales | Sí, con operaciones controladas |
 | HU-021 | HU-017, HU-018 o HU-019 | Sí para datos reales | Sí, con matrícula activa controlada |
 
+## Tarea incorporada desde el backlog
+
+| Tarea | Depende de | Bloqueante para aceptar la EP02 | Puede adelantarse |
+|---|---|---|---|
+| TAREA-001 — Integrar el acceso y la creación de cuenta con Google | Reutiliza HU-001, HU-002 y HU-005 de EP01 | No bloquea publicación ni matrícula; sí bloquea presentar Google como funcional | Sí, en paralelo con HU-008 y HU-009 |
+
 ## Olas recomendadas
 
-1. **Ola A, paralela:** HU-008 y HU-009.
+1. **Ola A, paralela:** HU-008, HU-009 y TAREA-001.
 2. **Ola B:** HU-010.
 3. **Ola C, paralela:** HU-011 y HU-014.
 4. **Ola D, paralela:** HU-012 y HU-013; continuar HU-014 con sus integraciones.
