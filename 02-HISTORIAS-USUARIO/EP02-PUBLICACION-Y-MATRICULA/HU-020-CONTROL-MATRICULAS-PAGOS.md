@@ -21,6 +21,8 @@
 - Datos de constancia y referencia.
 - Consulta de alumno, curso, fechas, forma de ingreso y responsable administrativo.
 - Cancelar una matrícula con motivo; no borrar ni devolver dinero.
+- Una cancelación no reactiva automáticamente otra matrícula, no transforma el pago ni habilita una
+  devolución. Cualquier nueva decisión se atiende posteriormente como excepción documentada.
 - Vencimiento automático de acceso según vigencia.
 - La vigencia usa `max(fecha_activacion, fecha_inicio si existe)` como día 1 y vence a las 23:59:59
   de `America/Lima` del día N; si está vacía, el acceso es permanente mientras no se cierre por otra
@@ -45,6 +47,8 @@
   borrar certificado.
 - **Dado** matrícula ACTIVA, **cuando** administración cancela con motivo, **entonces** pasa a
   CANCELADA y no ejecuta devolución.
+- **Dado** una matrícula CANCELADA, **cuando** se consulta posteriormente, **entonces** conserva su
+  historial y no ofrece reactivación automática ni altera los pagos registrados.
 - **Dado** historial con reintentos, **cuando** se consulta, **entonces** se ven resultados sin
   convertir fallos en APROBADO.
 - **Dado** sobrecupo o aprobación posterior a cancelación, **cuando** consulta, **entonces** puede

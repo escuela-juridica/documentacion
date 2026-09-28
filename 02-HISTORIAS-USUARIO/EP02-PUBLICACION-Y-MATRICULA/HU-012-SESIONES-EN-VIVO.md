@@ -23,6 +23,9 @@
 - Coherencia de modalidad; VIRTUAL no necesita sesiones.
 - Fecha de cierre de matrícula inicialmente igual al inicio si exige asistencia, pero editable.
 - ESEJUR no crea reuniones ni obtiene participantes de Zoom.
+- Esta historia cubre la programación inicial necesaria para publicar. La reprogramación,
+  cancelación, historial de cambios, recordatorios, avisos y correcciones de asistencia se
+  implementan en HU-027 de EP03.
 
 ## Flujo principal
 
@@ -52,6 +55,8 @@
 - **Backend:** coherencia temporal y disponibilidad para calendario/asistencia.
 - **Integración:** al crear o editar una sesión, su fecha, horario, enlace y estado deben aparecer
   iguales en el constructor del curso, el temario del alumno y el calendario público del curso.
+- **Límite:** todavía no permite reprogramar ni cancelar una sesión publicada, corregir asistencia
+  o administrar recordatorios; únicamente deja preparados los datos que esos flujos utilizarán.
 
 ## Demostración esperada
 

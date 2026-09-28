@@ -41,6 +41,9 @@ otro equipo para iniciar.
 
 ### Identidad Google nueva
 
+Este contrato funcional se conserva, pero su integración real se completa en TAREA-001 de EP02.
+Mientras la tarea no esté aceptada, los equipos no muestran Google como una capacidad funcional.
+
 1. HU-001 recibe de Google un correo verificado.
 2. Si ya existe una cuenta, HU-001 inicia la sesión.
 3. Si no existe, HU-001 conduce a PF-004 conservando solamente los datos autorizados necesarios.
@@ -77,4 +80,4 @@ se acuerdan los datos mínimos de tarjeta, curso seleccionado, modalidad, precio
 4. Iniciar sesión y actualizar datos personales.
 5. Recuperar el acceso mediante correo.
 6. Mostrar una cuenta Google existente y una identidad Google nueva derivada a la creación de
-   cuenta.
+   cuenta, únicamente si TAREA-001 de EP02 ya fue aceptada.

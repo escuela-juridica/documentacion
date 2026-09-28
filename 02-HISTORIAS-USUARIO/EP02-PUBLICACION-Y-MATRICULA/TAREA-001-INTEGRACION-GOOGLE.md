@@ -9,6 +9,10 @@ sin duplicar usuarios ni reemplazar su información o historial.
 No debe presentarse Google como funcional hasta que este recorrido esté integrado y probado de
 extremo a extremo.
 
+Mientras la tarea no esté aceptada, el botón debe permanecer oculto o identificado como
+“Próximamente”; nunca puede simular un acceso correcto. El acceso tradicional por correo y
+contraseña continúa disponible y esta tarea no bloquea la publicación, matrícula ni pago de EP02.
+
 ## Alcance funcional
 
 - Mostrar “Continuar con Google” en acceso y registro únicamente cuando la integración esté
@@ -153,3 +157,6 @@ extremo a extremo.
 
 Una persona ingresa con Google a su cuenta existente o completa una cuenta nueva sin duplicidad,
 sin verificación innecesaria y conservando el mismo perfil e historial.
+
+Al aceptarse la tarea se actualizan también las evidencias de HU-001 y HU-002, porque Google forma
+parte funcional de esos recorridos aunque su integración real se complete durante EP02.

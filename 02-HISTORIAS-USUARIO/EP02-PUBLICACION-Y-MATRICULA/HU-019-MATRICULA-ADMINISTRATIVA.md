@@ -16,15 +16,18 @@
 
 ## Alcance incluido
 
-- Buscar por correo y reutilizar una única cuenta existente. Si no existe, administración registra
-  correo, nombres, apellido paterno, apellido materno, teléfono opcional y DNI opcional; se crea con
-  la contraseña temporal `Escuela1415@`, correo pendiente de verificar y condición
-  CAMBIO_PENDIENTE.
-- Dejar vacío el DNI no impide crear la cuenta, activar la matrícula ni certificar posteriormente.
+- Buscar por nombre o correo y listar exclusivamente cuentas que posean el rol Alumno. Esta
+  historia no crea cuentas, no asigna roles y no modifica el rol principal; esas acciones se
+  realizan previamente en HU-008.
+- Solo admite cursos PUBLICADO o EN CURSO. BORRADOR, CERRADO y CANCELADO no permiten una nueva
+  matrícula administrativa.
 - `REGISTRADO_MANUAL` si hubo dinero: importe, medio, referencia y motivo obligatorios.
 - `EXONERADO` si no hubo dinero: importe cero y motivo obligatorio.
 - Responsable y fecha siempre registrados.
 - Ambas opciones activan matrícula y ocupan cupo.
+- La matrícula manual no produce sobrecupo: si no hay disponibilidad se bloquea y administración
+  debe aumentar primero la capacidad del curso. El sobrecupo queda reservado a aprobaciones Culqi
+  simultáneas o tardías iniciadas válidamente.
 - La vigencia, si existe, usa la fecha posterior entre activación administrativa e inicio del curso
   como día 1 y vence a las 23:59:59 de `America/Lima` del día N.
 - Puede realizarse después del cierre de matrícula. Si asistencia es obligatoria y ya no quedan
@@ -36,12 +39,11 @@
 
 ## Flujo principal
 
-1. Administración busca correo y selecciona curso disponible.
-2. Si la cuenta no existe, completa sus datos y ESEJUR envía las instrucciones de verificación y
-   cambio obligatorio de la contraseña temporal.
-3. Elige registro manual con pago o exoneración.
+1. Administración busca por nombre o correo y selecciona una cuenta que ya tenga rol Alumno.
+2. Si no aparece, ESEJUR orienta a crearla o asignarle el rol Alumno desde HU-008 y luego regresar.
+3. Selecciona un curso PUBLICADO o EN CURSO y elige registro manual con pago o exoneración.
 4. Completa los datos y motivo.
-5. ESEJUR valida duplicidad/cupo y activa la matrícula.
+5. ESEJUR valida estado del curso, duplicidad y cupo y activa la matrícula.
 6. Envía confirmación; el acceso real respeta la habilitación de la cuenta y la fecha de inicio.
 
 ## Criterios de aceptación
@@ -53,28 +55,33 @@
 - **Dado** cuenta CAMBIO_PENDIENTE, **cuando** matrícula, **entonces** el derecho queda ACTIVA, pero
   el contenido continúa bloqueado.
 - **Dado** una matrícula previa, **cuando** intenta repetir, **entonces** no duplica.
-- **Dado** una cuenta nueva sin DNI, **cuando** administración confirma la matrícula, **entonces**
-  la cuenta y el acceso siguen el mismo flujo sin generar un pendiente por ese dato.
+- **Dado** una cuenta que no posee rol Alumno, **cuando** administración la busca para matricular,
+  **entonces** no aparece como candidata y se orienta a resolver el rol desde HU-008.
+- **Dado** un curso BORRADOR, CERRADO o CANCELADO, **cuando** intenta matricular, **entonces** la
+  operación se bloquea sin crear acceso ni registro económico.
+- **Dado** un curso sin cupo, **cuando** intenta una matrícula administrativa, **entonces** se
+  bloquea hasta que administración aumente la capacidad; no se crea sobrecupo manual.
 - **Dado** cierre alcanzado y ausencia de sesiones futuras con asistencia obligatoria, **cuando**
   administración matricula, **entonces** debe confirmar la advertencia académica y queda registrada
   la matrícula sin afirmar que el alumno certificará automáticamente.
 
 ## Notificación
 
-- Al activarse la matrícula se envía la confirmación del curso y del origen administrativo. Si la
-  cuenta es nueva, además recibe por separado la contraseña temporal, verificación y pasos de
-  habilitación.
+- Al activarse la matrícula se envía la confirmación del curso y del origen administrativo. Las
+  instrucciones de una cuenta creada o modificada previamente pertenecen a HU-008.
 - Un fallo de envío no revierte la matrícula ni cambia el registro económico; administración puede
   reenviar. No se rastrea la apertura o entrega del mensaje.
 
 ## Dependencia interna
 
-- Depende de HU-008 para gestionar la cuenta y de HU-015 para disponer del curso publicado.
+- Depende de HU-008 para disponer de una cuenta con rol Alumno y de HU-015 para disponer del curso
+  publicado.
 - HU-020 y HU-021 consumen su resultado.
 
 ## Orientación de trabajo
 
-- **Frontend:** búsqueda, elección clara, campos condicionales y resumen.
+- **Frontend:** búsqueda limitada a alumnos, retorno hacia HU-008 cuando no exista uno elegible,
+  elección clara, campos condicionales y resumen.
 - **Backend:** registro económico, responsable, fecha, matrícula/cupo y restricciones de cuenta.
 - **Integración:** la acción administrativa debe dejar sincronizados cuenta, registro económico,
   matrícula, cupo y acceso; si la cuenta no está habilitada, conserva el derecho pero bloquea el
@@ -82,4 +89,5 @@
 
 ## Demostración esperada
 
-Demostrar REGISTRADO_MANUAL, EXONERADO y cuenta nueva pendiente de habilitación.
+Demostrar REGISTRADO_MANUAL, EXONERADO, rechazo de una cuenta sin rol Alumno y bloqueo por estado
+o cupo no permitido.

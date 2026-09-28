@@ -14,12 +14,16 @@ se desarrollan como incremento de esta épica.
 - **Historias:** HU-008.
 - **Actor:** administrador.
 - **Debe mostrar:** búsqueda y listado de usuarios, datos principales, rol, origen y estado de la
-  cuenta; permite crear un alumno o administrador y consultar quién concedió el perfil.
+  cuenta; permite crear un alumno o administrador, consultar sus roles y rol principal, y conocer
+  quién concedió cada perfil administrativo.
 - **Jerarquía:** el listado aparece primero y la creación o el detalle se abre en panel. Reenviar
   instrucciones y deshabilitar quedan dentro del detalle y no compiten con “Crear usuario”.
 - **Estados importantes:** correo existente sin duplicidad, apellido materno/teléfono/DNI vacíos,
   código de verificación reenviado, CAMBIO_PENDIENTE, cuenta habilitada, correo fallido,
   auto-desactivación bloqueada y último administrador protegido.
+- **Roles:** una cuenta existente puede recibir el rol faltante como secundario sin cambiar su
+  contraseña ni su rol principal. Esta versión no elimina roles, cambia el principal ni permite
+  alternar paneles durante la sesión.
 - **Acción para la review:** crear una cuenta con `Escuela1415@`, completar código de verificación
   y contraseña propia, y comprobar su habilitación.
 
@@ -28,8 +32,9 @@ se desarrollan como incremento de esta épica.
 - **Historias:** HU-009.
 - **Actor:** administrador.
 - **Debe mostrar:** selector de sección para tipos de curso, categorías, docentes públicos,
-  entidades, firmantes y tipos de material; solo un listado visible, con creación o edición en
-  panel. En escritorio puede representarse como pestañas cuando quepan sin comprimirse.
+  entidades, firmantes, tipos funcionales de material y reglas de archivo; solo un listado visible,
+  con creación o edición en panel. Debe distinguir tipo, origen y extensión. En escritorio puede
+  representarse como pestañas cuando quepan sin comprimirse.
 - **Estados importantes:** valor activo, inactivo, repetido o usado por cursos existentes.
 - **Acción para la review:** crear o actualizar un valor y seleccionarlo después en un curso.
 
@@ -41,8 +46,8 @@ se desarrollan como incremento de esta épica.
   cerrar matrícula y administrar el ciclo de vida.
 - **Jerarquía:** “Crear curso” es primaria; editar abre el curso y las demás acciones se muestran en
   un menú únicamente cuando el estado las permite.
-- **Estados importantes:** borrador, publicado, iniciado o disponible, cerrado y cancelado cuando
-  corresponda.
+- **Estados importantes en EP02:** borrador, publicado, en curso y cerrado. CANCELADO puede
+  reconocerse como estado general, pero su acción no aparece hasta HU-038.
 - **Acción para la review:** crear un curso, abrirlo, duplicarlo y mostrar sus cambios permitidos.
 
 ### PF-014 — Editor integral del curso
@@ -60,6 +65,9 @@ se desarrollan como incremento de esta épica.
   `dias_revision` y bloqueo de secuencia. PRACTICA siempre se muestra ilimitado.
 - **Estados importantes:** borrador incompleto, error por modalidad, validaciones pendientes,
   publicación correcta y restricciones posteriores al inicio.
+- **Reglas visibles:** selección ordenada de varios docentes; EN_VIVO exige sesión; HIBRIDO exige
+  sesión y contenido grabado; vista previa solo para una lección grabada; reglas académicas
+  congeladas después del inicio o primera actividad.
 - **Acción para la review:** configurar el curso completo e intentar publicarlo antes y después de
   resolver sus errores.
 
@@ -74,6 +82,8 @@ se desarrollan como incremento de esta épica.
 - **Estados importantes:** gratuita, pagada, administrativa, exonerada, pendiente, rechazada,
   aprobada, cancelada y casos que exceden capacidad.
 - **Acción para la review:** comparar los tres orígenes y realizar una matrícula administrativa.
+- **Matrícula administrativa:** busca solo cuentas con rol Alumno; si no existe una elegible, enlaza
+  a PF-010. No crea cuentas, asigna roles ni permite sobrecupo manual.
 
 ### PF-016 — Confirmación de matrícula gratuita
 
@@ -90,15 +100,19 @@ se desarrollan como incremento de esta épica.
 - **Debe mostrar:** curso, importe, moneda, promoción vigente y medios habilitados por Culqi.
 - **Estados importantes:** procesando, pendiente, rechazado, error recuperable y cupo agotado antes
   de la aprobación.
+- **Importe:** antes de iniciar muestra el precio confirmado. Un intento conserva ese importe; un
+  reintento posterior presenta el precio vigente y solicita otra confirmación.
 - **Acción para la review:** ejecutar un rechazo y luego reintentar; mostrar que PENDIENTE espera a
   Culqi y no ofrece un segundo intento.
 
-### PF-018 — Resultado del pago y comprobante informativo
+### PF-018 — Resultado del pago y constancia informativa
 
 - **Historias:** HU-018.
 - **Actor:** alumno.
 - **Debe mostrar:** resultado, orden, importe, moneda, medio, fecha y hora, alumno, curso y últimos
   dígitos de tarjeta cuando correspondan.
+- **Constancia:** únicamente APROBADO permite imprimirla. PENDIENTE, RECHAZADO, ERROR y EXPIRADO
+  muestran su resultado sin aparentar un pago realizado.
 - **Estados importantes:** aprobado con acceso, rechazado o pendiente sin acceso y confirmación
   repetida sin duplicidad; APROBADO tardío tras cierre/cupo y APROBADO sin acceso tras cancelación.
 - **Acción para la review:** mostrar un pago aprobado y su matrícula única.
@@ -113,6 +127,9 @@ se desarrollan como incremento de esta épica.
   corresponde a su estado, sin reutilizar filtros del catálogo.
 - **Estados importantes:** acceso vigente, cerrado con acceso conservado, matrícula individual
   cancelada o vencida y cancelación total con contenido previo conservado.
+- **Clasificación:** En progreso contiene matrículas sin `fecha_finalizacion`, incluso futuras,
+  vencidas o canceladas; Completados contiene las que sí tienen esa fecha, aunque después cambie el
+  estado del acceso. Cada tarjeta ofrece solo una acción realmente disponible.
 - **Acción para la review:** comprobar que cada matrícula aparece con el acceso correspondiente.
 
 ## Pantallas reutilizadas de EP01

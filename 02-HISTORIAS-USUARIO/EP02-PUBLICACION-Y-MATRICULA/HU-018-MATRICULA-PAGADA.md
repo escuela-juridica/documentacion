@@ -22,6 +22,11 @@
 - PagoEfectivo, depósito en efectivo, voucher enviado por WhatsApp y validación manual de capturas
   no forman parte de este flujo. Yape y Plin también deben ser procesados y confirmados por Culqi.
 - ESEJUR comprueba disponibilidad antes de iniciar, pero no reserva cupo.
+- Antes de enviar la operación, el alumno confirma el importe vigente. Cada intento conserva curso,
+  alumno, número de pedido, precio regular, promoción aplicada, importe final en soles, medio,
+  fecha y hora e identificador comunicado por Culqi.
+- El importe aceptado de un intento no cambia aunque después se modifique el precio o termine la
+  promoción. Un reintento posterior vuelve a mostrar el precio vigente y exige nueva confirmación.
 - Culqi procesa e informa PENDIENTE, APROBADO, RECHAZADO, ERROR o EXPIRADO.
 - Solo el primer APROBADO activa la matrícula y ocupa cupo.
 - Un intento no aprobado puede reintentarse sobre la misma matrícula, conservando historial y sin
@@ -34,6 +39,8 @@
 - Cuando no queda cupo se muestra “Sin cupos”; no se reserva un lugar ni se crea lista de espera.
 - Constancia imprimible: número de pedido, importe y moneda, método, fecha y hora, datos del alumno,
   curso y, para tarjeta, últimos dígitos. No es comprobante SUNAT.
+- La constancia solo existe para APROBADO. PENDIENTE, RECHAZADO, ERROR y EXPIRADO muestran su
+  resultado, pero nunca una constancia que aparente un pago realizado.
 - Pago y certificado están incluidos en un único importe.
 - La vigencia, si existe, comienza en la fecha posterior entre APROBADO/activación e inicio del
   curso; esa fecha es el día 1 y vence a las 23:59:59 de `America/Lima` del día N.
@@ -41,7 +48,8 @@
 ## Flujo principal
 
 1. El alumno elige comprar y ESEJUR valida curso, cuenta, duplicidad, cierre y cupo.
-2. Se inicia la operación con Culqi por el precio vigente.
+2. Confirma el precio vigente y ESEJUR conserva las condiciones aceptadas para ese intento antes
+   de iniciar la operación con Culqi.
 3. ESEJUR conserva el intento PENDIENTE hasta el resultado comunicado.
 4. Culqi informa APROBADO.
 5. Sin revisión humana, ESEJUR registra el pago una vez, activa matrícula, ocupa cupo, genera
@@ -53,6 +61,8 @@
 - RECHAZADO/ERROR/EXPIRADO: no activa ni ocupa cupo; informa y permite reintentar cuando aplica.
 - Ninguna captura, voucher o declaración del alumno sustituye el resultado APROBADO de Culqi.
 - Repetición del mismo resultado: no cambia cantidades ni genera otro correo/constancia.
+- Cambio de precio después de iniciar: no modifica el intento en curso; si se necesita reintentar,
+  se muestra el nuevo importe y el alumno debe aceptarlo antes de crear otra operación.
 - Otro intento ya PENDIENTE: no inicia un segundo simultáneo.
 - Sin cupo antes de pagar: muestra “Sin cupos” y no inicia operación.
 - Aprobación simultánea que causa sobrecupo: acceso para ambos y alerta administrativa.
@@ -79,6 +89,16 @@
 - **Dado** un resultado no aprobado que Culqi permite reintentar, **cuando** el alumno selecciona
   “Volver a pagar”, **entonces** el nuevo intento pertenece a la misma matrícula PENDIENTE_PAGO y
   conserva los resultados anteriores.
+- **Dado** un resultado no aprobado, **cuando** se muestra su detalle, **entonces** no existe una
+  constancia y la interfaz no afirma que el pago fue realizado.
+
+### Importe aceptado
+
+- **Dado** un intento iniciado por un importe confirmado, **cuando** el precio público cambia antes
+  de llegar el resultado, **entonces** el intento conserva el importe aceptado y su APROBADO activa
+  la matrícula por ese valor.
+- **Dado** un reintento después de cambiar el precio, **cuando** el alumno selecciona volver a
+  pagar, **entonces** ve y confirma el importe vigente antes de iniciar la nueva operación.
 
 ### Idempotencia
 
@@ -124,10 +144,12 @@
 ## Orientación de trabajo
 
 - **Frontend:** checkout, estados, reintento, constancia y mensajes sin afirmar procesamiento propio.
-- **Backend:** resultado Culqi, idempotencia, matrícula, cupo, historial y excepción de cancelación.
+- **Backend:** condiciones aceptadas por intento, resultado Culqi, idempotencia, matrícula, cupo,
+  historial y excepción de cancelación preparada para HU-038.
 - **Integración:** ejecutar APROBADO, fallo, repetición y cancelación en curso.
 
 ## Demostración esperada
 
-Completar pago aprobado, imprimir constancia, demostrar fallo/reintento y repetir una confirmación
-sin duplicar; mostrar la excepción de aprobación posterior a cancelación.
+Completar pago aprobado, imprimir constancia, demostrar fallo/reintento, conservar el importe
+aceptado y repetir una confirmación sin duplicar. La aprobación posterior a una cancelación total
+queda documentada, pero no se demuestra hasta HU-038.

@@ -99,6 +99,10 @@ que ya hayan quedado congelados en certificados emitidos.
 
 ### 5. Ingresar o crear una cuenta con Google
 
+Este bloque se incorpora a la review únicamente después de que TAREA-001 de EP02 funcione y quede
+aceptada de extremo a extremo. Antes de ello, el botón está oculto o marcado como “Próximamente” y
+la review continúa con correo y contraseña.
+
 1. Cerrar la sesión actual.
 2. Ingresar con una cuenta de Google ya vinculada y comprobar que abre la cuenta existente.
 3. Repetir con un correo Google nuevo y mostrar el traslado desde PF-003 hacia PF-004.
@@ -138,7 +142,8 @@ están registrados.
 
 - Las siete historias incluidas cumplen sus criterios de aceptación.
 - El catálogo y la ficha funcionan sin autenticación.
-- Los caminos de creación por formulario y Google no producen duplicidad.
+- El formulario no produce duplicidad. Cuando TAREA-001 de EP02 quede aceptada, Google debe cumplir
+  la misma regla antes de presentarse como funcional.
 - El inicio, cierre y recuperación de acceso funcionan de extremo a extremo.
 - Los cambios del perfil se conservan correctamente.
 - Los errores mostrados permiten al usuario saber cómo continuar.

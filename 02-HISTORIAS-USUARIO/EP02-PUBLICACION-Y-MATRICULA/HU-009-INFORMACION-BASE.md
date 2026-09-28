@@ -21,7 +21,8 @@
   independiente. Sus datos se muestran dentro de las tarjetas y fichas de los cursos asignados.
 - Entidades certificadoras/refrendantes.
 - Firmantes: nombre, cargo, imagen de firma y estado activo.
-- Extensiones de archivo permitidas y tamaño máximo.
+- Tipos funcionales de material, separados de su origen y de las reglas de carga.
+- Extensiones de archivo permitidas, su correspondencia con el tipo de material y tamaño máximo.
 - Configuración institucional del lugar de emisión del certificado, con “Lima, Perú” como valor
   inicial; los certificados emitidos conservan la copia usada en su momento.
 - Activar o desactivar elementos sin borrar la información usada históricamente.
@@ -42,7 +43,12 @@ agregar, editar, activar o desactivar valores sin modificar código.
   Colegio de Abogados de Cañete.
 - **Firmantes iniciales:** Mgt. Lilia Mercedes Guerra Macedo, Directora Ejecutiva; Mgt. Yourka
   Lisbeth Lucich Berrio, Comité Consultivo de Asuntos Académicos.
-- **Tipos de material:** PDF, DOC, PPT, EXCEL, IMAGEN, AUDIO, VIDEO, ZIP y ENLACE.
+- **Tipos funcionales de material:** documento PDF, documento de texto, presentación, hoja de
+  cálculo, imagen, audio, video, archivo comprimido y enlace.
+- **Orígenes:** archivo subido a ESEJUR, video de YouTube no listado y enlace externo de nube o de
+  otro servicio. El origen no sustituye el tipo de material.
+- **Reglas iniciales de carga:** extensiones permitidas por tipo y tamaño máximo; ENLACE no exige
+  extensión ni tamaño de archivo local.
 - **Lugar de emisión del certificado:** Lima, Perú.
 
 “In-house” se conserva únicamente como etiqueta comercial de tipo de curso. No crea grupos,
@@ -68,6 +74,11 @@ matrículas corporativas, accesos cerrados ni reglas especiales de venta.
   independientes.
 - **Dado** una regla de archivo, **cuando** se configura, **entonces** se aplica a nuevas cargas y se
   informa antes de aceptar un archivo inválido.
+- **Dado** una extensión que deja de permitirse, **cuando** ya existe un material que la utiliza,
+  **entonces** el material no se elimina y continúa disponible para quien tenga autorización; una
+  carga o reemplazo posterior sí debe cumplir la regla vigente.
+- **Dado** un material de tipo ENLACE, **cuando** se configura, **entonces** no se le exige extensión
+  ni tamaño de archivo local y se conserva por separado su origen externo.
 - **Dado** los valores iniciales, **cuando** se habilita la administración, **entonces** están
   disponibles para nuevas configuraciones y pueden desactivarse sin alterar usos históricos.
 - **Dado** el tipo In-house, **cuando** se asigna a un curso, **entonces** funciona solo como

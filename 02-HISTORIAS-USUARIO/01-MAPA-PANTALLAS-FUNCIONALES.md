@@ -62,7 +62,7 @@ No significa que vuelvan a desarrollarse.
 | PF-015 | Control de matrículas y pagos | Administrador |
 | PF-016 | Confirmación de matrícula gratuita | Alumno |
 | PF-017 | Checkout de pago en línea | Alumno |
-| PF-018 | Resultado del pago y comprobante informativo | Alumno |
+| PF-018 | Resultado del pago y constancia informativa | Alumno |
 | PF-019 | Mis cursos | Alumno |
 
 La review reutiliza PF-003 para ingresar, PF-005 para verificar el correo, PF-008 y PF-009 para

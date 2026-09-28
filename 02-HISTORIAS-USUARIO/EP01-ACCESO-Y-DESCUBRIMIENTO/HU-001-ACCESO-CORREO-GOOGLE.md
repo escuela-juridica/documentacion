@@ -18,6 +18,10 @@
 
 ## Valor y alcance
 
+> **Estado de implementación:** el acceso mediante correo y contraseña pertenece al entregable de
+> EP01. La integración real con Google se completa como TAREA-001 de EP02; mientras no esté aceptada,
+> el botón permanece oculto o identificado como “Próximamente” y nunca simula un ingreso correcto.
+
 La historia ofrece dos medios para ingresar a una cuenta existente:
 
 - correo y contraseña propia;
@@ -130,4 +134,5 @@ Todas las fechas y horas visibles o registradas se interpretan y muestran en `Am
 
 Ingresar como alumno y administrador mediante correo; ingresar con una cuenta Google existente;
 mostrar que un correo Google nuevo conduce a HU-002; comprobar el desvío a HU-003 y el rechazo de
-credenciales inválidas.
+credenciales inválidas. Los pasos de Google solo se demuestran después de aceptar TAREA-001 de
+EP02; antes de ello se demuestra únicamente el acceso tradicional.

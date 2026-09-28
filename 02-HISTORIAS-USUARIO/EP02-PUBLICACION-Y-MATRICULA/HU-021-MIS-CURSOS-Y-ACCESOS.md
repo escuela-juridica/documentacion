@@ -19,6 +19,12 @@
 - “Mis cursos” utiliza dos pestañas de navegación: **En progreso** y **Completados**. No son chips,
   etiquetas ni filtros del catálogo. La pestaña activa se distingue visualmente y al seleccionarla
   cambia la lista mostrada.
+- **En progreso** reúne toda matrícula sin `fecha_finalizacion`, incluso si espera el inicio, venció,
+  fue cancelada o pertenece a un curso cancelado. Su tarjeta explica la situación y solo muestra
+  “Continuar” cuando existe acceso efectivo.
+- **Completados** reúne toda matrícula con `fecha_finalizacion`, aunque después haya vencido, sido
+  cancelada o pertenezca a un curso cerrado o cancelado. Muestra el estado de certificación que
+  corresponda.
 - Tarjeta con curso, modalidad, avance disponible y acción “Continuar” cuando procede.
 - Cada tarjeta muestra una versión compacta del avance hacia la certificación: condiciones activas,
   valor real, meta y siguiente acción cuando exista.
@@ -58,6 +64,10 @@
 - **Dado** otro alumno, **cuando** inicia sesión, **entonces** nunca ve estas matrículas.
 - **Dado** la pantalla “Mis cursos”, **cuando** cambia entre “En progreso” y “Completados”,
   **entonces** solo una pestaña queda activa y la lista corresponde a esa selección.
+- **Dado** una matrícula sin fecha de finalización que venció o fue cancelada, **cuando** consulta
+  En progreso, **entonces** continúa visible como historial sin una acción de acceso inválida.
+- **Dado** una matrícula con fecha de finalización, **cuando** después vence o se cancela,
+  **entonces** permanece en Completados con su estado de certificado y no vuelve a En progreso.
 
 ## Dependencia interna
 

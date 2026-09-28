@@ -20,7 +20,7 @@
   lección obligatoria que pueda cursarse.
 - Fechas, precios, promoción, cupo, vigencia y modalidad coherentes.
 - Curso pagado con al menos una lección de vista previa de contenido real.
-- Sesiones válidas cuando modalidad/reglas las necesitan.
+- Sesiones válidas según la modalidad, independientemente de que la asistencia sea requisito.
 - Exámenes completos cuando se exigen.
 - Progreso y asistencia configurados de forma aplicable.
 - Datos de certificado, entidad y firmantes suficientes.
@@ -40,6 +40,12 @@ También se valida de manera explícita:
   EN_VIVO/HIBRIDO;
 - hora final posterior a la inicial y cierre de matrícula no posterior al fin;
 - firmantes y datos impresos completos; entidad activa cuando puede emitirse Refrendado.
+- al menos un docente activo, sin asignaciones repetidas; tipo y categoría activos;
+- VIRTUAL sin sesiones ni lecciones EN_VIVO; EN_VIVO con al menos una sesión válida; HIBRIDO con
+  al menos una sesión válida y por lo menos una lección grabada;
+- firmantes completos y activos; si puede emitirse Refrendado, entidad activa;
+- una lección grabada de vista previa con contenido real en cursos pagados; no cuentan una portada,
+  una lección vacía, un examen ni una sesión en vivo.
 
 ## Flujo principal
 
@@ -61,6 +67,12 @@ También se valida de manera explícita:
   CURSO en la misma operación, sin estado PUBLICADO intermedio visible.
 - **Dado** reglas activas, **cuando** falta un examen, lección completable, sesión futura o dato de
   certificado requerido, **entonces** la publicación permanece bloqueada y señala cada faltante.
+- **Dado** EN_VIVO o HIBRIDO sin sesión, aunque no exija asistencia, **cuando** intenta publicar,
+  **entonces** permanece BORRADOR porque la modalidad no corresponde a su contenido.
+- **Dado** HIBRIDO sin contenido grabado, **cuando** intenta publicar, **entonces** se bloquea hasta
+  que incluya ambos componentes de la modalidad.
+- **Dado** un dato maestro necesario que quedó inactivo, **cuando** valida el BORRADOR, **entonces**
+  se conserva la referencia para corregirla, pero no se publica hasta reemplazarla o reactivarla.
 
 ## Dependencia interna
 

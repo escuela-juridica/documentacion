@@ -29,7 +29,9 @@
 - Los materiales se muestran en línea sin descarga por defecto; administración habilita la descarga
   de manera independiente para cada material.
 - Sin material principal; orden mediante arrastrar y soltar.
-- Vista previa definida por lección.
+- Vista previa pública definida por lección, nunca por examen ni sesión en vivo. Al marcarla, todos
+  sus materiales visibles pueden consultarse sin iniciar sesión; cada material conserva su permiso
+  de descarga.
 - Duración de video detectada cuando sea posible; advertencia no bloqueante fuera de 10–15 minutos.
 - La duración detectada se muestra al alumno en el temario.
 - Al registrar YouTube se exige que el administrador indique un video no listado. Si la fuente no
@@ -56,6 +58,10 @@
 - Editar la copia de un módulo nunca altera su origen.
 - No se copian matrículas, progreso, intentos, asistencia o certificados.
 - Un enlace compartido no concede acceso a material protegido.
+- Antes de hacer pública una lección se advierte que todos sus materiales visibles quedarán
+  accesibles para visitantes. Si alguno permite descarga, el aviso lo indica expresamente sin
+  bloquear la decisión administrativa.
+- Una sesión EN_VIVO y un examen nunca pueden marcarse como vista previa pública.
 - Un archivo cuya extensión o tamaño incumple la configuración activa se rechaza indicando el
   límite aplicable antes de incorporarlo a la lección.
 
@@ -73,6 +79,10 @@
   según autorización sin descargarlo desde la interfaz.
 - **Dado** un material nuevo, **cuando** se guarda sin cambiar permisos, **entonces** queda visible
   en línea y con descarga desactivada.
+- **Dado** una lección marcada como vista previa, **cuando** un visitante la abre, **entonces** puede
+  consultar todos sus materiales visibles y solo descargar aquellos que tengan ese permiso.
+- **Dado** una sesión en vivo o un examen, **cuando** se intenta marcar como vista previa,
+  **entonces** la acción no se ofrece ni expone su enlace o contenido protegido.
 
 ## Dependencia interna
 

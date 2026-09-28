@@ -32,6 +32,7 @@ de software.
 - Administrar datos maestros.
 - Gestionar usuarios.
 - Crear cuenta administrativamente.
+- Conceder un rol faltante sin cambiar el rol principal.
 - Completar habilitación de cuenta temporal.
 - Crear y configurar curso.
 - Organizar módulos, lecciones y materiales.
@@ -69,6 +70,8 @@ de software.
 - `Reintentar pago` extiende `Pagar matrícula en línea`.
 - `Pagar matrícula en línea` incluye `Emitir constancia` solo si el resultado es APROBADO.
 - Los tres caminos de matrícula incluyen la activación de la matrícula cuando cumplen sus reglas.
+- `Matricular alumno administrativamente` utiliza una cuenta que ya posee rol Alumno; si no existe,
+  el administrador debe resolverla antes mediante `Gestionar usuarios`.
 
 ## Restricciones visuales y conceptuales
 
@@ -76,6 +79,8 @@ de software.
 - No mostrar a ESEJUR procesando el pago; Culqi es el actor externo que comunica el resultado.
 - No mostrar devolución automática ni comprobante SUNAT.
 - No convertir estados de pago en actores.
+- No representar la cancelación completa del curso como capacidad entregada en EP02; pertenece a
+  HU-038. El ciclo de vida de esta épica termina en CERRADO.
 
 ## Prompt listo para otra IA
 

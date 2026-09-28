@@ -247,6 +247,9 @@ historias de matrícula y pago, no como usuario humano.
 - En la versión actual se trabajará con el rol principal y no se mostrará una opción para cambiar
   de rol durante la sesión. La selección o alternancia entre varios roles queda preparada para una
   versión futura.
+- El primer rol de una cuenta queda como principal. Si administración concede después el otro rol,
+  se agrega como secundario, se conserva quién lo concedió y cuándo, y no se cambia el principal.
+  La versión actual tampoco elimina roles ni permite cambiar manualmente cuál es el principal.
 - El rol principal no convierte al docente en usuario del sistema. La condición de docente sigue
   dependiendo exclusivamente de su participación en uno o varios cursos.
 
@@ -335,6 +338,11 @@ del mismo recorrido académico.
 | **HIBRIDO** | Mezcla de ambas. |
 
 *(Presencial queda fuera: la Escuela es 100% en línea.)*
+
+Para que la modalidad tenga significado funcional, un curso `EN_VIVO` necesita al menos una
+sesión válida y un `HIBRIDO` necesita al menos una sesión válida y una lección grabada. Esto se
+exige aunque la asistencia no se utilice como requisito de certificación. Un `VIRTUAL` no admite
+sesiones ni lecciones `EN_VIVO`.
 
 **La modalidad la elige el administrador** al crear el curso — hace falta para publicarlo antes
 de cargar ninguna lección, porque de ella depende el badge del catálogo. El sistema **avisa** si
@@ -451,6 +459,9 @@ muestra una lista completa de lo que falta cuando no se cumple alguna de estas r
   módulo con una lección obligatoria disponible.
 - Un curso pagado debe tener al menos una lección de vista previa con contenido real. Una portada
   por defecto no cuenta como vista previa.
+- La vista previa se marca por lección grabada. Todos sus materiales visibles quedan públicos y
+  cada uno conserva su permiso de descarga; antes de publicar se advierte especialmente si alguno
+  puede descargarse. Un examen o una sesión en vivo nunca funcionan como vista previa.
 - El precio regular no puede ser negativo. Cuando existe precio promocional, no puede ser mayor
   que el regular y su fecha de inicio no puede ser posterior a su fecha de fin.
 - Los porcentajes de progreso, video y asistencia deben encontrarse entre 0% y 100%.
@@ -465,12 +476,17 @@ muestra una lista completa de lo que falta cuando no se cumple alguna de estas r
   completarse mediante detección de video o confirmación manual.
 - Si `requiere_asistencia` está activo, el curso debe tener modalidad `EN_VIVO` o `HIBRIDO` y debe tener al menos
   una sesión futura con fecha, hora de inicio y hora de fin.
+- Aunque la asistencia esté desactivada, `EN_VIVO` debe tener al menos una sesión y `HIBRIDO` debe
+  tener al menos una sesión y una lección grabada.
 - Un curso `VIRTUAL` no puede tener sesiones `EN_VIVO` ni reglas de asistencia. `EN_VIVO` e `HIBRIDO`
   deben tener `fecha_inicio`, `fecha_fin` y sus sesiones dentro de ese periodo.
 - La hora de fin de cada sesión debe ser posterior a su hora de inicio. La fecha de cierre de
   matrícula, cuando exista, no puede ser posterior a `fecha_fin`.
 - Deben estar definidos los firmantes y los demás datos que aparecerán en el certificado. Si el
   curso puede emitir nivel Refrendado, también debe tener una entidad certificadora activa.
+- Debe existir al menos un docente activo y puede haber varios, sin repeticiones y con un orden
+  definido. También deben estar activos el tipo, la categoría y los firmantes necesarios. Un dato
+  desactivado se conserva en referencias históricas, pero bloquea la publicación de un BORRADOR.
 
 La advertencia editorial de videos fuera de 10 a 15 minutos continúa sin bloquear la publicación:
 no es una inconsistencia funcional, sino una recomendación de microlearning.
@@ -595,6 +611,12 @@ método de pago, fecha y hora, sus datos y el curso comprado — y si pagó con 
 dígitos. Es **imprimible**: mucha gente lo necesita para rendir el gasto ante su institución.
 No es un comprobante tributario SUNAT; la Escuela emite ese documento por su canal actual.
 
+Antes de enviar cada intento a Culqi, el alumno confirma el importe vigente. Ese intento conserva
+el curso, alumno, número de pedido, precio regular, promoción aplicada, importe final, moneda,
+medio, fecha y hora y la referencia comunicada por Culqi. Un cambio posterior de precio no altera
+la operación ya iniciada. Si el resultado permite reintentar, el nuevo intento vuelve a mostrar el
+precio vigente y requiere otra confirmación. Solo APROBADO genera la constancia imprimible.
+
 ### Estados del pago
 
 Cada intento de pago en línea conserva su propio resultado, separado del estado de acceso de la
@@ -686,9 +708,15 @@ Autoservicio no significa *solo* autoservicio. La Escuela va a necesitar matricu
 pagos por transferencia bancaria, cortesías, cursos in-house, un pago que falló — igual que hace
 hoy el 100% de las veces.
 
-- El administrador puede **crear una matrícula directamente**, sin pasar por Culqi.
+- El administrador puede **crear una matrícula directamente**, sin pasar por Culqi, únicamente
+  para una cuenta que ya tenga rol Alumno y sobre un curso PUBLICADO o EN CURSO.
+- La búsqueda de matrícula lista solo alumnos. Si la cuenta no existe o no posee ese rol, se crea o
+  se completa primero desde Gestión de usuarios y luego se regresa a la matrícula; este flujo no
+  crea cuentas ni asigna roles por sí mismo.
 - Si hubo dinero, registra REGISTRADO_MANUAL con importe, medio, referencia y motivo.
 - Si fue cortesía, beca u otra exoneración, registra EXONERADO con importe cero y motivo.
+- Si no existe cupo, la operación manual se bloquea hasta que administración aumente la capacidad.
+  El sobrecupo solo puede provenir de aprobaciones Culqi simultáneas o tardías iniciadas con cupo.
 - Así el registro de ingresos queda completo aunque el cobro no haya pasado por el sistema, y
   la Escuela tiene el dato para emitir su comprobante.
 
@@ -862,8 +890,9 @@ perder a esa persona, la captura por el canal que ya usa y el administrador comp
 - Si el correo ya tiene cuenta, utiliza esa misma cuenta y **no cambia su contraseña**.
 - Si es una cuenta nueva, su contraseña temporal es **`Escuela1415@`** y queda con la condición
   **CAMBIO_PENDIENTE**.
-- Puede crear al mismo tiempo la matrícula manual y su operación REGISTRADO_MANUAL o EXONERADO
-  (§9).
+- Después de crear la cuenta y asignarle rol Alumno, puede continuar con la matrícula manual y su
+  operación REGISTRADO_MANUAL o EXONERADO (§9). Son pasos consecutivos y la matrícula no duplica el
+  formulario de cuenta.
 - El DNI puede dejarse vacío o registrarse como dato personal opcional; no forma parte de los
   requisitos del certificado.
 
@@ -1216,9 +1245,11 @@ del estado del curso:
   y reglas de certificación.
 - En **PUBLICADO**, mientras todavía no inicia, puede seguir modificándolos. Si ya existen
   matrículas, el sistema muestra una advertencia antes de cambiar el temario o los requisitos.
-- En **EN CURSO**, o desde que algún alumno empezó a avanzar, no puede eliminar módulos o
-  lecciones, agregar nuevas lecciones obligatorias, eliminar exámenes calificados, aumentar la
-  nota mínima, el progreso o la asistencia exigidos, ni cambiar las reglas de certificación.
+- En **EN CURSO**, o desde que algún alumno registró su primer avance, intento o asistencia, no
+  puede eliminar módulos o lecciones, agregar nuevas lecciones obligatorias ni aumentar o reducir
+  reglas académicas. Quedan congeladas las condiciones de examen, progreso y asistencia; notas y
+  porcentajes mínimos; umbral de video; secuencia; días de espera; plazo de revisión; clasificación
+  CALIFICADO/PRACTICA; lecciones obligatorias y exámenes calificados requeridos.
 - Un examen que ya tiene intentos no permite editar sus preguntas u opciones.
 
 Una vez iniciado sí se permiten correcciones que **no cambian las condiciones académicas**:
@@ -1806,7 +1837,7 @@ Es la pantalla que más usa el alumno:
 
 | Sección | Contenido |
 |---|---|
-| **Mis cursos** | Dos pestañas de navegación, **En progreso** y **Completados**, con su porcentaje de avance y un botón para **continuar** donde se quedó. No utiliza los filtros del catálogo. |
+| **Mis cursos** | Dos pestañas de navegación, **En progreso** y **Completados**, con su porcentaje de avance y un botón para **continuar** cuando corresponde. En progreso reúne matrículas sin `fecha_finalizacion`, incluso futuras, vencidas o canceladas; Completados reúne las que sí tienen esa fecha aunque luego cambie el acceso. No utiliza los filtros del catálogo. |
 | **Próximas sesiones** | Las sesiones en vivo de todos sus cursos, ordenadas por fecha, con acceso directo al enlace cuando se habilite |
 | **Mis certificados** | Los suyos, y solo los suyos. Con descarga y enlace de verificación |
 | **Mi perfil** | Consulta y edición de datos personales, incluido el DNI opcional. La confirmación de nombres y apellidos se realiza en el flujo de certificación *(§13.8)* |
@@ -1990,15 +2021,15 @@ pantallas que hay que construir del lado de gestión.**
 
 | Área | Qué puede hacer |
 |---|---|
-| **Cursos** | Crear y editar: título, descripción, imagen, URL amigable, tipo, categoría temática, modalidad, precio regular y promocional con su vigencia, cupo, vigencia de acceso, fecha de inicio opcional y sin fecha de fin en `VIRTUAL`, fechas obligatorias y cierre de matrícula en `EN_VIVO` o `HIBRIDO`, horas académicas, lista de beneficios, entidad que refrenda y firmantes |
-| **Estados** | Publicar, cerrar, cancelar con motivo y **forzar las transiciones** cuando haga falta adelantar o retrasar |
+| **Cursos** | Crear y editar: título, descripción, imagen, URL amigable, tipo, categoría temática, modalidad, precio regular y promocional con su vigencia, cupo, vigencia de acceso, fecha de inicio opcional y sin fecha de fin en `VIRTUAL`, fechas obligatorias y cierre de matrícula en `EN_VIVO` o `HIBRIDO`, horas académicas, lista de beneficios, uno o varios docentes ordenados, entidad que refrenda y firmantes |
+| **Estados** | Publicar, adelantar o retrasar el inicio antes de comenzar, cerrar ordinariamente y cancelar con motivo mediante su flujo específico; ningún estado retrocede |
 | **Contenido** | Crear módulos y lecciones, **ordenar todo**, marcar lecciones como vista previa y definir el tipo de lección (grabada o en vivo). La duración del video se detecta automáticamente cuando la fuente lo permite y se advierten, sin bloquear, los videos fuera de 10-15 minutos. Una vez iniciado el curso, solo se permiten correcciones y materiales complementarios que no alteren el avance ni la certificación |
 | **Sesiones en vivo** | Cargar fecha, hora de inicio, hora de fin y **enlace de la reunión** · reprogramar o cancelar sesiones futuras con motivo y aviso a los alumnos · subir la **grabación** después |
 | **Materiales** | Subir archivos o enlazar YouTube y nube, ordenarlos arrastrando y soltando, y **habilitar la descarga material por material**. No se elige un material principal |
 | **Duplicar** | Agregar a un curso una copia de un módulo existente, con sus lecciones, materiales y exámenes, para combinarlo y reordenarlo · duplicar un curso como nueva convocatoria en BORRADOR, sin copiar matrículas, pagos, progreso, intentos, asistencia ni certificados |
 | **Exámenes** | Crear exámenes calificados o de práctica con selección única, selección múltiple, verdadero/falso y respuesta abierta. Configurar puntajes, reintentos, tiempo límite, barajado, respuestas correctas, plazo de revisión, fecha de habilitación cuando corresponda y si un examen calificado bloquea el siguiente módulo |
-| **Reglas del curso** | Las tres condiciones de certificación —exámenes, progreso y asistencia—, sus valores mínimos, el umbral de video, la **secuencia obligatoria** y los días de espera del certificado. En VIRTUAL no se ofrece asistencia. Una vez iniciado el curso, no puede aumentar sus requisitos académicos |
-| **Matrículas** | Crear cuentas con contraseña temporal y teléfono opcional · **matricular a mano** con REGISTRADO_MANUAL o EXONERADO · **cancelar** con motivo · consultar el avance, los intentos y las notas de cualquier alumno |
+| **Reglas del curso** | Las tres condiciones de certificación —exámenes, progreso y asistencia—, sus valores mínimos, el umbral de video, la **secuencia obligatoria** y los días de espera del certificado. En VIRTUAL no se ofrece asistencia. Desde EN CURSO o la primera actividad quedan congeladas y no pueden aumentarse ni reducirse |
+| **Matrículas** | Crear o completar cuentas y roles desde Gestión de usuarios · listar solo cuentas con rol Alumno para **matricular a mano** con REGISTRADO_MANUAL o EXONERADO · **cancelar** con motivo · consultar avance, intentos y notas |
 | **Pagos** | Consultar resultados informados por Culqi, operaciones REGISTRADO_MANUAL y EXONERADO, alertas de sobrecupo y pagos aprobados después de cancelar un curso |
 | **Libro de Reclamaciones** | Consultar QUEJAS y RECLAMOS, revisar adjuntos y fechas límite, responder por correo y reenviar una respuesta ya registrada |
 | **Exámenes rendidos** | Calificar respuestas abiertas y consultar sus fechas límite · **otorgar un intento adicional** a quien agotó los suyos sin aprobar, con motivo registrado |
@@ -2059,7 +2090,7 @@ puede reenviar a cualquiera.
 | RN-02 | La lección es la unidad ordenada y marcable y se enfoca editorialmente en un concepto. La duración del video se detecta automáticamente cuando la fuente lo permite; se advierte, sin bloquear, si está fuera de 10-15 minutos. Sin video no se exige duración y, si la fuente externa no permite detectarla, el dato es opcional. |
 | RN-03 | Una lección es `GRABADA` o `EN_VIVO`. |
 | RN-04 | La lección en vivo tiene fecha, hora de inicio, hora de fin y enlace. Una sesión futura puede reprogramarse o cancelarse con motivo; se actualiza el calendario y se avisa a los matriculados. CANCELADA permanece visible, no cuenta para asistencia ni progreso y no bloquea la secuencia. Una sesión realizada no cambia de fecha ni se cancela. |
-| RN-05 | El curso tiene modalidad `VIRTUAL`, `EN_VIVO` o `HIBRIDO`; la define el administrador y el sistema avisa si no coincide con las lecciones cargadas. Presencial queda fuera. |
+| RN-05 | El curso tiene modalidad `VIRTUAL`, `EN_VIVO` o `HIBRIDO`; la define el administrador. VIRTUAL no admite sesiones ni lecciones EN_VIVO; EN_VIVO necesita al menos una sesión válida; HIBRIDO necesita al menos una sesión válida y una lección grabada, aunque asistencia no sea requisito. Presencial queda fuera. |
 | RN-06 | Un módulo pertenece a un solo curso. Al editar otro curso, el administrador puede agregar una copia completa de ese módulo, combinarla con otros y reordenarla. Cada copia es independiente. |
 | RN-07 | Al agregar un módulo existente se copian sus lecciones, materiales, exámenes, preguntas y opciones; los archivos físicos se reutilizan mediante sus referencias. |
 | RN-08 | Cada curso tiene una URL amigable propia, definida desde su creación. |
@@ -2069,7 +2100,7 @@ puede reenviar a cualquiera.
 
 | # | Regla |
 |---|---|
-| RN-10 | Las transiciones PUBLICADO → EN CURSO → CERRADO son automáticas según las fechas cuando existen; el administrador puede forzarlas. Un VIRTUAL sin fecha de inicio queda EN CURSO en la misma publicación; con inicio futuro permanece PUBLICADO hasta esa fecha, nunca tiene fecha de fin y se cierra manualmente. PUBLICADO o EN CURSO también puede pasar a CANCELADO con motivo. |
+| RN-10 | BORRADOR pasa a PUBLICADO solo después de validar; nunca regresa. PUBLICADO pasa a EN CURSO por fecha o adelanto administrativo y solo puede retrasar su inicio antes de comenzar o registrar actividad. EN CURSO pasa a CERRADO por fecha o cierre anticipado y no retrocede. Un VIRTUAL sin inicio queda EN CURSO al publicarse y se cierra manualmente. PUBLICADO o EN CURSO también puede pasar a CANCELADO con motivo mediante el flujo específico de HU-038. |
 | RN-11 | Un curso con matrículas no puede volver a BORRADOR; se retira de venta pasándolo a CERRADO. |
 | RN-12 | No se borra ningún curso, módulo ni lección con matrículas o progreso asociado; se oculta o se cierra. |
 
@@ -2078,19 +2109,19 @@ puede reenviar a cualquiera.
 | # | Regla |
 |---|---|
 | RN-13 | Un curso pagado no se puede publicar sin al menos una lección de vista previa con contenido real; una imagen por defecto puede ser portada, pero no reemplaza la muestra. |
-| RN-14 | Las lecciones de vista previa son públicas: sin registro ni matrícula. |
+| RN-14 | La vista previa se marca por lección grabada: todos sus materiales visibles son públicos sin registro ni matrícula y cada uno conserva su permiso de descarga. Se advierte antes de exponerlos. Exámenes y sesiones EN_VIVO nunca son vista previa. |
 | RN-15 | Un solo pago cubre contenido y certificado. No hay un segundo cobro por certificar. |
 | RN-16 | Los cursos gratuitos también certifican, bajo las mismas reglas. |
 | RN-17 | Los precios son netos, en soles, sin desglose de impuestos. |
 | RN-18 | Culqi procesa los pagos en línea con tarjeta, Yape o Plin e informa PENDIENTE, APROBADO, RECHAZADO, ERROR o EXPIRADO. Una operación administrativa queda REGISTRADO_MANUAL si hubo dinero o EXONERADO si el importe es cero. El pago en efectivo queda fuera. |
 | RN-19 | ESEJUR no cobra, autoriza ni rechaza operaciones bancarias. Registra el resultado comunicado por Culqi y aplica automáticamente su consecuencia. |
-| RN-20 | Cada pago aprobado genera una constancia imprimible con número de pedido, importe, método, fecha y curso. No reemplaza el comprobante tributario SUNAT emitido por la Escuela. |
+| RN-20 | Cada intento conserva el importe y promoción confirmados al iniciarse; un cambio posterior no los altera y un reintento vuelve a pedir confirmación del precio vigente. Solo APROBADO genera una constancia imprimible con número de pedido, importe, método, fecha y curso. No reemplaza el comprobante tributario SUNAT emitido por la Escuela. |
 | RN-21 | El precio promocional puede tener fechas de vigencia; sin fechas, es permanente. |
 | RN-22 | La matrícula se activa automáticamente solo cuando Culqi informa APROBADO, sin intervención humana. Una operación iniciada válidamente se honra aunque después cierre la matrícula, el curso pase a CERRADO o se llene el cupo. Si el curso o la matrícula quedaron CANCELADOS, se registra el pago pero no se activa acceso. |
 | RN-23 | El primer resultado APROBADO se registra una vez. Una repetición no genera otro pago ni matrícula y ESEJUR no convierte fallos en APROBADO. Una aprobación posterior a CANCELADO mantiene la matrícula CANCELADA y abre atención externa; una aprobación que encuentra el cupo lleno activa y genera alerta de sobrecupo. |
 | RN-24 | Solo puede existir un intento PENDIENTE por matrícula. ESEJUR no le asigna un plazo propio y no permite reintentarlo mientras siga PENDIENTE. Solo RECHAZADO, ERROR o EXPIRADO permiten un nuevo intento sobre la misma matrícula, conservando historial. |
-| RN-25 | Toda matrícula manual genera REGISTRADO_MANUAL con importe, medio, referencia y motivo, o EXONERADO con importe cero y motivo; ambas registran responsable y fecha y activan la matrícula. |
-| RN-26 | En autoservicio no se matricula sin correo verificado. Administración puede crear cuenta y matrícula, pero el contenido queda bloqueado hasta verificar el correo y cambiar la contraseña temporal. ACTIVA representa el derecho concedido; utilizarlo también exige una cuenta habilitada y que haya llegado la fecha de inicio cuando exista. |
+| RN-25 | Toda matrícula manual usa una cuenta que ya posee rol Alumno y un curso PUBLICADO o EN CURSO. Genera REGISTRADO_MANUAL con importe, medio, referencia y motivo, o EXONERADO con importe cero y motivo; ambas registran responsable y fecha y activan la matrícula. No asigna roles, no admite sobrecupo manual y no crea otra matrícula si ya existe una. |
+| RN-26 | En autoservicio no se matricula sin correo verificado. Administración crea o completa primero la cuenta desde Gestión de usuarios y luego matricula al alumno; el contenido queda bloqueado hasta verificar el correo y cambiar la contraseña temporal cuando corresponda. ACTIVA representa el derecho concedido; utilizarlo también exige una cuenta habilitada y que haya llegado la fecha de inicio cuando exista. |
 | RN-27 | Un alumno no puede matricularse dos veces en el mismo curso. |
 | RN-28 | Los cursos PUBLICADO y EN CURSO admiten matrícula mientras tengan cupo y no se haya alcanzado su cierre de matrícula o cierre administrativo. VIRTUAL no usa fecha de cierre de matrícula. |
 | RN-29 | Un curso puede definir una capacidad de venta; vacío significa sin límite. Un pago PENDIENTE no reserva cupo. El cupo se ocupa cuando Culqi informa APROBADO y la matrícula pasa a ACTIVA, o cuando se activa una matrícula gratuita o administrativa. |
@@ -2112,7 +2143,7 @@ puede reenviar a cualquiera.
 | RN-40 | El avance se calcula sobre las lecciones obligatorias definidas al iniciar el curso. El contenido complementario agregado después no reduce el avance y un certificado emitido nunca se revoca por cambios de contenido. |
 | RN-41 | El alumno avanza en el orden que definió el administrador: para abrir una lección debe haber completado la anterior. Un examen calificado de módulo puede bloquear el siguiente hasta ser aprobado. |
 | RN-42 | Lo ya completado queda siempre accesible; lo que no se puede es adelantarse. |
-| RN-43 | Después de iniciado el curso no se agregan lecciones obligatorias ni se aumentan requisitos. Se permiten correcciones y materiales complementarios que no alteren el avance ni la certificación. |
+| RN-43 | Al pasar a EN CURSO o registrarse la primera actividad, lo que ocurra primero, se congelan las condiciones académicas: no se agregan lecciones obligatorias ni se aumentan o reducen requisitos, umbrales, secuencia, días de espera, plazo de revisión, clasificación de exámenes ni conjuntos obligatorios. Se permiten correcciones y materiales complementarios que no alteren avance ni certificación. |
 | RN-44 | La secuencia obligatoria es una opción por curso, activa por defecto. Cada examen calificado de módulo permite decidir si bloquea el siguiente; si la secuencia se desactiva, ningún examen bloquea la navegación. |
 | RN-45 | La tarjeta de sesión siempre es visible, pero el enlace solo se habilita entre inicio y fin. Abrirlo registra una asistencia. Después se muestra grabación o pendiente. Una sesión CANCELADA se excluye del total. |
 | RN-46 | El administrador puede corregir manualmente la asistencia de cualquier sesión. |
@@ -2138,7 +2169,7 @@ puede reenviar a cualquiera.
 
 | # | Regla |
 |---|---|
-| RN-59 | La certificación se configura con tres condiciones independientes: exámenes, progreso y asistencia. Sus valores iniciales dependen de la modalidad y pueden modificarse antes de iniciar. En VIRTUAL la opción de asistencia no se muestra. Si `requiere_examenes` está desactivado, no puede permanecer ningún examen CALIFICADO: antes de iniciar se debe convertir a PRACTICA o retirar. Si las tres condiciones se desactivan, el certificado solo puede emitirse manualmente con motivo. |
+| RN-59 | La certificación se configura con tres condiciones independientes: exámenes, progreso y asistencia. Sus valores iniciales dependen de la modalidad y pueden modificarse solo antes de EN CURSO o de la primera actividad. Después quedan congelados tanto aumentos como reducciones. En VIRTUAL la asistencia no se muestra. Sin `requiere_examenes` no puede permanecer un CALIFICADO; si las tres condiciones se desactivan, el certificado solo puede emitirse manualmente con motivo. |
 | RN-60 | El umbral del certificado normal es la nota mínima del curso y el del refrendado debe ser mayor; por defecto 12 y 14. |
 | RN-61 | Si el curso no exige exámenes, el certificado es siempre Normal. |
 | RN-62 | El certificado se emite sin intervención administrativa cuando se cumple la regla de certificación, no existe ningún examen calificado PENDIENTE_REVISION, llegó la fecha de fin si existe y el alumno confirmó sus datos. Con espera se emite a las 00:00 de `America/Lima` de la fecha programada; con cero días, después de la confirmación final del alumno. Una finalización obtenida válidamente no se pierde si después la matrícula vence o se cancela. |
@@ -2153,7 +2184,7 @@ puede reenviar a cualquiera.
 | RN-71 | El correo para confirmar datos del certificado se envía únicamente cuando el alumno ya cumple las condiciones académicas y temporales de emisión y solo faltan sus datos. Una vez emitido, el correo del certificado lleva un enlace de descarga, nunca el PDF adjunto. |
 | RN-72 | El QR o el código manual llevan a una verificación pública con código, nombre, curso, horas, nivel, entidad, fecha y estado. Nunca muestra DNI, contacto, nota, firmas ni PDF. Un ANULADO muestra su fecha y que no es válido; una corrección muestra los datos vigentes y un código inexistente responde "Certificado no encontrado". |
 | RN-73 | Sin nombres, apellido paterno y apellido materno confirmados no se genera el certificado. La confirmación se realiza y se registra dentro del proceso de certificación cuando corresponde preparar la emisión; no forma parte del perfil general de `persona`. El DNI es opcional, se administra desde el perfil y nunca condiciona la emisión. |
-| RN-74 | Cada curso indica qué entidad lo refrenda; entidades, firmantes, tipos de curso y categorías temáticas son tablas maestras. El lugar de emisión proviene de la configuración institucional y su valor inicial es "Lima, Perú". |
+| RN-74 | Cada curso puede tener uno o varios docentes públicos ordenados y sin duplicados; no reciben cuenta. Entidades, firmantes, docentes, tipos de curso y categorías son datos maestros activos para nuevas asignaciones. Un BORRADOR con un dato requerido inactivo no se publica; cursos y certificados históricos lo conservan. La entidad es obligatoria solo si puede emitirse Refrendado. El lugar inicial de emisión es "Lima, Perú". |
 
 ### Contenido protegido
 
@@ -2167,7 +2198,7 @@ puede reenviar a cualquiera.
 
 | # | Regla |
 |---|---|
-| RN-78 | El docente tiene un perfil público sin acceso al sistema; el alumno y el administrador sí utilizan una cuenta. Una cuenta puede acumular estos roles de acceso, pero debe tener exactamente uno como principal. La versión actual abre el panel de ese rol y deja el cambio entre roles para una versión futura. |
+| RN-78 | El docente tiene perfil público sin acceso; alumno y administrador sí usan cuenta. Una cuenta puede acumular ambos roles, pero tiene exactamente uno principal: el primero. Conceder luego el otro lo agrega como secundario y registra otorgante y fecha sin cambiar contraseña ni principal. Esta versión no elimina roles, cambia el principal ni alterna paneles durante la sesión. |
 | RN-79 | ESEJUR valida cada solicitud de ingreso, pero no conserva un historial de intentos de acceso, direcciones IP ni dispositivos. Tampoco controla sesiones simultáneas. |
 | RN-80 | El registro por formulario o Google exige marcar la casilla de conformidad con la política de privacidad y los términos antes de crear la cuenta. Si no se marca, no se crea el usuario. La existencia de la cuenta implica que esta condición fue cumplida; no se guarda contenido, versión, fecha ni historial de aceptación. En la creación administrativa se asume cumplida desde que el administrador crea la cuenta a solicitud de la persona. La contraseña propia debe tener al menos 8 caracteres e incluir mayúscula, minúscula y número. La verificación usa un código de 6 dígitos de un solo uso; reenviarlo invalida el anterior. El enlace de recuperación dura 60 minutos y usarlo o solicitar uno nuevo invalida el anterior. |
 | RN-81 | La plataforma ofrece Libro de Reclamaciones como página pública enlazada en el pie y accesible con o sin cuenta; con sesión, completa los datos conocidos. |
@@ -2178,7 +2209,7 @@ puede reenviar a cualquiera.
 | RN-86 | Un mismo correo es una sola cuenta: los accesos por formulario y por Google se vinculan entre sí. |
 | RN-87 | El login no bloquea el catálogo ni las lecciones de vista previa; la sesión se pide solo al matricularse. |
 | RN-88 | El registro guarda el WhatsApp del alumno como dato de contacto opcional; las notificaciones automáticas van por correo. |
-| RN-89 | La pantalla de registro ofrece WhatsApp para solicitar una cuenta manual. Cualquier administrador HABILITADO puede crear otro administrador o un alumno usando correo, nombres, apellido paterno obligatorio, apellido materno opcional y `telefono` y DNI opcionales; se registra quién concedió el perfil. No puede deshabilitarse a sí mismo ni dejar al sistema sin al menos un administrador habilitado. Una cuenta nueva recibe por correo las instrucciones, el código de verificación de seis dígitos y `Escuela1415@`, y queda con CAMBIO_PENDIENTE. Puede entrar al panel, pero no abrir cursos, exámenes ni certificados hasta verificar el correo y cambiar la contraseña. Una cuenta existente nunca cambia su clave. |
+| RN-89 | La pantalla de registro ofrece WhatsApp para solicitar una cuenta manual. Cualquier administrador HABILITADO puede crear otro administrador o un alumno, o conceder a una cuenta existente el rol faltante como secundario. Se usan correo, nombres, apellido paterno obligatorio, apellido materno, `telefono` y DNI opcionales; se registra otorgante y fecha. No puede deshabilitarse a sí mismo ni dejar al sistema sin otro administrador habilitado. Una cuenta nueva recibe código, `Escuela1415@` y CAMBIO_PENDIENTE; una existente nunca cambia su clave ni rol principal. |
 | RN-90 | El formulario de registro lleva protección anti-robot. |
 
 ### Catálogo y administración
@@ -2194,9 +2225,9 @@ puede reenviar a cualquiera.
 | RN-97 | El administrador puede consultar el avance, los intentos y las notas de cualquier alumno. |
 | RN-98 | El alumno ve en todo momento su avance hacia el certificado: cada condición activa del curso, con su valor real y su meta. |
 | RN-99 | El alumno tiene un calendario mensual con las sesiones en vivo de todos sus cursos; solo se muestra si tiene cursos `EN_VIVO` o `HIBRIDO`. |
-| RN-100 | Cada curso representa una convocatoria concreta. Al duplicarlo se copia su configuración y estructura académica en un nuevo BORRADOR, reutilizando los archivos físicos; se genera una nueva dirección amigable única y nunca se copian matrículas, pagos, progreso, intentos, asistencia ni certificados. |
+| RN-100 | Cada curso representa una convocatoria concreta. Al duplicarlo se copia su configuración, estructura académica, docentes y orden en un nuevo BORRADOR, reutilizando archivos físicos; se genera otra dirección amigable y nunca se copian matrículas, pagos, progreso, intentos, asistencia ni certificados. Un dato maestro inactivo debe corregirse antes de publicar la copia. |
 | RN-101 | SELECCION_UNICA, SELECCION_MULTIPLE y VERDADERO_FALSO se califican al instante. Un intento con RESPUESTA_ABIERTA queda PENDIENTE_REVISION hasta que el administrador lo califique; tiene `dias_revision`, 3 días calendario por defecto y no modificable después del inicio del curso, muestra `fecha_limite_revision`, impide otro intento pendiente y bloquea la finalización y el certificado si el examen es CALIFICADO. Cada respuesta recibe un puntaje inclusivo entre 0 y su puntaje máximo y una observación opcional visible para el alumno. |
-| RN-102 | Antes de publicar se valida que el curso tenga estructura cursable, reglas coherentes, fechas válidas y todos los elementos requeridos por sus condiciones de examen, progreso, asistencia y certificación. Si falta algo, la publicación se bloquea mostrando la lista completa de pendientes. |
+| RN-102 | Antes de publicar se valida estructura cursable, modalidad real —VIRTUAL sin vivo, EN_VIVO con sesión, HIBRIDO con sesión y grabado—, maestros activos, docentes, fechas y reglas de examen, progreso, asistencia y certificación. Si falta algo, se bloquea y muestra la lista completa. |
 | RN-103 | Cancelar un curso completo exige motivo, detiene matrículas y pagos nuevos, cancela sus sesiones futuras y envía un solo aviso consolidado por curso, sin correos separados por cada sesión. Conserva todo el historial. Quien no había finalizado conserva como consulta solo el contenido ya liberado, pero no puede registrar nuevos checks, progreso, intentos, asistencia ni finalización. Quien finalizó antes conserva la confirmación de datos y la emisión programada aunque después la matrícula venza o se cancele. Una aprobación de Culqi recibida después de cancelar registra el pago, pero mantiene la matrícula CANCELADA para atención externa. No ejecuta devoluciones. |
 | RN-104 | Administración dispone de cinco reportes: matrículas, pagos registrados, seguimiento académico, certificados y asistencia. Pueden filtrarse según los datos que contengan y descargarse en Excel. El rango de fechas usa `fecha_matricula` en matrículas y seguimiento, fecha del resultado o registro administrativo en pagos, `fecha_emision` en certificados y fecha de sesión en asistencia. |
 | RN-105 | El reporte de matrículas distingue estado de matrícula, forma de ingreso, situación académica y estado del certificado. Una matrícula o confirmación repetida se contabiliza una sola vez. |
@@ -2439,8 +2470,9 @@ crear una cuenta con correo, nombres, apellidos, teléfono opcional y DNI opcion
 contraseña temporal `Escuela1415@` y CAMBIO_PENDIENTE; puede ver el panel, pero el aviso permanece
 y no accede a cursos, exámenes ni certificados hasta verificar el correo y cambiar la contraseña.
 Recibe por correo las instrucciones y el código de verificación de seis dígitos. Una
-cuenta existente conserva su clave. Toda matrícula administrativa
-genera REGISTRADO_MANUAL o EXONERADO según exista cobro.* (§9 y §10)
+cuenta existente conserva su clave. La cuenta o el rol Alumno se resuelven primero en Gestión de
+usuarios; la matrícula administrativa lista únicamente alumnos y no crea cuentas ni asigna roles.
+Toda matrícula administrativa genera REGISTRADO_MANUAL o EXONERADO según exista cobro.* (§9 y §10)
 
 El código de verificación es de un solo uso y su reenvío invalida el anterior; la recuperación dura
 60 minutos y usarla o solicitar otra invalida la anterior. La contraseña propia exige al menos
@@ -2463,10 +2495,11 @@ progreso, libera la secuencia y envía un aviso. Las sesiones realizadas solo ad
 de enlace, grabación o asistencia.* (§7, §11 y §16)
 
 **19.27 — Validación antes de publicar** ✅ *Resuelto: BORRADOR solo pasa a PUBLICADO cuando tiene
-estructura cursable, fechas y valores coherentes, una muestra real si es pagado y todos los
-elementos exigidos por sus reglas de exámenes, progreso, asistencia y certificación. La validación
-muestra todos los pendientes y bloquea la publicación; la advertencia de duración 10-15 minutos no
-bloquea.* (§5 y §8)
+estructura cursable, fechas y valores coherentes, maestros y docentes activos, una muestra real si
+es pagado y todos los elementos exigidos por sus reglas de exámenes, progreso, asistencia y
+certificación. VIRTUAL no admite sesiones; EN_VIVO exige una; HIBRIDO exige sesión y contenido
+grabado aunque asistencia esté desactivada. La validación muestra todos los pendientes y bloquea la
+publicación; la advertencia de duración 10-15 minutos no bloquea.* (§5 y §8)
 
 **19.28 — Ventana de asistencia automática** ✅ *Resuelto: cada sesión exige hora de inicio y
 hora de fin. Abrir su enlace desde la plataforma cuenta una sola vez únicamente dentro de esa

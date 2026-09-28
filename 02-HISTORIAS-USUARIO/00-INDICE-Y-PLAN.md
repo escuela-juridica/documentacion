@@ -116,6 +116,11 @@ flujo. La propuesta consolidada contempla **40 pantallas principales únicas**.
 | HU-020 | Consultar y controlar matrículas y pagos | 2 | Al menos una de HU-017, HU-018 o HU-019 |
 | HU-021 | Consultar mis cursos y accesos | 2 | Al menos una de HU-017, HU-018 o HU-019 |
 
+EP02 también contiene `TAREA-001 — Integrar el acceso y la creación de cuenta con Google`. No
+cambia la numeración ni bloquea publicación o matrícula. Mientras no esté aceptada, Google se
+oculta o se identifica como “Próximamente”; al completarse actualiza las evidencias de HU-001 y
+HU-002.
+
 ### EP03 — Desarrollo académico
 
 | ID | Historia | Personas | Dependencia interna |

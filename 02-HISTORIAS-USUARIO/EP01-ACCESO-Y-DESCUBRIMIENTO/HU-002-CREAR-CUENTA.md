@@ -18,6 +18,10 @@
 
 ## Alcance común
 
+> **Estado de implementación:** el formulario pertenece al entregable de EP01. La creación real
+> mediante Google se completa como TAREA-001 de EP02; hasta entonces el botón permanece oculto o
+> identificado como “Próximamente” y no crea cuentas simuladas.
+
 - Nunca se crea más de una cuenta para el mismo correo.
 - La casilla de conformidad con los términos y la política de privacidad es obligatoria antes de
   crear la cuenta.
@@ -148,3 +152,4 @@
 
 Crear una cuenta mediante formulario y dejarla pendiente para HU-003; crear otra mediante Google
 sin verificación adicional; repetir con un correo existente para demostrar que nunca se duplica.
+Los pasos de Google se presentan únicamente después de aceptar TAREA-001 de EP02.

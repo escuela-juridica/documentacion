@@ -17,8 +17,8 @@
 ## Alcance incluido
 
 - Cada curso es una convocatoria concreta, inicialmente BORRADOR.
-- Título, descripción, portada, URL amigable, tipo, categoría, modalidad, docente, horas, beneficios,
-  entidad y firmantes.
+- Título, descripción, portada, URL amigable, tipo, categoría, modalidad, uno o varios docentes
+  ordenados, horas, beneficios, entidad cuando corresponda y firmantes.
 - Modalidades `VIRTUAL`, `EN_VIVO` e `HIBRIDO`; presencial fuera.
 - Precio neto en soles: gratuito o pagado; regular, promocional y vigencia opcional de promoción.
 - Capacidad de venta opcional; vacío significa sin límite.
@@ -34,13 +34,16 @@
 - Advertencia si modalidad y lecciones posteriores no coinciden.
 - Seleccionar “In-house” solo clasifica comercialmente el curso; no crea grupos, cupos corporativos,
   accesos privados ni una matrícula diferente.
+- Un docente no puede asignarse dos veces al mismo curso. Su orden determina cómo se muestran sus
+  avatares en el catálogo y sus perfiles dentro de la ficha pública.
+- Asignar un docente nunca crea una cuenta, rol, contraseña, panel o página pública independiente.
 
 ## Flujo principal
 
 1. Administración crea un BORRADOR y completa los datos básicos.
 2. Selecciona modalidad y ESEJUR adapta las fechas disponibles.
 3. Define condición comercial, capacidad y vigencia.
-4. Selecciona clasificaciones, docente y datos certificadores.
+4. Selecciona clasificaciones, uno o varios docentes y los datos certificadores aplicables.
 5. Guarda y obtiene la URL amigable del curso.
 
 La URL amigable se define desde la creación. Antes de modificarla, ESEJUR advierte que los enlaces
@@ -57,6 +60,8 @@ ya compartidos dejarían de conducir a la ficha anterior.
 - La imagen por defecto puede ser portada, no una vista previa real.
 - Un curso In-house conserva exactamente las reglas de modalidad, pago, cupo, acceso y matrícula
   que administración configure; la etiqueta por sí sola no altera ninguna de ellas.
+- Un docente repetido dentro del mismo curso se rechaza. Solo pueden elegirse docentes activos para
+  una nueva asignación.
 
 ## Criterios de aceptación
 
@@ -71,6 +76,8 @@ ya compartidos dejarían de conducir a la ficha anterior.
   día 1; si se activa después, la activación es el día 1, y en ambos casos vence al terminar el día N.
 - **Dado** asistencia obligatoria en EN_VIVO/HIBRIDO, **cuando** crea el curso, **entonces** el cierre
   se propone igual al inicio y puede modificarse únicamente dentro del periodo del curso.
+- **Dado** varios docentes activos, **cuando** los asigna y ordena, **entonces** el curso conserva
+  una sola asignación por docente y utiliza ese orden en el catálogo y la ficha pública.
 
 ## Dependencia interna
 

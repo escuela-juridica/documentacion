@@ -36,8 +36,8 @@
   avance previo como la fecha; sin fecha se usa la apertura automática por avance.
 - Decidir si un examen calificado de módulo bloquea el siguiente cuando hay secuencia.
 - `dias_revision` para abiertas, tres días calendario por defecto; queda bloqueado cuando el curso
-  inicia. La calificación manual acepta desde 0 hasta el puntaje máximo de la pregunta, ambos
-  incluidos, y una observación opcional visible para el alumno.
+  inicia. Se deja definido que la revisión posterior aceptará desde 0 hasta el puntaje máximo de
+  la pregunta, ambos incluidos, y una observación opcional visible para el alumno.
 - La nota del intento se calcula como `puntaje_obtenido / puntaje_total × 20`, se muestra con hasta
   dos decimales y aprueba desde la nota mínima del curso, 12 por defecto. No existe penalización.
 - En selección múltiple solo se entrega el puntaje completo si se marcan todas las alternativas
@@ -91,6 +91,8 @@
 - **Frontend:** editor de examen y preguntas con opciones condicionales.
 - **Backend:** validación de configuración, reglas por modalidad y copia al reutilizar módulos.
 - **Integración:** crear un automático y otro abierto, ambos listos para las historias académicas.
+- **Límite:** no incluye la bandeja, asignación real de puntajes, publicación de notas ni avisos de
+  revisión. El alumno rinde en HU-029 y la calificación administrativa se ejecuta en HU-030.
 
 ## Demostración esperada
 

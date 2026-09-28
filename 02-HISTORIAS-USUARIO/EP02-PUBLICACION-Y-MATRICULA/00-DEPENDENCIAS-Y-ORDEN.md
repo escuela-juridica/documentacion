@@ -18,7 +18,7 @@ administrativa, y el acceso aparece correctamente en “Mis cursos”.
 | HU-013 | HU-011 | Sí para ubicar exámenes | Sí, acordando la estructura |
 | HU-014 | HU-010 | Sí | Sí; integra sesiones y exámenes cuando se activen |
 | HU-015 | HU-010 a HU-014 según modalidad y reglas | Sí | Puede preparar validaciones, no aceptarse antes |
-| HU-016 | HU-015 | Sí | Puede preparar estados con cursos controlados |
+| HU-016 | HU-015 | Sí | Puede preparar estados ordinarios con cursos controlados; CANCELADO espera HU-038 |
 | HU-017 | HU-015 | Sí | Sí, con curso publicado controlado |
 | HU-018 | HU-015 | Sí | Sí, con curso publicado controlado |
 | HU-019 | HU-008 y HU-015 | Sí | Sí, con curso publicado y cuenta controlados |
@@ -49,6 +49,13 @@ administrativa, y el acceso aparece correctamente en “Mis cursos”.
 - HU-020 y HU-021 deben leer la misma matrícula y no crear estados diferentes para un mismo alumno.
 - Ningún pago pendiente reserva cupo; la ocupación ocurre al activar la matrícula.
 - Una confirmación repetida no duplica el pago, la matrícula ni el acceso.
+- HU-019 solo matricula cuentas que ya posean rol Alumno; la cuenta y sus roles se resuelven antes
+  en HU-008.
+- EN_VIVO requiere al menos una sesión; HIBRIDO requiere sesión y contenido grabado aunque la
+  asistencia no sea condición de certificación.
+- EP02 administra el cierre ordinario. La transición completa a CANCELADO pertenece a HU-038.
+- El importe confirmado queda fijado por intento; un reintento posterior vuelve a mostrar el precio
+  vigente y requiere otra confirmación.
 
 ## Secuencia de demostración
 

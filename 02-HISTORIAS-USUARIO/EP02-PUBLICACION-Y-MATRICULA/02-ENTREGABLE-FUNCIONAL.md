@@ -24,7 +24,7 @@ El recorrido que resume el valor entregado es:
 | HU-013 | Configuración de exámenes |
 | HU-014 | Requisitos académicos y de certificación |
 | HU-015 | Validación y publicación |
-| HU-016 | Ciclo de vida, duplicación y cierre del curso |
+| HU-016 | Ciclo de vida ordinario, duplicación y cierre del curso; cancelación completa queda para HU-038 |
 | HU-017 | Matrícula gratuita |
 | HU-018 | Matrícula con pago automático en línea |
 | HU-019 | Matrícula realizada por administración |
@@ -68,13 +68,16 @@ Antes de comenzar deben existir:
    caracteres, mayúscula, minúscula y número.
 5. Comprobar que la cuenta queda habilitada y que no puede desactivarse al propio administrador ni
    al último administrador activo.
+6. Conceder a una cuenta existente el rol que le falta sin duplicarla, cambiar su contraseña ni
+   sustituir su rol principal.
 
 **Resultado esperado:** la Escuela incorpora usuarios sin duplicarlos y conserva control sobre su
 habilitación y sus roles.
 
 ### 1. Administrar la información base
 
-1. Consultar tipos de curso, categorías, entidades, firmantes y tipos de material.
+1. Consultar tipos de curso, categorías, docentes, entidades, firmantes, tipos funcionales de
+   material y reglas de archivo.
 2. Crear o actualizar un valor que pueda seleccionarse posteriormente en un curso.
 3. Comprobar que la información base se reutiliza sin tener que escribirla nuevamente.
 
@@ -86,6 +89,7 @@ habilitación y sus roles.
 2. Mostrar las diferencias entre `VIRTUAL`, `EN_VIVO` e `HIBRIDO`.
 3. Comprobar que un curso virtual no exige fecha de fin ni permite seleccionar asistencia.
 4. Configurar fechas y cierre de matrícula cuando la modalidad lo requiera.
+5. Asignar y ordenar varios docentes sin crearles cuentas de acceso.
 
 **Resultado esperado:** el curso conserva una configuración coherente con su modalidad y no
 permite combinaciones inválidas.
@@ -97,6 +101,8 @@ permite combinaciones inválidas.
 3. Mostrar la duración detectada cuando se sube un video y la duración opcional del enlazado.
 4. Configurar vista previa y permiso de descarga por material.
 5. Reutilizar un módulo de otro curso y demostrar que la copia queda independiente.
+6. Marcar una lección grabada como vista previa, mostrar el aviso de exposición pública y comprobar
+   que un examen o una sesión en vivo no puede publicarse de esa manera.
 
 **Resultado esperado:** el administrador puede publicar contenido con rapidez sin perder control
 sobre orden, progreso, protección o duración.
@@ -112,6 +118,9 @@ sobre orden, progreso, protección o duración.
 **Resultado esperado:** el curso contiene las actividades requeridas por su modalidad sin obligar
 a todos los cursos a usar examen, asistencia o progreso como requisito de certificación.
 
+La review solo demuestra la programación inicial. Reprogramar, cancelar sesiones, administrar
+recordatorios y corregir asistencia corresponden a HU-027 de EP03.
+
 ### 5. Configurar requisitos de certificación
 
 1. Activar o desactivar examen, asistencia y progreso según corresponda.
@@ -119,6 +128,7 @@ a todos los cursos a usar examen, asistencia o progreso como requisito de certif
 3. Configurar los umbrales Normal y Refrendado; comprobar que el nivel se deriva de la nota y no se
    selecciona manualmente por alumno.
 4. Confirmar que el progreso continúa visible aunque no sea requisito de certificación.
+5. Comprobar que las reglas quedan congeladas al iniciar el curso o registrarse la primera actividad.
 
 **Resultado esperado:** la escuela define reglas flexibles y verificables para completar el curso.
 
@@ -128,6 +138,8 @@ a todos los cursos a usar examen, asistencia o progreso como requisito de certif
 2. Mostrar todos los datos o relaciones pendientes de corregir.
 3. Completar la configuración y publicar nuevamente.
 4. Consultar el curso publicado desde el catálogo público.
+5. Comprobar que EN_VIVO exige una sesión y que HIBRIDO exige sesión y contenido grabado, aunque la
+   asistencia no sea requisito.
 
 **Resultado esperado:** solo se publica un curso coherente, completo y disponible según sus fechas.
 
@@ -153,13 +165,16 @@ cupos y no crea accesos ante pagos rechazados o pendientes.
 
 ### 9. Realizar una matrícula administrativa
 
-1. Seleccionar o crear una cuenta de alumno.
+1. Buscar y seleccionar una cuenta que ya posea el rol Alumno.
 2. Matricularla indicando si corresponde pago manual o exoneración.
 3. Mostrar la advertencia cuando una matrícula tardía dificulte cumplir asistencia.
 4. Verificar su aparición en “Mis cursos” y en el control administrativo.
 
 **Resultado esperado:** el acceso administrativo conserva claramente el origen y condición de la
 matrícula sin simular un pago automático.
+
+Si la persona no tiene rol Alumno, se resuelve primero en HU-008. HU-019 no crea cuentas ni asigna
+roles y no admite cursos BORRADOR, CERRADO o CANCELADO ni un sobrecupo manual.
 
 ### 10. Controlar matrículas, pagos y accesos
 
@@ -173,13 +188,15 @@ propio y permiten auditar qué ocurrió.
 
 ### 11. Administrar el ciclo de vida
 
-1. Mostrar los estados del curso y su cambio permitido.
+1. Mostrar BORRADOR, PUBLICADO, EN CURSO y CERRADO con sus cambios permitidos sin retrocesos.
 2. Cerrar la matrícula sin retirar el acceso a quienes ya se matricularon.
 3. Duplicar el curso y comprobar que la nueva copia no comparte avances, matrículas ni resultados.
 4. Mostrar las restricciones de edición después del inicio o del primer progreso.
 
 **Resultado esperado:** la oferta puede mantenerse y reutilizarse sin alterar el historial de los
 alumnos.
+
+La cancelación completa y la transición a CANCELADO no se demuestran hasta HU-038 de EP04.
 
 ## Comprobaciones alternativas durante la review
 
@@ -190,7 +207,10 @@ alumnos.
 - Permitir un nuevo intento únicamente tras RECHAZADO, ERROR o EXPIRADO; mientras exista PENDIENTE
   no se crea otro intento y ESEJUR espera el resultado de Culqi.
 - Demostrar que un APROBADO tardío iniciado válidamente se respeta tras cierre, fecha vencida o
-  cupo lleno, mientras una cancelación del curso o matrícula conserva el pago sin entregar acceso.
+  cupo lleno. La aprobación posterior a una cancelación completa queda documentada para HU-038,
+  pero no forma parte de esta review.
+- Cambiar el precio después de iniciar una operación y comprobar que el intento conserva el importe
+  confirmado; un reintento muestra el precio vigente y solicita nueva confirmación.
 - Mantener una matrícula confirmada aunque falle su correo; permitir el reenvío.
 
 ## Evidencias que deben conservarse
@@ -214,12 +234,15 @@ alumnos.
 - Los reintentos y notificaciones repetidas no generan duplicidad.
 - El alumno obtiene acceso únicamente cuando su matrícula lo permite.
 - Administración puede explicar el estado de cada matrícula y pago mostrado.
+- Las pestañas En progreso y Completados clasifican por `fecha_finalizacion`, sin ocultar matrículas
+  vencidas o canceladas.
 
 ## Límite del entregable
 
 La épica habilita el acceso al curso, pero no demuestra todavía consumo académico completo,
 asistencia, calificación, progreso real ni emisión de certificados. Esas capacidades corresponden
-a las EP03 y EP04.
+a las EP03 y EP04. Tampoco demuestra reprogramación/cancelación de sesiones ni cancelación completa
+del curso. Google solo se presenta si TAREA-001 quedó integrada y aceptada de extremo a extremo.
 
 ## Mensaje de cierre de la review
 

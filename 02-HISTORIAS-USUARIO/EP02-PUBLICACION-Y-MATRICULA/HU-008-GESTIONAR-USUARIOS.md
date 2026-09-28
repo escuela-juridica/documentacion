@@ -17,14 +17,21 @@
 
 ## Alcance incluido
 
-- Listado y búsqueda de usuarios por nombre o correo, mostrando rol, origen y estado de cuenta.
+- Listado y búsqueda de usuarios por nombre o correo, mostrando sus roles, el rol principal,
+  origen y estado de cuenta.
 - Consulta del detalle de un usuario y de quién concedió el perfil cuando posee rol Administrador.
 - Correo, nombres y apellido paterno obligatorios; apellido materno, teléfono y DNI opcionales.
 - Para una cuenta nueva: contraseña temporal `Escuela1415@` y condición CAMBIO_PENDIENTE.
 - Correo con instrucciones, contraseña temporal y verificación.
 - Aviso permanente en el panel hasta verificar correo y cambiar contraseña.
 - Bloqueo de cursos, exámenes y certificados mientras exista una condición pendiente.
-- Una cuenta existente conserva su contraseña y no se duplica.
+- Una cuenta existente conserva su contraseña, identidad e historial y no se duplica.
+- Una cuenta puede acumular los roles Alumno y Administrador. El primer rol asignado queda como
+  principal y una asignación posterior se agrega como secundaria sin cambiarlo.
+- Cada cuenta conserva exactamente un rol principal. En esta versión no se elimina roles, no se
+  cambia el rol principal y no se ofrece alternar paneles durante la sesión.
+- Si se concede a una cuenta existente un rol que todavía no posee, se registra el administrador
+  que lo concedió y la fecha y hora. Conceder nuevamente el mismo rol no duplica la asignación.
 - La contraseña propia que reemplaza a la temporal debe tener al menos ocho caracteres, una letra
   mayúscula, una letra minúscula y un número.
 - La verificación utiliza un código de seis dígitos y de un solo uso. Reenviarlo invalida el código
@@ -45,7 +52,8 @@
 1. Administración abre el listado y busca por nombre o correo.
 2. Si encuentra la cuenta, consulta su detalle y ejecuta únicamente acciones válidas para su
    estado. Si no existe, abre “Crear usuario”.
-3. Completa los datos, selecciona Alumno o Administrador y crea la cuenta temporal.
+3. Completa los datos, selecciona el rol inicial y crea la cuenta temporal. Si la cuenta ya
+   existe, puede concederle el rol faltante sin cambiar su contraseña ni su rol principal.
 4. ESEJUR envía instrucciones y deja activa la condición CAMBIO_PENDIENTE.
 5. La persona inicia sesión con la clave temporal.
 6. Verifica correo con el código más reciente y establece contraseña propia.
@@ -54,7 +62,7 @@
 ## Excepciones
 
 - Correo existente: se reutiliza la cuenta, se conservan clave e historial y no se envía una nueva
-  contraseña temporal.
+  contraseña temporal. Si ya posee el rol seleccionado tampoco se duplica la asignación.
 - Teléfono vacío: válido.
 - DNI vacío: válido; la persona puede registrarlo o editarlo después desde su perfil y nunca es un
   requisito de habilitación o certificación.
@@ -76,6 +84,11 @@
   cuenta queda plenamente operativa.
 - **Dado** un correo existente, **cuando** administración lo selecciona, **entonces** no cambia su
   contraseña ni crea duplicados.
+- **Dado** una cuenta existente con un solo rol, **cuando** administración le concede el otro,
+  **entonces** conserva una sola identidad, agrega el rol secundario, mantiene su rol principal y
+  registra quién lo concedió y cuándo.
+- **Dado** una cuenta que ya posee el rol solicitado, **cuando** se intenta conceder nuevamente,
+  **entonces** no se crea otra asignación ni se altera el rol principal.
 - **Dado** apellido materno, teléfono o DNI vacíos, **cuando** se crea la cuenta, **entonces** no se
   bloquea la operación ni se inventa información para esos campos.
 - **Dado** un administrador habilitado, **cuando** crea otro administrador, **entonces** la nueva
@@ -107,8 +120,9 @@
 
 - **Frontend:** listado, búsqueda, detalle, creación administrativa, aviso persistente y pasos de
   habilitación.
-- **Backend:** búsqueda sin duplicidad, contraseña temporal, restricciones, transición de estado y
-  protección para conservar al menos un administrador activo.
+- **Backend:** búsqueda sin duplicidad, contraseña temporal, asignación no duplicada de roles,
+  conservación del rol principal, restricciones, transición de estado y protección para conservar
+  al menos un administrador activo.
 - **Integración:** crear → recibir instrucciones → entrar restringido → completar → entrar habilitado.
 
 ## Demostración esperada
