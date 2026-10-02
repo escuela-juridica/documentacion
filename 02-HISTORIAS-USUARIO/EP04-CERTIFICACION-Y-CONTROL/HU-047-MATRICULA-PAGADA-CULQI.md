@@ -1,4 +1,4 @@
-# HU-018 — Matricularme pagando en línea
+# HU-047 — Matricularme pagando en línea mediante Culqi
 
 ## Información general
 
@@ -6,7 +6,7 @@
 |---|---|
 | Actor principal | Alumno |
 | Actor secundario | Culqi |
-| Incremento | Mes 2 |
+| Incremento | Mes 5 |
 | Personas recomendadas | 2 |
 | Responsable / participante | Por asignar / Por asignar |
 | Prioridad | Crítica |
@@ -138,8 +138,8 @@
 
 ## Dependencia interna
 
-- Depende de HU-015.
-- HU-020, HU-021 y HU-037 utilizan sus resultados.
+- Depende de HU-015 para que el curso esté publicado y de la base de matrícula establecida en EP02.
+- HU-037, HU-038, HU-041, HU-042 y HU-046 utilizan sus resultados dentro de EP04.
 
 ## Orientación de trabajo
 

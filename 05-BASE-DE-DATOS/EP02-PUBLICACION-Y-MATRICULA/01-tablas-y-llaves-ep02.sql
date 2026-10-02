@@ -826,7 +826,7 @@ COMMENT ON COLUMN pago.numero_pedido IS 'Numero interno unico del intento.';
 COMMENT ON COLUMN pago.operacion_proveedor IS 'Identificador unico retornado por la pasarela.';
 COMMENT ON COLUMN pago.origen IS 'Origen EN_LINEA, MANUAL o EXONERADO.';
 COMMENT ON COLUMN pago.medio IS 'Medio informado por la pasarela o administrador.';
-COMMENT ON COLUMN pago.estado IS 'Estado INICIADO, APROBADO, RECHAZADO, ERROR, ANULADO o EXONERADO.';
+COMMENT ON COLUMN pago.estado IS 'Estado REGISTRADO_MANUAL o EXONERADO en EP02; HU-047 agrega INICIADO, APROBADO, RECHAZADO, ERROR y ANULADO.';
 COMMENT ON COLUMN pago.moneda IS 'Moneda confirmada para el intento.';
 COMMENT ON COLUMN pago.precio_regular_aplicado IS 'Copia del precio regular al iniciar el intento.';
 COMMENT ON COLUMN pago.precio_promocional_aplicado IS 'Copia del precio promocional vigente, si existia.';

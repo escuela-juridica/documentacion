@@ -21,23 +21,23 @@
 | RN-12 | HU-016, HU-038 |
 | RN-13 | HU-007, HU-011, HU-015 |
 | RN-14 | HU-007, HU-011, HU-015 |
-| RN-15 | HU-018 |
+| RN-15 | HU-047 |
 | RN-16 | HU-017, HU-032 |
-| RN-17 | HU-010, HU-018 |
-| RN-18 | HU-018, HU-019, HU-042 |
-| RN-19 | HU-018, HU-037 |
-| RN-20 | HU-018, HU-042 |
+| RN-17 | HU-010, HU-047 |
+| RN-18 | HU-019, HU-042, HU-047 |
+| RN-19 | HU-037, HU-047 |
+| RN-20 | HU-042, HU-047 |
 | RN-21 | HU-010 |
-| RN-22 | HU-018 |
-| RN-23 | HU-018, HU-037, HU-038 |
-| RN-24 | HU-018, HU-020 |
+| RN-22 | HU-047 |
+| RN-23 | HU-037, HU-038, HU-047 |
+| RN-24 | HU-020, HU-047 |
 | RN-25 | HU-019, HU-020 |
-| RN-26 | HU-002, HU-003, HU-008, HU-017, HU-018, HU-019, HU-021 |
-| RN-27 | HU-017, HU-018, HU-019 |
-| RN-28 | HU-017, HU-018, HU-019 |
-| RN-29 | HU-010, HU-017, HU-018, HU-019 |
-| RN-30 | HU-018, HU-037 |
-| RN-31 | HU-010, HU-017, HU-018, HU-019, HU-021 |
+| RN-26 | HU-002, HU-003, HU-008, HU-017, HU-019, HU-021, HU-047 |
+| RN-27 | HU-017, HU-019, HU-047 |
+| RN-28 | HU-017, HU-019, HU-047 |
+| RN-29 | HU-010, HU-017, HU-019, HU-047 |
+| RN-30 | HU-037, HU-047 |
+| RN-31 | HU-010, HU-017, HU-019, HU-021, HU-047 |
 | RN-32 | HU-020, HU-021, HU-033 |
 | RN-33 | HU-007, HU-010, HU-021 |
 | RN-34 | HU-020, HU-021, HU-032, HU-038 |
@@ -109,7 +109,7 @@
 | RN-100 | HU-011, HU-016 |
 | RN-101 | HU-013, HU-029, HU-030, HU-031, HU-043 |
 | RN-102 | HU-015 |
-| RN-103 | HU-018, HU-027, HU-037, HU-038 |
+| RN-103 | HU-027, HU-037, HU-038, HU-047 |
 | RN-104 | HU-041, HU-042, HU-043, HU-044, HU-045 |
 | RN-105 | HU-041, HU-046 |
 | RN-106 | HU-042, HU-046 |
@@ -134,9 +134,9 @@
 | 19.11 Acceso, finalización y certificado | HU-020, HU-021, HU-032 |
 | 19.12 Condiciones flexibles | HU-014, HU-025, HU-032 |
 | 19.13 Fechas VIRTUAL | HU-007, HU-010, HU-016, HU-021, HU-032 |
-| 19.14 Estados de pago | HU-018, HU-019, HU-020, HU-037, HU-042 |
-| 19.15 Reintentos de pago | HU-018, HU-020 |
-| 19.16 Cupo al activar | HU-017, HU-018, HU-019, HU-037 |
+| 19.14 Estados de pago | HU-019, HU-020, HU-037, HU-042, HU-047 |
+| 19.15 Reintentos de pago | HU-020, HU-047 |
+| 19.16 Cupo al activar | HU-017, HU-019, HU-037, HU-047 |
 | 19.17 Finalización flexible de lecciones | HU-011, HU-024 |
 | 19.18 Exámenes interactivos | HU-013, HU-028, HU-029, HU-030 |
 | 19.19 Examen que bloquea | HU-013, HU-025, HU-028 |
@@ -150,7 +150,7 @@
 | 19.27 Validación antes de publicar | HU-015 |
 | 19.28 Ventana de asistencia | HU-012, HU-026, HU-031 |
 | 19.29 Habilitación administrativa | HU-001, HU-002, HU-003, HU-008, HU-019 |
-| 19.30 Cancelación completa | HU-018, HU-027, HU-037, HU-038 |
+| 19.30 Cancelación completa | HU-027, HU-037, HU-038, HU-047 |
 | 19.31 Vencimiento de examen | HU-013, HU-028, HU-031 |
 | 19.32 Responder QUEJA y RECLAMO | HU-039, HU-040 |
 | 19.33 Orden del catálogo | HU-006, HU-016 |
@@ -161,8 +161,8 @@
 | # | Correo | Historia(s) que especifican disparador y resultado |
 |---:|---|---|
 | 1 | Bienvenida, acceso inicial y verificación | HU-002, HU-003, HU-008 |
-| 2 | Matrícula confirmada | HU-017, HU-018, HU-019 |
-| 3 | Pago no completado | HU-018 |
+| 2 | Matrícula confirmada | HU-017, HU-019, HU-047 |
+| 3 | Pago no completado | HU-047 |
 | 4 | Sesión en vivo, recordatorio/cambio | HU-026, HU-027 |
 | 5 | Confirmar datos para certificado | HU-032 |
 | 6 | Recuperar contraseña | HU-004 |

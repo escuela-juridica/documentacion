@@ -16,8 +16,9 @@
 
 ## Alcance incluido
 
-- Matrículas PENDIENTE_PAGO, ACTIVA, CANCELADA y VENCIDA.
-- Intentos Culqi y resultados; REGISTRADO_MANUAL y EXONERADO.
+- Matrículas ACTIVA, CANCELADA y VENCIDA generadas por gratuidad o administración.
+- Condiciones REGISTRADO_MANUAL y EXONERADO. PENDIENTE_PAGO e intentos Culqi se agregan mediante
+  HU-047 de EP04 sin reemplazar este control.
 - Datos de constancia y referencia.
 - Consulta de alumno, curso, fechas, forma de ingreso y responsable administrativo.
 - Cancelar una matrícula con motivo; no borrar ni devolver dinero.
@@ -29,9 +30,6 @@
   regla.
 - Conservación de la finalización ya obtenida, la confirmación de datos, la emisión programada y el
   certificado, aunque la matrícula luego venza o sea cancelada.
-- Un sobrecupo simultáneo se muestra con los dos pagos APROBADO, las dos matrículas ACTIVA y una
-  alerta pendiente de atención. Una aprobación posterior a cancelar un curso muestra el pago
-  APROBADO separado de la matrícula CANCELADA y sin acceso, con su caso de atención externa.
 
 ## Flujo principal
 
@@ -49,16 +47,13 @@
   CANCELADA y no ejecuta devolución.
 - **Dado** una matrícula CANCELADA, **cuando** se consulta posteriormente, **entonces** conserva su
   historial y no ofrece reactivación automática ni altera los pagos registrados.
-- **Dado** historial con reintentos, **cuando** se consulta, **entonces** se ven resultados sin
-  convertir fallos en APROBADO.
-- **Dado** sobrecupo o aprobación posterior a cancelación, **cuando** consulta, **entonces** puede
-  explicar por separado resultado de pago, matrícula, cupo, acceso y atención registrada.
 - **Dado** una matrícula ya finalizada, **cuando** posteriormente vence o se cancela, **entonces**
   continúa el proceso de certificación sin reabrir el acceso académico.
 
 ## Dependencia interna
 
-- Requiere datos de HU-017, HU-018 o HU-019 para integración.
+- Requiere datos de HU-017 o HU-019 para integración en EP02. Los intentos automáticos de Culqi se
+  incorporan posteriormente mediante HU-047 de EP04.
 - Puede adelantarse con matrículas y pagos controlados.
 
 ## Orientación de trabajo
@@ -70,4 +65,5 @@
 
 ## Demostración esperada
 
-Demostrar acceso ACTIVA, pago fallido, registro manual, exoneración, vencimiento y cancelación.
+Demostrar acceso ACTIVA, registro manual, exoneración, vencimiento y cancelación. Los intentos y
+resultados automáticos se incorporan posteriormente en la demostración de HU-047.

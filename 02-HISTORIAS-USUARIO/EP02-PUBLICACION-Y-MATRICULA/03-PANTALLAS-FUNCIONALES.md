@@ -2,9 +2,9 @@
 
 ## Cantidad
 
-La épica incorpora **9 pantallas principales nuevas**. Su review reutiliza seis pantallas de EP01:
+La épica incorpora **7 pantallas principales nuevas**. Su review reutiliza seis pantallas de EP01:
 inicio de sesión, verificación del correo, panel, perfil, catálogo y ficha pública. Por ello, el
-recorrido completo puede mostrar aproximadamente **15 pantallas principales**, aunque solo nueve
+recorrido completo puede mostrar aproximadamente **13 pantallas principales**, aunque solo siete
 se desarrollan como incremento de esta épica.
 
 ## Pantallas nuevas
@@ -79,8 +79,8 @@ se desarrollan como incremento de esta épica.
   y detalle relacionado cuando exista.
 - **Jerarquía:** listado y búsqueda primero; al seleccionar se muestra un resumen de Alumno,
   Matrícula y Pago, con Pagos e Historial desplegables. Las excepciones no aparecen en todas las filas.
-- **Estados importantes:** gratuita, pagada, administrativa, exonerada, pendiente, rechazada,
-  aprobada, cancelada y casos que exceden capacidad.
+- **Estados importantes en EP02:** gratuita, administrativa con pago manual, exonerada, activa,
+  cancelada y vencida. Los estados automáticos de Culqi se agregan mediante HU-047 de EP04.
 - **Acción para la review:** comparar los tres orígenes y realizar una matrícula administrativa.
 - **Matrícula administrativa:** busca solo cuentas con rol Alumno; si no existe una elegible, enlaza
   a PF-010. No crea cuentas, asigna roles ni permite sobrecupo manual.
@@ -92,30 +92,6 @@ se desarrollan como incremento de esta épica.
 - **Debe mostrar:** curso, gratuidad, disponibilidad y acción explícita para confirmar.
 - **Estados importantes:** confirmada, ya matriculado, matrícula cerrada y sin cupos.
 - **Acción para la review:** matricular al alumno y dirigirlo a “Mis cursos”.
-
-### PF-017 — Checkout de pago en línea
-
-- **Historias:** HU-018.
-- **Actor:** alumno.
-- **Debe mostrar:** curso, importe, moneda, promoción vigente y medios habilitados por Culqi.
-- **Estados importantes:** procesando, pendiente, rechazado, error recuperable y cupo agotado antes
-  de la aprobación.
-- **Importe:** antes de iniciar muestra el precio confirmado. Un intento conserva ese importe; un
-  reintento posterior presenta el precio vigente y solicita otra confirmación.
-- **Acción para la review:** ejecutar un rechazo y luego reintentar; mostrar que PENDIENTE espera a
-  Culqi y no ofrece un segundo intento.
-
-### PF-018 — Resultado del pago y constancia informativa
-
-- **Historias:** HU-018.
-- **Actor:** alumno.
-- **Debe mostrar:** resultado, orden, importe, moneda, medio, fecha y hora, alumno, curso y últimos
-  dígitos de tarjeta cuando correspondan.
-- **Constancia:** únicamente APROBADO permite imprimirla. PENDIENTE, RECHAZADO, ERROR y EXPIRADO
-  muestran su resultado sin aparentar un pago realizado.
-- **Estados importantes:** aprobado con acceso, rechazado o pendiente sin acceso y confirmación
-  repetida sin duplicidad; APROBADO tardío tras cierre/cupo y APROBADO sin acceso tras cancelación.
-- **Acción para la review:** mostrar un pago aprobado y su matrícula única.
 
 ### PF-019 — Mis cursos
 
@@ -147,10 +123,9 @@ se desarrollan como incremento de esta épica.
 - panel de detalle de pago o matrícula dentro de PF-015;
 - confirmaciones de duplicación, cierre o publicación;
 - cada pestaña del editor del curso;
-- formulario alojado por Culqi dentro del checkout;
 - mensajes de correo y alertas de cupo.
 
 ## Orden recomendado de presentación
 
 PF-003 → PF-010 → PF-005 → PF-008 → PF-009 → PF-012 → PF-013 → PF-014 → PF-001 → PF-002 →
-PF-016 → PF-017 → PF-018 → PF-015 → PF-019.
+PF-016 → PF-015 → PF-019.

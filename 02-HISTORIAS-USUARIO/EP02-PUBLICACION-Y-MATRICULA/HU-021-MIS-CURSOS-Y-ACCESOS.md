@@ -71,7 +71,8 @@
 
 ## Dependencia interna
 
-- Para datos reales necesita HU-017, HU-018 o HU-019.
+- Para datos reales en EP02 necesita HU-017 o HU-019. HU-047 de EP04 agrega posteriormente el
+  acceso originado por un pago automático aprobado.
 - Puede adelantarse con una matrícula controlada.
 
 ## Orientación de trabajo

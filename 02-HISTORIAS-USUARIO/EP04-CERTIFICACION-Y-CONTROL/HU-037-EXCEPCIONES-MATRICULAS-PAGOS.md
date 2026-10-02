@@ -55,7 +55,8 @@
 
 ## Dependencia interna
 
-- No depende internamente para desarrollarse con casos controlados.
+- Puede desarrollarse con casos controlados, pero depende de HU-047 para integrar excepciones
+  automáticas reales de Culqi.
 - Se integra con HU-038 para aprobación posterior a cancelación.
 
 ## Orientación de trabajo

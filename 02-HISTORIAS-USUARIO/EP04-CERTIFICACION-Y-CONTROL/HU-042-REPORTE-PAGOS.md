@@ -38,7 +38,8 @@ y motivo cuando corresponda.
 
 ## Dependencia interna
 
-- Ninguna interna; usa pagos operativos existentes.
+- Usa pagos manuales existentes y depende de HU-047 para incorporar resultados automáticos reales
+  de Culqi.
 - Paralela con los otros reportes.
 
 ## Orientación de trabajo

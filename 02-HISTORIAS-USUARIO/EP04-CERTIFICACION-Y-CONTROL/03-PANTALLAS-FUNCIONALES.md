@@ -2,11 +2,31 @@
 
 ## Cantidad
 
-La épica incorpora **12 pantallas principales nuevas**. La presentación final reutiliza cuatro
-pantallas anteriores para enlazar el recorrido: inicio de sesión, gestión de cursos, “Mis cursos”
-y aula. En total pueden mostrarse aproximadamente **16 pantallas principales**.
+La épica incorpora **14 pantallas principales nuevas**, incluyendo las dos pantallas de pago
+aplazadas desde EP02. La presentación final reutiliza cinco pantallas anteriores para enlazar el
+recorrido: inicio de sesión, ficha del curso, gestión de cursos, “Mis cursos” y aula. En total
+pueden mostrarse aproximadamente **19 pantallas principales**.
 
 ## Pantallas nuevas
+
+### PF-017 — Checkout de pago en línea
+
+- **Historias:** HU-047.
+- **Actor:** alumno.
+- **Debe mostrar:** curso, importe confirmado, moneda, promoción vigente y medios habilitados por Culqi.
+- **Estados importantes:** procesando, pendiente, rechazado, error recuperable y cupo agotado antes
+  de iniciar. PENDIENTE no reserva cupo ni permite otro intento simultáneo.
+- **Acción para la review:** mostrar un resultado no aprobado y un reintento autorizado.
+
+### PF-018 — Resultado del pago y constancia informativa
+
+- **Historias:** HU-047.
+- **Actor:** alumno.
+- **Debe mostrar:** resultado, pedido, importe, moneda, medio, fecha, alumno, curso y últimos
+  dígitos de tarjeta cuando correspondan.
+- **Estados importantes:** aprobado con acceso, pendiente o rechazado sin acceso, y confirmación
+  repetida sin duplicidad. La constancia existe únicamente para APROBADO.
+- **Acción para la review:** mostrar el pago aprobado, la matrícula única y el acceso resultante.
 
 ### PF-029 — Estado de certificación y confirmación de datos
 
@@ -133,6 +153,7 @@ y aula. En total pueden mostrarse aproximadamente **16 pantallas principales**.
 ## Pantallas reutilizadas
 
 - **PF-003:** ingreso del alumno y del administrador.
+- **PF-002:** selección del curso pagado e inicio de la compra.
 - **PF-019:** acceso del alumno desde “Mis cursos”.
 - **PF-020:** origen de la situación de cumplimiento y acceso a certificación.
 - **PF-013:** origen de la cancelación completa de un curso; la confirmación no cuenta como otra
@@ -140,6 +161,7 @@ y aula. En total pueden mostrarse aproximadamente **16 pantallas principales**.
 
 ## Elementos que no cuentan como pantallas adicionales
 
+- formulario alojado por Culqi dentro del checkout;
 - advertencia anterior a emitir el certificado;
 - formulario emergente de cancelación completa;
 - confirmación de emisión, corrección o anulación;
@@ -150,5 +172,5 @@ y aula. En total pueden mostrarse aproximadamente **16 pantallas principales**.
 
 ## Orden recomendado de presentación
 
-PF-003 → PF-019 → PF-020 → PF-029 → PF-030 → PF-031 → PF-032 → PF-033 → PF-034 → PF-035 →
-PF-013 → PF-036 → PF-037 → PF-038 → PF-039 → PF-040.
+PF-003 → PF-002 → PF-017 → PF-018 → PF-019 → PF-020 → PF-029 → PF-030 → PF-031 → PF-032 →
+PF-033 → PF-034 → PF-035 → PF-013 → PF-036 → PF-037 → PF-038 → PF-039 → PF-040.

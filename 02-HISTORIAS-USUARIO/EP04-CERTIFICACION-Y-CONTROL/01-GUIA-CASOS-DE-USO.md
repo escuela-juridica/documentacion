@@ -2,8 +2,8 @@
 
 ## Objetivo para la IA diagramadora
 
-Generar un diagrama UML de casos de uso estilo **Rational Rose** que muestre certificación, control
-administrativo, reclamaciones y consulta de información. Debe mantenerse legible aunque la épica
+Generar un diagrama UML de casos de uso estilo **Rational Rose** que muestre pago automático,
+certificación, control administrativo, reclamaciones y consulta de información. Debe mantenerse legible aunque la épica
 tenga varias ramas.
 
 ## Estilo
@@ -28,9 +28,13 @@ tenga varias ramas.
 ### Secundario
 
 - `Servicio de correo`
+- `Culqi`
 
 ## Casos de uso
 
+- Pagar matrícula en línea.
+- Reintentar pago no completado.
+- Consultar resultado y constancia informativa.
 - Confirmar datos para certificado.
 - Obtener certificado.
 - Mejorar nota antes de emitir.
@@ -56,6 +60,8 @@ tenga varias ramas.
 
 ## Asociaciones y relaciones
 
+- Alumno: pagar matrícula, reintentar cuando corresponda y consultar su resultado.
+- Culqi: procesar la operación y comunicar su resultado.
 - Alumno: confirmar datos, obtener, mejorar antes de emitir, consultar y descargar certificados.
 - Verificador externo: verificar certificado.
 - Reclamante: presentar queja o reclamo y recibir constancia/respuesta.
@@ -64,6 +70,9 @@ tenga varias ramas.
 - Servicio de correo: datos pendientes, certificado listo, constancia y respuesta de reclamación,
   curso cancelado.
 - `Obtener certificado` incluye confirmar datos si están pendientes.
+- `Reintentar pago no completado` extiende `Pagar matrícula en línea` solo después de un resultado
+  que permita otro intento.
+- `Consultar resultado y constancia` se incluye después del pago; la constancia solo existe para APROBADO.
 - `Mejorar nota antes de emitir` extiende obtener certificado mientras no se haya emitido.
 - `Corregir certificado` y `Anular certificado` extienden la consulta administrativa de un
   certificado emitido; no deben unirse entre sí.
@@ -75,6 +84,7 @@ tenga varias ramas.
 ## Exclusiones
 
 - No mostrar devolución automática, comprobantes SUNAT o contabilidad.
+- No representar a ESEJUR como procesador bancario ni una captura o voucher como aprobación.
 - No exponer DNI, correo, teléfono, nota, firmas ni PDF en la verificación pública.
 - No modelar dashboard como dependencia funcional de las acciones del alumno.
 
@@ -82,7 +92,6 @@ tenga varias ramas.
 
 > Genera un diagrama UML de casos de uso horizontal, estilo Rational Rose, blanco y negro, para
 > “ESEJUR — Certificación y control”. Coloca Alumno, Administrador, Verificador externo y
-> Reclamante a la izquierda, y Servicio de correo a la derecha. Agrupa visualmente las elipses por
-> certificación, reclamaciones y reportes sin crear subsistemas adicionales. Aplica exactamente las
+> Reclamante a la izquierda, y Culqi y Servicio de correo a la derecha. Agrupa visualmente las
+> elipses por pago, certificación, reclamaciones y reportes sin crear subsistemas adicionales. Aplica exactamente las
 > relaciones y exclusiones indicadas y optimiza la legibilidad para Word.
-

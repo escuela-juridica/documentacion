@@ -2,14 +2,15 @@
 
 ## Producto funcional obtenido
 
-Al finalizar la épica queda operativo el **cierre educativo y administrativo de ESEJUR**. El
-alumno obtiene un certificado verificable cuando cumple las reglas; la escuela puede atender
-excepciones, cancelaciones, quejas y reclamos, y consultar reportes y gráficos de gestión.
+Al finalizar la épica queda operativo el **pago automático y el cierre educativo y administrativo
+de ESEJUR**. El alumno puede pagar mediante Culqi y obtiene un certificado verificable cuando
+cumple las reglas; la escuela atiende excepciones, cancelaciones, quejas y reclamos, y consulta
+reportes y gráficos de gestión.
 
 El recorrido que resume el valor entregado es:
 
-> Un alumno completa el curso, recibe y descarga su certificado, un tercero verifica su validez y
-> administración controla las incidencias y resultados generales de la operación.
+> Un alumno paga un curso mediante Culqi, completa su recorrido, recibe y descarga su certificado;
+> un tercero verifica su validez y administración controla las incidencias y resultados generales.
 
 ## Historias incluidas
 
@@ -30,6 +31,7 @@ El recorrido que resume el valor entregado es:
 | HU-044 | Reporte de certificados |
 | HU-045 | Reporte de asistencia |
 | HU-046 | Dashboard de gráficos simples |
+| HU-047 | Matrícula con pago automático mediante Culqi |
 
 ## Objetivo de la review
 
@@ -44,6 +46,7 @@ resultados. Esta review representa la presentación funcional final del sistema.
 - **Visitante:** presenta una queja o reclamo.
 - **Verificador externo:** verifica públicamente un certificado.
 - **Servicio de correo:** comunica emisión, cancelación y respuesta institucional.
+- **Culqi:** procesa el pago e informa el resultado; ESEJUR no procesa operaciones bancarias.
 
 ## Preparación previa
 
@@ -55,10 +58,23 @@ Antes de comenzar deben existir:
 - un alumno que aún no cumple uno o más requisitos;
 - certificados normal y refrendado, además de uno destinado a corrección o anulación;
 - matrículas y pagos con casos controlados de excepción;
+- credenciales y medios de prueba de Culqi para resultados aprobado, pendiente y rechazado;
 - un curso con alumnos completos e incompletos para demostrar cancelación;
 - una queja o reclamo pendiente y datos suficientes para alimentar todos los reportes.
 
 ## Guion principal de demostración
+
+### 0. Matricularse pagando mediante Culqi
+
+1. Ingresar como alumno y seleccionar un curso publicado con precio vigente.
+2. Confirmar el importe y elegir uno de los medios ofrecidos por Culqi.
+3. Mostrar un resultado no aprobado sin crear acceso ni consumir cupo.
+4. Reintentar cuando corresponda y recibir un resultado APROBADO.
+5. Comprobar que se registra una sola vez el pago, la matrícula, el acceso y el cupo.
+6. Consultar la constancia informativa y encontrar el curso en “Mis cursos”.
+
+**Resultado esperado:** Culqi procesa la operación y ESEJUR activa automáticamente una única
+matrícula solo después de APROBADO, sin reservas previas ni aprobación manual simulada.
 
 ### 1. Validar requisitos y emitir automáticamente
 
@@ -189,6 +205,9 @@ sin convertir el panel en un módulo operativo complejo.
 
 ## Comprobaciones alternativas durante la review
 
+- Repetir una confirmación de Culqi y comprobar que no duplica pago, matrícula, acceso ni cupo.
+- Mantener PENDIENTE sin reservar cupo y permitir reintento solo después de un resultado que lo admita.
+- Conservar el importe confirmado por intento aunque después cambie el precio público.
 - Impedir la emisión cuando falten requisitos o datos obligatorios.
 - Evitar certificados duplicados y nuevos intentos calificables después de emitir.
 - Mostrar un certificado anulado como no vigente en la verificación pública.
@@ -201,6 +220,7 @@ sin convertir el panel en un módulo operativo complejo.
 
 ## Evidencias que deben conservarse
 
+- pago aprobado, resultado no aprobado, reintento e idempotencia de Culqi;
 - certificado emitido, descargado y verificado;
 - casos de programación, requisitos y datos pendientes;
 - historial de emisión manual, corrección y anulación;
@@ -213,7 +233,8 @@ sin convertir el panel en un módulo operativo complejo.
 
 ## Criterios para aceptar el entregable
 
-- Las quince historias incluidas cumplen sus criterios de aceptación.
+- Las dieciséis historias incluidas cumplen sus criterios de aceptación.
+- El pago automático activa acceso únicamente con APROBADO y conserva intentos e importe confirmado.
 - La emisión automática respeta requisitos, espera, datos personales y protección de la nota.
 - Descarga y verificación pública muestran el estado correcto del certificado.
 - Emisión manual, corrección y anulación conservan historial y justificación.
@@ -228,8 +249,8 @@ sin convertir el panel en un módulo operativo complejo.
 Con la aceptación de esta épica, los incrementos anteriores se unen en un solo producto:
 
 > **Plataforma web integral de formación y certificación de la Escuela Jurídica ESEJUR**, capaz
-> de publicar cursos, matricular alumnos, desarrollar el aprendizaje, emitir certificados y
-> brindar control administrativo básico.
+> de publicar cursos, cobrar mediante Culqi, matricular alumnos, desarrollar el aprendizaje,
+> emitir certificados y brindar control administrativo básico.
 
 ## Mensaje de cierre de la review
 

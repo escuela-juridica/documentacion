@@ -3,8 +3,9 @@
 ## Entregable funcional
 
 Al cerrar la épica, administración gestiona usuarios y crea, configura, valida y publica un curso
-completo. Un alumno se matricula mediante el camino gratuito, el pago en línea o la matrícula
-administrativa, y el acceso aparece correctamente en “Mis cursos”.
+completo. Un alumno se matricula mediante el camino gratuito o la matrícula administrativa, y el
+acceso aparece correctamente en “Mis cursos”. El pago automático con Culqi se incorpora en HU-047
+de EP04.
 
 ## Dependencias internas
 
@@ -20,10 +21,9 @@ administrativa, y el acceso aparece correctamente en “Mis cursos”.
 | HU-015 | HU-010 a HU-014 según modalidad y reglas | Sí | Puede preparar validaciones, no aceptarse antes |
 | HU-016 | HU-015 | Sí | Puede preparar estados ordinarios con cursos controlados; CANCELADO espera HU-038 |
 | HU-017 | HU-015 | Sí | Sí, con curso publicado controlado |
-| HU-018 | HU-015 | Sí | Sí, con curso publicado controlado |
 | HU-019 | HU-008 y HU-015 | Sí | Sí, con curso publicado y cuenta controlados |
-| HU-020 | HU-017, HU-018 o HU-019 | Sí para datos reales | Sí, con operaciones controladas |
-| HU-021 | HU-017, HU-018 o HU-019 | Sí para datos reales | Sí, con matrícula activa controlada |
+| HU-020 | HU-017 o HU-019 | Sí para datos reales | Sí, con operaciones controladas |
+| HU-021 | HU-017 o HU-019 | Sí para datos reales | Sí, con matrícula activa controlada |
 
 ## Tarea incorporada desde el backlog
 
@@ -38,17 +38,14 @@ administrativa, y el acceso aparece correctamente en “Mis cursos”.
 3. **Ola C, paralela:** HU-011 y HU-014.
 4. **Ola D, paralela:** HU-012 y HU-013; continuar HU-014 con sus integraciones.
 5. **Ola E:** HU-015.
-6. **Ola F, paralela:** HU-016, HU-017, HU-018 y HU-019.
+6. **Ola F, paralela:** HU-016, HU-017 y HU-019.
 7. **Ola G, paralela:** HU-020 y HU-021.
 
 ## Puntos de integración obligatorios
 
 - HU-015 no se acepta con una publicación parcial: debe validar lo que el curso realmente exige.
-- HU-018 debe quedar integrado con el resultado comunicado por Culqi; ESEJUR no simula aprobar un
-  pago fallido.
 - HU-020 y HU-021 deben leer la misma matrícula y no crear estados diferentes para un mismo alumno.
-- Ningún pago pendiente reserva cupo; la ocupación ocurre al activar la matrícula.
-- Una confirmación repetida no duplica el pago, la matrícula ni el acceso.
+- EP02 no presenta checkout ni simula pagos automáticos. Culqi se integra en HU-047 de EP04.
 - HU-019 solo matricula cuentas que ya posean rol Alumno; la cuenta y sus roles se resuelven antes
   en HU-008.
 - EN_VIVO requiere al menos una sesión; HIBRIDO requiere sesión y contenido grabado aunque la
@@ -63,6 +60,6 @@ administrativa, y el acceso aparece correctamente en “Mis cursos”.
 2. Configurar modalidad, fechas, precios, cupo, contenido, sesiones, exámenes y certificación.
 3. Mostrar la validación y publicar.
 4. Gestionar una cuenta y completar su habilitación administrativa.
-5. Ejecutar matrícula gratuita, pagada y administrativa.
+5. Ejecutar matrícula gratuita y administrativa, incluyendo pago manual o exoneración cuando corresponda.
 6. Mostrar pagos y matrículas en administración.
 7. Ingresar como alumno y abrir “Mis cursos”.

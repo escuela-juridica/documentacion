@@ -24,7 +24,6 @@ de software.
 
 ### Secundarios
 
-- `Culqi`
 - `Servicio de correo`
 
 ## Casos de uso
@@ -45,20 +44,17 @@ de software.
 - Administrar ciclo de vida.
 - Duplicar curso como nueva convocatoria.
 - Matricularse gratis.
-- Pagar matrícula en línea.
-- Reintentar pago no completado.
+- Registrar pago manual o exoneración dentro de una matrícula administrativa.
 - Matricular alumno administrativamente.
 - Consultar matrículas y pagos.
 - Consultar mis cursos.
-- Emitir constancia de pago.
 
 ## Asociaciones y relaciones
 
 - Administrador se asocia con la gestión de usuarios y con todos los casos de configuración,
   validación, publicación, ciclo de vida, matrícula administrativa y consulta operativa.
 - Alumno se asocia con completar la habilitación de su cuenta temporal.
-- Alumno se asocia con matrícula gratuita, pago, reintento, constancia y “Mis cursos”.
-- Culqi se asocia con pagar y reintentar pago.
+- Alumno se asocia con matrícula gratuita y “Mis cursos”.
 - Servicio de correo se asocia con verificación de cuenta, instrucciones de habilitación,
   confirmación de matrícula y pago no completado.
 - `Gestionar usuarios` incluye `Crear cuenta administrativamente`.
@@ -67,8 +63,6 @@ de software.
 - `Crear y configurar curso` incluye organizar contenido, configurar sesiones cuando aplique,
   configurar exámenes cuando aplique y configurar certificación.
 - `Reutilizar módulos` extiende `Organizar módulos, lecciones y materiales`.
-- `Reintentar pago` extiende `Pagar matrícula en línea`.
-- `Pagar matrícula en línea` incluye `Emitir constancia` solo si el resultado es APROBADO.
 - Los tres caminos de matrícula incluyen la activación de la matrícula cuando cumplen sus reglas.
 - `Matricular alumno administrativamente` utiliza una cuenta que ya posee rol Alumno; si no existe,
   el administrador debe resolverla antes mediante `Gestionar usuarios`.
@@ -76,7 +70,7 @@ de software.
 ## Restricciones visuales y conceptuales
 
 - No dibujar una reserva de cupo: no existe.
-- No mostrar a ESEJUR procesando el pago; Culqi es el actor externo que comunica el resultado.
+- No mostrar checkout ni procesamiento automático: la integración con Culqi pertenece a HU-047 de EP04.
 - No mostrar devolución automática ni comprobante SUNAT.
 - No convertir estados de pago en actores.
 - No representar la cancelación completa del curso como capacidad entregada en EP02; pertenece a
@@ -85,6 +79,6 @@ de software.
 ## Prompt listo para otra IA
 
 > Genera un diagrama UML de casos de uso horizontal, blanco y negro, estilo Rational Rose, para
-> “ESEJUR — Publicación y matrícula”. Coloca Administrador y Alumno a la izquierda; Culqi y
-> Servicio de correo a la derecha. Usa el rectángulo del sistema, actores de palo, elipses y
+> “ESEJUR — Publicación y matrícula”. Coloca Administrador y Alumno a la izquierda y Servicio de
+> correo a la derecha. Usa el rectángulo del sistema, actores de palo, elipses y
 > relaciones UML include/extend. Respeta exactamente los casos y restricciones de este archivo.

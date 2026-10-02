@@ -26,8 +26,8 @@
 - Responsable y fecha siempre registrados.
 - Ambas opciones activan matrícula y ocupan cupo.
 - La matrícula manual no produce sobrecupo: si no hay disponibilidad se bloquea y administración
-  debe aumentar primero la capacidad del curso. El sobrecupo queda reservado a aprobaciones Culqi
-  simultáneas o tardías iniciadas válidamente.
+  debe aumentar primero la capacidad del curso. La excepción por aprobaciones Culqi simultáneas o
+  tardías se incorpora posteriormente mediante HU-047 de EP04.
 - La vigencia, si existe, usa la fecha posterior entre activación administrativa e inicio del curso
   como día 1 y vence a las 23:59:59 de `America/Lima` del día N.
 - Puede realizarse después del cierre de matrícula. Si asistencia es obligatoria y ya no quedan

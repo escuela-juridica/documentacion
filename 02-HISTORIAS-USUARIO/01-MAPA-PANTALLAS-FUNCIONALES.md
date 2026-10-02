@@ -28,9 +28,9 @@ el número técnico de vistas, pero no el alcance funcional del negocio.
 | Épica | Pantallas nuevas | Pantallas anteriores reutilizadas en su review | Total aproximado mostrado en la review |
 |---|---:|---:|---:|
 | EP01 — Acceso y descubrimiento | 10 | 0 | 10 |
-| EP02 — Publicación y matrícula | 9 | 6 | 15 |
+| EP02 — Publicación y matrícula | 7 | 6 | 13 |
 | EP03 — Desarrollo académico | 9 | 2 | 11 |
-| EP04 — Certificación y control | 12 | 4 | 16 |
+| EP04 — Certificación y control | 14 | 5 | 19 |
 | **Producto completo** | **40 pantallas principales únicas** | — | — |
 
 El total de una review cuenta también las pantallas anteriores necesarias para entrar al flujo.
@@ -61,8 +61,6 @@ No significa que vuelvan a desarrollarse.
 | PF-014 | Editor integral del curso | Administrador |
 | PF-015 | Control de matrículas y pagos | Administrador |
 | PF-016 | Confirmación de matrícula gratuita | Alumno |
-| PF-017 | Checkout de pago en línea | Alumno |
-| PF-018 | Resultado del pago y constancia informativa | Alumno |
 | PF-019 | Mis cursos | Alumno |
 
 La review reutiliza PF-003 para ingresar, PF-005 para verificar el correo, PF-008 y PF-009 para
@@ -100,9 +98,12 @@ La review reutiliza PF-003 para ingresar y PF-019 para seleccionar el curso matr
 | PF-038 | Detalle y respuesta de la queja o reclamo | Administrador |
 | PF-039 | Centro de reportes | Administrador |
 | PF-040 | Dashboard administrativo | Administrador |
+| PF-017 | Checkout de pago en línea | Alumno |
+| PF-018 | Resultado del pago y constancia informativa | Alumno |
 
-La review reutiliza PF-003 para ingresar, PF-019 para llegar desde “Mis cursos”, PF-020 para
-mostrar el cumplimiento académico y PF-013 para ejecutar la cancelación completa de un curso.
+La review reutiliza PF-003 para ingresar, PF-002 para iniciar una compra, PF-019 para llegar desde
+“Mis cursos”, PF-020 para mostrar el cumplimiento académico y PF-013 para ejecutar la cancelación
+completa de un curso. PF-017 y PF-018, aplazadas desde EP02, se implementan como parte de HU-047.
 
 ## Decisiones de agrupación para mantener el sistema simple
 

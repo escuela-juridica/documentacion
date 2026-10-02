@@ -57,10 +57,10 @@ El docente solo tiene perfil público. No inicia sesión ni posee historias de g
 | Mes | Épica | Entregable funcional de la presentación |
 |---:|---|---|
 | 1 | EP01 | Un visitante descubre un curso, crea o recupera su cuenta, inicia sesión y administra su perfil |
-| 2 | EP02 | Administración construye y publica un curso; un alumno se matricula gratis, en línea o por administración y lo ve en “Mis cursos” |
+| 2 | EP02 | Administración construye y publica un curso; un alumno se matricula gratis o por administración y lo ve en “Mis cursos” |
 | 3 | EP03 | El alumno abre un curso, consume materiales, completa lecciones y conserva su avance |
 | 4 | EP03 | El alumno participa en vivo, rinde exámenes y administración atiende la revisión y las excepciones académicas |
-| 5 | EP04 | El alumno obtiene y descarga su certificado; se verifica públicamente y administración atiende reclamaciones, excepciones, reportes y dashboard |
+| 5 | EP04 | Se integra el pago automático con Culqi; el alumno obtiene y descarga su certificado, y administración atiende excepciones, reclamaciones, reportes y dashboard |
 
 ## Documentos para las reviews
 
@@ -111,10 +111,9 @@ flujo. La propuesta consolidada contempla **40 pantallas principales únicas**.
 | HU-015 | Validar y publicar un curso | 2 | HU-010 a HU-014 según configuración |
 | HU-016 | Administrar el ciclo de vida del curso | 2 | HU-015 |
 | HU-017 | Matricularme en un curso gratuito | 2 | HU-015 |
-| HU-018 | Matricularme pagando en línea | 2 | HU-015 |
 | HU-019 | Matricular administrativamente a un alumno | 2 | HU-008 y HU-015 |
-| HU-020 | Consultar y controlar matrículas y pagos | 2 | Al menos una de HU-017, HU-018 o HU-019 |
-| HU-021 | Consultar mis cursos y accesos | 2 | Al menos una de HU-017, HU-018 o HU-019 |
+| HU-020 | Consultar y controlar matrículas y pagos | 2 | HU-017 o HU-019 |
+| HU-021 | Consultar mis cursos y accesos | 2 | HU-017 o HU-019 |
 
 EP02 también contiene `TAREA-001 — Integrar el acceso y la creación de cuenta con Google`. No
 cambia la numeración ni bloquea publicación o matrícula. Mientras no esté aceptada, Google se
@@ -155,6 +154,7 @@ HU-002.
 | HU-044 | Consultar el reporte de certificados | 2 | HU-032 o HU-035 para datos reales |
 | HU-045 | Consultar el reporte de asistencia | 2 | Ninguna dentro de la épica; requiere asistencias |
 | HU-046 | Consultar el dashboard | 2 | HU-041 a HU-045 |
+| HU-047 | Matricularme pagando en línea mediante Culqi | 2 | HU-015 y base de matrícula de EP02 |
 
 ## Orden de lectura y uso
 

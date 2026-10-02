@@ -4,8 +4,8 @@
 
 Al finalizar la épica queda operativo el **flujo de publicación, comercialización y matrícula de
 cursos de ESEJUR**. La escuela puede gestionar las cuentas de sus usuarios, construir una oferta
-académica y entregar acceso mediante gratuidad, pago automático con Culqi o matrícula
-administrativa.
+académica y entregar acceso mediante gratuidad o matrícula administrativa, con registro manual o
+exoneración cuando corresponda. El pago automático con Culqi se integra en EP04.
 
 El recorrido que resume el valor entregado es:
 
@@ -26,7 +26,6 @@ El recorrido que resume el valor entregado es:
 | HU-015 | Validación y publicación |
 | HU-016 | Ciclo de vida ordinario, duplicación y cierre del curso; cancelación completa queda para HU-038 |
 | HU-017 | Matrícula gratuita |
-| HU-018 | Matrícula con pago automático en línea |
 | HU-019 | Matrícula realizada por administración |
 | HU-020 | Consulta y control de matrículas y pagos |
 | HU-021 | Consulta de cursos y accesos del alumno |
@@ -41,7 +40,6 @@ por un alumno y aparecer correctamente en su espacio personal.
 
 - **Administrador:** configura, publica y controla el curso.
 - **Alumno:** realiza la matrícula y consulta su acceso.
-- **Culqi:** procesa el pago e informa el resultado; ESEJUR no procesa operaciones bancarias.
 - **Servicio de correo:** comunica las matrículas confirmadas.
 
 ## Preparación previa
@@ -52,7 +50,6 @@ Antes de comenzar deben existir:
 - tres alumnos de prueba: uno para matrícula gratuita, uno para pago y uno para matrícula
   administrativa;
 - información base disponible o datos preparados para crearla durante la demostración;
-- credenciales de prueba de Culqi y medios de prueba aprobados y rechazados;
 - un curso borrador incompleto para mostrar validaciones;
 - cupos controlados para demostrar disponibilidad y ausencia de reserva.
 
@@ -151,19 +148,7 @@ recordatorios y corregir asistencia corresponden a HU-027 de EP03.
 
 **Resultado esperado:** se crea la matrícula y el acceso sin crear un registro de pago ficticio.
 
-### 8. Realizar una matrícula pagada
-
-1. Ingresar con el segundo alumno y escoger un curso con precio.
-2. Pagar mediante el flujo automático de Culqi usando tarjeta, Yape o Plin según disponibilidad.
-3. Mostrar primero un rechazo y luego un pago aprobado.
-4. Confirmar que el cupo y el acceso se conceden únicamente con el pago aprobado.
-5. Consultar el comprobante informativo con orden, importe, moneda, medio, fecha, alumno, curso y
-   últimos dígitos cuando correspondan.
-
-**Resultado esperado:** ESEJUR reacciona al resultado de Culqi, no procesa el dinero, no reserva
-cupos y no crea accesos ante pagos rechazados o pendientes.
-
-### 9. Realizar una matrícula administrativa
+### 8. Realizar una matrícula administrativa
 
 1. Buscar y seleccionar una cuenta que ya posea el rol Alumno.
 2. Matricularla indicando si corresponde pago manual o exoneración.
@@ -176,17 +161,17 @@ matrícula sin simular un pago automático.
 Si la persona no tiene rol Alumno, se resuelve primero en HU-008. HU-019 no crea cuentas ni asigna
 roles y no admite cursos BORRADOR, CERRADO o CANCELADO ni un sobrecupo manual.
 
-### 10. Controlar matrículas, pagos y accesos
+### 9. Controlar matrículas, pagos y accesos
 
-1. Consultar los tres alumnos desde administración.
-2. Comparar matrícula gratuita, pagada y administrativa.
-3. Consultar sus estados e información de pago cuando exista.
+1. Consultar alumnos matriculados desde administración.
+2. Comparar matrícula gratuita, administrativa con pago manual y administrativa exonerada.
+3. Consultar sus estados e información económica cuando exista.
 4. Ingresar como alumno y comprobar el acceso correcto desde “Mis cursos”.
 
 **Resultado esperado:** matrícula, pago y acceso están relacionados, pero mantienen su significado
 propio y permiten auditar qué ocurrió.
 
-### 11. Administrar el ciclo de vida
+### 10. Administrar el ciclo de vida
 
 1. Mostrar BORRADOR, PUBLICADO, EN CURSO y CERRADO con sus cambios permitidos sin retrocesos.
 2. Cerrar la matrícula sin retirar el acceso a quienes ya se matricularon.
@@ -203,14 +188,6 @@ La cancelación completa y la transición a CANCELADO no se demuestran hasta HU-
 - Impedir la publicación de un curso incompleto o incoherente.
 - Rechazar promociones inválidas y configuraciones incompatibles con la modalidad.
 - Impedir matrícula cuando ya no hay cupos o la matrícula está cerrada.
-- Repetir la confirmación de Culqi y comprobar que no duplica pago, matrícula ni cupo consumido.
-- Permitir un nuevo intento únicamente tras RECHAZADO, ERROR o EXPIRADO; mientras exista PENDIENTE
-  no se crea otro intento y ESEJUR espera el resultado de Culqi.
-- Demostrar que un APROBADO tardío iniciado válidamente se respeta tras cierre, fecha vencida o
-  cupo lleno. La aprobación posterior a una cancelación completa queda documentada para HU-038,
-  pero no forma parte de esta review.
-- Cambiar el precio después de iniciar una operación y comprobar que el intento conserva el importe
-  confirmado; un reintento muestra el precio vigente y solicita nueva confirmación.
 - Mantener una matrícula confirmada aunque falle su correo; permitir el reenvío.
 
 ## Evidencias que deben conservarse
@@ -218,20 +195,19 @@ La cancelación completa y la transición a CANCELADO no se demuestran hasta HU-
 - curso configurado y publicado;
 - cuenta creada y habilitada administrativamente sin duplicidad;
 - estructura de módulos, sesiones, exámenes y requisitos;
-- tres matrículas con sus diferentes orígenes;
-- resultado aprobado y rechazado de Culqi;
-- comprobación de idempotencia y capacidad;
+- matrículas gratuitas, manuales y exoneradas correctamente diferenciadas;
+- comprobación de duplicidad y capacidad;
 - visualización del curso desde catálogo y “Mis cursos”;
 - lista de historias aceptadas y observaciones de la review.
 
 ## Criterios para aceptar el entregable
 
-- Las catorce historias incluidas cumplen sus criterios de aceptación.
+- Las trece historias incluidas cumplen sus criterios de aceptación.
 - El curso se configura y publica desde administración sin datos precargados manualmente.
 - Las reglas de modalidad se mantienen durante todo el flujo.
-- Los tres caminos de matrícula conceden el resultado correcto.
-- El pago automático nunca reserva cupo antes de ser aprobado.
-- Los reintentos y notificaciones repetidas no generan duplicidad.
+- Los caminos gratuito y administrativo conceden el resultado correcto.
+- El registro manual y la exoneración se distinguen sin simular un pago automático.
+- Las operaciones y notificaciones repetidas no generan duplicidad.
 - El alumno obtiene acceso únicamente cuando su matrícula lo permite.
 - Administración puede explicar el estado de cada matrícula y pago mostrado.
 - Las pestañas En progreso y Completados clasifican por `fecha_finalizacion`, sin ocultar matrículas
@@ -243,8 +219,10 @@ La épica habilita el acceso al curso, pero no demuestra todavía consumo acadé
 asistencia, calificación, progreso real ni emisión de certificados. Esas capacidades corresponden
 a las EP03 y EP04. Tampoco demuestra reprogramación/cancelación de sesiones ni cancelación completa
 del curso. Google solo se presenta si TAREA-001 quedó integrada y aceptada de extremo a extremo.
+El checkout, los resultados automáticos, reintentos e idempotencia de Culqi pertenecen a HU-047
+de EP04.
 
 ## Mensaje de cierre de la review
 
-> ESEJUR ya permite construir y publicar cursos, matricular alumnos gratuitamente, mediante pago
-> automático o por administración, y entregarles el acceso correcto en “Mis cursos”.
+> ESEJUR ya permite construir y publicar cursos, matricular alumnos gratuitamente o por
+> administración, y entregarles el acceso correcto en “Mis cursos”.

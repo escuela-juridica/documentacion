@@ -211,7 +211,7 @@ SELECT p.pregunta_id,'Alternativa correcta',true,1 FROM pregunta p WHERE p.tipo=
 UNION ALL
 SELECT p.pregunta_id,'Alternativa incorrecta',false,2 FROM pregunta p WHERE p.tipo='OPCION_UNICA';
 
--- Tres escenarios: compra aprobada, matricula gratuita y pago rechazado pendiente de reintento.
+-- Tres escenarios de EP02: pago manual, matricula gratuita y exoneracion administrativa.
 INSERT INTO matricula
     (usuario_id,curso_id,estado,forma_ingreso,fecha_activacion,fecha_vencimiento,creado_por_usuario_id)
 SELECT u.usuario_id,c.curso_id,v.estado,v.forma,
@@ -220,9 +220,9 @@ SELECT u.usuario_id,c.curso_id,v.estado,v.forma,
             THEN CURRENT_TIMESTAMP+(c.vigencia_acceso_dias||' days')::interval END,
        CASE WHEN v.forma='ADMINISTRADOR' THEN a.usuario_id END
 FROM (VALUES
- ('gabriel.mayanga@demo.esejur.pe','derecho-registral-notarial','ACTIVA','PAGO_EN_LINEA'),
+ ('gabriel.mayanga@demo.esejur.pe','derecho-registral-notarial','ACTIVA','ADMINISTRADOR'),
  ('joel.saldana@demo.esejur.pe','procedimiento-administrativo','ACTIVA','GRATUITA'),
- ('juan.morales@demo.esejur.pe','contrataciones-estado','PENDIENTE_PAGO','PAGO_EN_LINEA')
+ ('juan.morales@demo.esejur.pe','contrataciones-estado','ACTIVA','ADMINISTRADOR')
 ) v(correo,slug,estado,forma)
 JOIN usuario u ON u.correo=v.correo
 JOIN curso c ON c.url_amigable=v.slug
@@ -232,28 +232,28 @@ INSERT INTO historial_estado_matricula (matricula_id,estado_nuevo,realizado_por_
 SELECT m.matricula_id,m.estado,m.creado_por_usuario_id FROM matricula m;
 
 INSERT INTO pago
-    (matricula_id,numero_pedido,operacion_proveedor,origen,medio,estado,
+    (matricula_id,numero_pedido,origen,medio,estado,
      precio_regular_aplicado,precio_promocional_aplicado,importe,referencia_externa,
-     ultimos_digitos,motivo,constancia_numero,resultado_en,requiere_atencion)
-SELECT m.matricula_id,v.pedido,v.operacion,'EN_LINEA','TARJETA',v.estado,
-       c.precio_regular,c.precio_promocional,
-       COALESCE(c.precio_promocional,c.precio_regular),v.referencia,v.digitos,v.motivo,
-       v.constancia,CURRENT_TIMESTAMP,v.requiere_atencion
+     motivo,constancia_numero,resultado_en,requiere_atencion,registrado_por_usuario_id)
+SELECT m.matricula_id,v.pedido,v.origen,v.medio,v.estado,
+       c.precio_regular,c.precio_promocional,v.importe,v.referencia,v.motivo,
+       v.constancia,CURRENT_TIMESTAMP,false,a.usuario_id
 FROM (VALUES
- ('gabriel.mayanga@demo.esejur.pe','derecho-registral-notarial','PED-EP02-0001','CULQI-DEMO-0001','APROBADO','REF-DEMO-0001','1415',NULL::text,'CONST-0001',false),
- ('juan.morales@demo.esejur.pe','contrataciones-estado','PED-EP02-0002','CULQI-DEMO-0002','RECHAZADO','REF-DEMO-0002','2026','Fondos insuficientes',NULL::text,false)
-) v(correo,slug,pedido,operacion,estado,referencia,digitos,motivo,constancia,requiere_atencion)
+ ('gabriel.mayanga@demo.esejur.pe','derecho-registral-notarial','PED-EP02-0001','MANUAL','TRANSFERENCIA','REGISTRADO_MANUAL',450.00::numeric,'TRX-DEMO-0001',NULL::text,'CONST-0001'),
+ ('juan.morales@demo.esejur.pe','contrataciones-estado','PED-EP02-0002','EXONERADO',NULL,'EXONERADO',0.00::numeric,NULL,'Exoneracion autorizada para demostracion','CONST-0002')
+) v(correo,slug,pedido,origen,medio,estado,importe,referencia,motivo,constancia)
 JOIN usuario u ON u.correo=v.correo
 JOIN curso c ON c.url_amigable=v.slug
-JOIN matricula m ON m.usuario_id=u.usuario_id AND m.curso_id=c.curso_id;
+JOIN matricula m ON m.usuario_id=u.usuario_id AND m.curso_id=c.curso_id
+JOIN usuario a ON a.correo='enrique.prada@demo.esejur.pe';
 
 INSERT INTO notificacion
     (usuario_id,matricula_id,pago_id,tipo,destinatario,asunto,estado_envio,
      intentos_envio,ultimo_error,enviado_en)
 SELECT u.usuario_id,m.matricula_id,p.pago_id,
-       CASE WHEN p.estado='APROBADO' THEN 'PAGO_APROBADO' ELSE 'PAGO_RECHAZADO' END,
+       'MATRICULA_ADMINISTRATIVA',
        u.correo,
-       CASE WHEN p.estado='APROBADO' THEN 'Tu matricula fue activada' ELSE 'No se pudo completar tu pago' END,
+       'Tu matricula administrativa fue activada',
        'ENVIADO',1,NULL,CURRENT_TIMESTAMP
 FROM pago p JOIN matricula m ON m.matricula_id=p.matricula_id
 JOIN usuario u ON u.usuario_id=m.usuario_id;

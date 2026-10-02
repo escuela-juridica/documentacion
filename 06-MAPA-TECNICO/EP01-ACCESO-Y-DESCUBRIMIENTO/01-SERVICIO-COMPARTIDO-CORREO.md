@@ -111,7 +111,7 @@ operación principal:
 |---|---|---|
 | HU-008 | Bienvenida, contraseña temporal y código | Conserva la cuenta restringida y permite reenvío |
 | HU-017 | Confirmación de matrícula gratuita | No revierte matrícula ni libera cupo |
-| HU-018 | Resultado del pago y acceso | No cambia el resultado de Culqi ni duplica el pago |
+| HU-047 | Resultado del pago y acceso | No cambia el resultado de Culqi ni duplica el pago |
 | HU-019 | Instrucciones de cuenta nueva y confirmación administrativa | Conserva cuenta y matrícula según su estado; permite reenvío |
 | HU-027 | Reprogramación o cancelación de sesión | No revierte el cambio; permite reenviar el aviso |
 | HU-030 | Examen de respuesta abierta calificado | No revierte la nota ni el estado calificado |
