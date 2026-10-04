@@ -153,7 +153,8 @@ están registrados.
 
 Esta épica no demuestra todavía la creación administrativa de cursos, matrícula, pago, aula
 virtual ni certificación. El curso usado aquí sirve para descubrimiento y vista previa; su
-publicación y adquisición forman parte de la EP02.
+publicación forma parte de EP02; su adquisición se completa mediante matrícula en EP03 o pago
+automático en EP06, según corresponda.
 
 ## Mensaje de cierre de la review
 

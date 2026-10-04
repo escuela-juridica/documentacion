@@ -888,9 +888,11 @@ Ejemplos:
 02-COMPONENTES
 03-PATRONES
 10-EP01-ACCESO-Y-DESCUBRIMIENTO
-20-EP02-PUBLICACION-Y-MATRICULA
-30-EP03-DESARROLLO-ACADEMICO
-40-EP04-CERTIFICACION-Y-CONTROL
+20-EP02-ADMINISTRACION-Y-PUBLICACION
+30-EP03-MATRICULAS-Y-ACCESOS
+40-EP04-AULA-PROGRESO-Y-SESIONES
+50-EP05-EVALUACION-Y-CERTIFICACION
+60-EP06-PAGOS-Y-CONTROL
 90-PROTOTIPOS-REVIEW
 99-ARCHIVO
 ```
@@ -938,22 +940,35 @@ Debe permitir también mostrar recuperación y Google.
 
 ```text
 Administración → Crear curso → Contenido → Requisitos → Publicar
-Catálogo → Ficha → Matrícula gratuita o pago → Resultado → Mis cursos
 Administración → Usuarios → Crear cuenta → Verificar código → Cambiar contraseña → Habilitar
 ```
 
 ### EP03
 
 ```text
-Mis cursos → Aula → Lección → Progreso → Sesión → Examen → Resultado
-Administración → Calificar respuesta → Excepción
+Catálogo → Ficha → Matrícula gratuita o administrativa → Mis cursos
+Administración → Matrículas → Pago manual o exonerado → Reporte de matrículas
 ```
 
 ### EP04
 
 ```text
-Estado de certificación → Confirmar datos → Certificado → Verificación pública
-Administración → Excepciones → Reclamos → Reportes → Dashboard
+Mis cursos → Aula → Lección → Progreso → Sesión
+Administración → Sesiones → Asistencia → Reporte de asistencia
+```
+
+### EP05
+
+```text
+Examen → Resultado → Revisión permitida → Estado de certificación → Confirmar datos → Certificado
+Consulta del certificado → Verificación pública → Reportes académicos
+```
+
+### EP06
+
+```text
+Ficha → Checkout → Resultado del pago → Mis cursos
+Administración → Excepciones → Cancelación → Reclamos → Reporte de pagos → Dashboard
 ```
 
 Para el prototipo se crean caminos alternos controlados mediante botones o variantes: aprobado,
@@ -968,8 +983,8 @@ Figma.
 - escritorio y móvil;
 - sistema de componentes;
 - estados relevantes;
-- navegación de las cuatro épicas;
-- cinco prototipos de review correspondientes a los cinco incrementos;
+- navegación de las seis épicas;
+- seis prototipos de review correspondientes a las seis épicas;
 - piezas necesarias para las 40 pantallas funcionales.
 
 ### No incluido inicialmente

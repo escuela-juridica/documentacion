@@ -1,6 +1,6 @@
 # Auditoría funcional de las historias de usuario
 
-Fecha de revisión final: 30 de agosto de 2026.
+Fecha de reorganización: 4 de octubre de 2026.
 
 ## Objetivo de la auditoría
 
@@ -32,18 +32,20 @@ Cada historia fue revisada para confirmar:
 | Épica | Historias | Resultado |
 |---|---:|---|
 | EP01 — Acceso y descubrimiento | 7 | Completa y autosuficiente |
-| EP02 — Publicación y matrícula | 14 | Completa y autosuficiente |
-| EP03 — Desarrollo académico | 10 | Completa y autosuficiente |
-| EP04 — Certificación y control | 15 | Completa y autosuficiente |
+| EP02 — Administración y publicación | 9 | Completa y autosuficiente |
+| EP03 — Matrículas y accesos | 5 | Completa y autosuficiente |
+| EP04 — Aula, progreso y sesiones | 7 | Completa y autosuficiente |
+| EP05 — Evaluación y certificación | 9 | Completa y autosuficiente |
+| EP06 — Pagos y control | 9 | Completa y autosuficiente |
 
 ## Cobertura comprobada
 
-- 46 historias con numeración continua.
+- 46 historias vigentes; HU-018 fue retirada y su alcance se conserva como HU-047.
 - 109 reglas funcionales inventariadas y ubicadas en las historias que las ejecutan.
 - 34 decisiones funcionales comprobadas.
 - 11 notificaciones comprobadas por destinatario, momento, contenido y efecto ante fallo.
-- 4 guías de dependencias y orden.
-- 4 guías para diagramas de casos de uso.
+- 6 guías de dependencias y orden.
+- 6 guías para diagramas de casos de uso.
 - Máximo de dos personas recomendado por historia.
 - Cero referencias a códigos de trazabilidad o al documento de negocio dentro de las historias.
 

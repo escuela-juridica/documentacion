@@ -177,6 +177,6 @@
 - Reglas cubiertas: **109 de 109**.
 - Decisiones cubiertas: **34 de 34**.
 - Correos cubiertos: **11 de 11**.
-- Historias: **46 de 46**, organizadas en cuatro épicas.
+- Historias: **46 de 46**, organizadas en seis épicas; HU-018 fue retirada y su alcance pasó a HU-047.
 - Cada historia recomienda máximo dos personas.
 - Cada épica tiene dependencias internas, olas paralelas, entregable funcional y guía Rational Rose.

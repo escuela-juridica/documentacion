@@ -4,12 +4,18 @@ La base de datos se construye de manera acumulativa por épicas. Cada carpeta in
 las estructuras que necesita su entregable, pero una tabla se crea una sola vez y queda disponible
 para las épicas posteriores.
 
-## Orden acumulativo previsto
+## Orden funcional vigente
 
 1. `EP01-ACCESO-Y-DESCUBRIMIENTO`
-2. `EP02-PUBLICACION-Y-MATRICULA`
-3. `EP03-DESARROLLO-ACADEMICO`
-4. `EP04-CERTIFICACION-Y-CONTROL`
+2. `EP02-ADMINISTRACION-Y-PUBLICACION`
+3. `EP03-MATRICULAS-Y-ACCESOS`
+4. `EP04-AULA-PROGRESO-Y-SESIONES`
+5. `EP05-EVALUACION-Y-CERTIFICACION`
+6. `EP06-PAGOS-Y-CONTROL`
+
+Los scripts acumulativos existentes fueron preparados antes de esta reorganización funcional. Su
+separación física por las seis épicas se realizará cuando se prepare la base de cada incremento;
+la reorganización de historias no elimina tablas ni modifica datos por sí sola.
 
 Cada épica separa la creación de tablas y llaves de sus datos iniciales. Los datos ficticios se
 limitan a los registros necesarios para probar el entregable. En esta etapa no se incluyen

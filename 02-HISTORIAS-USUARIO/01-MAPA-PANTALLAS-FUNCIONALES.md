@@ -2,7 +2,7 @@
 
 ## Propósito
 
-Definir las pantallas principales que permiten implementar y presentar las cuatro épicas. Este
+Definir las pantallas principales que permiten implementar y presentar las seis épicas. Este
 mapa no reemplaza las historias: organiza visualmente las capacidades que ellas describen y ayuda
 a preparar prototipos, desarrollo frontend y reviews funcionales.
 
@@ -28,9 +28,11 @@ el número técnico de vistas, pero no el alcance funcional del negocio.
 | Épica | Pantallas nuevas | Pantallas anteriores reutilizadas en su review | Total aproximado mostrado en la review |
 |---|---:|---:|---:|
 | EP01 — Acceso y descubrimiento | 10 | 0 | 10 |
-| EP02 — Publicación y matrícula | 7 | 6 | 13 |
-| EP03 — Desarrollo académico | 9 | 2 | 11 |
-| EP04 — Certificación y control | 14 | 5 | 19 |
+| EP02 — Administración y publicación | 4 | 3 | 7 |
+| EP03 — Matrículas y accesos | 4 | 3 | 7 |
+| EP04 — Aula, progreso y sesiones | 4 | 3 | 7 |
+| EP05 — Evaluación y certificación | 9 | 4 | 13 |
+| EP06 — Pagos y control | 9 | 7 | 16 |
 | **Producto completo** | **40 pantallas principales únicas** | — | — |
 
 El total de una review cuenta también las pantallas anteriores necesarias para entrar al flujo.
@@ -51,7 +53,7 @@ No significa que vuelvan a desarrollarse.
 | PF-009 | Mi perfil, datos y seguridad | Alumno y administrador |
 | PF-011 | Documentos legales públicos | Visitante y usuario |
 
-## Pantallas de EP02 — Publicación y matrícula
+## Pantallas de EP02 — Administración y publicación
 
 | ID | Pantalla principal | Actor |
 |---|---|---|
@@ -59,37 +61,55 @@ No significa que vuelvan a desarrollarse.
 | PF-012 | Administración de información base | Administrador |
 | PF-013 | Gestión y listado de cursos | Administrador |
 | PF-014 | Editor integral del curso | Administrador |
-| PF-015 | Control de matrículas y pagos | Administrador |
+
+La review reutiliza PF-003 para ingresar y PF-001/PF-002 para comprobar la publicación.
+
+## Pantallas de EP03 — Matrículas y accesos
+
+| ID | Pantalla principal | Actor |
+|---|---|---|
+| PF-015 | Control de matrículas y condiciones económicas | Administrador |
 | PF-016 | Confirmación de matrícula gratuita | Alumno |
 | PF-019 | Mis cursos | Alumno |
+| PF-039 | Centro de reportes, sección Matrículas | Administrador |
 
-La review reutiliza PF-003 para ingresar, PF-005 para verificar el correo, PF-008 y PF-009 para
-completar la habilitación, PF-001 para encontrar el curso y PF-002 para abrir su ficha pública.
+La review reutiliza PF-003 para ingresar y PF-002 para iniciar la matrícula desde la ficha.
 
-## Pantallas de EP03 — Desarrollo académico
+## Pantallas de EP04 — Aula, progreso y sesiones
 
 | ID | Pantalla principal | Actor |
 |---|---|---|
 | PF-020 | Aula y ruta del curso | Alumno |
 | PF-021 | Reproductor de lección y materiales | Alumno |
 | PF-022 | Calendario y sesiones del alumno | Alumno |
-| PF-023 | Resolución del examen | Alumno |
-| PF-024 | Resultado e intentos del examen | Alumno |
 | PF-025 | Gestión de sesiones y asistencia | Administrador |
-| PF-026 | Cola de respuestas abiertas | Administrador |
-| PF-027 | Revisión y calificación de respuestas | Administrador |
-| PF-028 | Gestión de excepciones académicas | Administrador |
+| PF-039 | Centro de reportes, sección Asistencia | Administrador |
 
-La review reutiliza PF-003 para ingresar y PF-019 para seleccionar el curso matriculado.
+La review reutiliza PF-003, PF-019 y la estructura de PF-039 iniciada en EP03.
 
-## Pantallas de EP04 — Certificación y control
+## Pantallas de EP05 — Evaluación y certificación
 
 | ID | Pantalla principal | Actor |
 |---|---|---|
+| PF-023 | Resolución del examen | Alumno |
+| PF-024 | Resultado e intentos del examen | Alumno |
+| PF-026 | Cola de respuestas abiertas | Administrador |
+| PF-027 | Revisión y calificación de respuestas | Administrador |
+| PF-028 | Gestión de excepciones académicas | Administrador |
 | PF-029 | Estado de certificación y confirmación de datos | Alumno |
 | PF-030 | Mis certificados | Alumno |
 | PF-031 | Visor privado y descarga del certificado | Alumno |
 | PF-032 | Verificación pública del certificado | Verificador externo |
+| PF-039 | Centro de reportes, secciones Académico y Certificados | Administrador |
+
+La review reutiliza PF-003, PF-019, PF-020 y PF-039.
+
+## Pantallas de EP06 — Pagos y control
+
+| ID | Pantalla principal | Actor |
+|---|---|---|
+| PF-017 | Checkout de pago en línea | Alumno |
+| PF-018 | Resultado del pago y constancia informativa | Alumno |
 | PF-033 | Gestión administrativa de certificados | Administrador |
 | PF-034 | Emisión, detalle, corrección y anulación | Administrador |
 | PF-035 | Excepciones de matrículas y pagos | Administrador |
@@ -98,12 +118,9 @@ La review reutiliza PF-003 para ingresar y PF-019 para seleccionar el curso matr
 | PF-038 | Detalle y respuesta de la queja o reclamo | Administrador |
 | PF-039 | Centro de reportes | Administrador |
 | PF-040 | Dashboard administrativo | Administrador |
-| PF-017 | Checkout de pago en línea | Alumno |
-| PF-018 | Resultado del pago y constancia informativa | Alumno |
 
-La review reutiliza PF-003 para ingresar, PF-002 para iniciar una compra, PF-019 para llegar desde
-“Mis cursos”, PF-020 para mostrar el cumplimiento académico y PF-013 para ejecutar la cancelación
-completa de un curso. PF-017 y PF-018, aplazadas desde EP02, se implementan como parte de HU-047.
+La review reutiliza PF-003, PF-002, PF-013, PF-019, PF-020, PF-030 y PF-039. PF-017 y PF-018 se
+implementan como parte de HU-047.
 
 ## Decisiones de agrupación para mantener el sistema simple
 
