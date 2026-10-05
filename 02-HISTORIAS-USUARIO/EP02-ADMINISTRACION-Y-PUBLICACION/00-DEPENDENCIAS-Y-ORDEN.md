@@ -15,7 +15,7 @@ coherencia y lo publica en el catálogo. Esta épica no matricula alumnos.
 | HU-011 | HU-010 | Sí, con un curso de prueba |
 | HU-012 | HU-011 | Sí, acordando la estructura de lección |
 | HU-013 | HU-011 | Sí, acordando la estructura de evaluación |
-| HU-014 | HU-010; integra HU-012 y HU-013 cuando aplican | Sí |
+| HU-014 | HU-010; aplica la propuesta de cierre por asistencia e integra HU-012 y HU-013 cuando aplican | Sí |
 | HU-015 | HU-010 a HU-014 según modalidad y reglas | Solo puede aceptarse al integrar todo |
 | HU-016 | HU-015 | Puede prepararse con cursos controlados |
 
@@ -33,6 +33,8 @@ coherencia y lo publica en el catálogo. Esta épica no matricula alumnos.
 - VIRTUAL no exige fecha final ni permite asistencia como requisito.
 - EN_VIVO exige al menos una sesión válida antes de publicar.
 - HIBRIDO exige al menos una sesión y contenido grabado.
+- HU-010 permite registrar inicialmente un cierre válido; HU-014 es la única historia que aplica
+  la propuesta automática vinculada con asistencia y no elimina una fecha confirmada al desactivarla.
 - Varios docentes pueden asociarse y ordenarse sin crearles una cuenta.
 - Las reglas se congelan al iniciar el curso o registrarse la primera actividad.
 - Duplicar crea una copia independiente sin matrículas, pagos, progreso ni resultados.

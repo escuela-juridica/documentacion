@@ -17,7 +17,8 @@ HU-008, HU-009, HU-010, HU-011, HU-012, HU-013, HU-014, HU-015 y HU-016.
 4. Organizar módulos, lecciones, videos, materiales y vista previa.
 5. Programar las sesiones requeridas por la modalidad.
 6. Configurar un examen automático y otro con respuesta abierta.
-7. Configurar examen, progreso, asistencia, notas y espera del certificado.
+7. Configurar los requisitos de exámenes, progreso y asistencia, además de sus umbrales y la espera
+   del certificado; comprobar que la asistencia propone el cierre de matrícula aplicable.
 8. Intentar publicar el curso incompleto y mostrar todos los errores.
 9. Corregirlo, publicarlo y encontrarlo desde el catálogo de EP01.
 10. Duplicarlo y comprobar que la copia es un borrador independiente.

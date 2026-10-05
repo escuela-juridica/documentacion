@@ -27,10 +27,12 @@
   vence a las 23:59:59 de `America/Lima` del día N. Nunca consume vigencia antes de poder acceder.
 - `VIRTUAL`: inicio opcional y sin fecha de fin ni cierre de matrícula.
 - `EN_VIVO`/`HIBRIDO`: inicio y fin obligatorios y cierre de matrícula configurable.
-- Si asistencia es obligatoria en `EN_VIVO` o `HIBRIDO`, el cierre de matrícula propone inicialmente
-  la fecha de inicio; administración puede extenderlo, pero nunca después de la fecha de fin. Si la
-  asistencia no es obligatoria, el cierre es opcional y vacío permite matricular hasta el cierre
-  administrativo, el fin o el agotamiento del cupo.
+- En `EN_VIVO` o `HIBRIDO`, el cierre de matrícula se puede registrar inicialmente como una fecha
+  opcional. La propuesta automática basada en asistencia se aplica en HU-014, cuando se configuran
+  definitivamente los requisitos académicos: si la asistencia queda obligatoria, ESEJUR propone la
+  fecha de inicio; administración puede extenderla, pero nunca después de la fecha de fin. Si la
+  asistencia no es obligatoria, el cierre continúa siendo opcional y vacío permite matricular hasta
+  el cierre administrativo, el fin o el agotamiento del cupo.
 - Advertencia si modalidad y lecciones posteriores no coinciden.
 - Seleccionar “In-house” solo clasifica comercialmente el curso; no crea grupos, cupos corporativos,
   accesos privados ni una matrícula diferente.
@@ -74,8 +76,9 @@ ya compartidos dejarían de conducir a la ficha anterior.
   permanente respectivamente.
 - **Dado** vigencia N, **cuando** se activa antes del inicio, **entonces** el inicio del curso es el
   día 1; si se activa después, la activación es el día 1, y en ambos casos vence al terminar el día N.
-- **Dado** asistencia obligatoria en EN_VIVO/HIBRIDO, **cuando** crea el curso, **entonces** el cierre
-  se propone igual al inicio y puede modificarse únicamente dentro del periodo del curso.
+- **Dado** un curso EN_VIVO/HIBRIDO, **cuando** se crea antes de configurar los requisitos
+  académicos, **entonces** la fecha de cierre puede quedar vacía o registrarse dentro del periodo;
+  HU-014 aplica posteriormente la propuesta vinculada con la asistencia obligatoria.
 - **Dado** varios docentes activos, **cuando** los asigna y ordena, **entonces** el curso conserva
   una sola asignación por docente y utiliza ese orden en el catálogo y la ficha pública.
 

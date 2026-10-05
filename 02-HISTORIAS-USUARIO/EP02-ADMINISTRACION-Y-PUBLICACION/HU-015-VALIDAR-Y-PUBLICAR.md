@@ -77,7 +77,8 @@ También se valida de manera explícita:
 ## Dependencia interna
 
 - Depende de HU-010 y HU-011; también HU-012, HU-013 y HU-014 cuando la configuración los exige.
-- Es el punto bloqueante antes de HU-016 a HU-021.
+- Es el punto bloqueante antes de HU-016. Una vez publicado, el curso queda disponible para los
+  flujos de matrícula de EP03 y, cuando sea pagado, para el pago automático de HU-047 en EP06.
 
 ## Orientación de trabajo
 

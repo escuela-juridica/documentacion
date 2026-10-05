@@ -21,7 +21,8 @@
 - Fechas dentro del periodo del curso EN_VIVO/HIBRIDO.
 - Grabación inicialmente pendiente y agregable después.
 - Coherencia de modalidad; VIRTUAL no necesita sesiones.
-- Fecha de cierre de matrícula inicialmente igual al inicio si exige asistencia, pero editable.
+- La sesión aporta las fechas necesarias para validar el cierre de matrícula. La propuesta de usar
+  la fecha de inicio cuando la asistencia es obligatoria pertenece exclusivamente a HU-014.
 - ESEJUR no crea reuniones ni obtiene participantes de Zoom.
 - Esta historia cubre la programación inicial necesaria para publicar. La reprogramación,
   cancelación, historial de cambios, recordatorios, avisos y correcciones de asistencia se
@@ -54,7 +55,8 @@
 - **Frontend:** programación horaria, validaciones y estado de grabación.
 - **Backend:** coherencia temporal y disponibilidad para calendario/asistencia.
 - **Integración:** al crear o editar una sesión, su fecha, horario, enlace y estado deben aparecer
-  iguales en el constructor del curso, el temario del alumno y el calendario público del curso.
+  iguales en el constructor del curso. Esos mismos datos quedan preparados para el temario y el
+  calendario privado del alumno que se implementan en EP04; EP02 no expone un calendario público.
 - **Límite:** todavía no permite reprogramar ni cancelar una sesión publicada, corregir asistencia
   o administrar recordatorios; únicamente deja preparados los datos que esos flujos utilizarán.
 

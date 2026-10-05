@@ -13,8 +13,12 @@
 
 - PF-010: listado, búsqueda, creación, roles, estado y acciones seguras sobre cuentas.
 - PF-012: tipos, categorías, docentes, entidades, firmantes, materiales y reglas de archivo.
-- PF-013: crear, editar, duplicar, publicar y administrar estados permitidos.
-- PF-014: Información, Contenido, Sesiones, Exámenes, Certificación y Publicación.
+- PF-013: crear, editar, duplicar, administrar estados permitidos e iniciar la acción rápida de
+  publicación. Esta acción no publica por una ruta diferente: abre el mismo resumen de validación
+  de HU-015 dentro de PF-014.
+- PF-014: Información, Contenido, Sesiones, Exámenes, Certificación y Publicación. La sección
+  Publicación es el único flujo funcional que presenta todos los errores, permite navegar a las
+  correcciones, solicita confirmación y ejecuta la transición atómica de HU-015.
 
 ## Pantallas reutilizadas
 

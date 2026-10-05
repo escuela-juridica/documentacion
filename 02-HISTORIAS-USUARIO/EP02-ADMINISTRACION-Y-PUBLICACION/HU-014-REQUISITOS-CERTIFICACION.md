@@ -21,6 +21,10 @@
 - `VIRTUAL`: exámenes y progreso activos por defecto; asistencia no se muestra.
 - `EN_VIVO`: exámenes y asistencia activos por defecto; progreso desactivado inicialmente.
 - `HIBRIDO`: las tres activas por defecto.
+- Al activar asistencia en `EN_VIVO` o `HIBRIDO`, ESEJUR propone la fecha de inicio como cierre de
+  matrícula. Administración puede conservar una fecha ya registrada si es válida o modificar la
+  propuesta, pero el cierre nunca puede ser posterior a la fecha de fin. Al desactivar asistencia,
+  el cierre vuelve a ser opcional y no se elimina automáticamente una fecha válida ya confirmada.
 - Todas configurables antes de iniciar; asistencia solo EN_VIVO/HIBRIDO. Se congelan cuando el
   curso pasa a EN CURSO o cuando un alumno registra su primer avance, intento o asistencia, lo que
   ocurra primero.
@@ -39,8 +43,9 @@
 
 1. ESEJUR propone valores según modalidad.
 2. Administración activa/desactiva condiciones y define umbrales válidos.
-3. Configura secuencia y espera de certificado.
-4. Guarda antes del primer evento que congele las reglas del curso.
+3. ESEJUR propone o valida el cierre de matrícula según la condición de asistencia.
+4. Configura secuencia y espera de certificado.
+5. Guarda antes del primer evento que congele las reglas del curso.
 
 Los porcentajes de progreso, video y asistencia deben quedar entre 0 y 100. La nota mínima y la de
 Refrendado deben quedar entre 0 y 20; el umbral Normal es exactamente la nota mínima y Refrendado
@@ -49,6 +54,12 @@ debe ser estrictamente mayor. Los días de espera no pueden ser negativos.
 ## Criterios de aceptación
 
 - **Dado** VIRTUAL, **cuando** abre reglas, **entonces** asistencia no aparece.
+- **Dado** EN_VIVO/HIBRIDO con asistencia obligatoria, **cuando** configura los requisitos,
+  **entonces** ESEJUR propone la fecha de inicio como cierre de matrícula y solo permite conservar
+  o elegir una fecha que no sea posterior al fin del curso.
+- **Dado** EN_VIVO/HIBRIDO sin asistencia obligatoria, **cuando** configura los requisitos,
+  **entonces** el cierre es opcional y una fecha válida previamente confirmada no se elimina de
+  manera automática.
 - **Dado** un curso sin exámenes obligatorios, **cuando** guarda, **entonces** no existe nota final
   para certificar ni nivel Refrendado.
 - **Dado** `requiere_examenes` desactivado y un examen CALIFICADO, **cuando** intenta guardar,

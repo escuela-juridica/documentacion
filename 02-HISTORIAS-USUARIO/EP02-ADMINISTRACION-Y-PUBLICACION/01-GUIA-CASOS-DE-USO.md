@@ -22,14 +22,18 @@
 - Validar curso.
 - Publicar curso.
 - Duplicar curso.
-- Cerrar matrícula o curso mediante el ciclo ordinario.
+- Configurar cierre de matrícula.
+- Cerrar curso mediante el ciclo ordinario.
 
 ## Relaciones
 
 - Publicar incluye validar el curso.
 - Configurar curso incluye asignar docentes y requisitos.
+- Configurar curso incluye configurar el cierre de matrícula cuando la modalidad lo permita.
 - Organizar contenido incluye gestionar módulos, lecciones y materiales.
 - Duplicar extiende la gestión del curso y siempre produce un borrador independiente.
+- Cerrar curso extiende la administración del ciclo de vida y no equivale a configurar el cierre
+  de matrícula.
 
 ## Exclusiones
 
