@@ -7,7 +7,7 @@ un reenvío invalida inmediatamente los anteriores. La operación no crea otra c
 
 ## Punto de partida, tablas y dependencia
 
-- Frontend: `features/auth/verificar-correo` es una pantalla pendiente.
+- Frontend: `features/auth/verificar-correo` ya implementa código, reenvío y estados de respuesta.
 - Tablas: `usuario` y `codigo_verificacion_correo`.
 - Depende de una cuenta pendiente creada por HU-002 o, posteriormente, HU-008.
 - Entrega una cuenta con correo verificado a HU-001.

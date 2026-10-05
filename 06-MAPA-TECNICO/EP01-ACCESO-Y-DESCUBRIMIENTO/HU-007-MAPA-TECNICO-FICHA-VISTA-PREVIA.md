@@ -8,8 +8,9 @@ materiales protegidos nunca se entregan por conocer su dirección.
 
 ## Punto de partida y tablas
 
-- Frontend: `features/cursos/ficha-curso` es una pantalla pendiente y no lee el parámetro de ruta.
-- Backend: no existe consulta pública de ficha ni autorización de vista previa.
+- Frontend: `features/cursos/ficha-curso` ya lee la dirección amigable y consume la ficha pública.
+- Backend: la consulta pública, docentes, estructura y vista previa ya cuentan con servicio y
+  autorización de recurso.
 - Tablas: `curso`, maestros, `curso_docente`, `persona`, `modulo`, `leccion`, `material_leccion`,
   `recurso` y `matricula`.
 - Se integra con HU-006, pero puede probarse directamente con `/cursos/registral`.
@@ -74,7 +75,7 @@ lección, actividad y bandera pública antes de entregar una referencia.
 - Leer `urlAmigable` desde `ActivatedRoute` y reaccionar si cambia sin destruir toda la aplicación.
 - Crear método de detalle en `CursoApiService` reutilizando tipos compartidos con catálogo.
 - Implementar estados: carga, ficha, no encontrada, error y reintento.
-- Sustituir la pantalla pendiente por cabecera, docentes, descripción, panel comercial, ficha
+- Mantener la cabecera, docentes, descripción, panel comercial, ficha
   técnica, beneficios y temario.
 - Implementar “Leer más” solo cuando la descripción lo requiera.
 - Crear acordeones accesibles de módulos y lecciones.
@@ -83,7 +84,8 @@ lección, actividad y bandera pública antes de entregar una referencia.
 - Solicitar la vista previa cuando el visitante la selecciona; no precargar referencias privadas.
 - Mostrar reproductor o recurso según tipo y limpiar el anterior al cambiar.
 - Para lección protegida, mostrar requisito de matrícula sin realizar petición pública de recurso.
-- Las acciones de pago o acceso se muestran, pero su operación completa pertenece a EP02; si
+- Las acciones de adquisición se muestran, pero la matrícula gratuita/administrativa pertenece a
+  EP03 y el pago automático mediante Culqi pertenece a EP06; si
   requieren cuenta, orientan a acceso o registro sin conceder contenido.
 
 ## Pruebas mínimas

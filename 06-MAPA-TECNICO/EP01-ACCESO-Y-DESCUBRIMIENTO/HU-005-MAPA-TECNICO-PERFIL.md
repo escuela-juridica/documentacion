@@ -8,8 +8,9 @@ definir una propia sin perder el vínculo Google.
 
 ## Punto de partida, tablas y dependencia
 
-- Frontend: `features/cuenta/mi-perfil` es una pantalla pendiente dentro del layout de alumno.
-- Backend: no existen endpoints protegidos de perfil.
+- Frontend: `features/cuenta/mi-perfil` ya contiene consulta, edición y validaciones dentro del
+  layout de alumno.
+- Backend: los endpoints protegidos y el servicio de perfil ya existen.
 - Tablas: `usuario` y `persona`.
 - Depende de la sesión de HU-001.
 

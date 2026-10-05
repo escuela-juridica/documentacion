@@ -1,25 +1,15 @@
 # Base de datos PostgreSQL de ESEJUR
 
-La base de datos se construye de manera acumulativa por épicas. Cada carpeta incorpora solamente
-las estructuras que necesita su entregable, pero una tabla se crea una sola vez y queda disponible
-para las épicas posteriores.
+La fuente vigente es la carpeta `BASE-DE-DATOS-DEFINITIVA`. Contiene el modelo acumulado para las
+seis épicas y reemplaza los antiguos scripts separados por incremento.
 
-## Orden funcional vigente
+## Archivo vigente
 
-1. `EP01-ACCESO-Y-DESCUBRIMIENTO`
-2. `EP02-ADMINISTRACION-Y-PUBLICACION`
-3. `EP03-MATRICULAS-Y-ACCESOS`
-4. `EP04-AULA-PROGRESO-Y-SESIONES`
-5. `EP05-EVALUACION-Y-CERTIFICACION`
-6. `EP06-PAGOS-Y-CONTROL`
+- `BASE-DE-DATOS-DEFINITIVA/esejur-base-de-datos-completa.sql`
 
-Los scripts acumulativos existentes fueron preparados antes de esta reorganización funcional. Su
-separación física por las seis épicas se realizará cuando se prepare la base de cada incremento;
-la reorganización de historias no elimina tablas ni modifica datos por sí sola.
-
-Cada épica separa la creación de tablas y llaves de sus datos iniciales. Los datos ficticios se
-limitan a los registros necesarios para probar el entregable. En esta etapa no se incluyen
-triggers, funciones, procedimientos, vistas ni automatizaciones de base de datos.
+El archivo ejecuta, en este orden, la limpieza total, la creación de la estructura y la carga de
+datos. Todo se encuentra dentro de una sola transacción: si algún bloque falla, PostgreSQL revierte
+la operación completa.
 
 ## Convenciones
 
@@ -28,7 +18,13 @@ triggers, funciones, procedimientos, vistas ni automatizaciones de base de datos
 - Identificadores internos: `bigint` autogenerado.
 - Fechas de eventos: `timestamp with time zone` (`timestamptz`).
 - Zona de presentación del negocio: `America/Lima`.
-- Nombres técnicos: español, minúsculas, sin tildes y con guion bajo.
+- Tablas en singular y nombres técnicos en español, minúsculas, sin tildes y con guion bajo.
 - No se almacenan contraseñas, códigos ni tokens en texto plano; solo sus hashes.
 - Las eliminaciones funcionales importantes se representan mediante estados para conservar
   historial.
+- Los reportes y el dashboard consultan las tablas operativas; no duplican información.
+- No se crean triggers, funciones, procedimientos ni vistas en esta entrega.
+
+La estructura de EP01 se conservó dentro del modelo definitivo para mantener compatibilidad con el
+backend ya implementado. Las tablas posteriores amplían ese mismo modelo sin exigir una base
+separada por épica.

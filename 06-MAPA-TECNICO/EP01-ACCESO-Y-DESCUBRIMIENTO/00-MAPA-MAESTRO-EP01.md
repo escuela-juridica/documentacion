@@ -25,23 +25,26 @@ llevar ese comportamiento al proyecto actual.
   por cookie; contrato global de errores; normalizadores; política de contraseña; cálculo comercial
   de cursos y servicio SMTP para correos HTML.
 - También existe un controlador de salud y un endpoint de prueba de correo limitado a `local` y
-  `dev`. Todavía no existen las entidades, repositorios ni servicios propios de cada HU.
+  `dev`. EP01 ya incorpora sus entidades, repositorios, servicios y controladores funcionales.
 - Los códigos de verificación y los enlaces de recuperación se entregan por correo mediante
   `MailService`; ninguna HU vuelve a configurar SMTP ni crea otro cliente de correo.
 
 ### Frontend
 
-- Angular 21 con rutas y layouts de EP01.
-- Las pantallas existen visualmente, pero casi todas carecen de formularios y servicios reales.
-- El catálogo contiene tarjetas estáticas y la ficha es una pantalla pendiente.
-- No existe configuración HTTP, interceptor, contrato de errores ni integración con el backend.
-- La sesión actual vive solo en memoria y el guard todavía no protege las rutas `/app`.
+- Angular 21 con rutas, layouts, formularios, servicios HTTP, interceptor y guardas de EP01.
+- Acceso tradicional, registro, verificación, recuperación, perfil, catálogo y ficha ya cuentan con
+  implementación funcional en el proyecto.
+- El componente compartido de Google permanece explícitamente pendiente; su integración real se
+  completa mediante `TAREA-001` de EP02 y no se presenta como una capacidad terminada antes de ello.
+- El CRUD administrativo en memoria es una evidencia independiente; HU-008 debe sustituirlo por
+  persistencia real sin alterar los recorridos ya implementados de EP01.
 
 ### Base de datos
 
 - Las tablas se crean con los SQL ubicados en el backend bajo
-  `sql/EP01-ACCESO-Y-DESCUBRIMIENTO`, en el esquema `public`.
-- Existen 17 tablas y datos de prueba con 15 cursos.
+  `sql/BASE-DE-DATOS-DEFINITIVA`, en el esquema `public`.
+- La versión definitiva contiene 47 tablas para EP01 a EP06 y datos de prueba con 15 cursos; EP01
+  utiliza únicamente el subconjunto que necesita.
 - No se deben cambiar tablas desde una HU sin comprobar primero que la historia realmente exige un
   dato nuevo.
 
@@ -359,12 +362,10 @@ la pantalla.
 
 ### Paso 1. Preparar PostgreSQL
 
-Desde la carpeta `sql/EP01-ACCESO-Y-DESCUBRIMIENTO` del backend se ejecutan, en este orden:
-
-1. `00-reiniciar-tablas-ep01.sql`, solo cuando se quiera borrar y reconstruir la información de
-   desarrollo.
-2. `01-tablas-y-llaves-ep01.sql` para crear las 17 tablas y sus restricciones.
-3. `02-datos-iniciales-ep01.sql` para cargar usuarios, docentes, catálogos y 15 cursos.
+Desde la carpeta `sql/BASE-DE-DATOS-DEFINITIVA` del backend se ejecuta únicamente
+`esejur-base-de-datos-completa.sql`. El archivo limpia las tablas existentes, crea las 47 tablas y
+carga usuarios, docentes, catálogos y 15 cursos dentro de una sola transacción. Solo debe usarse
+cuando se quiera reconstruir por completo la información de desarrollo.
 
 Hibernate tiene `ddl-auto: validate`: si una entidad no coincide con SQL, la aplicación debe fallar
 al iniciar. No se cambia a `update` ni `create` para ocultar el error.

@@ -1,5 +1,9 @@
 # HU-002 — Mapa técnico de creación de cuenta
 
+> Estado de integración: el registro por formulario y su verificación pertenecen a EP01. El
+> registro mediante Google descrito aquí se implementa con `TAREA-001` de EP02 y no se considera
+> disponible antes de que esa tarea haya sido integrada y probada.
+
 ## Resultado que debe entregar
 
 Un visitante crea una única cuenta de alumno mediante formulario o completa una identidad Google
@@ -8,8 +12,9 @@ verificado. La aceptación legal se exige, pero no se persiste por separado.
 
 ## Punto de partida y tablas
 
-- Frontend: `features/auth/registro` es una pantalla sin formulario funcional.
-- Backend: no existen entidades ni servicios de cuenta.
+- Frontend: `features/auth/registro` ya implementa el formulario funcional y su servicio API.
+- Backend: las entidades y servicios del registro por formulario ya existen; Google se incorpora
+  exclusivamente con `TAREA-001` de EP02.
 - Tablas principales: `persona`, `usuario`, `rol`, `usuario_rol` y, para formulario,
   `codigo_verificacion_correo`.
 

@@ -8,8 +8,8 @@ invalida tokens anteriores.
 
 ## Punto de partida y tablas
 
-- Frontend: `recuperar-password` y `nueva-password` existen como pantallas pendientes.
-- Backend: no existe servicio de recuperación.
+- Frontend: `recuperar-password` y `nueva-password` ya contienen formularios y servicios API.
+- Backend: el servicio de recuperación y el uso único del token ya están implementados.
 - Tablas: `usuario` y `token_recuperacion_acceso`.
 - Puede desarrollarse con una cuenta controlada sin esperar HU-002.
 

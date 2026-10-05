@@ -8,9 +8,8 @@ sesión y no recibe información protegida.
 
 ## Punto de partida y tablas
 
-- Frontend: `features/cursos/catalogo` presenta seis tarjetas estáticas, texto de nueve cursos y
-  enlaces repetidos incorrectos.
-- Backend: no existen entidades ni endpoints de catálogo.
+- Frontend: `features/cursos/catalogo` ya consume la API, pagina nueve cursos y conecta los filtros.
+- Backend: las entidades, proyecciones y endpoints públicos del catálogo ya existen.
 - Tablas: `curso`, `tipo_curso`, `categoria_tematica`, `estado_curso`, `curso_docente`, `persona` y
   `matricula`.
 
@@ -110,7 +109,7 @@ correctamente y el catálogo cumple filtros, orden, estados y protección de inf
 2. Crear los DTO de tarjeta y reutilizar `PageResponse` para la paginación.
 3. Crear repositorios de curso, matrícula, docentes, tipos y categorías.
 4. Reutilizar `CourseCommercialStatusService`, luego crear el servicio de catálogo y el controlador.
-5. Crear modelos, `curso-api.service.ts` y reemplazar las tarjetas estáticas.
+5. Conservar los modelos y `curso-api.service.ts` como contrato único de las tarjetas dinámicas.
 
 ### 2. Consulta principal paginada
 

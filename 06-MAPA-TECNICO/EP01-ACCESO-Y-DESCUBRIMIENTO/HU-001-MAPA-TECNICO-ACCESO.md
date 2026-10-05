@@ -1,5 +1,9 @@
 # HU-001 — Mapa técnico de acceso con correo o Google
 
+> Estado de integración: el acceso por correo y contraseña pertenece a EP01 y ya puede demostrarse.
+> El recorrido Google descrito en este mapa se habilita únicamente al completar y aceptar
+> `TAREA-001` de EP02; hasta entonces el frontend utiliza el componente pendiente y no simula éxito.
+
 ## Resultado que debe entregar
 
 Una cuenta existente puede ingresar con correo y contraseña o con una identidad Google válida. El
@@ -8,10 +12,10 @@ verificación pendiente o al registro complementario sin crear cuentas duplicada
 
 ## Punto de partida
 
-- Frontend: `features/auth/acceso` contiene la pantalla, pero no tiene formulario ni llamadas.
-- Sesión: `core/session/session.ts` conserva datos solo en memoria.
-- Backend: ya existen JWT, cookie, CORS y configuración común de permisos; todavía no existen las
-  entidades, repositorios ni endpoints de acceso de esta historia.
+- Frontend: `features/auth/acceso` ya contiene formulario y comunicación con la API.
+- Sesión: `core/session/session.ts`, el interceptor y las guardas forman la base implementada.
+- Backend: JWT, cookie, CORS, entidades, repositorios, servicio y endpoint de acceso tradicional ya
+  existen; el bloque Google continúa reservado para `TAREA-001` de EP02.
 - Tablas: `usuario`, `persona`, `usuario_rol` y `rol`.
 
 ## Dependencias
