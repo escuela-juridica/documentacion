@@ -8,13 +8,18 @@ coherencia.
 
 ## Servicio
 
+> Actualizacion: la columna real es `regla_curso.bloqueado_en`; el nombre anterior del mapa no
+> corresponde a la base actual. Actualmente se bloquea por ese valor o por estado `EN_CURSO`; cuando EP04
+> implemente progreso, intentos y asistencia, el primer evento academico tambien debe completar
+> `bloqueado_en`.
+
 Aplicar valores iniciales según modalidad. Ocultar y rechazar asistencia en VIRTUAL. Validar
 porcentajes 0–100, notas 0–20, refrendado mayor que mínima y espera no negativa. Si se desactivan
 exámenes, rechazar mientras exista CALIFICADO. Si asistencia se activa, proponer inicio como cierre
 de matrícula; conservar una fecha ya confirmada si sigue siendo válida. Al desactivarla, no borrar
 automáticamente el cierre confirmado.
 
-Antes de guardar, revisar `reglas_bloqueadas_en`, estado EN_CURSO y existencia de progreso,
+Antes de guardar, revisar `bloqueado_en`, estado EN_CURSO y existencia de progreso,
 intentos o asistencia. La respuesta devuelve la propuesta separada del valor confirmado para que
 Angular no guarde silenciosamente. Probar tres modalidades, todas las condiciones apagadas y reglas
 congeladas.

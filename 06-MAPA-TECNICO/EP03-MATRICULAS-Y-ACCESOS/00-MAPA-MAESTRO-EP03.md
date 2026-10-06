@@ -21,14 +21,14 @@ matricula/  acceso/  pagomanual/  reportematricula/
 manual/exonerado se registra dentro de la misma transacción de HU-019. La gratuidad no crea una
 fila en `pago`.
 
-## Rutas frontend sugeridas
+## Rutas frontend planificadas
 
 ```text
 /cursos/:slug/matricula-gratuita
 /mis-cursos
-/administracion/matriculas
-/administracion/matriculas/nueva
-/administracion/reportes/matriculas
+/admin/matriculas
+/admin/matriculas/nueva
+/admin/reportes/matriculas
 ```
 
 ## Tablas

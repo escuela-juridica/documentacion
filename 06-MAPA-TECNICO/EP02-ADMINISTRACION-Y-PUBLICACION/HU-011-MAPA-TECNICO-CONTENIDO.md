@@ -4,6 +4,13 @@
 
 Usa `modulo`, `leccion`, `recurso`, `material_leccion`, `tipo_material` y `regla_archivo`.
 
+## Reemplazo de archivo subido
+
+El editor debe permitir reemplazar un material de origen `SUBIDO`. La operacion conserva el mismo
+material, orden, titulo y permiso de descarga, pero crea un recurso nuevo y lo asocia al material.
+El recurso anterior solo se elimina del almacenamiento si no esta asociado a otra copia; nunca se
+modifica un recurso compartido en sitio.
+
 ## API principal
 
 - CRUD ordenado en `/api/admin/cursos/{cursoId}/modulos` y sus lecciones.

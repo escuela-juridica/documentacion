@@ -1,7 +1,19 @@
 # Mapa técnico de ESEJUR
 
-La documentación técnica se organiza con la misma distribución funcional de seis épicas. En esta
-entrega se encuentra desarrollada hasta EP04.
+La documentación técnica se organiza con la misma distribución funcional de seis épicas. Los mapas
+de EP01 a EP04 están definidos, aunque la implementación no está completa en todas ellas.
+
+## Estado actual
+
+| Epica | Estado del codigo | Alcance vigente |
+|---|---|---|
+| EP01 | Implementada | Acceso, registro, verificacion, recuperacion, perfil y catalogo. Google sigue como tarea pendiente. |
+| EP02 | En construccion | HU-008 a HU-014 tienen base funcional; HU-015 y HU-016 son el cierre de la epica. |
+| EP03 | Planificada | Matriculas, accesos y reporte de matriculas. |
+| EP04 | Planificada | Aula, progreso, asistencia y cambios posteriores de sesiones. |
+
+Los mapas describen el destino tecnico acordado. Si una ruta, entidad o regla aun no existe en el
+codigo, se debe tratar como trabajo pendiente y no como funcionalidad ya disponible.
 
 ## Orden vigente
 
@@ -9,7 +21,8 @@ entrega se encuentra desarrollada hasta EP04.
 2. `EP02-ADMINISTRACION-Y-PUBLICACION`: administración, construcción y publicación del curso.
 3. `EP03-MATRICULAS-Y-ACCESOS`: matrícula gratuita/administrativa y control de accesos.
 4. `EP04-AULA-PROGRESO-Y-SESIONES`: consumo académico, progreso y asistencia.
-5. EP05 y EP06: pendientes de desarrollar como mapas técnicos específicos.
+5. `EP05-EVALUACION-Y-CERTIFICACION`: evaluacion, certificacion y reportes academicos.
+6. `EP06-PAGOS-Y-CONTROL`: pagos automaticos, excepciones, reclamaciones y dashboard.
 
 Todos los mapas nuevos utilizan como referencia única la base ubicada en
 `05-BASE-DE-DATOS/BASE-DE-DATOS-DEFINITIVA`. No deben crearse tablas alternativas con nombres

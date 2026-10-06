@@ -16,28 +16,37 @@ EP02 no crea matrículas, pagos ni progreso.
 6. HU-016 como ciclo de vida y duplicación.
 7. TAREA-001 Google puede avanzar en paralelo y no bloquea la publicación.
 
-## Paquetes backend sugeridos
+## Estructura backend vigente
 
 ```text
-adminusuario/  maestra/  curso/  contenido/  sesion/  examen/  publicacion/
+controller/  service/  repository/  entity/  dto/
 ```
 
-Cada paquete separa controlador, servicio, repositorio, DTO de petición, DTO de respuesta y
-proyecciones. `publicacion` puede consultar los demás dominios, pero estos no deben depender de
-`publicacion`.
+La implementación actual mantiene las capas por responsabilidad. Los servicios de curso, contenido
+y examen concentran las reglas de EP02; HU-015 y HU-016 completarán las transiciones de
+publicación y ciclo de vida sin duplicar sus validaciones.
 
-## Rutas frontend sugeridas
+## Rutas frontend vigentes
 
 ```text
-/administracion/usuarios
-/administracion/informacion-base
-/administracion/cursos
-/administracion/cursos/nuevo
-/administracion/cursos/:id/editar/:seccion
+/admin/usuarios
+/admin/informacion-base
+/admin/cursos
+/admin/cursos/:id
 ```
 
 El editor conserva las secciones Información, Contenido, Sesiones, Exámenes, Certificación y
-Publicación. La acción rápida del listado abre la misma sección Publicación; no existe otro flujo.
+Publicación. La sección es una pestaña dentro de `/admin/cursos/:id`; no se codifica como segmento
+adicional de URL.
+
+## Endpoints EP02 vigentes
+
+- `GET/PUT /api/admin/cursos/{id}/reglas`: requisitos academicos y de certificacion de HU-014.
+- `GET/POST/PUT/PATCH /api/admin/cursos`, `/api/admin/modulos`, `/api/admin/lecciones` y
+  `/api/admin/materiales`: curso y contenido de HU-010 a HU-012.
+- `GET/POST/PUT/PATCH /api/admin/cursos/{cursoId}/examenes` y recursos de preguntas: HU-013.
+- La publicacion y el ciclo de vida se documentan en HU-015 y HU-016; no se deben presentar como
+  cierre funcional de EP02 mientras sus pestañas no esten integradas en el frontend.
 
 ## Tablas
 
@@ -49,7 +58,7 @@ Publicación. La acción rápida del listado abre la misma sección Publicación
 
 ## Condiciones de aceptación técnica
 
-- Toda escritura administrativa exige rol principal o asignado `ROLE_ADMINISTRADOR`.
+- Toda escritura administrativa exige la autoridad `ADMINISTRADOR` de la sesion autenticada.
 - Las operaciones compuestas son transaccionales.
 - Los listados se paginan y filtran en backend.
 - Desactivar datos maestros no rompe referencias históricas.

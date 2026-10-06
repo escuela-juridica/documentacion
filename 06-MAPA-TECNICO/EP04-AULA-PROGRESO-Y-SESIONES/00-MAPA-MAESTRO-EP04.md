@@ -22,15 +22,15 @@ aula/  material/  progreso/  sesion/  asistencia/  reporteasistencia/
 Toda operación protegida recibe la identidad desde Spring Security y resuelve la matrícula en el
 backend; nunca acepta un `usuario_id` enviado por Angular.
 
-## Rutas frontend sugeridas
+## Rutas frontend planificadas
 
 ```text
 /mis-cursos/:matriculaId/aula
 /mis-cursos/:matriculaId/lecciones/:leccionId
 /mis-cursos/calendario
-/administracion/sesiones
-/administracion/asistencia
-/administracion/reportes/asistencia
+/admin/sesiones
+/admin/asistencia
+/admin/reportes/asistencia
 ```
 
 ## Tablas
